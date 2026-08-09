@@ -1,0 +1,23 @@
+import { describe,expect,it } from "vitest";
+import { isChapterUnlocked } from "../src/core/progress/progress";
+import { BasicStagingEngine } from "../src/games/dramatik/mechanics/staging_engine";
+import { fixedStageDirections,generalRehearsalSource } from "../src/games/dramatik/data/chapter_04/scene_source";
+import { conversationGoals,escalationPoints,speechActs } from "../src/games/dramatik/data/chapter_04/analysis";
+import { directorError } from "../src/games/dramatik/data/chapter_04/staging_options";
+import { initialChapter04Session,resolveDirectorError,saveStaging } from "../src/games/dramatik/mechanics/chapter_04_engine";
+import type { FixedStageDirection,StagingDecision } from "../src/games/dramatik/data/staging";
+import { initialGameState } from "../src/core/state/types";
+import { loadGameState,saveGameState } from "../src/core/state/store";
+describe("chapter 4 general rehearsal",()=>{
+ it("unlocks chapter 4 only after chapter 3",()=>{expect(isChapterUnlocked("chapter_04",["chapter_01","chapter_02"])).toBe(false);expect(isChapterUnlocked("chapter_04",["chapter_01","chapter_02","chapter_03"])).toBe(true)});
+ it("loads fixed stage directions as immutable primary source",()=>{expect(fixedStageDirections.map(x=>x.text)).toEqual(["(Tritt hervor.)","(Sie fechten.)"]);expect(fixedStageDirections.every(x=>x.editable===false&&x.source_verified===true)).toBe(true)});
+ it("loads Paris and Romeo goals from didactic data",()=>{expect(conversationGoals.find(x=>x.character_id==="paris")?.goal).toBe("Romeo aufhalten und festnehmen.");expect(conversationGoals.find(x=>x.character_id==="romeo")?.goal).toContain("Konflikt zu vermeiden")});
+ it("references protected evidence instead of duplicating excerpts",()=>{expect(conversationGoals.flatMap(x=>x.evidence).every(id=>generalRehearsalSource.some(source=>source.id===id))).toBe(true);expect(speechActs.every(item=>generalRehearsalSource.some(source=>source.id===item.source_reference))).toBe(true)});
+ it("links the selected speech acts",()=>expect(speechActs.map(x=>x.target)).toEqual(["festnehmen / auffordern","warnen","zurückweisen"]));
+ it("offers several plausible escalation points",()=>expect(escalationPoints.length).toBeGreaterThanOrEqual(3));
+ it("never mutates primary text while evaluating staging",()=>{const fixed:FixedStageDirection[]=[{id:"fight",exactText:"(Sie fechten.)",fixed:true,kind:"fixed_stage_direction",sourceReference:"source"}];const engine=new BasicStagingEngine(fixed);const before=JSON.stringify(generalRehearsalSource);const decision:StagingDecision={id:"d",dimension:"distance",characterId:"both",value:"weit",evidenceIds:["source"],reasoningId:"reason",kind:"optional_staging_choice"};expect(engine.evaluate(decision).valid).toBe(true);expect(JSON.stringify(generalRehearsalSource)).toBe(before);expect(engine.getFixedDirections()[0].exactText).toBe("(Sie fechten.)")});
+ it("stores staging choice and reasoning separately",()=>{const r=saveStaging({...initialChapter04Session,round:7},"paris_position","im Halbdunkel seitlich","verdeutlicht Paris' Beobachterposition");expect(r.valid).toBe(true);expect(r.session.stagingDecisions.paris_position.value).not.toBe(r.session.stagingDecisions.paris_position.reasoningId)});
+ it("rejects the problematic director variant through counter-evidence",()=>{expect(resolveDirectorError({...initialChapter04Session,round:10},"Romeo greift sofort an.").valid).toBe(false);expect(resolveDirectorError({...initialChapter04Session,round:10},directorError.counterEvidence).valid).toBe(true)});
+ it("unlocks chapter 5 only after chapter 4",()=>{expect(isChapterUnlocked("chapter_05",["chapter_01","chapter_02","chapter_03"])).toBe(false);expect(isChapterUnlocked("chapter_05",["chapter_01","chapter_02","chapter_03","chapter_04"])).toBe(true)});
+ it("persists rehearsal decisions",()=>{const memory=new Map<string,string>();const storage={getItem:(k:string)=>memory.get(k)??null,setItem:(k:string,v:string)=>memory.set(k,v)};const session={...initialChapter04Session,round:8 as const,stagingDecisions:{demo:{id:"demo",dimension:"distance" as const,characterId:"both",value:"weit",evidenceIds:["e"],reasoningId:"r",kind:"optional_staging_choice" as const}}};saveGameState({...initialGameState,currentGame:"dramatik",currentChapter:"chapter_04",decisions:{chapter_04:session}},storage);expect((loadGameState(storage).decisions.chapter_04 as typeof session).stagingDecisions.demo.reasoningId).toBe("r")});
+});

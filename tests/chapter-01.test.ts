@@ -1,0 +1,17 @@
+import { describe, expect, it } from "vitest";
+import { chapter01Fragments, informationCards } from "../src/games/dramatik/data/chapter_01_content";
+import { checkManuscriptElement, initialChapter01Session, placeInformationCard, placeRound1, placeStageDirection } from "../src/games/dramatik/mechanics/chapter_01_engine";
+import { isChapterUnlocked } from "../src/core/progress/progress";
+import { loadGameState, saveGameState } from "../src/core/state/store";
+import { createNewGameState } from "../src/core/state/store";
+
+function memoryStorage() { const data = new Map<string,string>(); return { getItem:(key:string)=>data.get(key)??null,setItem:(key:string,value:string)=>void data.set(key,value) }; }
+
+describe("chapter 1", () => {
+  it("loads the editorial fragment types", () => { expect(chapter01Fragments.map((item)=>item.fragment_type)).toEqual(["scene_location","stage_direction","speaker","speech","stage_direction","speech","speaker","speech","stage_direction"]); });
+  it("accepts correct and rejects incorrect round-1 assignments", () => { const wrong=placeRound1(initialChapter01Session,"fragment_a","speech"); expect(wrong.valid).toBe(false); expect(wrong.session.assignments).toEqual({}); const right=placeRound1(wrong.session,"fragment_a","scene_location"); expect(right.valid).toBe(true); expect(right.session.assignments.fragment_a).toBe("scene_location"); });
+  it("triggers Balthasar's neutral entrance and exit slots", () => { const round2={...initialChapter01Session,round:2 as const}; const entrance=placeStageDirection(round2,"fragment_e"); expect(entrance.session.balthasarVisible).toBe(true); expect(entrance.session.round).toBe(3); const wrong=placeStageDirection(entrance.session,"fragment_e"); expect(wrong.valid).toBe(false); expect(wrong.session.balthasarVisible).toBe(true); const exit=placeStageDirection(wrong.session,"fragment_h"); expect(exit.session.balthasarVisible).toBe(false); expect(exit.session.round).toBe(4); });
+  it("keeps summaries technically distinct from primary source", () => { expect(informationCards.every((item)=>item.text_origin==="didactic_summary")).toBe(true); expect(informationCards.some((item)=>item.text_origin===("primary_source" as never))).toBe(false); });
+  it("can complete the full chapter and unlock chapter 2", () => { let session=initialChapter01Session; for(const [id,target] of [["fragment_a","scene_location"],["fragment_b","stage_direction"],["fragment_c","speaker"],["fragment_d","speech"]] as const) session=placeRound1(session,id,target).session; session=placeStageDirection(session,"fragment_e").session; session=placeStageDirection(session,"fragment_h").session; for(const card of informationCards) session=placeInformationCard(session,card.id,card.target).session; for(const type of ["speech","stage_direction","speaker","scene_location"] as const) session=checkManuscriptElement(session,type).session; expect(session.completed).toBe(true); expect(isChapterUnlocked("chapter_02",["chapter_01"])).toBe(true); });
+  it("restores a consistent mid-chapter session after reload", () => { const storage=memoryStorage(); const session=placeRound1(initialChapter01Session,"fragment_a","scene_location").session; const state={...createNewGameState(),decisions:{chapter_01:session}}; saveGameState(state,storage); expect((loadGameState(storage).decisions.chapter_01 as typeof session).assignments.fragment_a).toBe("scene_location"); });
+});

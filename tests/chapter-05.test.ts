@@ -1,0 +1,27 @@
+import { describe,expect,it } from "vitest";
+import { isChapterUnlocked } from "../src/core/progress/progress";
+import { interpretationHypothesis } from "../src/games/dramatik/data/chapter_05/hypothesis";
+import { analysisResults,relevanceFeedback } from "../src/games/dramatik/data/chapter_05/evidence_selection";
+import { interpretationLinks } from "../src/games/dramatik/data/chapter_05/interpretation_links";
+import { generalRehearsalSource } from "../src/games/dramatik/data/chapter_04/scene_source";
+import { argumentBlocks } from "../src/games/dramatik/data/chapter_05/argument_chain";
+import { oneSidedClaim } from "../src/games/dramatik/data/chapter_05/countercheck";
+import { attachEvidence,classifyRelevance,completeChapter05,countercheck,explainObservation,initialChapter05Session,loadStagingReview,placeArgumentBlock,reviseStagingOnce,type Chapter05Session } from "../src/games/dramatik/mechanics/chapter_05_engine";
+import type { StagingDecision } from "../src/games/dramatik/data/staging";
+import { initialGameState } from "../src/core/state/types";
+import { loadGameState,saveGameState } from "../src/core/state/store";
+describe("chapter 5 interpretation rehearsal",()=>{
+ it("unlocks chapter 5 only after chapter 4",()=>{expect(isChapterUnlocked("chapter_05",["chapter_01","chapter_02","chapter_03"])).toBe(false);expect(isChapterUnlocked("chapter_05",["chapter_01","chapter_02","chapter_03","chapter_04"])).toBe(true)});
+ it("marks the hypothesis as interpretation",()=>expect(interpretationHypothesis.text_origin).toBe("interpretation"));
+ it("references existing primary IDs without duplicating primary content",()=>{expect(interpretationLinks.every(l=>generalRehearsalSource.some(s=>s.id===l.evidence_reference))).toBe(true);expect(JSON.stringify(interpretationLinks)).not.toContain('"text_origin":"primary_source"')});
+ it("distinguishes high, medium and low relevance",()=>expect(new Set(analysisResults.map(x=>x.relevance))).toEqual(new Set(["high_relevance","medium_relevance","low_relevance"])));
+ it("does not call a correct low-relevance observation false",()=>expect(relevanceFeedback.low_relevance).toContain("Beobachtung ist richtig"));
+ it("does not accept observation alone as complete interpretation",()=>{const link=interpretationLinks[0];const explained=explainObservation({...initialChapter05Session,round:2},link.observation_id,link.explanation_id,link.hypothesis_relation);expect(explained.valid).toBe(true);expect(explained.session.interpretationLinks).toHaveLength(0)});
+ it("attaches the matching protected evidence reference",()=>{const link=interpretationLinks[0];const explained=explainObservation({...initialChapter05Session,round:2},link.observation_id,link.explanation_id,link.hypothesis_relation);const attached=attachEvidence(explained.session,link.evidence_reference);expect(attached.valid).toBe(true);expect(attached.session.interpretationLinks[0].evidence_id).toBe(link.evidence_reference)});
+ it("can differentiate a one-sided claim",()=>{const result=countercheck({...initialChapter05Session,round:6},oneSidedClaim,true);expect(result.valid).toBe(true);expect(result.session.hypothesisRefined).toBe(true)});
+ it("requires every argument level in order",()=>{let s:Chapter05Session={...initialChapter05Session,round:7};expect(placeArgumentBlock(s,argumentBlocks[1].id).valid).toBe(false);for(const block of argumentBlocks)s=placeArgumentBlock(s,block.id).session;expect(s.round).toBe(8);expect(s.argumentOrder).toHaveLength(5)});
+ it("loads chapter-4 staging and permits exactly one revision",()=>{const d:StagingDecision={id:"distance",dimension:"distance",characterId:"both",value:"große Distanz",evidenceIds:["c04_romeo_warning"],reasoningId:"distance",kind:"optional_staging_choice"};const s=loadStagingReview({...initialChapter05Session,round:8},{distance:d});const first=reviseStagingOnce(s,d);expect(first.valid).toBe(true);expect(reviseStagingOnce(first.session,d).valid).toBe(false);expect(completeChapter05(first.session).valid).toBe(true)});
+ it("unlocks the finale only after chapter 5 completion",()=>{const done=["chapter_01","chapter_02","chapter_03","chapter_04","chapter_05"];expect(isChapterUnlocked("finale",done.slice(0,-1))).toBe(false);expect(isChapterUnlocked("finale",done)).toBe(true)});
+ it("persists interpretation state over reload",()=>{const memory=new Map<string,string>();const storage={getItem:(k:string)=>memory.get(k)??null,setItem:(k:string,v:string)=>memory.set(k,v)};const session={...initialChapter05Session,round:7 as const,argumentOrder:["block_hypothesis"]};saveGameState({...initialGameState,currentGame:"dramatik",currentChapter:"chapter_05",decisions:{chapter_05:session}},storage);expect((loadGameState(storage).decisions.chapter_05 as typeof session).argumentOrder).toEqual(["block_hypothesis"])});
+ it("records actual relevance while providing differentiated feedback",()=>{const low=analysisResults.find(x=>x.relevance==="low_relevance")!;const result=classifyRelevance(initialChapter05Session,low.id,"high_relevance");expect(result.valid).toBe(false);expect(result.actual).toBe("low_relevance")});
+});

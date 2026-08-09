@@ -1,0 +1,11 @@
+export const characterizationTasks=[
+ {id:"char_benvolio",character_id:"benvolio",claim:"friedensstiftend beziehungsweise vermittelnd",claim_type:"implicit",observation:"Benvolio versucht in der Eröffnungsszene, den Kampf zu beenden.",evidence:"Er fordert zum Einstecken der Schwerter auf.",evidence_source:"didactic_summary",source_location:null,source_verified:false,interpretation:"Benvolio kann als friedensstiftend beziehungsweise vermittelnd gedeutet werden.",accepted_reasoning:["observation","evidence","interpretation"],feedback_correct:"Beobachtung, Handlungsgrundlage und Deutung bilden eine nachvollziehbare Kette.",feedback_partial:"Die Deutung benötigt noch Beobachtung und Handlungsgrundlage.",feedback_wrong:"Beginnen Sie mit dem beobachtbaren Handeln.",competency:"indirect_characterization",required_assets:[],text_origin:"interpretation"},
+ {id:"char_tybalt",character_id:"tybalt",claim:"stark konfliktbereit und feindselig gegenüber den Montagues",claim_type:"implicit",observation:"Tybalt weist Benvolios Friedensversuch zurück.",evidence:"Er erklärt seine Abneigung gegenüber den Montagues und setzt den Kampf fort.",evidence_source:"didactic_summary",source_location:null,source_verified:false,interpretation:"Tybalt kann als stark konfliktbereit und feindselig gegenüber den Montagues gedeutet werden.",accepted_reasoning:["observation","evidence","interpretation"],feedback_correct:"Die Deutung bleibt an beobachtbarem Handeln gebunden.",feedback_partial:"Verbinden Sie Beobachtung und Handlungsgrundlage.",feedback_wrong:"Eine moralische Etikettierung ersetzt keine Analyse.",competency:"indirect_characterization",required_assets:[],text_origin:"interpretation"},
+] as const;
+
+export const characterizationFindings=[
+ {id:"finding_1",text:"Eine Figur äußert ausdrücklich eine Einschätzung über eine andere Figur.",target:"direct",text_origin:"didactic_summary"},
+ {id:"finding_2",text:"Eine Haltung wird aus dem Verhalten einer Figur erschlossen.",target:"indirect",text_origin:"didactic_summary"},
+ {id:"finding_3",text:"Eine Eigenschaft wird einer Figur ausdrücklich zugeschrieben.",target:"direct",text_origin:"didactic_summary"},
+ {id:"finding_4",text:"Eine mögliche Eigenschaft wird aus Sprache, Entscheidung und Reaktion abgeleitet.",target:"indirect",text_origin:"didactic_summary"},
+] as const;
