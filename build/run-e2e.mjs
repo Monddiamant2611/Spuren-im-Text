@@ -5,7 +5,7 @@ const env = { ...process.env, NO_PROXY: [process.env.NO_PROXY, "127.0.0.1", "loc
 const server = spawn(process.execPath, [resolve("node_modules/vinext/dist/cli.js"), "dev", "--configLoader", "runner", "--hostname", "127.0.0.1", "--port", "4173"], { env, stdio: "inherit" });
 
 async function waitForServer() {
-  for (let attempt = 0; attempt < 60; attempt += 1) {
+  for (let attempt = 0; attempt < 180; attempt += 1) {
     try {
       const response = await fetch("http://127.0.0.1:4173");
       if (response.ok) return;

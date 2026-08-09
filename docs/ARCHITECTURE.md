@@ -36,7 +36,7 @@ Neue Primärtexte werden nicht automatisch beschafft. Nach redaktioneller Freiga
 
 `Chapter02` nutzt dieselbe Game-Shell und persistiert einen rein serialisierbaren Sitzungszustand unter `GameState.decisions.chapter_02`. Die fachliche Ablaufsteuerung liegt in `chapter_02_engine.ts`. Das generische `RelationshipGraph` rendert ausschließlich übergebene Figuren und Beziehungen; Auswahl und Verbindung sind über native Buttons auch per Tastatur und Touch bedienbar. Der bestehende Feedback- und Evidence-Reasoning-Core wurde generisch vervollständigt, ohne Werk- oder Figurenwissen in den Core zu verlagern.
 
-Alle noch nicht redaktionell belegten Stellen in Konflikt, Figurenentwicklung und Beziehungsbelegen sind sichtbare, unbestätigte Platzhalter (`placeholder: true`, `source_verified: false`). Kapitel 2 fügt dem Primärtextverzeichnis keine Datei hinzu und verändert dessen Integritätsmanifest nicht.
+Konflikt, Figurenentwicklung und Beziehungsbelege in Kapitel 2 sind als didaktische Zusammenfassungen beziehungsweise Interpretationen mit `source_verified: false` modelliert. Sie werden nicht als Primärtext ausgegeben. Kapitel 2 fügt dem Primärtextverzeichnis keine Datei hinzu und verändert dessen Integritätsmanifest nicht.
 
 ## Kapitel 3
 

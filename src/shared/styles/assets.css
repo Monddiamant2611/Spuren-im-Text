@@ -1,0 +1,8 @@
+.archive-character{display:grid;justify-items:center;align-content:end;min-height:10rem;padding:.5rem;background:#172a33;color:#f3ead7}
+.archive-character .character-image{width:7rem;height:9rem;border-radius:.35rem;background:#eee4d2}
+.relationship-graph{position:relative;overflow:hidden}
+.relationship-graph>.asset-backdrop{opacity:.2}
+.relationship-graph>*:not(.asset-backdrop){position:relative;z-index:1}
+.rehearsal-stage-frame>.director-call{z-index:6}.rehearsal-stage .tomb-set{pointer-events:none}
+.theatre-scene .scene-caption{pointer-events:none}.theatre-scene .finale-entry{z-index:6}
+@media(max-width:52rem){.archive-character{min-height:7rem}.archive-character .character-image{width:5rem;height:6rem}}

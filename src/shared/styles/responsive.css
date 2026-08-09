@@ -1,0 +1,119 @@
+/* Phase 4: responsive behavior layered over the established visual system. */
+.mobile-theatre-nav{display:none}
+
+.performance-stage.light-even .performance-light{background:#f4d98938}
+.performance-stage.light-focus .performance-light{background:radial-gradient(circle at 50% 70%,#ffe7a875 0 18%,transparent 48%)}
+.performance-stage.light-dim .performance-light{background:linear-gradient(#02070b70,#02070b8c),radial-gradient(circle at 50% 70%,#e8c47738,transparent 48%)}
+.performance-stage.distance-large .performance-figure.paris{left:10%}.performance-stage.distance-large .performance-figure.romeo{right:10%}
+.performance-stage.distance-medium .performance-figure.paris{left:23%}.performance-stage.distance-medium .performance-figure.romeo{right:23%}
+.performance-stage.distance-close .performance-figure.paris{left:34%}.performance-stage.distance-close .performance-figure.romeo{right:34%}
+.performance-stage.movement-slow .performance-figure.paris{transform:translateX(20%)}.performance-stage.movement-slow .performance-figure.romeo{transform:translateX(-20%)}
+.performance-stage.movement-abrupt .performance-figure.paris{transform:translateX(42%)}.performance-stage.movement-abrupt .performance-figure.romeo{transform:translateX(-42%)}
+.performance-figure{z-index:3!important}.performance-figure figcaption{display:grid;justify-items:center;gap:.15rem;padding:.2rem .45rem;background:#07131ddd;text-align:center}
+.performance-figure figcaption small{display:block;color:#d9cba9;font-size:.65rem}
+.performance-pause{position:absolute;z-index:5;left:50%;bottom:4%;transform:translateX(-50%);padding:.5rem .8rem;background:#07131de8;border:1px solid #d2b15d;color:#f3ead7;text-transform:uppercase;letter-spacing:.1em;font-size:.7rem}
+.performance-screen>footer button:disabled{opacity:.65;cursor:wait}
+
+@media (max-width:44rem){
+  html,body{max-width:100%;overflow-x:hidden}
+  button,a,input{touch-action:manipulation}
+  button,.mobile-theatre-nav a{min-height:2.75rem}
+
+  .game-shell{min-height:100svh;overflow-x:hidden}
+  .game-header{position:relative;padding:.65rem;gap:.55rem}
+  .brand-button{text-align:center}
+  .utility-nav{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:100%}
+  .utility-nav button{min-width:0;padding:.65rem .35rem}
+  .progress-indicator{overflow-x:auto;overscroll-behavior-inline:contain;padding-bottom:.2rem}
+
+  .theatre-wrap{display:grid;align-content:start;gap:.75rem;overflow:hidden;padding:.75rem}
+  .theatre-scene{width:100%;min-width:0;max-height:none;aspect-ratio:4/5;background:#09131a}
+  .theatre-scene>.asset-backdrop{object-position:center;opacity:.72}
+  .theatre-scene .hotspot{display:none}
+  .theatre-scene .hotspot.focused-area{display:grid;left:50%;right:auto;top:auto;bottom:12%;width:min(18rem,calc(100% - 2rem));min-height:5.25rem;transform:translateX(-50%)}
+  .theatre-scene .hotspot-stage.focused-area:hover,.theatre-scene .hotspot-stage.focused-area:focus-visible{transform:translate(-50%,-3px)}
+  .theatre-scene .scene-caption{left:.75rem;right:.75rem;bottom:.75rem;width:auto;transform:none;pointer-events:none}
+  .theatre-scene .focused-area~.scene-caption{bottom:7.3rem}
+  .theatre-scene .finale-entry{left:50%;right:auto;bottom:12%;width:min(18rem,calc(100% - 2rem));min-width:0;transform:translateX(-50%)}
+  .mobile-theatre-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;width:100%;padding:.7rem;background:#101d26;border:1px solid #604b31}
+  .mobile-theatre-nav button{display:grid;grid-template-columns:1.6rem 1fr;align-items:center;gap:.1rem .45rem;min-width:0;padding:.65rem;text-align:left;color:#f3ead7;background:#18303c;border:1px solid #8b7657}
+  .mobile-theatre-nav button span{grid-row:1/3;font-size:1.15rem;color:#d9ba6a}
+  .mobile-theatre-nav button strong,.mobile-theatre-nav button small{min-width:0;overflow-wrap:anywhere}
+  .mobile-theatre-nav button small{color:#c5bda9}
+  .mobile-theatre-nav button[aria-current="location"]{outline:3px solid #f1d47e;outline-offset:1px}
+  .mobile-theatre-nav button:disabled{opacity:.55;color:#c7c2b7}
+  .mobile-theatre-nav .mobile-finale-entry{grid-column:1/-1;background:#6f343d}
+
+  .overlay-backdrop{padding:.5rem;align-items:center}
+  .overlay-panel{width:100%;max-height:calc(100svh - 1rem);padding:2.8rem 1rem 1rem;overflow:auto}
+  .close-button{width:2.75rem;height:2.75rem}
+
+  .chapter-header{padding:.65rem;gap:.5rem}
+  .chapter-header button{min-height:2.75rem}
+  .chapter-header h1{font-size:clamp(1.35rem,7vw,1.8rem)}
+  .chapter-layout,.ensemble-layout,.archive-layout,.interpretation-layout{width:calc(100% - 1rem);padding:.5rem 0}
+  .writing-desk,.archive-table,.ensemble-workspace{min-height:0;border-width:.4rem}
+  .ensemble-nodes{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ensemble-nodes button{min-height:8rem}
+  .ensemble-portrait{height:5.5rem}
+  .relationship-graph{overflow:visible}
+  .relationship-graph>.asset-backdrop{object-position:center top}
+  .connection-ledger{max-height:19rem;overflow:auto}
+  .archive-cards,.archive-zones,.causal-tray,.knowledge-zones,.summary-cards{grid-template-columns:1fr}
+  .clue-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .clue-grid button{min-height:9rem;padding:.65rem}
+  .archive-character{grid-column:1/-1}
+  .causal-slots{overflow:visible}
+
+  .rehearsal-stage-frame{width:calc(100% - 1rem);margin:.5rem auto}
+  .rehearsal-stage,.corrected-rehearsal .rehearsal-stage{min-height:22rem;aspect-ratio:4/5;border-width:.4rem}
+  .rehearsal-stage>.asset-backdrop{object-position:center}
+  .stage-figure{bottom:10%;max-width:42%}
+  .stage-figure>.character-image{width:clamp(4.4rem,23vw,6.2rem);height:clamp(7.2rem,35vw,10rem)}
+  .rehearsal-stage.distance-large .stage-figure.paris{left:3%}.rehearsal-stage.distance-large .stage-figure.romeo{right:3%}
+  .rehearsal-stage.distance-medium .stage-figure.paris{left:14%}.rehearsal-stage.distance-medium .stage-figure.romeo{right:14%}
+  .rehearsal-stage.distance-close .stage-figure.paris{left:25%}.rehearsal-stage.distance-close .stage-figure.romeo{right:25%}
+  .rehearsal-stage.movement-slow .stage-figure.paris{transform:translateX(12%)}.rehearsal-stage.movement-slow .stage-figure.romeo{transform:translateX(-12%)}
+  .rehearsal-stage.movement-abrupt .stage-figure.paris{transform:translateX(25%)}.rehearsal-stage.movement-abrupt .stage-figure.romeo{transform:translateX(-25%)}
+  .staging-options{grid-template-columns:1fr}
+  .staging-choice fieldset button{min-height:3.25rem}
+  .rehearsal-state{display:grid;grid-template-columns:1fr}
+  .stage-object.lantern-image{right:3%;top:8%;width:2.8rem;height:4.5rem}
+
+  .performance-screen>header,.performance-screen>footer{padding:.65rem;gap:.65rem;flex-wrap:wrap}
+  .performance-stage{min-height:25rem;aspect-ratio:4/5}
+  .performance-stage>.asset-backdrop{object-position:center}
+  .performance-figure{bottom:8%;max-width:42%}
+  .performance-figure.paris{left:5%}.performance-figure.romeo{right:5%}
+  .performance-stage.distance-large .performance-figure.paris{left:3%}.performance-stage.distance-large .performance-figure.romeo{right:3%}
+  .performance-stage.distance-medium .performance-figure.paris{left:14%}.performance-stage.distance-medium .performance-figure.romeo{right:14%}
+  .performance-stage.distance-close .performance-figure.paris{left:18%}.performance-stage.distance-close .performance-figure.romeo{right:18%}
+  .performance-stage.movement-slow .performance-figure.paris{transform:translateX(12%)}.performance-stage.movement-slow .performance-figure.romeo{transform:translateX(-12%)}
+  .performance-stage.movement-abrupt .performance-figure.paris{transform:translateX(24%)}.performance-stage.movement-abrupt .performance-figure.romeo{transform:translateX(-24%)}
+  .performance-figure>.character-image{width:clamp(4.5rem,24vw,6.3rem);height:clamp(7rem,37vw,10rem)}
+  .performance-text{width:calc(100% - 1rem);padding:.85rem;margin:0 auto}
+  .performance-text p{font-size:1rem;line-height:1.45}
+  .finale-title{padding:1rem}
+  .finale-entry{min-width:0}
+  .restored-book{padding:.5rem}
+  .book-pages,.restored-book>header,.book-source,.book-actions{width:100%}
+  .book-pages{padding:1rem}
+  .own-interpretation blockquote{font-size:1rem}
+}
+
+@media (max-width:24rem){
+  .mobile-theatre-nav{grid-template-columns:1fr}
+  .mobile-theatre-nav .mobile-finale-entry{grid-column:auto}
+  .clue-grid{grid-template-columns:1fr}
+  .stage-figure small{font-size:.62rem}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .mobile-theatre-nav button,.theatre-scene .hotspot.focused-area{scroll-behavior:auto;transition:none!important}
+}
+
+@media print{
+  .restored-book>header{display:block!important;width:100%;margin:0 0 1rem;background:#fff!important;color:#000!important;border-bottom:2px solid #000}
+  .restored-book>header h1{font-size:2rem}
+  .book-actions{display:none!important}
+}

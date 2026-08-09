@@ -14,6 +14,7 @@ import { audienceKnowledge } from "../../src/games/dramatik/data/chapter_03/audi
 import { evidenceClaims } from "../../src/games/dramatik/data/chapter_03/unsupported_claims";
 import { relevanceCards } from "../../src/games/dramatik/data/chapter_03/relevance";
 import { perspectives, speechActs, dialoguePhases, escalationPoints, languageObservations } from "../../src/games/dramatik/data/chapter_04/analysis";
+import { stagingOptions } from "../../src/games/dramatik/data/chapter_04/staging_options";
 import { interpretationClaims } from "../../src/games/dramatik/data/chapter_05/unsupported_claims";
 import { analysisResults } from "../../src/games/dramatik/data/chapter_05/evidence_selection";
 import { escalationStructure } from "../../src/games/dramatik/data/chapter_05/countercheck";
@@ -60,7 +61,7 @@ test("complete learning path reaches the restored director's book without a dead
   for (const relation of relationships) {
     await page.getByRole("button", { name: new RegExp(`${names[relation.a]}.*Figur wählen`) }).click();
     await page.getByRole("button", { name: new RegExp(`${names[relation.b]}.*Figur wählen`) }).click();
-    await page.getByRole("button", { name: /Redaktioneller Primärtextbeleg/ }).click();
+    await page.getByRole("button", { name: relation.evidenceOptions.find((item) => item.correct)!.text }).click();
   }
   for (const task of characterizationTasks) for (const text of [task.observation, task.evidence, task.interpretation]) await page.getByRole("button", { name: new RegExp(text.slice(0, 24)) }).click();
   for (const finding of characterizationFindings) await selectAndPlace(page, finding.text, finding.target === "direct" ? /^Direkte Charakterisierung\b/ : /^Indirekte Charakterisierung\b/);
@@ -93,10 +94,21 @@ test("complete learning path reaches the restored director's book without a dead
   for (const point of escalationPoints.slice(0, 2)) await page.getByRole("button", { name: point.label }).click();
   await page.getByRole("button", { name: "Konfliktlinie sichern" }).click();
   for (const item of languageObservations) await page.getByRole("button", { name: new RegExp(item.observation) }).click();
-  for (let index = 0; index < 4; index += 1) await page.locator(".staging-options button:not([disabled])").first().click();
-  await page.getByRole("button", { name: "Szene mit Inszenierung abspielen" }).click();
-  await page.getByRole("button", { name: "Eine Entscheidung korrigieren" }).click();
+  for (const [index, option] of stagingOptions.entries()) {
+    const choice = page.locator(".staging-choice").nth(index % 3);
+    const combination = option.combinations.find((item) => item.quality !== "problematic")!;
+    const reasoning = option.reasoning_options.find((item) => item.id === combination.reasoningId)!;
+    await choice.getByRole("button", { name: combination.value, exact: true }).click();
+    await choice.getByRole("button", { name: reasoning.label, exact: true }).click();
+    await choice.getByRole("button", { name: "Regieentscheidung prüfen" }).click();
+  }
+  await page.getByRole("button", { name: "Generalprobe mit Ihrer Inszenierung beginnen" }).click();
+  for (let index = 0; index < 3; index += 1) await page.getByRole("button", { name: "Probe fortsetzen" }).click();
+  await page.getByRole("button", { name: "Gegenprobe starten" }).click();
   await page.getByRole("button", { name: /Romeo fordert Paris zunächst mehrfach/ }).click();
+  await page.locator(".revision-options button").first().click();
+  await page.getByRole("button", { name: "Korrigierte Version ansehen" }).click();
+  await page.getByRole("button", { name: "Regiecheck abschließen" }).click();
   await leaveChapter(page);
   await page.getByRole("button", { name: /Regiebuch: verfügbar/ }).click();
 
@@ -108,7 +120,10 @@ test("complete learning path reaches the restored director's book without a dead
   await page.locator(".countercheck button").first().click();
   for (const block of argumentBlocks) await page.getByRole("button", { name: new RegExp(block.text.slice(0, 25)) }).click();
   await page.getByRole("button", { name: /Regieentscheidungen aus Kapitel 4/ }).click();
-  await page.locator(".staging-review article button").first().click();
+  const revision = page.locator(".staging-review article").first();
+  await revision.getByRole("button", { name: "geringe Distanz", exact: true }).click();
+  await revision.getByRole("button", { name: /zunehmende Bedrängung/ }).click();
+  await revision.getByRole("button", { name: "Ausgewählte Änderung speichern" }).click();
   await page.getByRole("button", { name: "Deutung und Inszenierung abschließen" }).click();
   await leaveChapter(page);
 

@@ -28,7 +28,7 @@ Der automatisierte vollständige Bedienpfad benötigt in Chromium rund 11 Sekund
 
 ## Bekannte offene Punkte
 
-- Kapitel 2 enthält mangels redaktioneller Freigabe sichtbare Platzhalter für Beziehungsbelege, vier Konfliktschritte und drei Entwicklungsphasen. Das ist ein Produktionsblocker.
+- Kapitel 2 begründet Beziehungen durch auswählbare didaktische Beobachtungen und rekonstruiert Konflikt sowie Figurenentwicklung aus gekennzeichneten didaktischen Zusammenfassungen. Diese Inhalte sind keine Primärtexte.
 - Es gibt keine freigegebenen Bild- oder Audioassets; neutrale CSS-Slots halten das Spiel bedienbar, sind aber kein finaler Medienbestand.
 - Die Zielspielzeit von 20–25 Minuten ist noch nicht mit Lernenden validiert und kann bei sorgfältigem Lesen überschritten werden.
 - Chromium ist automatisiert geprüft; Firefox und WebKit waren in der lokalen Testumgebung nicht installiert.

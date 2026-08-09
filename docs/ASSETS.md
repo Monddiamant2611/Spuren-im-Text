@@ -33,3 +33,11 @@ Das Finale verwendet weiterhin die vorhandenen CSS-Bühnen-, Vorhang-, Licht-, R
 ## Audit Phase 8
 
 Manifest und Laufzeitverwendungen wurden erneut inventarisiert. Es existieren weiterhin keine Bild- oder Audiodateien und damit keine 404-Pfade, Duplikate oder verzerrten Rastermedien. Sämtliche sichtbaren Figuren, Objekte, Vorhänge und Lichtflächen sind CSS- beziehungsweise Text-Slots. Balthasar, Marcus und die neun Ensemblefiguren bleiben als fehlender redaktionell freizugebender Assetbestand dokumentiert; die neutralen Slots sind kein behaupteter finaler Bildbestand.
+
+## Produktive Bildintegration
+
+Unter `public/assets/dramatik` liegen nun 67 redaktionell bereitgestellte Bilddateien: sieben Hintergründe, 32 Figurenvarianten, elf Gegenstände und 17 Symbole. Alle Dateien sind mit ihrem unveränderten Dateinamen im zentralen Manifest registriert. Die Gesamtgröße beträgt 42.013.943 Byte.
+
+Produktiv verwendet werden insbesondere der Theater-Eingangsbereich, der Raum der Figurenkonstellation, die Gruftbühne, die restaurierte Finalfassung, verfügbare Ensembleporträts, Balthasars ruhiger und dringlicher Zustand, Romeo- und Paris-Zustände, der versiegelte Brief, Sanduhr, Marcus, Lorenzo mit Brief, Schlüssel und Laterne. Nicht passende oder kontextuell nicht benötigte Varianten bleiben registriert, werden aber nicht willkürlich angezeigt. `Schreinwerfer.jpg` bleibt wegen der unklaren Abgrenzung zum eindeutig benannten `Scheinwerfersymbol.jpg` ungenutzt.
+
+Bildkomponenten laden kapitelbezogen mit nativem Lazy Loading. Beim Ladefehler bleibt der vorherige Initialen- beziehungsweise CSS-Fallback sichtbar; ein fehlendes Bild blockiert keine Aufgabe. Dekorative Bilder besitzen leere Alternativtexte, Figuren und inhaltliche Objekte knappe zugängliche Bezeichnungen.

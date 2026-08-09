@@ -33,6 +33,7 @@ export interface GameState {
   finaleCompleted: boolean;
   gameCompleted: boolean;
   performanceState: PerformanceState;
+  currentPerformanceMoment: number;
   finalStaging: Record<string, unknown>;
   finalHypothesis: string | null;
   visibleCompetencyResults: Record<string, { level: CompetencyLevel; feedback: string }>;
@@ -42,5 +43,5 @@ export const initialGameState: GameState = {
   version: 1, currentGame: null, currentChapter: null, completedChapters: [], decisions: {},
   competencies: {}, failedAttempts: {}, stagingDecisions: {}, selectedEvidence: [], progress: {},
   theatreState: "INITIAL", settings: { music: true, soundEffects: true, reducedMotion: false }, lastSavedAt: null,
-  finaleStarted:false,finaleCompleted:false,gameCompleted:false,performanceState:"NOT_STARTED",finalStaging:{},finalHypothesis:null,visibleCompetencyResults:{},
+  finaleStarted:false,finaleCompleted:false,gameCompleted:false,performanceState:"NOT_STARTED",currentPerformanceMoment:0,finalStaging:{},finalHypothesis:null,visibleCompetencyResults:{},
 };

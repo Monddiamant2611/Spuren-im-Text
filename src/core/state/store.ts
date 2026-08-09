@@ -45,6 +45,7 @@ export function loadGameState(storage: Pick<Storage, "getItem"> = localStorage):
       progress: isRecord(parsed.progress) ? parsed.progress as GameState["progress"] : {},
       theatreState: validTheatreState(parsed.theatreState) ? parsed.theatreState : defaults.theatreState,
       performanceState: validPerformanceState(parsed.performanceState) ? parsed.performanceState : defaults.performanceState,
+      currentPerformanceMoment: typeof parsed.currentPerformanceMoment === "number" && Number.isInteger(parsed.currentPerformanceMoment) && parsed.currentPerformanceMoment >= 0 ? parsed.currentPerformanceMoment : 0,
       finalStaging: isRecord(parsed.finalStaging) ? parsed.finalStaging : {},
       visibleCompetencyResults: isRecord(parsed.visibleCompetencyResults) ? parsed.visibleCompetencyResults as GameState["visibleCompetencyResults"] : {},
       settings,
