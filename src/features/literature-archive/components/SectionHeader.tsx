@@ -1,0 +1,1 @@
+export function SectionHeader({ eyebrow, title, description }: { eyebrow?: string; title: string; description?: string }) { return <header className="section-header">{eyebrow && <p className="section-header__eyebrow">{eyebrow}</p>}<h2>{title}</h2>{description && <p>{description}</p>}</header>; }

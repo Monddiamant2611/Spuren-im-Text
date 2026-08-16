@@ -25,7 +25,7 @@ const completedSave = {
 for (const viewport of viewports) {
   test(`${viewport.name} keeps the theatre and restored book operable`, async ({ page }) => {
     await page.setViewportSize(viewport);
-    await page.goto("/");
+    await page.goto("/dramatik");
     await page.evaluate((save) => localStorage.setItem("lernwerkstatt-games:state:v1", JSON.stringify(save)), completedSave);
     await page.reload();
     await page.getByRole("button", { name: "Fortsetzen" }).click();
@@ -37,7 +37,7 @@ for (const viewport of viewports) {
 }
 
 test("overlays close with Escape and return focus to a usable shell", async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/dramatik");
   await page.getByRole("button", { name: "Textgrundlage & Quellen" }).click();
   await expect(page.getByRole("dialog")).toBeVisible();
   await page.keyboard.press("Escape");

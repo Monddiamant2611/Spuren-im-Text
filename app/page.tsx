@@ -1,5 +1,5 @@
-import { GameShell } from "@/src/shared/components/GameShell";
+import { LiteratureArchive } from "@/src/features/literature-archive/LiteratureArchive";
 
 export default function Home() {
-  return <GameShell />;
+  return <LiteratureArchive />;
 }

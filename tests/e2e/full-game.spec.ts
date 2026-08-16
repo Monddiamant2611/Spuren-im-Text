@@ -34,7 +34,7 @@ const chapter01Information = [
 ];
 const chapter01Checks = ["Darf ich dem holden Tod des Schlafes traun,", "(Romeo tritt auf.)", "Romeo.", "Mantua. Eine Straße."];
 
-test.beforeEach(async ({ page }) => { await page.goto("/"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
+test.beforeEach(async ({ page }) => { await page.goto("/dramatik"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
 
 async function leaveChapter(page: Page) { await page.getByRole("button", { name: /Theater/ }).click(); }
 async function selectAndPlace(page: Page, item: string | RegExp, zone: string | RegExp) { await page.getByRole("button", { name: item }).click(); await page.getByRole("button", { name: zone }).click(); }

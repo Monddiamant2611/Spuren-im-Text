@@ -4,3 +4,39 @@
   --font-display: Georgia, "Times New Roman", serif; --font-body: "Segoe UI", Arial, sans-serif;
   --focus: #e8c879; --tap-size: 44px; --content-width: 72rem;
 }
+
+:root {
+  --archive-snow: #fbfcfe;
+  --archive-night: #101f3b;
+  --archive-night-soft: #203451;
+  --archive-gold: #a88743;
+  --archive-gold-light: #d9c590;
+  --archive-ivory: #f7f3e9;
+  --archive-blue-gray: #e7edf3;
+  --archive-text: #1b2940;
+  --archive-muted: #5c6878;
+  --archive-correct: #255a45;
+  --archive-incorrect: #8a3f3f;
+  --archive-hint: #936a20;
+  --archive-space-1: .375rem;
+  --archive-space-2: .75rem;
+  --archive-space-3: 1rem;
+  --archive-space-4: 1.5rem;
+  --archive-space-5: 2rem;
+  --archive-space-6: 3rem;
+  --archive-radius-sm: .45rem;
+  --archive-radius-md: .8rem;
+  --archive-radius-lg: 1.25rem;
+  --archive-border: 1px solid rgba(16,31,59,.16);
+  --archive-shadow: 0 1.25rem 3rem rgba(16,31,59,.1);
+  --archive-text-xs: clamp(.78rem, .75rem + .12vw, .86rem);
+  --archive-text-sm: clamp(.9rem, .85rem + .2vw, 1rem);
+  --archive-text-md: clamp(1rem, .95rem + .25vw, 1.14rem);
+  --archive-text-lg: clamp(1.3rem, 1.15rem + .7vw, 1.8rem);
+  --archive-text-xl: clamp(2.35rem, 1.7rem + 3vw, 5rem);
+  --archive-transition: 180ms ease;
+  --archive-z-decoration: 0;
+  --archive-z-content: 10;
+  --archive-z-modal: 100;
+  --archive-content-max: 68rem;
+}

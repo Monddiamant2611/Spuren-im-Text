@@ -27,13 +27,10 @@
   .progress-indicator{overflow-x:auto;overscroll-behavior-inline:contain;padding-bottom:.2rem}
 
   .theatre-wrap{display:grid;align-content:start;gap:.75rem;overflow:hidden;padding:.75rem}
-  .theatre-scene{width:100%;min-width:0;max-height:none;aspect-ratio:4/5;background:#09131a}
-  .theatre-scene>.asset-backdrop{object-position:center;opacity:.72}
-  .theatre-scene .hotspot{display:none}
-  .theatre-scene .hotspot.focused-area{display:grid;left:50%;right:auto;top:auto;bottom:12%;width:min(18rem,calc(100% - 2rem));min-height:5.25rem;transform:translateX(-50%)}
-  .theatre-scene .hotspot-stage.focused-area:hover,.theatre-scene .hotspot-stage.focused-area:focus-visible{transform:translate(-50%,-3px)}
-  .theatre-scene .scene-caption{left:.75rem;right:.75rem;bottom:.75rem;width:auto;transform:none;pointer-events:none}
-  .theatre-scene .focused-area~.scene-caption{bottom:7.3rem}
+  .theatre-scene{width:100%;min-width:0;max-height:none;aspect-ratio:1672/941;background:#080b0e}
+  .theatre-scene>.asset-backdrop{object-position:center;opacity:1}
+  .theatre-access-label{display:none}
+  .theatre-access:hover,.theatre-access:focus-visible,.theatre-access.focused-area{transform:translateY(-.15rem) scale(1.02)}
   .theatre-scene .finale-entry{left:50%;right:auto;bottom:12%;width:min(18rem,calc(100% - 2rem));min-width:0;transform:translateX(-50%)}
   .mobile-theatre-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem;width:100%;padding:.7rem;background:#101d26;border:1px solid #604b31}
   .mobile-theatre-nav button{display:grid;grid-template-columns:1.6rem 1fr;align-items:center;gap:.1rem .45rem;min-width:0;padding:.65rem;text-align:left;color:#f3ead7;background:#18303c;border:1px solid #8b7657}
@@ -109,7 +106,7 @@
 }
 
 @media (prefers-reduced-motion:reduce){
-  .mobile-theatre-nav button,.theatre-scene .hotspot.focused-area{scroll-behavior:auto;transition:none!important}
+  .mobile-theatre-nav button,.theatre-access{scroll-behavior:auto;transition:none!important}
 }
 
 @media print{

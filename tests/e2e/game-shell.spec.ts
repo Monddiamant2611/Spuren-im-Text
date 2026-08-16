@@ -4,7 +4,7 @@ import { conflictChain } from "../../src/games/dramatik/data/chapter_02/conflict
 import { developmentCards } from "../../src/games/dramatik/data/chapter_02/development";
 import { countercheckOptions } from "../../src/games/dramatik/data/chapter_05/countercheck";
 
-test.beforeEach(async ({ page }) => { await page.goto("/"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
+test.beforeEach(async ({ page }) => { await page.goto("/dramatik"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
 
 test("start, theatre, keyboard hotspots, sources and persistence", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /DIE LETZTE AUFFÜHRUNG/ })).toBeVisible();
@@ -13,7 +13,7 @@ test("start, theatre, keyboard hotspots, sources and persistence", async ({ page
   const desk = page.getByRole("button", { name: /Regiepult: verfügbar/ });
   await expect(desk).toBeEnabled(); await desk.focus(); await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { name: "Das zerrissene Regiebuch" })).toBeVisible(); await page.getByRole("button", { name: "← Theater" }).click();
-  for (const name of ["Ensemblewand", "Theaterarchiv", "Bühne", "Regiebuch"]) await expect(page.getByRole("button", { name: new RegExp(`${name}: gesperrt`) })).toBeDisabled();
+  for (const name of ["Ensemblewand", "Theaterarchiv", "Bühne", "Regiebuch"]) await expect(page.getByRole("button", { name: new RegExp(`${name}: gesperrt`) })).toHaveCount(0);
   await page.getByRole("button", { name: "Quellen" }).click(); await expect(page.getByRole("heading", { name: /William Shakespeare/ })).toBeVisible(); await page.getByRole("button", { name: "Fenster schließen" }).click();
   await page.reload(); await expect(page.getByRole("button", { name: "Fortsetzen" })).toBeVisible();
 });

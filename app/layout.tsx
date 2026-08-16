@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Lernwerkstatt Games",
-  description: "Modulare Lernspiele für Dramatik, Epik und Lyrik",
+  title: "Das Literatur-Archiv",
+  description: "Grundlagen der Arbeit mit Literatur",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

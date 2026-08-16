@@ -17,7 +17,7 @@ async function seed(page: import("@playwright/test").Page, patch: Record<string,
 }
 
 test.beforeEach(async ({ page }) => {
-  await page.goto("/");
+  await page.goto("/dramatik");
   await page.evaluate(() => localStorage.clear());
 });
 
@@ -113,6 +113,21 @@ for (const viewport of [{ width: 1920, height: 1080 }, { width: 1600, height: 90
     await seed(page);
     await page.reload(); await page.getByRole("button", { name: "Fortsetzen" }).click();
     await expect(page.locator(".theatre-scene>.asset-backdrop")).toBeVisible();
+    const theatreLayout = await page.locator(".theatre-scene").evaluate((scene) => {
+      const bounds = scene.getBoundingClientRect();
+      const background = scene.querySelector<HTMLImageElement>(".theatre-main-background")!;
+      const accesses = [...scene.querySelectorAll<HTMLButtonElement>(".theatre-access")];
+      return {
+        backgroundLoaded: background.complete && background.naturalWidth > 0,
+        aspectDelta: Math.abs(background.naturalWidth / background.naturalHeight - bounds.width / bounds.height),
+        accessesLoaded: accesses.every((button) => button.querySelector<HTMLImageElement>("img")?.naturalWidth),
+        accessesContained: accesses.every((button) => { const rect = button.getBoundingClientRect(); return rect.left >= bounds.left - 1 && rect.right <= bounds.right + 1 && rect.top >= bounds.top - 1 && rect.bottom <= bounds.bottom + 1; }),
+      };
+    });
+    expect(theatreLayout.backgroundLoaded).toBe(true);
+    expect(theatreLayout.aspectDelta).toBeLessThan(.01);
+    expect(theatreLayout.accessesLoaded).toBe(true);
+    expect(theatreLayout.accessesContained).toBe(true);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
     if (viewport.width <= 704) await expect(page.getByRole("navigation", { name: "Theaterbereiche" })).toBeVisible();
     else await expect(page.getByRole("navigation", { name: "Theaterbereiche" })).toBeHidden();

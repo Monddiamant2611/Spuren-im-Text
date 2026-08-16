@@ -21,7 +21,7 @@ import { Chapter05 } from "../../games/dramatik/scenes/Chapter05";
 import type { Chapter05Session } from "../../games/dramatik/mechanics/chapter_05_engine";
 import { Finale } from "../../games/dramatik/scenes/Finale";
 import { createFinaleSnapshot, isFinaleAvailable } from "../../games/dramatik/mechanics/finale_state";
-import { AssetBackdrop } from "./AssetImage";
+import { AssetImage } from "./AssetImage";
 
 type Overlay = "options" | "sources" | "regiebuch" | "chapter" | null;
 
@@ -136,17 +136,15 @@ export function GameShell() {
       </header>
       <section className="theatre-wrap" aria-label="Interaktive Theaterübersicht">
         <div className="theatre-scene" data-state={state.theatreState}>
-          <AssetBackdrop id="bg_theatre_entrance"/>
-          <div className="proscenium" aria-hidden="true"><span className="arch arch-left"/><span className="arch arch-right"/></div>
-          <div className="curtain curtain-left" aria-hidden="true"/><div className="curtain curtain-right" aria-hidden="true"/>
-          <div className="stage-light" aria-hidden="true"/><div className="stage-floor" aria-hidden="true"/>
+          <AssetImage id="bg_theatre_main" className="asset-backdrop theatre-main-background" loading="eager" decorative/>
           {theatreAreas.map((area) => {
             const unlocked = isChapterUnlocked(area.chapterId, state.completedChapters);
             const completed = state.completedChapters.includes(area.chapterId);
-            return <button key={area.id} className={`hotspot hotspot-${area.id} ${focusArea === area.id ? "focused-area" : ""}`} disabled={!unlocked} onFocus={() => setFocusArea(area.id)} onMouseEnter={() => setFocusArea(area.id)} onClick={() => openChapter(area.chapterId)} aria-label={`${area.label}: ${completed ? "abgeschlossen" : unlocked ? "verfügbar" : "gesperrt"}`}><span className="hotspot-symbol" aria-hidden="true">{area.symbol}</span><strong>{area.label}</strong><small>{completed ? "Abgeschlossen" : unlocked ? "Betreten" : "Gesperrt"}</small></button>;
+            if (!unlocked) return null;
+            const status = completed ? "abgeschlossen" : "verfügbar";
+            return <button key={area.id} className={`theatre-access theatre-access-${area.id} ${focusArea === area.id ? "focused-area" : ""} ${completed ? "completed" : "current"}`} data-status={status} onFocus={() => setFocusArea(area.id)} onMouseEnter={() => setFocusArea(area.id)} onClick={() => openChapter(area.chapterId)} aria-label={`Kapitel ${Number(area.chapterId.slice(-2))} öffnen: ${area.title} · ${area.label}: ${status}`}><AssetImage id={area.assetId} className="theatre-access-image" decorative fallback={<span className="theatre-access-fallback">{area.label}</span>}/><span className="theatre-access-label"><small>Kapitel {Number(area.chapterId.slice(-2))}</small><strong>{area.title}</strong><em>{completed ? "Abgeschlossen" : "Jetzt betreten"}</em></span></button>;
           })}
           {isFinaleAvailable(state) && <button className="finale-entry" onClick={() => openChapter("finale")} aria-label="Finale: Die letzte Aufführung betreten"><span aria-hidden="true">◆</span><strong>Die letzte Aufführung</strong><small>Vorhang öffnen</small></button>}
-          <div className="scene-caption" aria-live="polite"><span>Im Fokus</span><strong>{theatreAreas.find((area) => area.id === focusArea)?.label}</strong></div>
         </div>
         <nav className="mobile-theatre-nav" aria-label="Theaterbereiche">
           {theatreAreas.map((area) => {

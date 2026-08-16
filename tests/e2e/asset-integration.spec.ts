@@ -3,10 +3,32 @@ import { expect,test } from "@playwright/test";
 const base={version:1,currentGame:"dramatik",completedChapters:[],competencies:{},failedAttempts:{},stagingDecisions:{},selectedEvidence:[],progress:{},theatreState:"INITIAL",settings:{music:false,soundEffects:false,reducedMotion:true},lastSavedAt:"2026-08-09T12:00:00.000Z"};
 async function save(page:import("@playwright/test").Page,currentChapter:string,decisions:Record<string,unknown>,completedChapters:string[]=[]){await page.evaluate(({state})=>localStorage.setItem("lernwerkstatt-games:state:v1",JSON.stringify(state)),{state:{...base,currentChapter,decisions,completedChapters}});await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click()}
 
-test.beforeEach(async({page})=>{await page.goto("/");await page.evaluate(()=>localStorage.clear())});
+test.beforeEach(async({page})=>{await page.goto("/dramatik");await page.evaluate(()=>localStorage.clear())});
+
+test("neutral theatre reveals only the current image-based chapter access",async({page})=>{
+ await page.getByRole("button",{name:"Spiel beginnen"}).click();
+ await expect(page.locator(".theatre-main-background")).toHaveAttribute("src",/Theater_neutral_Hauptansicht/);
+ await expect(page.locator(".theatre-access")).toHaveCount(1);
+ await expect(page.locator(".theatre-access-image")).toHaveAttribute("src",/Kapitelzugang_1_Regiebuch/);
+ await expect(page.getByRole("button",{name:/Kapitel 1 öffnen: Das zerrissene Regiebuch/})).toBeEnabled();
+ await expect(page.locator(".theatre-access-label")).toHaveText(/Kapitel 1Das zerrissene RegiebuchJetzt betreten/);
+});
+
+test("completed access objects remain subdued while progression reveals the next chapter",async({page})=>{
+ const state={...base,currentChapter:"chapter_02",completedChapters:["chapter_01","chapter_02"],decisions:{},theatreState:"AFTER_CHAPTER_2"};
+ await page.evaluate(saved=>localStorage.setItem("lernwerkstatt-games:state:v1",JSON.stringify(saved)),state);await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();
+ await expect(page.locator(".theatre-access")).toHaveCount(3);
+ await expect(page.locator(".theatre-access.completed")).toHaveCount(2);
+ await expect(page.locator(".theatre-access.current")).toHaveCount(1);
+ await expect(page.locator(".theatre-access.current .theatre-access-image")).toHaveAttribute("src",/Kapitelzugang_3_Archivtruhe/);
+ await page.getByRole("button",{name:/Kapitel 1 öffnen: Das zerrissene Regiebuch/}).click();
+ await expect(page.getByRole("heading",{name:"Das zerrissene Regiebuch"})).toBeVisible();
+ await page.getByRole("button",{name:"← Theater"}).click();
+ await expect(page.locator(".theatre-access.current")).toHaveCount(1);
+});
 
 test("chapter 1 shows and removes Balthasar while a failed image keeps the fallback",async({page})=>{
- await page.route(/Balthasar,%20ruhig\.jpg$/,route=>route.abort());
+ await page.route(/Balthasar,%20ruhig\(1\)\.png$/,route=>route.abort());
  const chapter01={round:2,assignments:{},balthasarVisible:false,informationAssignments:{},regieChecks:[],completed:false,failedAttempts:0,competencyEvents:[]};
  await save(page,"chapter_01",{chapter_01:chapter01});
  await page.getByRole("button",{name:/Balthasar tritt auf/}).click();
@@ -17,7 +39,7 @@ test("chapter 1 shows and removes Balthasar while a failed image keeps the fallb
 test("chapter 3 uses urgent Balthasar and archive objects",async({page})=>{
  const chapter03={round:3,messageAssignments:{},knowledgeAssignments:{},foundClues:[],orderedEvents:[],causalConnections:[],roleAssignments:{},missingInformationSelected:false,audienceAssignments:{},claimAssignments:{},relevanceSelections:[],completed:false,failedAttempts:0,competencyEvents:[]};
  await save(page,"chapter_03",{chapter_03:chapter03},["chapter_01","chapter_02"]);
- await expect(page.locator(".archive-character img")).toHaveAttribute("src",/Balthasar, aufgeregt/);await expect(page.locator(".clue-grid button").first().locator("img")).toHaveAttribute("src",/Versiegelter Brief/);
+ await expect(page.locator(".archive-character img")).toHaveAttribute("src",/Balthasar, aufgeregt/);await expect(page.locator(".clue-grid button").first().locator("img")).toHaveCount(0);await expect(page.locator(".clue-grid button").first()).toContainText("Brief");
 });
 
 test("chapter 4 character image follows staging state and uses the tomb stage",async({page})=>{
