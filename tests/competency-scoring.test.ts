@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { mergeMeasuredCompetencies, scoreCompetencyEvents } from "../src/core/progress/competency";
+import { mergeMeasuredCompetencies, mergeReplayCompetencies, scoreCompetencyEvents } from "../src/core/progress/competency";
 import { initialGameState } from "../src/core/state/types";
 import { aggregateVisibleCompetencies } from "../src/games/dramatik/mechanics/competency_aggregation";
 
@@ -27,4 +27,7 @@ describe("measured competency scoring", () => {
     expect(aggregateVisibleCompetencies(state)).toEqual(aggregateVisibleCompetencies(state));
     expect(JSON.stringify(aggregateVisibleCompetencies(state))).not.toContain("%");
   });
+  it("does not increase competence for an identical successful replay", () => { const current={evidence_reasoning:{value:5,level:"advanced" as const}}; expect(mergeReplayCompetencies(current,[{competency:"evidence_reasoning",success:true}],["evidence_reasoning"])).toEqual(current); });
+  it("does not farm competence through repeated identical replays", () => { let current={evidence_reasoning:{value:5,level:"advanced" as const}}; for(let i=0;i<20;i+=1)current=mergeReplayCompetencies(current,[{competency:"evidence_reasoning",success:true}],["evidence_reasoning"]) as typeof current; expect(current.evidence_reasoning.value).toBe(5); });
+  it("accepts genuinely improved later evidence", () => { const current={evidence_reasoning:{value:2,level:"progressing" as const}}; expect(mergeReplayCompetencies(current,[{competency:"evidence_reasoning",success:true}],["evidence_reasoning"]).evidence_reasoning.value).toBe(5); });
 });

@@ -6,13 +6,13 @@ Die Lernenden restaurieren ein historisches Theater, indem sie dramatische Texts
 
 ## Kapitelstruktur
 
-1. **Das zerrissene Regiebuch:** Primärtextfragmente funktional zuordnen, Bühnenwirkung von Regieanweisungen erkennen und Wissensstand unterscheiden.
-2. **Das Ensemble erwacht:** Beziehungen begründen, direkte und indirekte Charakterisierung unterscheiden, Konflikt-, Wissens- und Entwicklungsstrukturen rekonstruieren.
-3. **Der Brief, der nie ankam:** Archivhinweise untersuchen, Informationsstände trennen, Kausalketten und relationale Ursache/Folge-Rollen bilden, Beleg und Vermutung unterscheiden.
-4. **Die Generalprobe:** Gesprächsziele, Sprachhandlungen, Eskalation und Sprache analysieren; textgebundene, vom Original getrennte Regieentscheidungen treffen.
-5. **Die Deutungsprobe:** relevante Analyseergebnisse, Textbelege, Erklärung und Hypothesenbezug zu einer Argumentationskette verbinden; Inszenierung einmal kritisch revidieren.
+1. **Das zerrissene Regiebuch:** allgemeine Situations- und Textsignale untersuchen und anschließend auf Wielands Shakespeare-Text übertragen.
+2. **Das Ensemble erwacht:** Figurenbefunde, Erschließungen, Ziele, Beziehungen und Entwicklung textgebunden analysieren.
+3. **Die Stimmen auf der Bühne:** Gesprächsziele, Sprachhandlungen, Reaktionen, Wendepunkte und Gesprächsentwicklung rekonstruieren.
+4. **Der Punkt ohne Rückkehr:** äußere und innere Konflikte, Ursachen, Folgen, Handlungsalternativen und Wendepunkte untersuchen.
+5. **Was bedeutet das?:** Analysebefunde, Textbelege, Relevanz, Gegenbelege und Hypothesenrevision zu einer Interpretation verbinden.
 
-Das Finale stellt keine sechste Prüfung dar. Es führt die bestehende Primärtextpassage mit den gespeicherten Regieentscheidungen auf und zeigt danach das Regiebuch als Lernübersicht.
+Das Finale stellt keine sechste vollständige Lernstation dar. Es verbindet die fünf Analysebereiche in einer einzigen Syntheseprobe und öffnet danach das übertragbare Regiebuch. Alte Staging- und Aufführungsmodelle sind im produktiven Finale nicht sichtbar.
 
 ## Mechaniken und Kompetenzen
 
@@ -20,7 +20,7 @@ Verwendet werden ausschließlich die vorhandenen Mechaniken: Drag-and-drop mit T
 
 ## Primärtextregeln
 
-Verbindlich ist William Shakespeares „Romeo und Julia“ in der Übersetzung August Wilhelm Schlegels nach der zentral konfigurierten Wikisource-Referenz. Primärtexte liegen ausschließlich in geschützten, gehashten Dateien. Kapitel 5 und Finale referenzieren die Kapitel-4-IDs und kopieren den Wortlaut nicht. Didaktische Zusammenfassung, Interpretation und Spielerinszenierung bleiben technisch und visuell getrennt.
+Verbindlich ist William Shakespeares „Romeo und Juliette“ in der Übersetzung von Christoph Martin Wieland. Primärtextgrundlage ist die lokale Datei `docs/sources/william-shakespeare-romeo-und-juliette.epub`. Die Kapiteldateien sind gehasht und werden zusätzlich gegen die konkreten EPUB-XHTML-Inhalte geprüft. Didaktische Zusammenfassungen und Interpretationen bleiben technisch und visuell vom Primärtext getrennt.
 
 ## Spielzeit
 

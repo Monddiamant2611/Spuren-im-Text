@@ -28,3 +28,20 @@ export function mergeMeasuredCompetencies(
   }
   return next;
 }
+
+export function mergeReplayCompetencies(
+  current: GameState["competencies"],
+  events: readonly CompetencyEventLike[],
+  competencyIds: readonly string[],
+): GameState["competencies"] {
+  const next = { ...current };
+  for (const competencyId of competencyIds) {
+    const measured = scoreCompetencyEvents(events.filter((event) => event.competency === competencyId));
+    if (measured === undefined) continue;
+    const previous = current[competencyId]?.value;
+    if (previous === undefined || measured > previous) {
+      next[competencyId] = { value: measured, level: competencyLevelFor(measured) };
+    }
+  }
+  return next;
+}

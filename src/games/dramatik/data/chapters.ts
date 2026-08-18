@@ -12,3 +12,6 @@ export const dramatikGame: GameDefinition = {
     { id: "finale", title: "Das Finale – Die letzte Probe", status: "ready" },
   ],
 };
+
+export const dramatikChapterIds = dramatikGame.chapters.slice(0, 5).map((chapter) => chapter.id);
+export const dramatikNavigationIds = dramatikGame.chapters.map((chapter) => chapter.id);

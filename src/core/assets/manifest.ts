@@ -15,6 +15,7 @@ const backgrounds=[
 
 const characterFiles=[
  ["amme","Amme(1).png","Amme","neutral"],["balthasar_urgent","Balthasar, aufgeregt  mit dringender Nachricht(1).png","Balthasar","urgent"],["balthasar_calm","Balthasar, ruhig(1).png","Balthasar","calm"],
+ ["benvolio_calm","Benvolio, der blaue Degenkämpfer.png","Benvolio","calm"],
  ["lorenzo_blessing","Bruder Lorenzo beim Erteilen des Segens(1).png","Bruder Lorenzo","blessing"],["lorenzo_letter","Bruder Lorenzo mit Brief(1).png","Bruder Lorenzo","letter"],["marcus","Bruder Markus(1).png","Bruder Markus","neutral"],
  ["julia_thoughtful","Julia, nachdenklich(1).png","Julia","thoughtful"],["julia_calm","Julia, ruhig(1).png","Julia","calm"],["julia_sad","Julia, traurig(1).png","Julia","sad"],["julia_loving","Julia, verliebt(1).png","Julia","loving"],
  ["lady_capulet","Lady Capulet(1).png","Lady Capulet","neutral"],["capulet","Lord Capulet(1).png","Capulet","neutral"],

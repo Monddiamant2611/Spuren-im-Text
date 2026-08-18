@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import { AudioManager } from "../../core/audio/AudioManager";
 import { deriveTheatreState, isChapterUnlocked } from "../../core/progress/progress";
-import { mergeMeasuredCompetencies } from "../../core/progress/competency";
+import { mergeMeasuredCompetencies, mergeReplayCompetencies } from "../../core/progress/competency";
 import { createNewGameState, loadGameState, resetGameState, saveGameState } from "../../core/state/store";
 import { initialGameState, type GameSettings, type GameState } from "../../core/state/types";
 import { dramatikGame } from "../../games/dramatik/data/chapters";
@@ -32,6 +32,7 @@ export function GameShell() {
   const [selectedChapter, setSelectedChapter] = useState<string | null>(null);
   const [focusArea, setFocusArea] = useState("desk");
   const [hydrated, setHydrated] = useState(false);
+  const [storageWarning, setStorageWarning] = useState(false);
   const audio = useRef<AudioManager | null>(null);
 
   useEffect(() => {
@@ -39,6 +40,7 @@ export function GameShell() {
     const timer = window.setTimeout(() => { setState(loadGameState()); setHydrated(true); }, 0);
     return () => window.clearTimeout(timer);
   }, []);
+  useEffect(() => { const warn = () => setStorageWarning(true); window.addEventListener("lernwerkstatt:storage-error", warn); return () => window.removeEventListener("lernwerkstatt:storage-error", warn); }, []);
 
   const persist = (next: GameState) => {
     const performanceState = next.performanceState === "PERFORMANCE_RUNNING" || next.performanceState === "PERFORMANCE_COMPLETE" ? next.performanceState : undefined;
@@ -80,27 +82,27 @@ export function GameShell() {
 
   const saveChapter01 = (session: Chapter01Session) => persist({ ...state, currentChapter: "chapter_01", decisions: { ...state.decisions, chapter_01: session }, failedAttempts: { ...state.failedAttempts, chapter_01: session.failedAttempts } });
   const completeChapter01 = (session: Chapter01Session) => {
-    const competencies = mergeMeasuredCompetencies(state.competencies, session.competencyEvents, ["text_structure", "stage_direction", "speaker_assignment", "scene_orientation", "information_state"]);
+    const competencies = mergeChapterCompetencies(state, "chapter_01", session.competencyEvents, ["text_structure", "stage_direction", "speaker_assignment", "scene_orientation", "information_state"]);
     persist({ ...state, currentChapter: "chapter_02", completedChapters: [...new Set([...state.completedChapters, "chapter_01"])], decisions: { ...state.decisions, chapter_01: session }, failedAttempts: { ...state.failedAttempts, chapter_01: session.failedAttempts }, competencies, theatreState: "AFTER_CHAPTER_1" });
   };
   const saveChapter02 = (session: Chapter02Session) => persist({ ...state, currentChapter: "chapter_02", decisions: { ...state.decisions, chapter_02: session }, failedAttempts: { ...state.failedAttempts, chapter_02: session.failedAttempts } });
   const completeChapter02 = (session: Chapter02Session) => {
-    const competencies = mergeMeasuredCompetencies(state.competencies, session.competencyEvents, ["character_relationships", "direct_characterization", "indirect_characterization", "motivation", "conflict_analysis", "character_development", "knowledge_state_analysis", "evidence_reasoning"]);
+    const competencies = mergeChapterCompetencies(state, "chapter_02", session.competencyEvents, ["character_relationships", "direct_characterization", "indirect_characterization", "motivation", "conflict_analysis", "character_development", "knowledge_state_analysis", "evidence_reasoning"]);
     persist({ ...state, currentChapter: "chapter_03", completedChapters: [...new Set([...state.completedChapters, "chapter_02"])], decisions: { ...state.decisions, chapter_02: session }, failedAttempts: { ...state.failedAttempts, chapter_02: session.failedAttempts }, competencies });
   };
   const saveChapter03 = (session: Chapter03Session) => persist({ ...state, currentChapter: "chapter_03", decisions: { ...state.decisions, chapter_03: session }, failedAttempts: { ...state.failedAttempts, chapter_03: session.failedAttempts } });
   const completeChapter03 = (session: Chapter03Session) => {
-    const competencies = mergeMeasuredCompetencies(state.competencies, session.competencyEvents, ["situation_analysis", "context_analysis", "cause_effect", "causal_reasoning", "knowledge_state_analysis", "evidence_reasoning", "relevance_selection", "unsupported_claim_detection"]);
+    const competencies = mergeChapterCompetencies(state, "chapter_03", session.competencyEvents, ["situation_analysis", "context_analysis", "cause_effect", "causal_reasoning", "knowledge_state_analysis", "evidence_reasoning", "relevance_selection", "unsupported_claim_detection"]);
     persist({ ...state, currentChapter: "chapter_04", completedChapters: [...new Set([...state.completedChapters, "chapter_03"])], decisions: { ...state.decisions, chapter_03: session }, failedAttempts: { ...state.failedAttempts, chapter_03: session.failedAttempts }, competencies });
   };
   const saveChapter04 = (session: Chapter04Session) => persist({ ...state, currentChapter: "chapter_04", decisions: { ...state.decisions, chapter_04: session }, stagingDecisions: { ...state.stagingDecisions, chapter_04: session.stagingDecisions }, failedAttempts: { ...state.failedAttempts, chapter_04: session.failedAttempts } });
   const completeChapter04 = (session: Chapter04Session) => {
-    const competencies = mergeMeasuredCompetencies(state.competencies, session.competencyEvents, ["conflict_analysis","causal_reasoning","action_analysis","turning_point","evidence_reasoning","internal_conflict","transfer_analysis"]);
+    const competencies = mergeChapterCompetencies(state, "chapter_04", session.competencyEvents, ["conflict_analysis","causal_reasoning","action_analysis","turning_point","evidence_reasoning","internal_conflict","transfer_analysis"]);
     persist({ ...state, currentChapter: "chapter_05", completedChapters: [...new Set([...state.completedChapters, "chapter_04"])], decisions: { ...state.decisions, chapter_04: session }, stagingDecisions: { ...state.stagingDecisions, chapter_04: session.stagingDecisions }, failedAttempts: { ...state.failedAttempts, chapter_04: session.failedAttempts }, competencies });
   };
   const saveChapter05 = (session: Chapter05Session) => persist({ ...state, currentChapter: "chapter_05", decisions: { ...state.decisions, chapter_05: session }, failedAttempts: { ...state.failedAttempts, chapter_05: session.failedAttempts } });
   const completeChapter05 = (session: Chapter05Session) => {
-    const competencies = mergeMeasuredCompetencies(state.competencies, session.competencyEvents, ["interpretation_reasoning","hypothesis_building","evidence_reasoning","relevance_reasoning","counterevidence","argumentation","transfer_analysis"]);
+    const competencies = mergeChapterCompetencies(state, "chapter_05", session.competencyEvents, ["interpretation_reasoning","hypothesis_building","evidence_reasoning","relevance_reasoning","counterevidence","argumentation","transfer_analysis"]);
     persist({ ...state, currentChapter: "finale", completedChapters: [...new Set([...state.completedChapters, "chapter_05"])], decisions: { ...state.decisions, chapter_05: session }, failedAttempts: { ...state.failedAttempts, chapter_05: session.failedAttempts }, competencies });
   };
   const updateFinale = (patch: Partial<GameState>) => {
@@ -108,15 +110,16 @@ export function GameShell() {
     const completed = patch.finaleCompleted === true;
     persist({ ...state, ...snapshot, ...patch, currentChapter: "finale", progress: { ...state.progress, finale_ready: true, ...(completed ? { finale_completed: true, game_completed: true } : {}) } });
   };
+  const renderWithStatus = (content: ReactNode) => <>{storageWarning && <div className="storage-warning" role="status">Der Spielstand kann momentan nicht dauerhaft gespeichert werden. Sie können in dieser Sitzung weiterarbeiten.</div>}{content}</>;
 
-  if (!hydrated) return <main className="loading-screen" aria-label="Spiel wird geladen"><span>Das Theater öffnet …</span></main>;
-  if (screen === "chapter_01") return <Chapter01 gameState={state} onSave={saveChapter01} onExit={() => setScreen("theatre")} onComplete={completeChapter01} />;
-  if (screen === "chapter_02") return <Chapter02 gameState={state} onSave={saveChapter02} onExit={() => setScreen("theatre")} onComplete={completeChapter02} />;
-  if (screen === "chapter_03") return <Chapter03 gameState={state} onSave={saveChapter03} onExit={() => setScreen("theatre")} onComplete={completeChapter03} />;
-  if (screen === "chapter_04") return <Chapter04 gameState={state} onSave={saveChapter04} onExit={() => setScreen("theatre")} onComplete={completeChapter04} />;
-  if (screen === "chapter_05") return <Chapter05 gameState={state} onSave={saveChapter05} onExit={() => setScreen("theatre")} onComplete={completeChapter05} />;
-  if (screen === "finale") return <Finale state={state} onUpdate={updateFinale} onExit={() => setScreen("theatre")} />;
-  if (screen === "start") return <StartScreen saved={state.currentGame !== null} onBegin={begin} onResume={resume} onBook={() => setScreen("finale")} onOverlay={setOverlay} overlay={overlay} state={state} onSettings={updateSettings} onReset={reset} />;
+  if (!hydrated) return renderWithStatus(<main className="loading-screen" aria-label="Spiel wird geladen"><span>Das Theater öffnet …</span></main>);
+  if (screen === "chapter_01") return renderWithStatus(<Chapter01 gameState={state} onSave={saveChapter01} onExit={() => setScreen("theatre")} onComplete={completeChapter01} />);
+  if (screen === "chapter_02") return renderWithStatus(<Chapter02 gameState={state} onSave={saveChapter02} onExit={() => setScreen("theatre")} onComplete={completeChapter02} />);
+  if (screen === "chapter_03") return renderWithStatus(<Chapter03 gameState={state} onSave={saveChapter03} onExit={() => setScreen("theatre")} onComplete={completeChapter03} />);
+  if (screen === "chapter_04") return renderWithStatus(<Chapter04 gameState={state} onSave={saveChapter04} onExit={() => setScreen("theatre")} onComplete={completeChapter04} />);
+  if (screen === "chapter_05") return renderWithStatus(<Chapter05 gameState={state} onSave={saveChapter05} onExit={() => setScreen("theatre")} onComplete={completeChapter05} />);
+  if (screen === "finale") return renderWithStatus(<Finale state={state} onUpdate={updateFinale} onExit={() => setScreen("theatre")} />);
+  if (screen === "start") return renderWithStatus(<StartScreen saved={state.currentGame !== null} onBegin={begin} onResume={resume} onBook={() => setScreen("finale")} onOverlay={setOverlay} overlay={overlay} state={state} onSettings={updateSettings} onReset={reset} />);
 
   return (
     <main className={`game-shell theatre-${state.theatreState.toLowerCase()} ${state.settings.reducedMotion ? "reduce-motion" : ""}`}>
@@ -151,6 +154,7 @@ export function GameShell() {
         </nav>
       </section>
       <div className="feedback-bar" role="status"><span aria-hidden="true">◆</span> Das Theater befindet sich im Zustand <strong>{state.theatreState.replaceAll("_", " ")}</strong>.</div>
+      {storageWarning && <div className="storage-warning" role="status">Der Spielstand kann momentan nicht dauerhaft gespeichert werden. Sie können in dieser Sitzung weiterarbeiten.</div>}
       {overlay && <OverlayPanel type={overlay} chapter={chapter} state={state} onClose={() => setOverlay(null)} onSettings={updateSettings} onReset={reset} />}
     </main>
   );
@@ -182,7 +186,13 @@ function OverlayPanel({ type, chapter, state, onClose, onSettings, onReset }: { 
     if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   };
-  return <div className="overlay-backdrop" role="presentation" onKeyDown={handleKeyDown} onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section ref={panelRef} className="overlay-panel" role="dialog" aria-modal="true" aria-labelledby="overlay-title"><button ref={closeRef} className="close-button" onClick={onClose} aria-label="Fenster schließen">×</button>{type === "chapter" && <><p className="overlay-kicker">Kapitel</p><h2 id="overlay-title">{chapter?.id === "finale" ? "Finale" : `Kapitel ${Number(chapter?.id.slice(-2))}`} – {chapter?.title}</h2></>}{type === "sources" && <><p className="overlay-kicker">Textgrundlage &amp; Quellen</p><h2 id="overlay-title">{dramatikSource.author}<br/><cite>„{dramatikSource.work}“</cite></h2><dl><dt>Deutsche Textgrundlage</dt><dd>Übersetzung von {dramatikSource.translation}</dd><dt>Verbindliche digitale Referenz</dt><dd><a href={dramatikSource.referenceUrl} target="_blank" rel="noreferrer">{dramatikSource.referenceLabel}</a></dd></dl><p>Literarische Primärtexte werden in diesem Spiel wortgetreu aus der festgelegten Textgrundlage übernommen. Didaktische Erläuterungen und Interpretationen werden davon deutlich getrennt.</p></>}{type === "options" && <><p className="overlay-kicker">Einstellungen</p><h2 id="overlay-title">Optionen</h2><div className="settings"><Toggle label="Musik" checked={state.settings.music} onChange={(music) => onSettings({ music })}/><Toggle label="Soundeffekte" checked={state.settings.soundEffects} onChange={(soundEffects) => onSettings({ soundEffects })}/><Toggle label="Bewegungen reduzieren" checked={state.settings.reducedMotion} onChange={(reducedMotion) => onSettings({ reducedMotion })}/></div><button className="danger-button" onClick={onReset}>Spielstand zurücksetzen</button></>}{type === "regiebuch" && <><p className="overlay-kicker">Zentrales Regiebuch</p><h2 id="overlay-title">Das verlorene Regiebuch</h2><div className="book-grid"><section><h3>Kapitelübersicht</h3><ol>{dramatikGame.chapters.slice(0,5).map((item) => <li key={item.id}>{item.title}<span>{state.completedChapters.includes(item.id) ? "Abgeschlossen" : "Noch ohne Eintrag"}</span></li>)}</ol></section><section><h3>Lernweg</h3><p className="placeholder-note">Das vollständige Regiebuch mit Kompetenzübersicht, Deutung und Inszenierung öffnet sich nach der letzten Aufführung.</p></section></div></>}</section></div>;
+  return <div className="overlay-backdrop" role="presentation" onKeyDown={handleKeyDown} onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section ref={panelRef} className="overlay-panel" role="dialog" aria-modal="true" aria-labelledby="overlay-title"><button ref={closeRef} className="close-button" onClick={onClose} aria-label="Fenster schließen">×</button>{type === "chapter" && <><p className="overlay-kicker">Kapitel</p><h2 id="overlay-title">{chapter?.id === "finale" ? "Finale" : `Kapitel ${Number(chapter?.id.slice(-2))}`} – {chapter?.title}</h2></>}{type === "sources" && <><p className="overlay-kicker">Textgrundlage &amp; Quellen</p><h2 id="overlay-title">{dramatikSource.author}<br/><cite>„{dramatikSource.work}“</cite></h2><dl><dt>Deutsche Textgrundlage</dt><dd>Übersetzung von {dramatikSource.translation}</dd><dt>Primärtextgrundlage</dt><dd>{dramatikSource.primaryTextBasis}</dd></dl><p>Literarische Primärtexte werden in diesem Spiel wortgetreu aus der im Projekt hinterlegten Wieland-Ausgabe übernommen. Didaktische Erläuterungen und Interpretationen werden davon deutlich getrennt.</p></>}{type === "options" && <><p className="overlay-kicker">Einstellungen</p><h2 id="overlay-title">Optionen</h2><div className="settings"><Toggle label="Musik" checked={state.settings.music} onChange={(music) => onSettings({ music })}/><Toggle label="Soundeffekte" checked={state.settings.soundEffects} onChange={(soundEffects) => onSettings({ soundEffects })}/><Toggle label="Bewegungen reduzieren" checked={state.settings.reducedMotion} onChange={(reducedMotion) => onSettings({ reducedMotion })}/></div><button className="danger-button" onClick={onReset}>Spielstand zurücksetzen</button></>}{type === "regiebuch" && <><p className="overlay-kicker">Zentrales Regiebuch</p><h2 id="overlay-title">Das verlorene Regiebuch</h2><div className="book-grid"><section><h3>Kapitelübersicht</h3><ol>{dramatikGame.chapters.slice(0,5).map((item) => <li key={item.id}>{item.title}<span>{state.completedChapters.includes(item.id) ? "Abgeschlossen" : "Noch ohne Eintrag"}</span></li>)}</ol></section><section><h3>Lernweg</h3><p className="placeholder-note">Das vollständige Regiebuch mit Kompetenzübersicht und Deutung öffnet sich nach der letzten Probe.</p></section></div></>}</section></div>;
 }
 
 function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (value: boolean) => void }) { return <label className="toggle"><span>{label}</span><input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)}/><span className="switch" aria-hidden="true"/></label>; }
+
+function mergeChapterCompetencies(state: GameState, chapterId: string, events: readonly { competency: string; success: boolean }[], competencyIds: readonly string[]) {
+  return state.completedChapters.includes(chapterId)
+    ? mergeReplayCompetencies(state.competencies, events, competencyIds)
+    : mergeMeasuredCompetencies(state.competencies, events, competencyIds);
+}

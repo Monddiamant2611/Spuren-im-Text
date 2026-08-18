@@ -56,10 +56,9 @@ test("modal traps focus, closes with Escape and restores its trigger", async ({ 
   await trigger.press("Enter");
   const dialog = page.getByRole("dialog");
   const close = dialog.getByRole("button", { name: "Fenster schließen" });
-  const sourceLink = dialog.getByRole("link", { name: "Wikisource" });
   await expect(close).toBeFocused();
   await page.keyboard.press("Shift+Tab");
-  await expect(sourceLink).toBeFocused();
+  await expect(close).toBeFocused();
   await page.keyboard.press("Tab");
   await expect(close).toBeFocused();
   await page.keyboard.press("Escape");

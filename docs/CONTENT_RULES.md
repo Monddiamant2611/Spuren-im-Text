@@ -2,7 +2,7 @@
 
 Literarische Primärtexte dürfen nicht erfunden, ergänzt, modernisiert oder ungekennzeichnet verändert werden. Orthografie, Zeichensetzung, Sprecherangaben und Regieanweisungen bleiben exakt erhalten. Stille Kürzungen und automatische Korrekturen sind unzulässig. Redaktionell vorbereitete Kürzungen müssen ausdrücklich gekennzeichnet sein.
 
-Für „Romeo und Julia“ gilt ausschließlich August Wilhelm Schlegels Übersetzung in der auf Wikisource bereitgestellten Fassung. Codex beschafft oder ergänzt in Phase 0 keine fehlenden Originaltexte.
+Für den produktiven Lernpfad gilt ausschließlich William Shakespeares „Romeo und Juliette“ in der Übersetzung von Christoph Martin Wieland. Verbindliche Primärtextgrundlage ist `docs/sources/william-shakespeare-romeo-und-juliette.epub`. Die verwendeten Ausschnitte werden direkt gegen die XHTML-Inhalte dieser lokalen EPUB geprüft.
 
 ## Herkunftstypen
 
@@ -15,8 +15,8 @@ Didaktische Zusammenfassungen und Interpretationen müssen technisch und visuell
 
 `source_verified: true` darf ausschließlich in redaktionell freigegebenen Inhaltsdateien gesetzt werden. Die Anwendung darf diesen Status niemals selbst erzeugen. Primärtextdatensätze sind immer `editable: false`.
 
-Die für Kapitel 1 freigegebenen Fragmente aus dem 5. Aufzug, 1. Szene liegen in einer geschützten JSON-Datei. Das SHA-256-Manifest und ein zusätzlicher exakter Inhaltsvergleich sichern auch Schreibweisen wie „traun“ gegen scheinbar harmlose Modernisierung.
+Die für Kapitel 1–5 verwendeten Wieland-Ausschnitte liegen in geschützten JSON-Dateien. Das SHA-256-Manifest und der exakte EPUB-Inhaltsvergleich sichern den historischen Wortlaut gegen scheinbar harmlose Modernisierung.
 
-Die in Kapitel 4, Kapitel 5 und Finale verwendete Passage aus dem 5. Aufzug, 3. Szene besitzt genau eine geschützte Datenquelle. Nachgelagerte Analyse-, Inszenierungs- und Aufführungsdaten referenzieren deren IDs; sie dürfen den Wortlaut nicht duplizieren. Feste Regieanweisungen werden ebenfalls aus diesen IDs geladen und können durch Spielerentscheidungen nicht verändert werden.
+Alte Schlegel-/Wikisource-Dateien bleiben ausschließlich als nicht produktiv importierter Legacy-Bestand erhalten. Sie dürfen weder im sichtbaren Quellenbereich noch im aktuellen Lernpfad als verwendete Textgrundlage ausgegeben werden.
 
 Produktionsinhalte dürfen keine redaktionellen Platzhalter enthalten. Nicht verifizierte didaktische Zusammenfassungen bleiben `source_verified: false`, werden ausdrücklich als didaktische Inhalte geführt und dürfen nicht als Primärtext ausgegeben werden. Die Beziehungsbelege, Konfliktstruktur und Figurenentwicklung in Kapitel 2 verwenden ausschließlich solche gekennzeichneten didaktischen Aussagen.

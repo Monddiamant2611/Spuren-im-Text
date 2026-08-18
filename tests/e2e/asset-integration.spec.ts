@@ -38,7 +38,12 @@ test("chapter 1 uses Lorenzo as guide while a failed image keeps the fallback",a
 test("chapter 3 uses the rehearsal cast and analysis-room background",async({page})=>{
  const chapter03={round:4,practiceActs:{},practiceGoals:{},goalEvidence:{},goalChange:null,speechChains:[],phaseOrder:[],turningPoint:null,languageChains:[],findingAssignments:{},transferEvidence:{},comparisonAssignments:{},finalSteps:[],completed:false,failedAttempts:0,competencyEvents:[]};
  await save(page,"chapter_03",{chapter_03:chapter03},["chapter_01","chapter_02"]);
- await expect(page.locator(".dialogue-stage>.asset-backdrop")).toHaveAttribute("src",/Weitere Theaterkulisse/);await expect(page.locator(".dialogue-figure img")).toHaveCount(3);await expect(page.locator(".figure-fallback")).toContainText("Benvolio");
+ await expect(page.locator(".dialogue-stage>.asset-backdrop")).toHaveAttribute("src",/Weitere Theaterkulisse/);await expect(page.locator(".dialogue-figure img")).toHaveCount(4);const benvolio=page.getByRole("img",{name:"Benvolio"});await expect(benvolio).toHaveAttribute("src",/Benvolio, der blaue Degenkämpfer/);await expect(page.locator(".figure-fallback")).toHaveCount(0);expect(await benvolio.evaluate(image=>({loaded:(image as HTMLImageElement).naturalWidth>0,ratio:(image as HTMLImageElement).naturalWidth/(image as HTMLImageElement).naturalHeight}))).toMatchObject({loaded:true,ratio:expect.any(Number)});
+});
+
+test("learner-facing source labels use Wieland and hide internal EPUB paths",async({page})=>{
+ await page.getByRole("button",{name:"Textgrundlage & Quellen"}).click();const dialog=page.getByRole("dialog");await expect(dialog).toContainText("Christoph Martin Wieland");await expect(dialog).not.toContainText(/Schlegel|Wikisource|OEBPS\/chapter-/);await dialog.getByRole("button",{name:"Fenster schließen"}).click();
+ await save(page,"chapter_04",{chapter_04:{round:5}},["chapter_01","chapter_02","chapter_03"]);await page.getByText("Geschützte Textbelege öffnen").click();await expect(page.locator("body")).not.toContainText(/OEBPS\/chapter-/);await expect(page.locator("body")).toContainText("Christoph Martin Wieland");
 });
 
 test("chapter 4 uses Romeo, Paris and the tomb stage for the external conflict",async({page})=>{
