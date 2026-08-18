@@ -95,14 +95,13 @@ export function GameShell() {
   };
   const saveChapter04 = (session: Chapter04Session) => persist({ ...state, currentChapter: "chapter_04", decisions: { ...state.decisions, chapter_04: session }, stagingDecisions: { ...state.stagingDecisions, chapter_04: session.stagingDecisions }, failedAttempts: { ...state.failedAttempts, chapter_04: session.failedAttempts } });
   const completeChapter04 = (session: Chapter04Session) => {
-    const competencies = mergeMeasuredCompetencies(state.competencies, session.competencyEvents, ["dialogue_analysis","conversation_goals","speech_acts","conversation_development","conflict_analysis","language_analysis","nonverbal_analysis","staging_reasoning","evidence_reasoning","perspective_analysis"]);
+    const competencies = mergeMeasuredCompetencies(state.competencies, session.competencyEvents, ["conflict_analysis","causal_reasoning","action_analysis","turning_point","evidence_reasoning","internal_conflict","transfer_analysis"]);
     persist({ ...state, currentChapter: "chapter_05", completedChapters: [...new Set([...state.completedChapters, "chapter_04"])], decisions: { ...state.decisions, chapter_04: session }, stagingDecisions: { ...state.stagingDecisions, chapter_04: session.stagingDecisions }, failedAttempts: { ...state.failedAttempts, chapter_04: session.failedAttempts }, competencies });
   };
   const saveChapter05 = (session: Chapter05Session) => persist({ ...state, currentChapter: "chapter_05", decisions: { ...state.decisions, chapter_05: session }, failedAttempts: { ...state.failedAttempts, chapter_05: session.failedAttempts } });
   const completeChapter05 = (session: Chapter05Session) => {
-    const competencies = mergeMeasuredCompetencies(state.competencies, session.competencyEvents, ["relevance_selection","interpretation","evidence_reasoning","hypothesis_testing","claim_validation","argument_structure","critical_revision","staging_reasoning"]);
-    const stagingDecisions = session.stagingRevision ? { ...state.stagingDecisions, chapter_05_revision: session.stagingRevision } : state.stagingDecisions;
-    persist({ ...state, currentChapter: "finale", completedChapters: [...new Set([...state.completedChapters, "chapter_05"])], decisions: { ...state.decisions, chapter_05: session }, failedAttempts: { ...state.failedAttempts, chapter_05: session.failedAttempts }, competencies, stagingDecisions });
+    const competencies = mergeMeasuredCompetencies(state.competencies, session.competencyEvents, ["interpretation_reasoning","hypothesis_building","evidence_reasoning","relevance_reasoning","counterevidence","argumentation","transfer_analysis"]);
+    persist({ ...state, currentChapter: "finale", completedChapters: [...new Set([...state.completedChapters, "chapter_05"])], decisions: { ...state.decisions, chapter_05: session }, failedAttempts: { ...state.failedAttempts, chapter_05: session.failedAttempts }, competencies });
   };
   const startFinale = () => {
     const snapshot = createFinaleSnapshot(state);

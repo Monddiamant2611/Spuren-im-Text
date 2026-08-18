@@ -6,8 +6,8 @@ export const visibleCompetencies:readonly VisibleCompetencyDefinition[]=[
  {id:"character_analysis",label:"Figuren analysieren",sources:["character_relationships","direct_characterization","indirect_characterization","motivation","conflict_analysis","character_development"],feedback:feedback("Figurenbeziehungen und Handlungen")},
  {id:"situation_action",label:"Situation und Handlung verstehen",sources:["situation_analysis","context_analysis","cause_effect","causal_reasoning","knowledge_state_analysis"],feedback:feedback("Situations- und Handlungszusammenhänge")},
  {id:"dialogue",label:"Dialoge untersuchen",sources:["dialogue_analysis","conversation_goals","speech_acts","conversation_development","language_analysis"],feedback:feedback("Gesprächsverläufe und Sprachhandlungen")},
- {id:"evidence",label:"Textbelege nutzen",sources:["evidence_reasoning","claim_validation","unsupported_claim_detection","relevance_selection"],feedback:feedback("Textbelege")},
- {id:"interpretation",label:"Interpretieren",sources:["interpretation","hypothesis_testing","argument_structure","critical_revision"],feedback:feedback("Analyseergebnisse für Interpretationen")},
+ {id:"evidence",label:"Textbelege nutzen",sources:["evidence_reasoning","claim_validation","unsupported_claim_detection","relevance_selection","relevance_reasoning","counterevidence"],feedback:feedback("Textbelege")},
+ {id:"interpretation",label:"Interpretieren",sources:["interpretation","hypothesis_testing","argument_structure","critical_revision","interpretation_reasoning","hypothesis_building","argumentation","transfer_analysis"],feedback:feedback("Analyseergebnisse für Interpretationen")},
  {id:"staging",label:"Inszenierungen begründen",sources:["staging_reasoning","nonverbal_analysis","perspective_analysis"],feedback:feedback("textgebundene Inszenierungsentscheidungen")},
 ] as const;
 function levelFor(value:number):CompetencyLevel{return value>=5?"advanced":value>=3.5?"secure":value>=2?"progressing":"developing"}

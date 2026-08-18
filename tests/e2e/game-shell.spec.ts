@@ -1,8 +1,6 @@
 import { expect, test } from "@playwright/test";
-import { relationships } from "../../src/games/dramatik/data/chapter_02/relationships";
-import { conflictChain } from "../../src/games/dramatik/data/chapter_02/conflicts";
-import { developmentCards } from "../../src/games/dramatik/data/chapter_02/development";
-import { countercheckOptions } from "../../src/games/dramatik/data/chapter_05/countercheck";
+import { practiceClaims, transferTasks } from "../../src/games/dramatik/data/chapter_02_content";
+import { transferChain, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
 
 test.beforeEach(async ({ page }) => { await page.goto("/dramatik"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
 
@@ -13,7 +11,7 @@ test("start, theatre, keyboard hotspots, sources and persistence", async ({ page
   const desk = page.getByRole("button", { name: /Regiepult: verfügbar/ });
   await expect(desk).toBeEnabled(); await desk.focus(); await page.keyboard.press("Enter");
   await expect(page.getByRole("heading", { name: "Das zerrissene Regiebuch" })).toBeVisible(); await page.getByRole("button", { name: "← Theater" }).click();
-  for (const name of ["Ensemblewand", "Theaterarchiv", "Bühne", "Regiebuch"]) await expect(page.getByRole("button", { name: new RegExp(`${name}: gesperrt`) })).toHaveCount(0);
+  for (const name of ["Ensemblewand", "Probenbühne", "Bühne", "Regiebuch"]) await expect(page.getByRole("button", { name: new RegExp(`${name}: gesperrt`) })).toHaveCount(0);
   await page.getByRole("button", { name: "Quellen" }).click(); await expect(page.getByRole("heading", { name: /William Shakespeare/ })).toBeVisible(); await page.getByRole("button", { name: "Fenster schließen" }).click();
   await page.reload(); await expect(page.getByRole("button", { name: "Fortsetzen" })).toBeVisible();
 });
@@ -21,14 +19,14 @@ test("start, theatre, keyboard hotspots, sources and persistence", async ({ page
 test("chapter 1 supports keyboard reconstruction and mid-chapter reload", async ({ page }) => {
   await page.getByRole("button", { name: "Spiel beginnen" }).click();
   await page.getByRole("button", { name: /Regiepult: verfügbar/ }).press("Enter");
-  await page.getByRole("button", { name: /Mantua\. Eine Straße\./ }).press("Enter");
-  await page.getByRole("button", { name: /Ort \/ Szenenangabe/ }).press("Enter");
+  await page.getByRole("button", { name: "Regiebuch untersuchen" }).press("Enter");
+  await page.getByRole("button", { name: "ANNA" }).press("Enter");
   await page.reload();
   await page.getByRole("button", { name: "Fortsetzen" }).click();
-  await expect(page.getByText("Originaltext · restauriert")).toBeVisible();
+  await expect(page.getByText("Markieren Sie eine Information, die nicht gesprochen wird, sondern das Bühnengeschehen beschreibt.")).toBeVisible();
 });
 
-test("chapter 2 relationship graph is keyboard operable, responsive and persistent", async ({ page }) => {
+test("chapter 2 evidence classification is keyboard operable, responsive and persistent", async ({ page }) => {
   await page.evaluate(() => localStorage.setItem("lernwerkstatt-games:state:v1", JSON.stringify({
     version: 1, currentGame: "dramatik", currentChapter: "chapter_02", completedChapters: ["chapter_01"],
     decisions: {}, competencies: {}, failedAttempts: {}, stagingDecisions: {}, selectedEvidence: [], progress: {},
@@ -36,121 +34,95 @@ test("chapter 2 relationship graph is keyboard operable, responsive and persiste
   })));
   await page.reload();
   await page.getByRole("button", { name: "Fortsetzen" }).click();
-  await expect(page.getByRole("heading", { name: "Das Ensemble erwacht" })).toBeVisible();
-  await page.getByRole("button", { name: /Romeo.*Figur wählen/ }).focus();
-  await page.keyboard.press("Enter");
-  await page.getByRole("button", { name: /Julia.*Figur wählen/ }).focus();
-  await page.keyboard.press("Enter");
-  const relation = relationships[0];
-  await page.getByRole("button", { name: relation.evidenceOptions.find((item) => !item.correct)!.text }).press("Enter");
-  await expect(page.getByText(/begründet die verbundene Beziehung nicht/)).toBeVisible();
-  await expect(page.getByText("Verbindung und Begründung ergänzt")).toHaveCount(0);
-  await page.getByRole("button", { name: relation.evidenceOptions.find((item) => item.correct)!.text }).press("Enter");
-  await expect(page.getByText("Verbindung und Begründung ergänzt")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Das Ensemble" })).toBeVisible();
+  await page.getByRole("button", { name: "Erste Figurenakte öffnen" }).press("Enter");
+  const claim=practiceClaims[0];
+  await page.getByRole("button",{name:claim.text}).press("Enter");
+  await page.getByRole("button",{name:/Eindeutig belegt/}).press("Enter");
   await page.reload(); await page.getByRole("button", { name: "Fortsetzen" }).click();
-  await expect(page.getByText("Verbindung und Begründung ergänzt")).toBeVisible();
+  await expect(page.getByRole("button",{name:claim.text})).toHaveCount(0);
   await page.setViewportSize({ width: 1024, height: 768 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
-  await expect(page.getByRole("button", { name: /Mercutio.*Figur wählen/ })).toBeVisible();
+  await expect(page.getByText("MARA:").first()).toBeVisible();
 });
 
-test("chapter 2 ordering and chapter 5 countercheck reject wrong choices and survive reload", async ({ page }) => {
-  const chapter02Base = { relationshipIndex:8,pendingRelationship:null,completedRelationships:relationships.map((item)=>item.id),characterizationTask:2,reasoningStep:0,classified:{},knowledgeAssignments:{},finaleIndex:0,completed:false,failedAttempts:0,competencyEvents:[] };
+test("chapter 2 transfer rejects a wrong evidence link and chapter 5 countercheck survives reload", async ({ page }) => {
   const save = async (currentChapter:string,completedChapters:string[],decisions:Record<string,unknown>,theatreState:string) => page.evaluate(({currentChapter,completedChapters,decisions,theatreState}) => localStorage.setItem("lernwerkstatt-games:state:v1",JSON.stringify({version:1,currentGame:"dramatik",currentChapter,completedChapters,decisions,competencies:{},failedAttempts:{},stagingDecisions:{chapter_04:{}},selectedEvidence:[],progress:{},theatreState,settings:{music:true,soundEffects:true,reducedMotion:false},lastSavedAt:new Date().toISOString()})),{currentChapter,completedChapters,decisions,theatreState});
 
-  await save("chapter_02",["chapter_01"],{chapter_02:{...chapter02Base,round:4,conflictStages:[],developmentStages:[]}},"AFTER_CHAPTER_1");
+  const chapter02={round:9,practiceAssignments:{},characterizationAssignments:{},highlights:[],momentAssignments:{},roleAssignments:{},relationshipSteps:[],selfOtherAssignments:{},transferSteps:[],comparisonAssignments:{},ensembleConnections:[],completed:false,failedAttempts:0,competencyEvents:[]};
+  await save("chapter_02",["chapter_01"],{chapter_02:chapter02},"AFTER_CHAPTER_1");
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await page.getByRole("button",{name:conflictChain[1].text}).click();
-  await expect(page.getByText(/vorangehenden Schritt/)).toBeVisible();
-  await page.getByRole("button",{name:conflictChain[0].text}).click();
+  const first=page.locator(".evidence-entry").first();
+  await first.locator("select").selectOption(transferTasks[1].sourceId);
+  await first.getByRole("button",{name:"Beleg prüfen"}).click();
+  await expect(page.getByRole("status")).toContainText("anderen Beleg");
+  await first.locator("select").selectOption(transferTasks[0].sourceId);
+  await first.getByRole("button",{name:"Beleg prüfen"}).click();
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await expect(page.getByRole("button",{name:conflictChain[0].text})).toBeDisabled();
+  await expect(page.locator(".evidence-entry.done")).toHaveCount(1);
 
-  await save("chapter_02",["chapter_01"],{chapter_02:{...chapter02Base,round:6,conflictStages:conflictChain.map((item)=>item.id),developmentStages:[]}},"AFTER_CHAPTER_1");
-  await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await page.getByRole("button",{name:developmentCards[1].text}).click();
-  await expect(page.getByRole("status")).toContainText("Figurenentwicklung braucht die Abfolge");
-  await page.getByRole("button",{name:developmentCards[0].text}).click();
-  await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await expect(page.getByRole("button",{name:developmentCards[0].text})).toBeDisabled();
-
-  const chapter05={round:6,relevanceAssignments:{},pendingInterpretation:null,interpretationLinks:[],claimAssignments:{},escalationAssignments:{},countercheckPassed:false,hypothesisRefined:false,argumentOrder:[],stagingReviewLoaded:false,stagingRevision:null,revisionCount:0,completed:false,failedAttempts:0,competencyEvents:[]};
+  const chapter05={round:15,transferHypothesis:transferHypotheses.find(item=>item.quality==="supported")!.text,failedAttempts:0,competencyEvents:[]};
   await save("chapter_05",["chapter_01","chapter_02","chapter_03","chapter_04"],{chapter_05:chapter05},"AFTER_CHAPTER_4");
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await page.getByRole("button",{name:countercheckOptions.find((item)=>!item.correct)!.text}).click();
-  await expect(page.getByText(/bereits differenziert/)).toBeVisible();
-  await expect(page.getByText("Probe 6 von 8")).toBeVisible();
-  await page.getByRole("button",{name:countercheckOptions.find((item)=>item.correct)!.text}).click();
-  await expect(page.getByText("Probe 7 von 8")).toBeVisible();
+  await page.getByRole("button",{name:/bietet das Gift begeistert/}).click();
+  await expect(page.getByRole("status")).toContainText("Denkbewegung");
+  await expect(page.getByText("Station 15 von 18")).toBeVisible();
+  await page.getByRole("button",{name:/verweist auf das Gesetz/}).click();
+  await expect(page.getByText("Station 16 von 18")).toBeVisible();
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await expect(page.getByText("Probe 7 von 8")).toBeVisible();
+  await expect(page.getByText("Station 16 von 18")).toBeVisible();
 });
 
-test("chapter 3 causal chain is keyboard operable, responsive and persistent", async ({ page }) => {
-  const chapter03 = { round:4,messageAssignments:{},knowledgeAssignments:{},foundClues:[],orderedEvents:[],causalConnections:[],roleAssignments:{},missingInformationSelected:false,audienceAssignments:{},claimAssignments:{},relevanceSelections:[],completed:false,failedAttempts:0,competencyEvents:[] };
+test("chapter 3 dialogue analysis is keyboard operable, responsive and persistent", async ({ page }) => {
+  const chapter03 = { round:4,practiceActs:{practice_mara_stop:"auffordern"},practiceGoals:{},goalEvidence:{},goalChange:null,speechChains:[],phaseOrder:[],turningPoint:null,languageChains:[],findingAssignments:{},transferEvidence:{},comparisonAssignments:{},finalSteps:[],completed:false,failedAttempts:0,competencyEvents:[] };
   await page.evaluate((session) => localStorage.setItem("lernwerkstatt-games:state:v1", JSON.stringify({
     version:1,currentGame:"dramatik",currentChapter:"chapter_03",completedChapters:["chapter_01","chapter_02"],decisions:{chapter_03:session},competencies:{},failedAttempts:{},stagingDecisions:{},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_2",settings:{music:true,soundEffects:true,reducedMotion:false},lastSavedAt:new Date().toISOString(),
   })), chapter03);
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await expect(page.getByRole("heading",{name:"Der Brief, der nie ankam"})).toBeVisible();
-  await page.getByRole("button",{name:"Lorenzo plant, Romeo zu informieren."}).press("Enter");
-  await page.getByRole("button",{name:"Position 1 belegen"}).press("Enter");
+  await expect(page.getByRole("heading",{name:"Die Stimmen auf der Bühne"})).toBeVisible();
+  await page.locator(".source-button").first().press("Enter");
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await expect(page.getByRole("button",{name:/Position 1: Lorenzo plant/})).toBeVisible();
-  await page.setViewportSize({width:1024,height:768});
+  await expect(page.getByText("Wer will in diesem Abschnitt was?")).toBeVisible();
+  await page.setViewportSize({width:390,height:844});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
-  await expect(page.getByRole("button",{name:/Position 1: Lorenzo plant/})).toBeVisible();
+  await expect(page.locator(".dialogue-stage")).toBeVisible();
 });
 
-test("chapter 4 rehearsal opens by director signal and persists keyboard analysis", async ({ page }) => {
+test("chapter 4 causal workshop opens and persists keyboard analysis", async ({ page }) => {
   await page.evaluate(()=>localStorage.setItem("lernwerkstatt-games:state:v1",JSON.stringify({version:1,currentGame:"dramatik",currentChapter:"chapter_04",completedChapters:["chapter_01","chapter_02","chapter_03"],decisions:{},competencies:{},failedAttempts:{},stagingDecisions:{},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_3",settings:{music:true,soundEffects:true,reducedMotion:false},lastSavedAt:new Date().toISOString()})));
-  await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await expect(page.getByRole("button",{name:"REGIE!"})).toBeVisible();await page.getByRole("button",{name:"REGIE!"}).press("Enter");
-  await page.getByRole("button",{name:"Romeo befindet sich am Familienbegräbnis der Capulets."}).press("Enter");await page.getByRole("button",{name:"Beobachtung"}).press("Enter");
-  await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await expect(page.getByRole("heading",{name:"Die Generalprobe"})).toBeVisible();
-  await page.setViewportSize({width:1024,height:768});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);await expect(page.getByText("Originaltext anzeigen")).toBeVisible();
+  await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await expect(page.getByRole("heading",{name:"Der Punkt ohne Rückkehr"})).toBeVisible();
+  await page.getByRole("button",{name:"Mara möchte zu einer Feier gehen."}).press("Enter");
+  await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await expect(page.getByRole("button",{name:"Mara möchte zu einer Feier gehen."})).toBeDisabled();
+  await page.setViewportSize({width:1024,height:768});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
 });
 
-test("chapter 4 stores a real staging choice and renders distinct stage distance", async ({ page }) => {
-  const session = { round:7,perspectiveAssignments:{},goalEvidence:{romeo:"c04_romeo_warning"},speechAssignments:{},orderedPhases:[],escalationSelections:["paris_rejects","fight"],languageFindings:[],stagingDecisions:{},rehearsalPlayed:false,rehearsalMoment:0,counterprobeActive:false,correctionUsed:false,directorErrorResolved:false,revisedRehearsalPlayed:false,completed:false,failedAttempts:0,competencyEvents:[] };
+test("chapter 4 stores a causal classification and keeps it after reload", async ({ page }) => {
+  const session = { round:3,causalIntroAssignments:{},failedAttempts:0,competencyEvents:[] };
   await page.evaluate((chapter04) => localStorage.setItem("lernwerkstatt-games:state:v1", JSON.stringify({
     version:1,currentGame:"dramatik",currentChapter:"chapter_04",completedChapters:["chapter_01","chapter_02","chapter_03"],decisions:{chapter_04:chapter04},competencies:{},failedAttempts:{},stagingDecisions:{},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_3",settings:{music:true,soundEffects:true,reducedMotion:false},lastSavedAt:new Date().toISOString(),
   })), session);
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  const distance = page.locator(".staging-choice").first();
-  await distance.getByRole("button",{name:"große Distanz",exact:true}).click();
-  await distance.getByRole("button",{name:/Romeos Versuch, die Konfrontation/}).click();
-  await distance.getByRole("button",{name:"Regieentscheidung prüfen"}).click();
-  await expect(page.locator(".rehearsal-stage").first()).toHaveClass(/distance-large/);
+  const rain=page.locator("fieldset").filter({hasText:"Mara verlässt das Haus"});await rain.getByRole("button",{name:"Nur zeitlich nacheinander"}).click();
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await expect(page.locator(".rehearsal-stage").first()).toHaveClass(/distance-large/);
-  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!).decisions.chapter_04.stagingDecisions.figure_distance.value);
-  expect(stored).toBe("große Distanz");
-  await page.evaluate(() => { const state=JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!); state.decisions.chapter_04.stagingDecisions.figure_distance={...state.decisions.chapter_04.stagingDecisions.figure_distance,value:"mittlere Distanz",reasoningId:"distance_pressure"}; localStorage.setItem("lernwerkstatt-games:state:v1",JSON.stringify(state)); });
-  await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await expect(page.locator(".rehearsal-stage").first()).toHaveClass(/distance-medium/);
+  const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!).decisions.chapter_04.causalIntroAssignments.rain);
+  expect(stored).toBe("temporal");
   await page.setViewportSize({width:1024,height:768});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
-  await expect(page.locator(".staging-choice").first()).toBeVisible();
+  await expect(page.getByRole("heading",{name:"Danach – oder deshalb?"})).toBeVisible();
 });
 
-test("chapter 5 argument puzzle is keyboard operable, persistent and responsive",async({page})=>{
- const chapter05={round:7,relevanceAssignments:{},pendingInterpretation:null,interpretationLinks:[],claimAssignments:{},escalationAssignments:{},countercheckPassed:true,hypothesisRefined:true,argumentOrder:[],stagingReviewLoaded:false,stagingRevision:null,revisionCount:0,completed:false,failedAttempts:0,competencyEvents:[]};
+test("chapter 5 transfer chain is keyboard operable, persistent and responsive",async({page})=>{
+ const chapter05={round:13,transferChain:[],failedAttempts:0,competencyEvents:[]};
  await page.evaluate(session=>localStorage.setItem("lernwerkstatt-games:state:v1",JSON.stringify({version:1,currentGame:"dramatik",currentChapter:"chapter_05",completedChapters:["chapter_01","chapter_02","chapter_03","chapter_04"],decisions:{chapter_05:session},competencies:{},failedAttempts:{},stagingDecisions:{chapter_04:{}},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_4",settings:{music:true,soundEffects:true,reducedMotion:false},lastSavedAt:new Date().toISOString()})),chapter05);
- await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await page.getByRole("button",{name:/hypothesis Deutungshypothese/}).press("Enter");await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await expect(page.getByRole("listitem").filter({hasText:"Deutungshypothese"})).toBeVisible();await page.setViewportSize({width:1024,height:768});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);await expect(page.getByRole("heading",{name:"Die Deutungsprobe"})).toBeVisible();
+ await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await page.getByRole("button",{name:new RegExp(transferChain[0].text.slice(0,18))}).press("Enter");await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await expect(page.getByRole("listitem").filter({hasText:"Meine Dürftigkeit"})).toBeVisible();await page.setViewportSize({width:1024,height:768});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);await expect(page.getByRole("heading",{name:"Was bedeutet das?"})).toBeVisible();
 });
 
-test("chapter 5 accepts only a changed staging value and carries it into finale and book",async({page})=>{
- const original={id:"figure_distance",dimension:"distance",characterId:"both",value:"große Distanz",evidenceIds:["c04_romeo_warning"],reasoningId:"distance_avoidance",kind:"optional_staging_choice"};
- const chapter05={round:8,relevanceAssignments:{analysis_paris_arrest:"high_relevance"},pendingInterpretation:null,interpretationLinks:[],claimAssignments:{},escalationAssignments:{},countercheckPassed:true,hypothesisRefined:true,argumentOrder:[],stagingReviewLoaded:true,reviewDecisions:{figure_distance:original},stagingRevision:null,revisionCount:0,completed:false,failedAttempts:0,competencyEvents:[]};
- const state={version:1,currentGame:"dramatik",currentChapter:"chapter_05",completedChapters:["chapter_01","chapter_02","chapter_03","chapter_04"],decisions:{chapter_05:chapter05},competencies:{},failedAttempts:{},stagingDecisions:{chapter_04:{figure_distance:original}},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_4",settings:{music:false,soundEffects:false,reducedMotion:true},lastSavedAt:new Date().toISOString()};
+test("chapter 5 requires a real hypothesis revision and does not write staging",async({page})=>{
+ const chapter05={round:16,transferHypothesis:transferHypotheses.find(item=>item.quality==="supported")!.text,transferCountercheck:"apothecary_resists",failedAttempts:0,competencyEvents:[]};
+ const state={version:1,currentGame:"dramatik",currentChapter:"chapter_05",completedChapters:["chapter_01","chapter_02","chapter_03","chapter_04"],decisions:{chapter_05:chapter05},competencies:{},failedAttempts:{},stagingDecisions:{chapter_04:{}},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_4",settings:{music:false,soundEffects:false,reducedMotion:true},lastSavedAt:new Date().toISOString()};
  await page.evaluate(saved=>localStorage.setItem("lernwerkstatt-games:state:v1",JSON.stringify(saved)),state);await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();
- const review=page.locator(".staging-review article").first();
- await review.getByRole("button",{name:"große Distanz",exact:true}).click();await review.getByRole("button",{name:/Romeos Versuch/}).click();await review.getByRole("button",{name:"Ausgewählte Änderung speichern"}).click();
- await expect(page.getByRole("status")).toContainText("tatsächlich veränderte");
- expect(await page.evaluate(()=>JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!).decisions.chapter_05.revisionCount)).toBe(0);
- await review.getByRole("button",{name:"mittlere Distanz",exact:true}).click();await review.getByRole("button",{name:/zunehmende Bedrängung/}).click();await review.getByRole("button",{name:"Ausgewählte Änderung speichern"}).click();
- await expect(page.getByRole("status")).toContainText("revidiert");await page.getByRole("button",{name:"Deutung und Inszenierung abschließen"}).click();await page.getByRole("button",{name:"← Theater"}).click();await page.getByRole("button",{name:/Finale: Die letzte Aufführung/}).click();await page.getByRole("button",{name:"Aufführung beginnen"}).click();await expect(page.locator(".performance-stage")).toHaveClass(/distance-medium/);
- for(let index=0;index<6;index+=1)await page.getByRole("button",{name:"Weiter"}).click();await page.getByRole("button",{name:"Vorhang schließen"}).click();await page.getByRole("button",{name:"Restauriertes Regiebuch öffnen"}).click();await expect(page.locator(".own-staging")).toContainText("Eine Entscheidung wurde in der Deutungsprobe revidiert.");await expect(page.locator(".own-staging")).toContainText("mittlere Distanz");
+ await page.getByRole("button",{name:chapter05.transferHypothesis}).click();await expect(page.getByRole("status")).toContainText("tatsächliche");expect((await page.evaluate(()=>JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!).decisions.chapter_05.transferRevision))).toBeUndefined();
+ await page.getByRole("button",{name:transferRefined}).click();const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!));expect(saved.decisions.chapter_05.transferRevision).toBe(transferRefined);expect(saved.stagingDecisions.chapter_05_revision).toBeUndefined();
 });
 
 test("finale performs existing text, restores the book, replays and survives reload", async ({ page }) => {

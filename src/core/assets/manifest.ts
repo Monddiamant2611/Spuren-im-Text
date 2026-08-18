@@ -10,7 +10,7 @@ const backgrounds=[
  asset("bg_verona_neutral","backgrounds","backgrounds","Neutrale Verona-Kulisse.png","","Kontextdarstellung Verona",{decorative:true}),
  asset("bg_relationship_room","backgrounds","backgrounds","Theaterraum mit Figurenkonstellation.png","","Figurenbeziehungsnetz",{chapters:["chapter_02"],decorative:true}),
  asset("bg_portrait_room","backgrounds","backgrounds","Theaterraum mit Figurenporträts an der Wand.png","","Ensemblewand",{chapters:["chapter_02"],decorative:true}),
- asset("bg_analysis_room","backgrounds","backgrounds","Weitere Theaterkulisse  Analysebereich.png","","Analyse- und Archivbereich",{chapters:["chapter_03","chapter_05"],decorative:true}),
+ asset("bg_analysis_room","backgrounds","backgrounds","Weitere Theaterkulisse  Analysebereich.png","","Analyse- und Archivbereich",{chapters:["chapter_01","chapter_03","chapter_05"],decorative:true}),
 ];
 
 const characterFiles=[
@@ -41,7 +41,7 @@ const literatureArchiveAssets:readonly AssetDefinition[]=[
 const theatreAccessAssets:readonly AssetDefinition[]=[
  asset("theatre_access_chapter_01","ui","ui","Kapitelzugang_1_Regiebuch.png","","Kapitelzugang: Das zerrissene Regiebuch",{chapters:["chapter_01"],decorative:true}),
  asset("theatre_access_chapter_02","ui","ui","Kapitelzugang_2_Ensemblewand.png","","Kapitelzugang: Das Ensemble erwacht",{chapters:["chapter_02"],decorative:true}),
- asset("theatre_access_chapter_03","ui","ui","Kapitelzugang_3_Archivtruhe.png","","Kapitelzugang: Der Brief, der nie ankam",{chapters:["chapter_03"],decorative:true}),
+ asset("theatre_access_chapter_03","ui","ui","Kapitelzugang_3_Archivtruhe.png","","Kapitelzugang: Die Stimmen auf der Bühne",{chapters:["chapter_03"],decorative:true}),
  asset("theatre_access_chapter_04","ui","ui","Kapitelzugang_4_Regiestuhl.png","","Kapitelzugang: Die Generalprobe",{chapters:["chapter_04"],decorative:true}),
  asset("theatre_access_chapter_05","ui","ui","Kapitelzugang_5_Analysepult.png","","Kapitelzugang: Die Deutungsprobe",{chapters:["chapter_05"],decorative:true}),
 ];
