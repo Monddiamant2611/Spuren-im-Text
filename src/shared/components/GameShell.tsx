@@ -103,14 +103,10 @@ export function GameShell() {
     const competencies = mergeMeasuredCompetencies(state.competencies, session.competencyEvents, ["interpretation_reasoning","hypothesis_building","evidence_reasoning","relevance_reasoning","counterevidence","argumentation","transfer_analysis"]);
     persist({ ...state, currentChapter: "finale", completedChapters: [...new Set([...state.completedChapters, "chapter_05"])], decisions: { ...state.decisions, chapter_05: session }, failedAttempts: { ...state.failedAttempts, chapter_05: session.failedAttempts }, competencies });
   };
-  const startFinale = () => {
+  const updateFinale = (patch: Partial<GameState>) => {
     const snapshot = createFinaleSnapshot(state);
-    persist({ ...state, ...snapshot, currentChapter: "finale", finaleStarted: true, performanceState: "PERFORMANCE_RUNNING", currentPerformanceMoment: 0, progress: { ...state.progress, finale_ready: true } });
-  };
-  const savePerformanceMoment = (currentPerformanceMoment: number) => persist({ ...state, currentChapter: "finale", finaleStarted: true, performanceState: "PERFORMANCE_RUNNING", currentPerformanceMoment });
-  const completeFinale = () => {
-    const snapshot = createFinaleSnapshot(state);
-    persist({ ...state, ...snapshot, currentChapter: "finale", finaleStarted: true, finaleCompleted: true, gameCompleted: true, performanceState: "PERFORMANCE_COMPLETE", progress: { ...state.progress, finale_ready: true, finale_completed: true, game_completed: true } });
+    const completed = patch.finaleCompleted === true;
+    persist({ ...state, ...snapshot, ...patch, currentChapter: "finale", progress: { ...state.progress, finale_ready: true, ...(completed ? { finale_completed: true, game_completed: true } : {}) } });
   };
 
   if (!hydrated) return <main className="loading-screen" aria-label="Spiel wird geladen"><span>Das Theater öffnet …</span></main>;
@@ -119,7 +115,7 @@ export function GameShell() {
   if (screen === "chapter_03") return <Chapter03 gameState={state} onSave={saveChapter03} onExit={() => setScreen("theatre")} onComplete={completeChapter03} />;
   if (screen === "chapter_04") return <Chapter04 gameState={state} onSave={saveChapter04} onExit={() => setScreen("theatre")} onComplete={completeChapter04} />;
   if (screen === "chapter_05") return <Chapter05 gameState={state} onSave={saveChapter05} onExit={() => setScreen("theatre")} onComplete={completeChapter05} />;
-  if (screen === "finale") return <Finale state={state} onStart={startFinale} onProgress={savePerformanceMoment} onComplete={completeFinale} onExit={() => setScreen("start")} />;
+  if (screen === "finale") return <Finale state={state} onUpdate={updateFinale} onExit={() => setScreen("theatre")} />;
   if (screen === "start") return <StartScreen saved={state.currentGame !== null} onBegin={begin} onResume={resume} onBook={() => setScreen("finale")} onOverlay={setOverlay} overlay={overlay} state={state} onSettings={updateSettings} onReset={reset} />;
 
   return (
@@ -143,7 +139,7 @@ export function GameShell() {
             const status = completed ? "abgeschlossen" : "verfügbar";
             return <button key={area.id} className={`theatre-access theatre-access-${area.id} ${focusArea === area.id ? "focused-area" : ""} ${completed ? "completed" : "current"}`} data-status={status} onFocus={() => setFocusArea(area.id)} onMouseEnter={() => setFocusArea(area.id)} onClick={() => openChapter(area.chapterId)} aria-label={`Kapitel ${Number(area.chapterId.slice(-2))} öffnen: ${area.title} · ${area.label}: ${status}`}><AssetImage id={area.assetId} className="theatre-access-image" decorative fallback={<span className="theatre-access-fallback">{area.label}</span>}/><span className="theatre-access-label"><small>Kapitel {Number(area.chapterId.slice(-2))}</small><strong>{area.title}</strong><em>{completed ? "Abgeschlossen" : "Jetzt betreten"}</em></span></button>;
           })}
-          {isFinaleAvailable(state) && <button className="finale-entry" onClick={() => openChapter("finale")} aria-label="Finale: Die letzte Aufführung betreten"><span aria-hidden="true">◆</span><strong>Die letzte Aufführung</strong><small>Vorhang öffnen</small></button>}
+          {isFinaleAvailable(state) && <button className="finale-entry" onClick={() => openChapter("finale")} aria-label="Finale: Die letzte Probe betreten"><span aria-hidden="true">◆</span><strong>Das Finale</strong><small>Die letzte Probe</small></button>}
         </div>
         <nav className="mobile-theatre-nav" aria-label="Theaterbereiche">
           {theatreAreas.map((area) => {
@@ -151,7 +147,7 @@ export function GameShell() {
             const completed = state.completedChapters.includes(area.chapterId);
             return <button key={area.id} disabled={!unlocked} aria-current={focusArea === area.id ? "location" : undefined} onFocus={() => setFocusArea(area.id)} onClick={() => { setFocusArea(area.id); openChapter(area.chapterId); }}><span aria-hidden="true">{area.symbol}</span><strong>{area.label}</strong><small>{completed ? "Abgeschlossen" : unlocked ? "Betreten" : "Gesperrt"}</small></button>;
           })}
-          {isFinaleAvailable(state) && <button className="mobile-finale-entry" onClick={() => openChapter("finale")}><span aria-hidden="true">◆</span><strong>Die letzte Aufführung</strong><small>Vorhang öffnen</small></button>}
+          {isFinaleAvailable(state) && <button className="mobile-finale-entry" onClick={() => openChapter("finale")}><span aria-hidden="true">◆</span><strong>Das Finale</strong><small>Die letzte Probe</small></button>}
         </nav>
       </section>
       <div className="feedback-bar" role="status"><span aria-hidden="true">◆</span> Das Theater befindet sich im Zustand <strong>{state.theatreState.replaceAll("_", " ")}</strong>.</div>

@@ -37,6 +37,10 @@ export interface GameState {
   finalStaging: Record<string, unknown>;
   finalHypothesis: string | null;
   visibleCompetencyResults: Record<string, { level: CompetencyLevel; feedback: string }>;
+  finaleVisitedAreas: string[];
+  finaleSynthesisCompleted: boolean;
+  finaleBookOpened: boolean;
+  finaleClosingSeen: boolean;
 }
 
 export const initialGameState: GameState = {
@@ -44,4 +48,5 @@ export const initialGameState: GameState = {
   competencies: {}, failedAttempts: {}, stagingDecisions: {}, selectedEvidence: [], progress: {},
   theatreState: "INITIAL", settings: { music: true, soundEffects: true, reducedMotion: false }, lastSavedAt: null,
   finaleStarted:false,finaleCompleted:false,gameCompleted:false,performanceState:"NOT_STARTED",currentPerformanceMoment:0,finalStaging:{},finalHypothesis:null,visibleCompetencyResults:{},
+  finaleVisitedAreas:[],finaleSynthesisCompleted:false,finaleBookOpened:false,finaleClosingSeen:false,
 };

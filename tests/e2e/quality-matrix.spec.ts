@@ -20,6 +20,8 @@ const completedSave = {
   lastSavedAt: "2026-08-09T12:00:00.000Z", finaleStarted: true, finaleCompleted: true,
   gameCompleted: true, performanceState: "PERFORMANCE_COMPLETE", finalStaging: {},
   finalHypothesis: "Gespeicherte Deutungshypothese", visibleCompetencyResults: [],
+  finaleVisitedAreas: ["situation", "figures", "dialogue", "conflict", "interpretation"], finaleSynthesisCompleted: true,
+  finaleBookOpened: true, finaleClosingSeen: true,
 };
 
 for (const viewport of viewports) {
@@ -29,7 +31,9 @@ for (const viewport of viewports) {
     await page.evaluate((save) => localStorage.setItem("lernwerkstatt-games:state:v1", JSON.stringify(save)), completedSave);
     await page.reload();
     await page.getByRole("button", { name: "Fortsetzen" }).click();
-    await expect(page.getByText("Das restaurierte Regiebuch", { exact: true })).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Das Theater ist restauriert." })).toBeVisible();
+    await page.getByRole("button", { name: "Regiebuch öffnen" }).click();
+    await expect(page.getByRole("heading", { name: "Werkzeuge für Analyse und Interpretation dramatischer Texte" })).toBeVisible();
     await expect(page.getByRole("button", { name: "Zum Startbildschirm" })).toBeVisible();
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);

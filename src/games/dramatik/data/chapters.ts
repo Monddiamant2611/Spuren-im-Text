@@ -9,6 +9,6 @@ export const dramatikGame: GameDefinition = {
     { id: "chapter_03", title: "Die Stimmen auf der Bühne", status: "ready" },
     { id: "chapter_04", title: "Der Punkt ohne Rückkehr", status: "ready" },
     { id: "chapter_05", title: "Was bedeutet das?", status: "ready" },
-    { id: "finale", title: "Die letzte Aufführung", status: "ready" },
+    { id: "finale", title: "Das Finale – Die letzte Probe", status: "ready" },
   ],
 };

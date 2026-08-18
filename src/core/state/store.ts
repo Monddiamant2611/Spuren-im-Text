@@ -48,6 +48,10 @@ export function loadGameState(storage: Pick<Storage, "getItem"> = localStorage):
       currentPerformanceMoment: typeof parsed.currentPerformanceMoment === "number" && Number.isInteger(parsed.currentPerformanceMoment) && parsed.currentPerformanceMoment >= 0 ? parsed.currentPerformanceMoment : 0,
       finalStaging: isRecord(parsed.finalStaging) ? parsed.finalStaging : {},
       visibleCompetencyResults: isRecord(parsed.visibleCompetencyResults) ? parsed.visibleCompetencyResults as GameState["visibleCompetencyResults"] : {},
+      finaleVisitedAreas: stringArray(parsed.finaleVisitedAreas),
+      finaleSynthesisCompleted: typeof parsed.finaleSynthesisCompleted === "boolean" ? parsed.finaleSynthesisCompleted : false,
+      finaleBookOpened: typeof parsed.finaleBookOpened === "boolean" ? parsed.finaleBookOpened : false,
+      finaleClosingSeen: typeof parsed.finaleClosingSeen === "boolean" ? parsed.finaleClosingSeen : false,
       settings,
     };
   } catch {

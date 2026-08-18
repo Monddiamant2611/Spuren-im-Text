@@ -125,30 +125,30 @@ test("chapter 5 requires a real hypothesis revision and does not write staging",
  await page.getByRole("button",{name:transferRefined}).click();const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!));expect(saved.decisions.chapter_05.transferRevision).toBe(transferRefined);expect(saved.stagingDecisions.chapter_05_revision).toBeUndefined();
 });
 
-test("finale performs existing text, restores the book, replays and survives reload", async ({ page }) => {
+test("finale synthesizes the learning path, restores the book, replays and survives reload", async ({ page }) => {
   const state = { version:1,currentGame:"dramatik",currentChapter:"finale",completedChapters:["chapter_01","chapter_02","chapter_03","chapter_04","chapter_05"],decisions:{chapter_05:{hypothesisRefined:true,relevanceAssignments:{analysis_paris_arrest:"high_relevance"},argumentOrder:[]}},competencies:{evidence_reasoning:{value:5,level:"secure"},staging_reasoning:{value:4,level:"secure"}},failedAttempts:{chapter_04:8},stagingDecisions:{chapter_04:{}},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_5",settings:{music:false,soundEffects:false,reducedMotion:true},lastSavedAt:new Date().toISOString() };
   await page.evaluate((saved) => localStorage.setItem("lernwerkstatt-games:state:v1", JSON.stringify(saved)), state);
   await page.reload(); await page.getByRole("button", { name: "Fortsetzen" }).click();
-  await expect(page.getByRole("heading", { name: "Die letzte Aufführung" })).toBeVisible();
-  await expect(page.locator(".finale-title")).toHaveClass(/reduce-motion/);
-  await page.getByRole("button", { name: "Aufführung beginnen" }).press("Enter");
-  await expect(page.getByText("Originaltext · Paris")).toBeVisible();
-  for (let index = 0; index < 6; index += 1) await page.getByRole("button", { name: "Weiter" }).press("Enter");
-  await expect(page.getByText("Originaltext · Regieanweisung")).toBeVisible();
-  await page.getByRole("button", { name: "Vorhang schließen" }).press("Enter");
-  await page.getByRole("button", { name: "Restauriertes Regiebuch öffnen" }).press("Enter");
-  await expect(page.getByRole("heading", { name: "Kompetenzübersicht" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Die letzte Probe" })).toBeVisible();
+  await expect(page.locator(".finale-new")).toHaveClass(/reduce-motion/);
+  await page.getByRole("button", { name: "Restauriertes Theater betreten" }).press("Enter");
+  for (const name of ["Regiebuch", "Ensemble", "Probenbühne", "Handlungsbuch", "Analysepult"]) { await page.getByRole("button", { name: new RegExp(`^${name}`) }).press("Enter"); await page.getByRole("button", { name: "Erinnerung schließen" }).press("Enter"); }
+  await page.getByRole("button", { name: "Eine letzte Verbindung herstellen" }).press("Enter");
+  for (const [a,b] of [["Situation","Figur und Ziel"],["Figur und Ziel","Konflikt und Handlung"],["Sprache und Dialog","Konflikt und Handlung"],["Sprache und Dialog","Deutung"],["Konflikt und Handlung","Deutung"]]) { await page.getByRole("button", { name: new RegExp(`^${a}`) }).press("Enter"); await page.getByRole("button", { name: new RegExp(`^${b}`) }).press("Enter"); }
+  await page.getByRole("button", { name: "Mein Regiebuch öffnen" }).press("Enter");
+  await expect(page.getByRole("heading", { name: "Persönliche Lernübersicht" })).toBeVisible();
   await expect(page.locator("body")).not.toContainText("%");
   await page.emulateMedia({ media: "print" });
   await expect(page.getByRole("navigation", { name: "Regiebuch-Aktionen" })).toBeHidden();
-  await expect(page.getByRole("heading", { name: "Kompetenzübersicht" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Zentrale Lernformeln" })).toBeVisible();
   await page.emulateMedia({ media: "screen" });
   await page.setViewportSize({ width: 1024, height: 768 });
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
-  await page.getByRole("button", { name: "Aufführung erneut ansehen" }).press("Enter");
-  await expect(page.getByRole("button", { name: "Aufführung erneut beginnen" })).toBeVisible();
-  await page.reload(); await expect(page.getByRole("button", { name: "Regiebuch ansehen" })).toBeVisible();
-  await page.getByRole("button", { name: "Regiebuch ansehen" }).click();
-  await expect(page.getByRole("heading", { name: "Deutungshypothese" })).toBeVisible();
-  await expect(page.locator(".restored-book")).toHaveCSS("display", "block");
+  await page.getByRole("button", { name: "Regiebuch schließen" }).press("Enter"); await page.getByRole("button", { name: "Vorhang auf" }).press("Enter");
+  await page.getByRole("button", { name: "Noch einmal spielen" }).press("Enter");
+  await expect(page.getByRole("button", { name: "Restauriertes Theater betreten" })).toBeVisible();
+  await page.reload(); await expect(page.getByRole("button", { name: "Regiebuch ansehen" })).toBeVisible(); await page.getByRole("button", { name: "Regiebuch ansehen" }).click();
+  await expect(page.getByRole("button", { name: "Regiebuch öffnen" })).toBeVisible(); await page.getByRole("button", { name: "Regiebuch öffnen" }).click();
+  await expect(page.getByRole("heading", { name: "Zentrale Lernformeln" })).toBeVisible();
+  await expect(page.locator(".analysis-book")).toHaveCSS("display", "block");
 });

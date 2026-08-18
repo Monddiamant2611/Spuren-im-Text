@@ -1,12 +1,8 @@
 import type { GameState } from "../../../core/state/types";
-import type { StagingDecision } from "../data/staging";
 import { transferRefined, transferHypotheses } from "../data/chapter_05_content";
 import { refinedHypothesis as legacyRefinedHypothesis } from "../data/chapter_05/hypothesis";
 import { aggregateVisibleCompetencies } from "./competency_aggregation";
-import { stagingOptions } from "../data/chapter_04/staging_options";
 const required=["chapter_01","chapter_02","chapter_03","chapter_04","chapter_05"];
 export function isFinaleAvailable(state:Pick<GameState,"completedChapters"|"theatreState">){return required.every(id=>state.completedChapters.includes(id))&&["AFTER_CHAPTER_5","FINALE_READY","PERFORMANCE_RUNNING","PERFORMANCE_COMPLETE"].includes(state.theatreState)}
-export function isActualStagingRevision(state:Pick<GameState,"stagingDecisions">){const base=(state.stagingDecisions.chapter_04??{}) as Record<string,StagingDecision>;const revision=state.stagingDecisions.chapter_05_revision as StagingDecision|undefined;if(!revision||!base[revision.id]||base[revision.id].value===revision.value)return false;const rule=stagingOptions.find(option=>option.id===revision.id);return Boolean(rule?.combinations.some(item=>item.value===revision.value&&item.reasoningId===revision.reasoningId&&item.quality!=="problematic"))}
-export function resolveFinalStaging(state:Pick<GameState,"stagingDecisions">){const base={...((state.stagingDecisions.chapter_04??{}) as Record<string,StagingDecision>)};const revision=state.stagingDecisions.chapter_05_revision as StagingDecision|undefined;if(revision&&isActualStagingRevision(state))base[revision.id]={...revision};return base}
 export function resolveFinalHypothesis(state:Pick<GameState,"decisions">){const chapter=(state.decisions.chapter_05 as {transferRevision?:string;transferHypothesis?:string;hypothesisRefined?:boolean}|undefined);return chapter?.transferRevision??chapter?.transferHypothesis??(chapter?.hypothesisRefined?legacyRefinedHypothesis:undefined)??transferHypotheses.find(item=>item.quality==="supported")?.text??transferRefined}
-export function createFinaleSnapshot(state:GameState){const competencies=aggregateVisibleCompetencies(state);return{finalStaging:resolveFinalStaging(state),finalHypothesis:resolveFinalHypothesis(state),visibleCompetencyResults:Object.fromEntries(Object.entries(competencies).map(([id,value])=>[id,{level:value.level,feedback:value.feedback}]))}}
+export function createFinaleSnapshot(state:GameState){const competencies=aggregateVisibleCompetencies(state);return{finalHypothesis:resolveFinalHypothesis(state),visibleCompetencyResults:Object.fromEntries(Object.entries(competencies).map(([id,value])=>[id,{level:value.level,feedback:value.feedback}]))}}

@@ -122,12 +122,14 @@ test("complete learning path reaches the restored director's book without a dead
   await page.getByRole("button",{name:/Gegenbelege bestimmen ihre Reichweite/}).click();await page.getByRole("button",{name:"Kapitel abschließen"}).click();
   await leaveChapter(page);
 
-  await page.getByRole("button", { name: /Finale: Die letzte Aufführung/ }).click();
-  await page.getByRole("button", { name: "Aufführung beginnen" }).click();
-  for (let index = 0; index < 6; index += 1) await page.getByRole("button", { name: "Weiter" }).click();
-  await page.getByRole("button", { name: "Vorhang schließen" }).click();
-  await page.getByRole("button", { name: "Restauriertes Regiebuch öffnen" }).click();
-  await expect(page.getByRole("heading", { name: "Kompetenzübersicht" })).toBeVisible();
+  await page.getByRole("button", { name: /Finale: Die letzte Probe/ }).click();
+  await page.getByRole("button", { name: "Restauriertes Theater betreten" }).click();
+  for (const name of ["Regiebuch", "Ensemble", "Probenbühne", "Handlungsbuch", "Analysepult"]) { await page.getByRole("button", { name: new RegExp(`^${name}`) }).click(); await page.getByRole("button", { name: "Erinnerung schließen" }).click(); }
+  await page.getByRole("button", { name: "Eine letzte Verbindung herstellen" }).click();
+  for (const [a,b] of [["Situation","Figur und Ziel"],["Figur und Ziel","Konflikt und Handlung"],["Sprache und Dialog","Konflikt und Handlung"],["Sprache und Dialog","Deutung"],["Konflikt und Handlung","Deutung"]]) { await page.getByRole("button", { name: new RegExp(`^${a}`) }).click(); await page.getByRole("button", { name: new RegExp(`^${b}`) }).click(); }
+  await page.getByRole("button", { name: "Mein Regiebuch öffnen" }).click();
+  await expect(page.getByRole("heading", { name: "Persönliche Lernübersicht" })).toBeVisible();
+  await page.getByRole("button", { name: "Regiebuch schließen" }).click(); await page.getByRole("button", { name: "Vorhang auf" }).click();
   const saved = await page.evaluate(() => JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!));
   expect(saved).toMatchObject({ completedChapters: ["chapter_01","chapter_02","chapter_03","chapter_04","chapter_05"], finaleCompleted: true, gameCompleted: true, performanceState: "PERFORMANCE_COMPLETE" });
 });
