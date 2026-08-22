@@ -38,7 +38,7 @@ test("chapter 1 uses Lorenzo as guide while a failed image keeps the fallback",a
 test("chapter 3 uses the rehearsal cast and analysis-room background",async({page})=>{
  const chapter03={round:4,practiceActs:{},practiceGoals:{},goalEvidence:{},goalChange:null,speechChains:[],phaseOrder:[],turningPoint:null,languageChains:[],findingAssignments:{},transferEvidence:{},comparisonAssignments:{},finalSteps:[],completed:false,failedAttempts:0,competencyEvents:[]};
  await save(page,"chapter_03",{chapter_03:chapter03},["chapter_01","chapter_02"]);
- await expect(page.locator(".dialogue-stage>.asset-backdrop")).toHaveAttribute("src",/Weitere Theaterkulisse/);await expect(page.locator(".dialogue-figure img")).toHaveCount(4);const benvolio=page.getByRole("img",{name:"Benvolio"});await expect(benvolio).toHaveAttribute("src",/Benvolio, der blaue Degenkämpfer/);await expect(page.locator(".figure-fallback")).toHaveCount(0);expect(await benvolio.evaluate(image=>({loaded:(image as HTMLImageElement).naturalWidth>0,ratio:(image as HTMLImageElement).naturalWidth/(image as HTMLImageElement).naturalHeight}))).toMatchObject({loaded:true,ratio:expect.any(Number)});
+ await expect(page.locator(".dialogue-stage>.asset-backdrop")).toHaveAttribute("src",/Weitere Theaterkulisse/);await expect(page.locator('[data-scene="chapter_03.conflict"] .scene-character img')).toHaveCount(4);const benvolio=page.getByRole("img",{name:"Benvolio"});await expect(benvolio).toHaveAttribute("src",/Benvolio, der blaue Degenkämpfer/);await expect(page.locator('[data-scene="chapter_03.conflict"] .scene-character-fallback')).toHaveCount(0);expect(await benvolio.evaluate(image=>({loaded:(image as HTMLImageElement).naturalWidth>0,ratio:(image as HTMLImageElement).naturalWidth/(image as HTMLImageElement).naturalHeight}))).toMatchObject({loaded:true,ratio:expect.any(Number)});
 });
 
 test("learner-facing source labels use Wieland and hide internal EPUB paths",async({page})=>{
@@ -48,8 +48,8 @@ test("learner-facing source labels use Wieland and hide internal EPUB paths",asy
 
 test("chapter 4 uses Romeo, Paris and the tomb stage for the external conflict",async({page})=>{
  await save(page,"chapter_04",{chapter_04:{round:5}},["chapter_01","chapter_02","chapter_03"]);
- await expect(page.locator(".causal-character.romeo")).toHaveAttribute("src",/Romeo, nachdenklich/);
- await expect(page.locator(".causal-character.paris")).toHaveAttribute("src",/Paris, ruhig/);
+ await expect(page.locator('[data-scene="chapter_04.tomb"] [data-character="Romeo"] img')).toHaveAttribute("src",/Romeo, nachdenklich/);
+ await expect(page.locator('[data-scene="chapter_04.tomb"] [data-character="Paris"] img')).toHaveAttribute("src",/Paris, ruhig/);
  await expect(page.locator(".causal-stage>.asset-backdrop")).toHaveAttribute("src",/Bühne mit Gruftkulisse/);
 });
 

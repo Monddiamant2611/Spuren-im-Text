@@ -14,6 +14,7 @@ export interface PrimarySourceRecord {
   editable: false;
   source_verified: boolean;
   fragment_type?: "scene_location" | "stage_direction" | "speaker" | "speech";
+  speaker?: string;
 }
 
 export interface LearningContentRecord {

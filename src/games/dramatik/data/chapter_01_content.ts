@@ -66,3 +66,38 @@ export const transferOptions = [
   "Die Szene spielt nachts auf einer Straße.",
   "Romeo hört dem Gespräch heimlich zu.",
 ];
+
+export interface SituationOption {id:string;text:string;correct:boolean;evidenceId:string|null;evidenceKind:"primary"|"context"|"none"}
+export interface SituationGroup {field:SituationField;options:readonly SituationOption[]}
+export const transferSituationGroups:readonly SituationGroup[]=[
+ {field:"place",options:[
+  {id:"place_unspecified",text:"Der genaue Ort ist im Ausschnitt nicht eindeutig angegeben.",correct:true,evidenceId:null,evidenceKind:"none"},
+  {id:"place_street",text:"Die Szene spielt auf einer Straße.",correct:false,evidenceId:null,evidenceKind:"none"},
+  {id:"place_mantua",text:"Die Szene spielt in Mantua.",correct:false,evidenceId:null,evidenceKind:"none"},
+ ]},
+ {field:"time",options:[
+  {id:"time_unspecified",text:"Der genaue Zeitpunkt ist nicht eindeutig angegeben.",correct:true,evidenceId:null,evidenceKind:"none"},
+  {id:"time_night",text:"Das Gespräch findet nachweislich in der Nacht statt.",correct:false,evidenceId:null,evidenceKind:"none"},
+  {id:"time_morning",text:"Das Gespräch findet nachweislich am Morgen statt.",correct:false,evidenceId:null,evidenceKind:"none"},
+ ]},
+ {field:"characters",options:[
+  {id:"char_capulet",text:"Capulet tritt auf.",correct:true,evidenceId:"c01_transfer_direction",evidenceKind:"primary"},
+  {id:"char_paris",text:"Paris tritt auf.",correct:true,evidenceId:"c01_transfer_direction",evidenceKind:"primary"},
+  {id:"char_servant",text:"Ein Bedienter tritt auf.",correct:true,evidenceId:"c01_transfer_direction",evidenceKind:"primary"},
+  {id:"char_romeo",text:"Romeo tritt in diesem Ausschnitt auf.",correct:false,evidenceId:null,evidenceKind:"none"},
+  {id:"char_juliette",text:"Julietta tritt in diesem Ausschnitt auf.",correct:false,evidenceId:null,evidenceKind:"none"},
+  {id:"char_lady",text:"Lady Capulet tritt in diesem Ausschnitt auf.",correct:false,evidenceId:null,evidenceKind:"none"},
+ ]},
+ {field:"history",options:[
+  {id:"history_previous_request",text:"Paris hat bereits zuvor um Julietta geworben.",correct:true,evidenceId:"c01_transfer_capulet_age",evidenceKind:"primary"},
+  {id:"history_feud",text:"Capulet und Montague leben seit längerer Zeit in Mißhelligkeit.",correct:true,evidenceId:"c01_transfer_capulet_peace",evidenceKind:"primary"},
+  {id:"history_secret_listener",text:"Romeo hat das Gespräch heimlich belauscht.",correct:false,evidenceId:null,evidenceKind:"none"},
+  {id:"history_married",text:"Julietta ist bereits verheiratet.",correct:false,evidenceId:null,evidenceKind:"none"},
+ ]},
+ {field:"conditions",options:[
+  {id:"condition_age",text:"Julietta hat noch nicht vierzehn Jahre gesehen.",correct:true,evidenceId:"c01_transfer_capulet_age",evidenceKind:"primary"},
+  {id:"condition_delay",text:"Capulet hält eine Heirat zu diesem Zeitpunkt für verfrüht.",correct:true,evidenceId:"c01_transfer_capulet_age",evidenceKind:"primary"},
+  {id:"condition_sanction",text:"Capulet und Montague müssen wegen ihres Streits dieselbe Strafe befürchten.",correct:true,evidenceId:"c01_transfer_capulet_peace",evidenceKind:"primary"},
+  {id:"condition_juliette_choice",text:"Julietta entscheidet in diesem Ausschnitt selbst über die Heirat.",correct:false,evidenceId:null,evidenceKind:"none"},
+ ]},
+] as const;

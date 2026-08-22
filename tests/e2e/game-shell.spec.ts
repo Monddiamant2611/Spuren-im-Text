@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { practiceClaims, transferTasks } from "../../src/games/dramatik/data/chapter_02_content";
-import { transferChain, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
+import { transferChain, transferCountercheckOptions, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
 
 test.beforeEach(async ({ page }) => { await page.goto("/dramatik"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
 
@@ -64,10 +64,10 @@ test("chapter 2 transfer rejects a wrong evidence link and chapter 5 counterchec
   const chapter05={round:15,transferHypothesis:transferHypotheses.find(item=>item.quality==="supported")!.text,failedAttempts:0,competencyEvents:[]};
   await save("chapter_05",["chapter_01","chapter_02","chapter_03","chapter_04"],{chapter_05:chapter05},"AFTER_CHAPTER_4");
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await page.getByRole("button",{name:/bietet das Gift begeistert/}).click();
+  await page.getByRole("button",{name:transferCountercheckOptions.find(item=>item.id==="apothecary_eager")!.text,exact:true}).click();
   await expect(page.getByRole("status")).toContainText("Denkbewegung");
   await expect(page.getByText("Station 15 von 18")).toBeVisible();
-  await page.getByRole("button",{name:/verweist auf das Gesetz/}).click();
+  await page.getByRole("button",{name:transferCountercheckOptions.find(item=>item.id==="apothecary_resists")!.text,exact:true}).click();
   await expect(page.getByText("Station 16 von 18")).toBeVisible();
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
   await expect(page.getByText("Station 16 von 18")).toBeVisible();

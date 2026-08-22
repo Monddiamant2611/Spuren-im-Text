@@ -3,6 +3,8 @@
 import { useState, type ReactNode } from "react";
 import type { GameState } from "../../../core/state/types";
 import { AssetBackdrop, AssetImage } from "../../../shared/components/AssetImage";
+import { GlossaryHelp } from "../../../shared/components/GlossaryHelp";
+import { dramaGlossary } from "../data/glossary";
 import { chapter05SourceById } from "../data/chapter_05_content";
 import { dramatikSource } from "../data/sources";
 import { chapterReview } from "../data/finale/regiebuch";
@@ -33,7 +35,7 @@ export function Finale({ state, onUpdate, onExit }: { state: GameState; onUpdate
   return <FinaleFrame state={state}><section className="finale-complete"><p className="eyebrow">Die letzte Probe</p><h1>Das Theater ist restauriert.</h1><p>Beobachten. Belegen. Analysieren. Zusammenhänge herstellen. Deuten.</p><div><button onClick={() => setMode("book")}>Regiebuch öffnen</button><button onClick={replay}>Noch einmal spielen</button><button onClick={onExit}>Zurück zum Theater</button></div></section></FinaleFrame>;
 }
 
-function FinaleFrame({ state, children }: { state: GameState; children: ReactNode }) { return <main className={`finale-new ${state.settings.reducedMotion ? "reduce-motion" : ""}`}><AssetBackdrop id="bg_finale_restored"/><div className="finale-warmth" aria-hidden="true"/>{children}</main>; }
+function FinaleFrame({ state, children }: { state: GameState; children: ReactNode }) { return <main className={`finale-new ${state.settings.reducedMotion ? "reduce-motion" : ""}`}><AssetBackdrop id="bg_finale_restored"/><div className="finale-warmth" aria-hidden="true"/><div className="finale-glossary"><GlossaryHelp entries={dramaGlossary} introTitle="Begriffe nachschlagen" seen onSeen={()=>{}}/></div>{children}</main>; }
 function SourceCitation(){return <aside className="finale-source-citation" aria-label="Quelleninformation"><strong>{dramatikSource.author}: „{dramatikSource.work}“</strong><span>Übersetzung: {dramatikSource.translation}</span><span>Primärtextgrundlage: {dramatikSource.primaryTextBasis}</span></aside>}
 
 function SynthesisTask({ completed, onComplete, onBook }: { completed: boolean; onComplete: () => void; onBook: () => void }) {

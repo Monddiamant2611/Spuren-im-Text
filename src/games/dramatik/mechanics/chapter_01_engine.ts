@@ -8,15 +8,20 @@ export interface Chapter01Session {
   signalAnswers: string[];
   certaintyAssignments: Record<string, Certainty>;
   situationAssignments: Record<string, SituationField>;
+  situationDraft: Record<string, SituationField>;
+  situationChecked: boolean;
   evidenceLinked: boolean;
   transferAssignments: Record<string, string>;
   transferEvidence: Record<string, string | null>;
   completed: boolean;
   failedAttempts: number;
   competencyEvents: CompetencyEvent[];
+  seenGlossaryIntroductions: string[];
+  transferSelections: Record<string,string[]>;
+  transferConfirmed: string[];
 }
 
-export const initialChapter01Session: Chapter01Session = { round:1,signalStep:0,signalAnswers:[],certaintyAssignments:{},situationAssignments:{},evidenceLinked:false,transferAssignments:{},transferEvidence:{},completed:false,failedAttempts:0,competencyEvents:[] };
+export const initialChapter01Session: Chapter01Session = { round:1,signalStep:0,signalAnswers:[],certaintyAssignments:{},situationAssignments:{},situationDraft:{},situationChecked:false,evidenceLinked:false,transferAssignments:{},transferEvidence:{},completed:false,failedAttempts:0,competencyEvents:[],seenGlossaryIntroductions:[],transferSelections:{},transferConfirmed:[] };
 
 function record(session:Chapter01Session, competency:CompetencyEvent["competency"], success:boolean):Chapter01Session {
   return {...session,failedAttempts:session.failedAttempts+(success?0:1),competencyEvents:[...session.competencyEvents,{competency,success,round:session.round}]};
@@ -49,6 +54,19 @@ export function placeSituation(session:Chapter01Session,id:string,target:Situati
   return {session:next,valid};
 }
 
+export function draftSituation(session:Chapter01Session,id:string,target:SituationField):Chapter01Session {
+  if(!streetSituationCards.some(item=>item.id===id))return session;
+  return {...session,situationDraft:{...session.situationDraft,[id]:target},situationChecked:false};
+}
+
+export function checkStreetSituation(session:Chapter01Session):{session:Chapter01Session;valid:boolean;problemFields:SituationField[]} {
+  const problemFields=[...new Set(streetSituationCards.filter(item=>session.situationDraft[item.id]!==item.target).map(item=>item.target))];
+  const valid=problemFields.length===0&&Object.keys(session.situationDraft).length===streetSituationCards.length;
+  let next=record({...session,situationChecked:true},"situation_analysis",valid);
+  if(valid)next={...next,situationAssignments:{...session.situationDraft},round:6};
+  return{session:next,valid,problemFields};
+}
+
 export function linkSituationEvidence(session:Chapter01Session,textId:string,observation:string,situation:string):{session:Chapter01Session;valid:boolean} {
   const valid=textId==="c01_street_provocation_1"&&observation.startsWith("Sampson will")&&situation.startsWith("Die Figuren achten");
   let next=record({...session,evidenceLinked:valid||session.evidenceLinked},"evidence_reasoning",valid);if(valid)next={...next,round:7};return {session:next,valid};
@@ -59,4 +77,15 @@ export function setTransferField(session:Chapter01Session,id:string,answer:strin
   let next=record({...session,transferAssignments:valid?{...session.transferAssignments,[id]:answer}:session.transferAssignments,transferEvidence:valid?{...session.transferEvidence,[id]:evidenceId}:session.transferEvidence},field?.field==="place"||field?.field==="time"||field?.field==="characters"?"scene_orientation":"situation_analysis",valid);
   if(transferFields.every(item=>next.transferAssignments[item.id]===item.answer)){next={...next,completed:true};}
   return {session:next,valid};
+}
+
+export function toggleTransferStatement(session:Chapter01Session,field:SituationField,id:string):Chapter01Session{
+ const current=session.transferSelections[field]??[];const values=current.includes(id)?current.filter(value=>value!==id):[...current,id];
+ return{...session,transferSelections:{...session.transferSelections,[field]:values},transferConfirmed:session.transferConfirmed.filter(value=>value!==field)};
+}
+
+export function checkTransferAnalysis(session:Chapter01Session,groups:readonly {field:SituationField;options:readonly {id:string;correct:boolean}[]}[]):{session:Chapter01Session;valid:boolean;fieldResults:Record<string,"complete"|"incomplete"|"contains_wrong">}{
+ const fieldResults:Record<string,"complete"|"incomplete"|"contains_wrong">={};const confirmed:string[]=[];
+ for(const group of groups){const chosen=session.transferSelections[group.field]??[];const expected=group.options.filter(option=>option.correct).map(option=>option.id);const wrong=chosen.some(id=>!expected.includes(id));const missing=expected.some(id=>!chosen.includes(id));fieldResults[group.field]=wrong?"contains_wrong":missing?"incomplete":"complete";if(!wrong&&!missing)confirmed.push(group.field)}
+ const valid=confirmed.length===groups.length;let next=record({...session,transferConfirmed:confirmed},"situation_analysis",valid);if(valid)next={...next,completed:true};return{session:next,valid,fieldResults};
 }

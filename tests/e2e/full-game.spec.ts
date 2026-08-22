@@ -1,36 +1,34 @@
 import { expect, test, type Page } from "@playwright/test";
-import { characterizationCards, chapter02PrimaryById, comparisonCards, ensembleLinks, highlightTasks, momentClaims, practiceClaims, relationshipTasks, roleTasks, selfOtherTasks, transferTasks } from "../../src/games/dramatik/data/chapter_02_content";
+import { characterizationCards, chapter02PrimaryById, comparisonCards, ensembleLinks, highlightReasoning, highlightTasks, momentClaims, practiceClaims, relationshipTasks, roleTasks, selfOtherTasks, shakespeareCharacterizationCards, transferTasks } from "../../src/games/dramatik/data/chapter_02_content";
 import { chapter03Source, comparisonTasks as chapter03Comparisons, goalChange, goalTasks as chapter03Goals, languageTasks as chapter03Language, mainSections, practiceActs as chapter03Practice, speechTasks as chapter03Speech, transferTasks as chapter03Transfer } from "../../src/games/dramatik/data/chapter_03_content";
 import { causalIntro, chain, chainLinks, conflictTypes, escalationCards, finalConnections, introFacts, julietCards, knowledgeCards, situationCards } from "../../src/games/dramatik/data/chapter_04_content";
-import { argumentBlocks, classificationCards, commonErrors, generalChain, hypothesisOptions, interpretationStructure, julietFindings, julietHypothesis, julietReverseChain, transferArgument, transferChain, transferEvidence, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
-import { certaintyClaims, situationEvidence, streetSituationCards, transferFields } from "../../src/games/dramatik/data/chapter_01_content";
+import { argumentBlocks, classificationCards, commonErrors, generalChain, hypothesisOptions, interpretationStructure, julietCountercheckOptions, julietFindings, julietHypothesis, julietReverseChain, transferArgument, transferChain, transferCountercheckOptions, transferEvidence, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
+import { certaintyClaims, situationEvidence, streetSituationCards, transferSituationGroups } from "../../src/games/dramatik/data/chapter_01_content";
 
 test.beforeEach(async ({ page }) => { await page.goto("/dramatik"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
 
 async function leaveChapter(page: Page) { await page.getByRole("button", { name: /Theater/ }).click(); }
-async function selectAndPlace(page: Page, item: string | RegExp, zone: string | RegExp) { await page.getByRole("button", { name: item }).click(); await page.getByRole("button", { name: zone }).click(); }
+async function selectAndPlace(page: Page, item: string | RegExp, zone: string | RegExp) { await page.getByRole("button", { name: item }).click(); await page.getByRole("button", { name: zone }).last().evaluate(element=>(element as HTMLButtonElement).click()); }
 async function completeChapter01(page:Page){
   await page.getByRole("button",{name:"Regiebuch untersuchen"}).click();
   await page.getByRole("button",{name:"ANNA"}).click();
   await page.getByRole("button",{name:/bleibt vor der Tür stehen/}).click();
   await page.getByRole("button",{name:"Noch könnte ich umkehren."}).click();
+  await page.getByRole("button",{name:"Analyse beginnen"}).click();
   for(const claim of certaintyClaims)await selectAndPlace(page,claim.text,claim.target==="explicit"?"Eindeutig belegt":claim.target==="inference"?"Plausibel erschließbar":"Nicht belegt");
   await page.getByRole("button",{name:"Shakespeare-Regiebuch öffnen"}).click();
+  await page.getByRole("button",{name:"Analyse beginnen"}).click();
   for(const card of streetSituationCards){
-    await page.getByRole("button",{name:card.text,exact:true}).click();
-    await page.getByRole("button",{name:card.target==="place"?"Ort":card.target==="characters"?"Figuren":card.target==="history"?"Vorgeschichte":card.target==="conditions"?"Bedingungen":"Nicht feststellbar"}).click();
+    await page.locator(".loose-pages button").filter({hasText:card.text}).first().click();
+    await page.locator(".situation-ledger").getByRole("button",{name:card.target==="place"?"Ort":card.target==="characters"?"Figuren":card.target==="history"?"Vorgeschichte":card.target==="conditions"?"Bedingungen":"Nicht feststellbar"}).click();
   }
+  await page.getByRole("button",{name:"Auswahl prüfen"}).click();
   await page.getByRole("button",{name:/Sampson\. Sey ohne Sorge/}).click();
   await page.getByRole("button",{name:situationEvidence.observation}).click();
   await page.getByRole("button",{name:situationEvidence.situation}).click();
   await page.getByRole("button",{name:"Verbindung in das Regiebuch eintragen"}).click();
-  for(const field of transferFields){
-    const label=field.field==="place"?"Ort":field.field==="time"?"Zeit":field.field==="characters"?"Figuren":field.field==="history"?"Vorgeschichte":"Bedingungen";
-    const card=page.locator(".transfer-ledger article").filter({has:page.getByRole("heading",{name:label,exact:true})});
-    await card.locator("select").nth(0).selectOption({label:field.answer});
-    await card.locator("select").nth(1).selectOption(field.evidenceId??"Keine Textstelle erforderlich");
-    await card.getByRole("button",{name:"Eintrag prüfen"}).click();
-  }
+  for(const group of transferSituationGroups)for(const option of group.options.filter(item=>item.correct))await page.getByText(option.text,{exact:true}).click();
+  await page.getByRole("button",{name:"Situationsanalyse prüfen"}).click();
 }
 async function completeChapter04(page:Page){
  for(const item of introFacts.filter(x=>x.relevant))await page.getByRole("button",{name:item.label}).click();
@@ -72,11 +70,15 @@ test("complete learning path reaches the restored director's book without a dead
   await page.getByRole("button", { name: /Ensemblewand: verfügbar/ }).click();
 
   await page.getByRole("button",{name:"Erste Figurenakte öffnen"}).click();
+  await page.getByRole("button",{name:"Analyse beginnen"}).click();
   for(const item of practiceClaims)await selectAndPlace(page,item.text,item.target==="explicit"?"Eindeutig belegt":item.target==="inference"?"Plausibel erschließbar":"Nicht belegt");
   for(const item of characterizationCards)await selectAndPlace(page,item.text,item.target==="direct"?/^Direkt\b/:/^Indirekt\b/);
+  for(const item of shakespeareCharacterizationCards)await selectAndPlace(page,item.text,item.target==="direct"?"Direkt ausgesprochen":item.target==="indirect"?"Aus Verhalten erschlossen":"Nicht ausreichend belegt");
   for(const task of highlightTasks)await page.getByRole("button",{name:chapter02PrimaryById(task.sourceId).text}).click();
+  await page.getByRole("button",{name:"Gesamtauswahl prüfen"}).click();
+  await page.getByRole("button",{name:highlightReasoning.find(item=>item.valid)!.text}).click();
   for(const item of momentClaims)await selectAndPlace(page,item.text,item.target==="supported"?"Gut gestützt":item.target==="uncertain"?"Möglich, aber unsicher":"Nicht gestützt");
-  for(const item of roleTasks)await selectAndPlace(page,item.observation,item.target==="goal"?"Ziel":item.target==="interest"?"Interesse / Bedürfnis":"Nicht sicher feststellbar");
+  for(const item of roleTasks)await selectAndPlace(page,item.observation,item.target==="goal"?"Ziel":item.target==="motive"?"Motiv":item.target==="interest"?"Interesse / Bedürfnis":"Nicht sicher feststellbar");
   for(const task of relationshipTasks){const card=page.locator(".evidence-entry:not(.done)").first();await card.locator("select").selectOption(task.sourceId);await card.getByRole("button",{name:"Beleg prüfen"}).click()}
   for(const item of selfOtherTasks)await selectAndPlace(page,item.text,item.target==="self"?"So zeigt sich die Figur":"So erscheint sie anderen");
   for(const task of transferTasks){const card=page.locator(".evidence-entry:not(.done)").first();await card.locator("select").selectOption(task.sourceId);await card.getByRole("button",{name:"Beleg prüfen"}).click()}
@@ -85,11 +87,12 @@ test("complete learning path reaches the restored director's book without a dead
   await leaveChapter(page);
   await page.getByRole("button", { name: /Probenbühne: verfügbar/ }).click();
   await page.getByRole("button",{name:"Allgemeine Dialogprobe beginnen"}).click();
+  await page.getByRole("button",{name:"Analyse beginnen"}).click();
   for(const item of chapter03Practice)await page.locator(".dialogue-choice").first().getByRole("button",{name:item.act,exact:true}).click();
   for(const item of chapter03Practice)await page.locator(".dialogue-choice").first().getByRole("button",{name:item.goal,exact:true}).click();
   for(const task of chapter03Goals)await page.locator(".source-button").filter({hasText:chapter03Source(task.sourceId).text}).click();
   await page.getByRole("button",{name:goalChange.answer.replaceAll("_"," "),exact:true}).click();
-  for(const task of chapter03Speech)await page.getByRole("button",{name:`${task.act} → passende Reaktion`,exact:true}).click();
+  for(const task of chapter03Speech){const correct=task.options.find(option=>option.act===task.act&&option.reactionId===task.reactionId)!;await page.getByRole("button",{name:correct.label,exact:true}).click()}
   for(const section of mainSections)await page.getByRole("button",{name:new RegExp(section.label)}).click();
   await page.getByRole("button",{name:"Gesprächslinie prüfen"}).click();
   await page.locator(".dialogue-choice button").first().click();
@@ -101,23 +104,25 @@ test("complete learning path reaches the restored director's book without a dead
   await page.getByRole("button",{name:"Dialogprotokoll abschließen"}).click();
   await leaveChapter(page);
   await page.getByRole("button", { name: /Bühne: verfügbar/ }).click();
+  await page.getByRole("button",{name:"Analyse beginnen"}).click();
 
   await completeChapter04(page);
   await leaveChapter(page);
   await page.getByRole("button", { name: /Regiebuch: verfügbar/ }).click();
+  await page.getByRole("button",{name:"Analyse beginnen"}).click();
 
   for(const item of classificationCards)await selectAndPlace(page,item.text,({observation:"Textbeobachtung",analysis:"Analyse",interpretation:"Interpretation",unsupported:"nicht ausreichend belegt"} as Record<string,string>)[item.target]);
   for(const item of generalChain)await page.getByRole("button",{name:new RegExp(item.text.slice(0,18))}).click();
   await page.getByRole("button",{name:hypothesisOptions.find(x=>x.quality==="supported")!.text}).click();await page.getByRole("button",{name:/durch den widersprüchlichen zweiten Satz präzisieren/}).click();
   for(const item of julietFindings)await selectAndPlace(page,item.text,item.accepted[0]==="direct"?"stützt unmittelbar":item.accepted[0]==="supplement"?"ergänzt":"kaum relevant");
   for(const item of [...julietReverseChain].reverse())await page.getByRole("button",{name:new RegExp(item.text.slice(0,16))}).click();
-  await page.getByRole("button",{name:/widerspricht ausdrücklich und bittet/}).click();await page.getByRole("button",{name:julietHypothesis}).click();
+  await page.getByRole("button",{name:julietCountercheckOptions.find(item=>item.id==="juliet_has_agency")!.text,exact:true}).click();await page.getByRole("button",{name:julietHypothesis}).click();
   for(const item of argumentBlocks)await page.getByRole("button",{name:new RegExp(item.text.slice(0,16))}).click();
   for(const item of commonErrors)await selectAndPlace(page,item.text,({evidence_without_analysis:"Beleg ohne Analyse",unsupported_claim:"unbelegte Behauptung",summary_only:"bloße Inhaltsangabe"} as Record<string,string>)[item.target]);
   for(const text of interpretationStructure)await page.getByRole("button",{name:text}).click();
   for(const item of transferEvidence.filter(x=>x.relevance!=="little").slice(0,4))await page.getByRole("button",{name:item.text}).click();
   for(const item of transferChain)await page.getByRole("button",{name:new RegExp(item.text.slice(0,18))}).click();
-  await page.getByRole("button",{name:transferHypotheses.find(x=>x.quality==="supported")!.text}).click();await page.getByRole("button",{name:/verweist auf das Gesetz/}).click();await page.getByRole("button",{name:transferRefined}).click();
+  await page.getByRole("button",{name:transferHypotheses.find(x=>x.quality==="supported")!.text}).click();await page.getByRole("button",{name:transferCountercheckOptions.find(item=>item.id==="apothecary_resists")!.text,exact:true}).click();await page.getByRole("button",{name:transferRefined}).click();
   for(const item of transferArgument)await page.getByRole("button",{name:new RegExp(item.text.slice(0,18))}).click();
   await page.getByRole("button",{name:/Gegenbelege bestimmen ihre Reichweite/}).click();await page.getByRole("button",{name:"Kapitel abschließen"}).click();
   await leaveChapter(page);

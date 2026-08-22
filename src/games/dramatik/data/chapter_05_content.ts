@@ -38,6 +38,11 @@ export const julietReverseChain=[
  {id:"j_analysis",kind:"analysis",text:"Drohung und verweigertes Gehör stehen Juliettes ausdrücklicher Ablehnung und Bitte gegenüber."},
  {id:"j_evidence",kind:"evidence",text:"Capulets Drohung sowie Juliettes Ablehnung und Bitte bilden die entscheidenden Belege."}
 ] as const;
+export const julietCountercheckOptions=[
+ {id:"juliet_no_voice",text:"Juliettes Bitte zeigt, dass das familiäre Machtgefälle für die Hypothese keine entscheidende Rolle spielt."},
+ {id:"juliet_has_agency",text:"Juliette widerspricht ausdrücklich und bittet um Gehör; das schränkt die absolute Aussage ein."},
+ {id:"juliet_controls_all",text:"Weil Juliette ihren Willen ausspricht, besitzt sie in der familiären Ordnung letztlich die Entscheidungsmacht."},
+] as const;
 export const argumentBlocks=[
  {id:"arg_claim",kind:"claim",text:julietHypothesis},
  {id:"arg_evidence",kind:"evidence",text:"Capulet droht Juliette mit Ausschluss, während sie ausdrücklich widerspricht und um Gehör bittet."},
@@ -69,6 +74,11 @@ export const transferHypotheses=[
  {id:"th_weighted",text:"Die Apothekerszene zeigt, wie Romeo die wirtschaftliche Not eines anderen nutzt und Geld als zerstörerische Macht deutet.",quality:"supported"},
  {id:"th_simple",text:"Der Apotheker verkauft Gift.",quality:"description"},
  {id:"th_absolute",text:"Der Apotheker handelt ausschließlich aus Bosheit.",quality:"contradicted"}
+] as const;
+export const transferCountercheckOptions=[
+ {id:"law_irrelevant",text:"Der Verweis auf das Gesetz zeigt, dass der Apotheker die Entscheidung vollständig ablehnt und deshalb keine Verantwortung trägt."},
+ {id:"apothecary_eager",text:"Romeos Geldangebot reicht als Beleg dafür, dass der Apotheker dem Verkauf innerlich zustimmt."},
+ {id:"apothecary_resists",text:"Der Apotheker verweist auf das Gesetz und trennt Dürftigkeit von Wille; das schränkt die Annahme freiwilliger Zustimmung ein."},
 ] as const;
 export const transferRefined="Die Apothekerszene zeigt, wie Romeo die wirtschaftliche Not des Apothekers gezielt nutzt; zugleich macht dessen Widerstand sichtbar, dass die Entscheidung nicht als freiwillige Zustimmung vereinfacht werden darf.";
 export const transferArgument=[
