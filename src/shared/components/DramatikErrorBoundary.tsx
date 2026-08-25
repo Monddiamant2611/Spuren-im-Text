@@ -13,7 +13,7 @@ export class DramatikErrorBoundary extends Component<{ children: ReactNode; onRe
   private recover = () => {
     this.setState({ hasError: false });
     if (this.props.onRecover) this.props.onRecover();
-    else window.location.assign("/dramatik");
+    else window.location.assign(`${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/dramatik/`);
   };
   render() { return this.state.hasError ? <DramatikErrorFallback onRecover={this.recover}/> : this.props.children; }
 }

@@ -1,6 +1,7 @@
 import type { AssetCategory, AssetDefinition } from "./types";
 
-const root="/assets/dramatik/";
+const publicBasePath=process.env.NEXT_PUBLIC_BASE_PATH??"";
+const root=`${publicBasePath}/assets/dramatik/`;
 const asset=(id:string,category:AssetCategory,folder:string,file:string,alt:string,usage:string,extra:Partial<AssetDefinition>={}):AssetDefinition=>({id,category,path:`${root}${folder}/${file}`,alt,game:"dramatik",usage,...extra});
 
 const backgrounds=[
@@ -34,9 +35,9 @@ const symbolFiles=[["quote_open","Anführungszeichen oben.png"],["quote_close","
 const symbols=symbolFiles.map(([id,file])=>asset(`symbol_${id}`,"analysis_symbols","symbols",file,"",`Dekoratives Funktionssymbol: ${id}`,{decorative:true}));
 
 const literatureArchiveAssets:readonly AssetDefinition[]=[
- {id:"archive_book_symbol",category:"literature",path:"/assets/dramatik/symbols/Buchsymbol.png",alt:"Buchsymbol",game:"shared",usage:"Kleines Literaturmotiv"},
- {id:"archive_scroll",category:"decoration",path:"/assets/dramatik/objects/Schriftrolle.png",alt:"",game:"shared",usage:"Dekorative Schriftrolle",decorative:true},
- {id:"archive_seal",category:"status",path:"/assets/dramatik/objects/Siegel.png",alt:"",game:"shared",usage:"Dekoratives Siegel der Abschlussansicht",decorative:true},
+ {id:"archive_book_symbol",category:"literature",path:`${root}symbols/Buchsymbol.png`,alt:"Buchsymbol",game:"shared",usage:"Kleines Literaturmotiv"},
+ {id:"archive_scroll",category:"decoration",path:`${root}objects/Schriftrolle.png`,alt:"",game:"shared",usage:"Dekorative Schriftrolle",decorative:true},
+ {id:"archive_seal",category:"status",path:`${root}objects/Siegel.png`,alt:"",game:"shared",usage:"Dekoratives Siegel der Abschlussansicht",decorative:true},
 ];
 
 const theatreAccessAssets:readonly AssetDefinition[]=[
@@ -52,4 +53,4 @@ export const literatureArchiveAssetGroups={decoration:["archive_scroll"],literat
 export const assetManifest:readonly AssetDefinition[]=[...backgrounds,...characters,...objects,...symbols,...theatreAccessAssets,...literatureArchiveAssets];
 export function getAsset(id:string){return assetManifest.find((item)=>item.id===id)}
 export function resolveCharacterAsset(character:string,state="calm"){return assetManifest.find((item)=>item.character===character&&item.state===state)??assetManifest.find((item)=>item.character===character&&["calm","neutral"].includes(item.state??""))}
-export function validateAssetManifest(items:readonly AssetDefinition[]):string[]{const ids=new Set<string>();const errors:string[]=[];for(const item of items){if(ids.has(item.id))errors.push(`duplicate asset id: ${item.id}`);ids.add(item.id);if(!item.path.startsWith("/assets/"))errors.push(`asset path must start with /assets/: ${item.id}`);if(!item.decorative&&!item.alt.trim())errors.push(`asset alt text is required: ${item.id}`)}return errors}
+export function validateAssetManifest(items:readonly AssetDefinition[]):string[]{const ids=new Set<string>();const errors:string[]=[];for(const item of items){if(ids.has(item.id))errors.push(`duplicate asset id: ${item.id}`);ids.add(item.id);if(!item.path.startsWith(`${publicBasePath}/assets/`))errors.push(`asset path must start with ${publicBasePath}/assets/: ${item.id}`);if(!item.decorative&&!item.alt.trim())errors.push(`asset alt text is required: ${item.id}`)}return errors}
