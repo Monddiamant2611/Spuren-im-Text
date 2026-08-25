@@ -2,6 +2,7 @@ import { expect, test } from "@playwright/test";
 
 test("regulärer Einstieg bietet Begriffsvorbereitung und passende Lernkartei", async ({ page }) => {
   await page.goto("/epik");
+  await page.getByRole("button", { name: "Analysewerkstatt betreten" }).click();
   const preparation = page.getByRole("dialog", { name: "Begriffe kurz wiederholen" });
   await expect(preparation).toBeVisible();
   await preparation.getByRole("button", { name: "Begriffe wiederholen" }).click();

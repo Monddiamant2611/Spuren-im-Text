@@ -12,8 +12,7 @@ test("Fortschritt überlebt Reload und lässt sich zurücksetzen", async ({ page
   await page.getByRole("button", { name: "Lernfortschritt zurücksetzen" }).click();
   await expect(page.getByText("Möchten Sie den gespeicherten Lernfortschritt wirklich zurücksetzen?")).toBeVisible();
   await page.getByRole("button", { name: "Fortschritt zurücksetzen", exact: true }).click();
-  await expect(page.getByRole("button", { name: "2 Erzählinstanz und Perspektive" })).toHaveCount(0);
-  await expect(page.getByRole("button", { name: "↗ Lernkartei", exact: true })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "Epische Werke entschlüsseln" })).toBeVisible();
   expect(await page.evaluate(() => localStorage.getItem("epik.learningProgress.v1"))).toBeNull();
 });
 
@@ -21,6 +20,7 @@ for (const viewport of [{ width: 768, height: 1024 }, { width: 390, height: 844 
   test(`Reset-Bereich bleibt bei ${viewport.width}×${viewport.height} erreichbar`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.goto("/epik");
+    await page.getByRole("button", { name: "Analysewerkstatt betreten" }).click();
     await page.getByRole("button", { name: "Direkt starten" }).click();
     const reset = page.getByRole("button", { name: "Lernfortschritt zurücksetzen" });
     await reset.scrollIntoViewIfNeeded();

@@ -41,6 +41,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 1366, height: 768
 
 test("Level-Vorbereitung und Wissen testen bleiben funktionsfähig", async ({ page }) => {
   await page.goto("/epik");
+  await page.getByRole("button", { name: "Analysewerkstatt betreten" }).click();
   const preparation = page.getByRole("dialog", { name: "Begriffe kurz wiederholen" });
   await preparation.getByRole("button", { name: "Begriffe wiederholen" }).click();
   await preparation.getByRole("button", { name: "Erzählinstanz", exact: true }).click();

@@ -3,8 +3,8 @@
 import { useSyncExternalStore } from "react";
 
 export const EPIK_PROGRESS_KEY = "epik.learningProgress.v1";
-export type EpikLearningProgress = { version: 1; completedChapters: number[] };
-const emptyProgress: EpikLearningProgress = { version: 1, completedChapters: [] };
+export type EpikLearningProgress = { version: 1; completedChapters: number[]; introSeen: boolean };
+const emptyProgress: EpikLearningProgress = { version: 1, completedChapters: [], introSeen: false };
 const changeEvent = "epik-learning-progress-change";
 
 export function normalizeCompletedChapters(value: unknown): number[] {
@@ -18,9 +18,10 @@ export function normalizeCompletedChapters(value: unknown): number[] {
 export function parseEpikProgress(raw: string | null): EpikLearningProgress {
   if (!raw) return emptyProgress;
   try {
-    const candidate = JSON.parse(raw) as { version?: unknown; completedChapters?: unknown };
+    const candidate = JSON.parse(raw) as { version?: unknown; completedChapters?: unknown; introSeen?: unknown };
     if (candidate?.version !== 1) return emptyProgress;
-    return { version: 1, completedChapters: normalizeCompletedChapters(candidate.completedChapters) };
+    const completedChapters = normalizeCompletedChapters(candidate.completedChapters);
+    return { version: 1, completedChapters, introSeen: candidate.introSeen === true || completedChapters.length > 0 };
   } catch {
     return emptyProgress;
   }
@@ -36,9 +37,17 @@ function announceProgressChange() {
 }
 
 export function completeEpikChapter(chapter: number): EpikLearningProgress {
-  const current = readEpikProgress().completedChapters;
+  const currentProgress = readEpikProgress();
+  const current = currentProgress.completedChapters;
   const completedChapters = chapter === current.length + 1 ? [...current, chapter] : current;
-  const progress: EpikLearningProgress = { version: 1, completedChapters };
+  const progress: EpikLearningProgress = { ...currentProgress, completedChapters };
+  window.localStorage.setItem(EPIK_PROGRESS_KEY, JSON.stringify(progress));
+  announceProgressChange();
+  return progress;
+}
+
+export function markEpikIntroSeen(): EpikLearningProgress {
+  const progress = { ...readEpikProgress(), introSeen: true };
   window.localStorage.setItem(EPIK_PROGRESS_KEY, JSON.stringify(progress));
   announceProgressChange();
   return progress;
@@ -57,4 +66,8 @@ function subscribe(callback: () => void) {
 
 export function useCompletedEpikChapterCount(): number {
   return useSyncExternalStore(subscribe, () => readEpikProgress().completedChapters.length, () => 0);
+}
+
+export function useEpikIntroSeen(): boolean {
+  return useSyncExternalStore(subscribe, () => readEpikProgress().introSeen, () => false);
 }

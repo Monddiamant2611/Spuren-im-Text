@@ -15,10 +15,11 @@ import { Chapter08Path } from "./Chapter08Path";
 import { Chapter09Path } from "./Chapter09Path";
 import { FinalCasePath } from "./FinalCasePath";
 import { LearningCards } from "./LearningCards";
+import { EpikIntro } from "./EpikIntro";
 import { LevelPreparationModal } from "./LevelPreparationModal";
 import { epikAreas, epikDemoTexts } from "./data/game";
 import { chapterLearningPreviews } from "./data/learning_content";
-import { completeEpikChapter, resetEpikProgress, useCompletedEpikChapterCount } from "./epik-progress";
+import { completeEpikChapter, markEpikIntroSeen, resetEpikProgress, useCompletedEpikChapterCount, useEpikIntroSeen } from "./epik-progress";
 
 export function EpikWorkshop() {
   const [areaId, setAreaId] = useState(epikAreas[0].id);
@@ -34,6 +35,8 @@ export function EpikWorkshop() {
   const [pendingChapter, setPendingChapter] = useState<number | undefined>(0);
   const [manualPreparation, setManualPreparation] = useState(false);
   const [learningCardCategory, setLearningCardCategory] = useState<number>();
+  const [introOpen, setIntroOpen] = useState(false);
+  const introSeen = useEpikIntroSeen();
   const reviewMode = useSyncExternalStore(() => () => undefined, () => process.env.NODE_ENV !== "production" && new URLSearchParams(window.location.search).get("__epik_test") === "1", () => false);
   const clientReady = useSyncExternalStore(() => () => undefined, () => true, () => false);
   const area = epikAreas.find((item) => item.id === areaId) ?? epikAreas[0];
@@ -59,6 +62,9 @@ export function EpikWorkshop() {
   function startPreparedChapter() { if (pendingChapter === undefined) return; setAreaId(epikAreas[pendingChapter].id); setPendingChapter(undefined); setManualPreparation(false); setHelpLevel(0); }
   function openPreparedCards(categoryIndex: number, term?: string) { setLearningCardCategory(categoryIndex); if (term) window.sessionStorage.setItem("epik.learningFocus", term); else window.sessionStorage.removeItem("epik.learningFocus"); setAreaId("learning-cards"); }
 
+  if (!clientReady) return <AppShell><div className="epik-entry-loading" aria-hidden="true" /></AppShell>;
+  if (!reviewMode && (introOpen || !introSeen)) return <AppShell><EpikIntro onEnter={() => { markEpikIntroSeen(); setIntroOpen(false); }}/></AppShell>;
+
   return <AppShell><section className="epik-workshop" aria-labelledby="epik-title">
     <header className="epik-header"><p className="archive-kicker">Digitale Lernwerkstatt</p><h1 id="epik-title">Analysewerkstatt Epik</h1><p>Erleben → Entdecken → Erkennen → Benennen → Belegen → Analysieren → Abwägen → Deuten → selbst formulieren</p></header>
     {reviewMode && <aside className="epik-review-tools"><Button variant="secondary" aria-expanded={reviewOpen} onClick={() => setReviewOpen((value) => !value)}>Prüfmodus · Bereich wechseln</Button>{reviewOpen && <Card><strong>Nur Navigation – der Lernfortschritt bleibt unverändert.</strong><div className="epik-review-menu"><button type="button" onClick={() => reviewNavigate("learning-cards")}>Lernkartei</button>{epikAreas.map((item, index) => <section key={item.id}><button type="button" onClick={() => reviewNavigate(item.id)}>Bereich {index + 1} · {item.title}</button><div className="epik-review-steps" aria-label={`Lernschritte Bereich ${index + 1}`}>{[0, 1, 2, 3, 4].map((step) => <button type="button" key={step} onClick={() => reviewNavigate(item.id, step)}>Schritt {step + 1}</button>)}</div></section>)}<button type="button" onClick={() => reviewNavigate("final-case")}>Abschlussfall</button></div></Card>}</aside>}
@@ -70,7 +76,7 @@ export function EpikWorkshop() {
     </nav>
     {!reviewMode && unlockedAreas <= 9 && <p className="epik-unlock-note">Weitere Analysebereiche werden nach und nach freigeschaltet.</p>}
 
-    {!isLearningCards && <div className="epik-toolbar"><Button variant="secondary" onClick={() => { setPendingChapter(undefined); setLearningCardCategory(activeIndex >= 0 ? chapterLearningPreviews[activeIndex].categoryIndex : undefined); setAreaId("learning-cards"); }}>Zur Lernkartei</Button>{activeIndex >= 0 && <Button variant="secondary" onClick={() => prepareChapter(activeIndex, true)}>Begriffe wiederholen</Button>}<Button variant="secondary" onClick={() => setHelpLevel((value) => Math.min(2, value + 1))}>{helpLevel ? "Weiterer Tipp" : "Tipp"}</Button></div>}
+    <div className="epik-toolbar"><Button variant="secondary" onClick={() => setIntroOpen(true)}>So funktioniert das Spiel</Button>{!isLearningCards && <><Button variant="secondary" onClick={() => { setPendingChapter(undefined); setLearningCardCategory(activeIndex >= 0 ? chapterLearningPreviews[activeIndex].categoryIndex : undefined); setAreaId("learning-cards"); }}>Zur Lernkartei</Button>{activeIndex >= 0 && <Button variant="secondary" onClick={() => prepareChapter(activeIndex, true)}>Begriffe wiederholen</Button>}<Button variant="secondary" onClick={() => setHelpLevel((value) => Math.min(2, value + 1))}>{helpLevel ? "Weiterer Tipp" : "Tipp"}</Button></>}</div>
     {helpLevel > 0 && !isLearningCards && <Card className="epik-help" role="status"><strong>Tipp {helpLevel}</strong><p>{helpLevel === 1 ? "Lesen Sie zuerst die Aufgabenstellung und suchen Sie dann das passende konkrete Textmerkmal." : "Trennen Sie sichere Beobachtung, Fachbegriff und mögliche Wirkung. Prüfen Sie anschließend, welche Antwort alle drei Ebenen verbindet."}</p><Button variant="secondary" onClick={() => setAreaId("learning-cards")}>In der Lernkartei nachsehen</Button></Card>}
 
     {isLearningCards ? <LearningCards key={learningCardCategory ?? "all"} initialCategory={learningCardCategory} returnLabel={pendingChapter === undefined ? "Zur Werkstatt" : `Zurück zu Bereich ${pendingChapter + 1}`} onReturn={() => { setAreaId(epikAreas[pendingChapter ?? 0].id); }}/> : <div onClick={handleAreaCompletion}>{isFinalCase ? <FinalCasePath onReturn={() => setAreaId(epikAreas[0].id)}/> : area.id === "erzaehlen" ? <Chapter01Path key={`${area.id}-${reviewStep}`} initialStep={reviewMode ? reviewStep : 0}/> : area.id === "perspektive" ? <Chapter02Path key={`${area.id}-${reviewStep}`} initialStep={reviewMode ? reviewStep : 0}/> : area.id === "naehe" ? <Chapter03Path key={`${area.id}-${reviewStep}`} initialStep={reviewMode ? reviewStep : 0}/> : area.id === "rede" ? <Chapter04Path key={`${area.id}-${reviewStep}`} initialStep={reviewMode ? reviewStep : 0}/> : area.id === "zeit" ? <Chapter05Path key={`${area.id}-${reviewStep}`} initialStep={reviewMode ? reviewStep : 0}/> : area.id === "figuren" ? <Chapter06Path key={`${area.id}-${reviewStep}`} initialStep={reviewMode ? reviewStep : 0}/> : area.id === "raum" ? <Chapter07Path key={`${area.id}-${reviewStep}`} initialStep={reviewMode ? reviewStep : 0}/> : area.id === "konflikt" ? <Chapter08Path key={`${area.id}-${reviewStep}`} initialStep={reviewMode ? reviewStep : 0}/> : area.id === "interpretation" ? <Chapter09Path key={`${area.id}-${reviewStep}`} initialStep={reviewMode ? reviewStep : 0}/> : <><div className="epik-layout">

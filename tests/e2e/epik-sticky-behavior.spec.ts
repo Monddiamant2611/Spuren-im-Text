@@ -9,7 +9,7 @@ async function expectActuallySticky(page: Page, card: Locator) { await page.eval
 async function chooseTextuallySupportedAnswer(group: Locator) { const labels = await group.getByRole("button").allTextContents(); for (const label of labels) { const option = group.getByRole("button", { name: label, exact: true }); await option.click(); await expect(option).toHaveClass(/is-selected/); const response = group.locator("small"); await expect(response).toBeVisible(); if ((await response.textContent())?.startsWith("Richtig")) return; } throw new Error("Keine textnahe Antwortoption gefunden."); }
 
 test("Bereich 1 hält den Übungstext beim echten Scrollen sichtbar", async ({ page }) => {
-  await page.setViewportSize({ width: 1440, height: 900 }); await page.goto("/epik"); await page.waitForTimeout(1_000); await startPrepared(page);
+  await page.setViewportSize({ width: 1440, height: 900 }); await page.goto("/epik"); await page.getByRole("button", { name: "Analysewerkstatt betreten" }).click(); await page.waitForTimeout(1_000); await startPrepared(page);
   await page.getByLabel("Das Grundgeschehen bleibt ähnlich.").check(); await page.getByLabel("Nicht jede Fassung nennt dieselben Einzelheiten.").check(); await page.getByLabel("Die Darstellung kann unterschiedlich wirken.").check(); await page.getByLabel("Eine Fassung kann Informationen ergänzen, die eine andere auslässt.").check(); await page.getByLabel("Ein vergleichbares Geschehen bedeutet nicht denselben Informationsumfang.").check(); await page.getByRole("button", { name: "Beobachtungen prüfen" }).click();
   await expectActuallySticky(page, page.locator(".epik-sticky-text"));
 });

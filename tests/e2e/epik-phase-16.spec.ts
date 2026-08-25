@@ -6,6 +6,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 768, height: 1024
   test(`lange Begriffsfamilie bleibt bei ${viewport.width}×${viewport.height} im Layout`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.goto("/epik");
+    await page.getByRole("button", { name: "Analysewerkstatt betreten" }).click();
     await page.waitForTimeout(1_000);
     await page.getByRole("button", { name: "Direkt starten" }).click();
     await page.getByRole("button", { name: "Zur Lernkartei", exact: true }).click();
@@ -31,6 +32,7 @@ for (const viewport of [{ width: 1440, height: 900 }, { width: 768, height: 1024
 test("Smartphone hält die einklappbare Textreferenz erreichbar", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/epik");
+  await page.getByRole("button", { name: "Analysewerkstatt betreten" }).click();
   await page.waitForTimeout(1_000);
   await page.getByRole("button", { name: "Direkt starten" }).click();
   await page.getByLabel("Das Grundgeschehen bleibt ähnlich.").check();

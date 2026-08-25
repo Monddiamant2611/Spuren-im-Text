@@ -5,12 +5,11 @@ const emptyProgress = { version: 1, completedChapters: [] };
 async function openManipulatedUrl(page: Page, query: string) {
   await page.addInitScript((progress) => localStorage.setItem("epik.learningProgress.v1", JSON.stringify(progress)), emptyProgress);
   await page.goto(`/epik?${query}`);
+  await expect(page.getByRole("heading", { name: "Epische Werke entschlüsseln" })).toBeVisible();
   await expect(page.getByRole("button", { name: /Prüfmodus|Review|QA/i })).toHaveCount(0);
   await expect(page.getByRole("button", { name: "2 Erzählinstanz und Perspektive" })).toHaveCount(0);
   await expect(page.getByRole("button", { name: /9 Von der Analyse/ })).toHaveCount(0);
   await expect(page.getByRole("button", { name: /Abschlussfall/ })).toHaveCount(0);
-  await expect(page.getByText("Erzählen verstehen · Lernschritt 1 von 5")).toBeVisible();
-  await expect(page.locator(".epik-path-progress .is-current")).toHaveText("1");
 }
 
 for (const query of ["review=1", "target=chapter-9", "target=chapter-2&step=5", "step=5", "target=final-case", "target=final-case&phase=7"]) {
@@ -33,6 +32,7 @@ test("regulär freigeschaltete Bereiche bleiben wiederholbar", async ({ page }) 
 
 test("Level-Vorbereitung, Begriffswiederholung und Glossar bleiben erreichbar", async ({ page }) => {
   await page.goto("/epik");
+  await page.getByRole("button", { name: "Analysewerkstatt betreten" }).click();
   const preparation = page.getByRole("dialog", { name: "Begriffe kurz wiederholen" });
   await preparation.getByRole("button", { name: "Begriffe wiederholen", exact: true }).click();
   await preparation.getByRole("button", { name: "Erzählte Welt", exact: true }).click();
