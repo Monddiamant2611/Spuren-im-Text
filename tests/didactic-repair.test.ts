@@ -31,8 +31,8 @@ describe("offene Situationsanalyse",()=>{
  it("unterstützt in jeder Kategorie Antwortmengen statt genau einer Lösung",()=>{
   expect(transferSituationGroups.every(group=>group.options.length>1)).toBe(true);
   expect(transferSituationGroups.find(x=>x.field==="characters")?.options.filter(x=>x.correct)).toHaveLength(3);
-  expect(transferSituationGroups.find(x=>x.field==="history")?.options.filter(x=>x.correct)).toHaveLength(2);
-  expect(transferSituationGroups.find(x=>x.field==="conditions")?.options.filter(x=>x.correct)).toHaveLength(3);
+  expect(transferSituationGroups.find(x=>x.field==="history")?.options.filter(x=>x.correct)).toHaveLength(1);
+  expect(transferSituationGroups.find(x=>x.field==="conditions")?.options.filter(x=>x.correct)).toHaveLength(2);
  });
  it("akzeptiert alle richtigen Mehrfachauswahlen gemeinsam",()=>expect(checkTransferAnalysis(correctSession(),transferSituationGroups).valid).toBe(true));
  it("weist eine unvollständige oder um eine falsche Figur ergänzte Auswahl zurück",()=>{

@@ -1,0 +1,9 @@
+import { describe, expect, it } from "vitest";
+import { chapter07PracticeTexts, chapter07Steps, evaluateSpaceStatement, isSpaceTransferComplete, selectSpaceText, spaceComparisons } from "../src/games/epik/data/chapter_07";
+describe("Epik Bereich 7", () => {
+  it("besitzt fünf Schritte und zehn unterschiedliche Texte", () => { expect(chapter07Steps).toHaveLength(5); expect(chapter07PracticeTexts).toHaveLength(10); expect(new Set(chapter07PracticeTexts.map((text) => text.id)).size).toBe(10); });
+  it("deckt die verbindlichen Raumdimensionen ab", () => { const features = chapter07PracticeTexts.flatMap((text) => text.features); expect(features).toEqual(expect.arrayContaining(["Atmosphäre", "Innenraum", "Außenraum", "Grenze", "Schwelle", "Enge", "Raum-Figur-Beziehung", "sozialer Raum", "Macht", "Zugang", "Raumfunktion", "mögliche Raumsymbolik"])); });
+  it("enthält drei Vergleiche und rotiert ohne Wiederholung", () => { expect(spaceComparisons).toHaveLength(3); const first = selectSpaceText(0); expect(selectSpaceText(0, [first.id]).id).not.toBe(first.id); });
+  it("bewertet zentrale Fehlvorstellungen", () => { expect(evaluateSpaceStatement("setting", false)).toBe(true); expect(evaluateSpaceStatement("dark", false)).toBe(true); expect(evaluateSpaceStatement("door", false)).toBe(true); expect(evaluateSpaceStatement("border", false)).toBe(true); expect(evaluateSpaceStatement("multiple", true)).toBe(true); expect(evaluateSpaceStatement("symbol", true)).toBe(true); expect(evaluateSpaceStatement("power", true)).toBe(true); });
+  it("erkennt den vollständigen Transfer", () => { const complete = { "weight-atmosphere": 1, "weight-function": 1, "atmosphere-proof": 1, "function-proof": 1, symbolism: 1, analysis: 1 }; expect(isSpaceTransferComplete(complete)).toBe(true); expect(isSpaceTransferComplete({ "weight-atmosphere": 1 })).toBe(false); });
+});

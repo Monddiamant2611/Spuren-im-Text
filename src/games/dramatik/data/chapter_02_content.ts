@@ -22,19 +22,27 @@ export const practiceClaims = [
 ] as const;
 
 export const characterizationCards = [
-  {id:"direct_explicit",text:"Mara sagt ausdrücklich, Leon sei drei Stunden zu spät.",target:"direct" as const},
-  {id:"indirect_gaze",text:"Aus Leons Blick zur Tür und seiner Frage wird ein mögliches Ausweichen erschlossen.",target:"indirect" as const},
-  {id:"direct_claim",text:"Eine Figur nennt eine andere ausdrücklich unzuverlässig.",target:"direct" as const},
-  {id:"indirect_action",text:"Eine Haltung wird aus Rede, Verhalten und Reaktion abgeleitet.",target:"indirect" as const},
+  {id:"direct_late",text:"Mara nennt Leon unzuverlässig.",target:"direct" as const},
+  {id:"indirect_gaze",text:"Leon blickt wiederholt zur Tür und beantwortet Maras Frage nur knapp.",target:"indirect" as const},
+  {id:"unsupported_hate",text:"Leon wird Mara künftig nie wieder treffen wollen.",target:"unsupported" as const},
+  {id:"direct_self",text:"Leon bezeichnet sich selbst als geduldig.",target:"direct" as const},
+  {id:"indirect_help",text:"Eine Figur unterbricht ihre Arbeit, um einer anderen beim Tragen zu helfen.",target:"indirect" as const},
+  {id:"direct_other",text:"Mara nennt Leon einen verlässlichen Freund.",target:"direct" as const},
+  {id:"unsupported_single",text:"Ein einmaliges Schweigen beweist, dass eine Figur grundsätzlich feige ist.",target:"unsupported" as const},
+  {id:"indirect_decision",text:"Eine Figur gibt den eigenen Platz auf, obwohl ihr daraus ein Nachteil entsteht.",target:"indirect" as const},
+  {id:"direct_reputation",text:"Mehrere Figuren beschreiben Leon als besonnen.",target:"direct" as const},
+  {id:"indirect_reaction",text:"Auf eine Beschuldigung hin weicht eine Figur zurück und sucht nach Worten.",target:"indirect" as const},
 ] as const;
 
 export const shakespeareCharacterizationCards=[
- {id:"sh_juliette_self",text:"Juliette sagt selbst, Heirat sei eine Ehre, an die sie noch nie gedacht habe.",sourceId:"c02_main_juliette_honor",target:"direct" as const},
- {id:"sh_lady_paris",text:"Lady Capulet beschreibt Paris ausdrücklich in einem ausführlichen Vergleich.",sourceId:"c02_main_lady_paris",target:"direct" as const},
- {id:"sh_juliette_intention",text:"Juliette kündigt an, Paris anzusehen und den Willen ihrer Mutter zu berücksichtigen.",sourceId:"c02_main_juliette_answer",target:"direct" as const},
- {id:"sh_lady_leads",text:"Aus Lady Capulets Fragen und Aufforderungen wird erschlossen, dass sie das Gespräch lenkt.",sourceId:"c02_main_lady_request",target:"indirect" as const},
- {id:"sh_juliette_refusal",text:"Juliette spricht ihre Ablehnung der geplanten Hochzeit ausdrücklich aus.",sourceId:"c02_transfer_juliette_refusal",target:"direct" as const},
- {id:"sh_capulet_power",text:"Aus Capulets Drohung wird ein starkes familiäres Machtgefälle erschlossen.",sourceId:"c02_transfer_capulet_threat",target:"indirect" as const},
+ {id:"sh_juliette_self",text:"Juliette stellt Heirat als eine Ehre dar, an die sie noch nie gedacht habe.",sourceId:"c02_main_juliette_honor",target:"direct" as const},
+ {id:"sh_lady_paris",text:"Lady Capulet zeichnet ein ausgesprochen positives Bild von Paris.",sourceId:"c02_main_lady_paris",target:"direct" as const},
+ {id:"sh_juliette_intention",text:"Juliette erscheint in ihrer Antwort vorsichtig und an der Erwartung ihrer Mutter orientiert.",sourceId:"c02_main_juliette_answer",target:"indirect" as const},
+ {id:"sh_lady_leads",text:"Lady Capulet lenkt das Gespräch und fordert von Juliette eine Positionierung.",sourceId:"c02_main_lady_request",target:"indirect" as const},
+ {id:"sh_juliette_refusal",text:"Juliette lehnt die geplante Verbindung mit Paris ab.",sourceId:"c02_transfer_juliette_refusal",target:"direct" as const},
+ {id:"sh_capulet_power",text:"Capulets Reaktion zeigt ein starkes familiäres Machtgefälle.",sourceId:"c02_transfer_capulet_threat",target:"indirect" as const},
+ {id:"sh_nurse_defends",text:"Die Amme tritt Juliette in der Auseinandersetzung schützend zur Seite.",sourceId:"c02_transfer_nurse_defends",target:"indirect" as const},
+ {id:"sh_lady_distance",text:"Lady Capulet vergrößert in diesem Moment die Distanz zu ihrer Tochter.",sourceId:"c02_transfer_lady_withdraws",target:"indirect" as const},
  {id:"sh_absolute_trait",text:"Der Ausschnitt beweist, dass Juliette in jeder Situation gehorsam ist.",sourceId:"c02_main_juliette_answer",target:"unsupported" as const},
 ] as const;
 
@@ -79,6 +87,9 @@ export const relationshipTasks=[
 export const selfOtherTasks=[
   {id:"self_juliette",sourceId:"c02_main_juliette_honor",target:"self" as const,text:"Juliette zeigt selbst, dass Heirat bisher nicht zu ihren eigenen Vorstellungen gehört."},
   {id:"other_lady",sourceId:"c02_main_lady_paris",target:"other" as const,text:"Lady Capulet behandelt Juliette als alt genug, über eine Heirat mit Paris nachzudenken."},
+  {id:"self_juliette_limit",sourceId:"c02_main_juliette_answer",target:"self" as const,text:"Juliette beschreibt, wie weit sie beim Betrachten von Paris gehen will."},
+  {id:"other_capulet",sourceId:"c02_transfer_capulet_threat",target:"other" as const,text:"Capulet behandelt Juliettes Widerspruch als Ungehorsam, den er nicht dulden will."},
+  {id:"self_juliette_break",sourceId:"c02_transfer_juliette_break",target:"self" as const,text:"Juliette formuliert für sich eine neue Einschätzung ihrer Vertrauten."},
 ] as const;
 
 export const transferSourceIds=["c02_transfer_lady_announcement","c02_transfer_juliette_refusal","c02_transfer_juliette_distinction","c02_transfer_juliette_plea","c02_transfer_capulet_threat","c02_transfer_nurse_defends","c02_transfer_lady_withdraws","c02_transfer_juliette_nurse_plea","c02_transfer_nurse_advice","c02_transfer_juliette_break"] as const;
@@ -91,8 +102,11 @@ export const transferTasks=[
 
 export const comparisonCards=[
   {id:"compare_early",target:"early" as const,text:"Juliette antwortet vorsichtig, will Paris erst betrachten und bezieht den Willen ihrer Mutter ein."},
+  {id:"compare_early_open",target:"early" as const,text:"Die frühere Situation lässt noch offen, wie Juliette sich nach der Begegnung mit Paris entscheiden würde."},
   {id:"compare_late",target:"late" as const,text:"Juliette lehnt die geplante Hochzeit ausdrücklich ab und bittet zugleich um Gehör und Aufschub."},
+  {id:"compare_late_pressure",target:"late" as const,text:"In der späteren Situation reagiert Juliette unter unmittelbarem familiärem Druck."},
   {id:"compare_context",target:"conclusion" as const,text:"Die Ausschnitte zeigen unterschiedliches situatives Verhalten; sie belegen keine einfache Entwicklung von „gehorsam“ zu „rebellisch“."},
+  {id:"compare_cautious",target:"conclusion" as const,text:"Der Vergleich erlaubt eine vorsichtige Aussage über veränderte Situationen, aber keine sichere Behauptung über Juliettes Verhalten in jeder Lage."},
 ] as const;
 
 export const ensembleLinks=[

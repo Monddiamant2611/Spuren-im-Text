@@ -1,0 +1,9 @@
+import { describe, expect, it } from "vitest";
+import { chapter06PracticeTexts, chapter06Steps, characterMisconceptions, evaluateCharacterStatement, isCharacterTransferComplete, observationCases, selectCharacterText } from "../src/games/epik/data/chapter_06";
+describe("Epik Bereich 6", () => {
+  it("besitzt fünf Schritte und elf unterschiedliche Texte", () => { expect(chapter06Steps).toHaveLength(5); expect(chapter06PracticeTexts).toHaveLength(11); expect(new Set(chapter06PracticeTexts.map((text) => text.id)).size).toBe(11); });
+  it("deckt die verbindlichen Figurenbereiche ab", () => { const features = chapter06PracticeTexts.flatMap((text) => text.features); expect(features).toEqual(expect.arrayContaining(["direkte Charakterisierung", "indirekte Charakterisierung", "Ziel", "Motiv", "Wert", "Selbstbild", "Fremdbild", "Beziehung", "Widerspruch", "Figurenentwicklung"])); });
+  it("enthält drei Beobachtungsfälle und rotiert ohne Wiederholung", () => { expect(observationCases).toHaveLength(3); const first = selectCharacterText(0); expect(selectCharacterText(0, [first.id]).id).not.toBe(first.id); });
+  it("bewertet zentrale Fehlvorstellungen", () => { expect(characterMisconceptions).toHaveLength(8); expect(evaluateCharacterStatement("adjectives", false)).toBe(true); expect(evaluateCharacterStatement("direct", false)).toBe(true); expect(evaluateCharacterStatement("single", false)).toBe(true); expect(evaluateCharacterStatement("self", false)).toBe(true); expect(evaluateCharacterStatement("foreign", true)).toBe(true); expect(evaluateCharacterStatement("contradiction", true)).toBe(true); });
+  it("erkennt den vollständigen Transfer", () => { const complete = { start: 1, trigger: 1, after: 1, goal: 1, motive: 1, value: 1, development: 1, figureType: 1, analysis: 1 }; expect(isCharacterTransferComplete(complete)).toBe(true); expect(isCharacterTransferComplete({ start: 1 })).toBe(false); });
+});

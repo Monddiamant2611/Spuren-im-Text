@@ -10,10 +10,18 @@ export const introFacts=[
 export const conflictTypes=[
  {id:"mara_father",label:"Mara will zur Feier; ihr Vater verlangt Lernen.",answer:"external"},
  {id:"mara_inner",label:"Mara möchte gehen, fürchtet aber die Folgen.",answer:"internal"},
+ {id:"leon_team",label:"Leon will den Ball behalten; seine Mitspielerin fordert einen Pass.",answer:"external"},
+ {id:"leon_inner",label:"Leon will widersprechen, möchte die Freundschaft aber nicht gefährden.",answer:"internal"},
+ {id:"samira_rule",label:"Samira möchte auftreten; die Leitung verweigert ihr den Zugang zur Bühne.",answer:"external"},
+ {id:"samira_inner",label:"Samira freut sich auf den Auftritt und zweifelt zugleich an ihrer Vorbereitung.",answer:"internal"},
 ] as const;
 export const causalIntro=[
  {id:"rain",label:"Mara verlässt das Haus. Danach beginnt es zu regnen.",answer:"temporal"},
  {id:"return",label:"Mara kehrt zurück, weil sie keinen Schirm hat.",answer:"causal"},
+ {id:"bell",label:"Die Schulglocke läutet. Kurz danach öffnet jemand ein Fenster.",answer:"temporal"},
+ {id:"dark",label:"Weil das Licht ausfällt, schaltet Leon seine Taschenlampe ein.",answer:"causal"},
+ {id:"book",label:"Mara legt das Buch weg. Danach fährt draußen ein Bus vorbei.",answer:"temporal"},
+ {id:"message",label:"Die Nachricht warnt vor Glatteis; deshalb nimmt Samira einen anderen Weg.",answer:"causal"},
 ] as const;
 export const situationCards=[
  {id:"place",label:"Gruft der Capulets",target:"situation"},

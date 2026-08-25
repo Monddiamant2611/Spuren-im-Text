@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { GameState } from "../../../core/state/types";
 import { AssetImage } from "../../../shared/components/AssetImage";
 import { PrimarySourceText } from "../../../shared/components/PrimarySourceText";
@@ -16,6 +16,7 @@ const hydrate=(value:unknown):Chapter04Session=>{if(!value||typeof value!=="obje
 
 export function Chapter04({gameState,onSave,onExit,onComplete}:Props){
  const[s,setS]=useState(()=>hydrate(gameState.decisions.chapter_04));const[feedback,setFeedback]=useState("Rekonstruieren Sie, wie aus Interessen und Handlungen ein Punkt ohne Rückkehr entsteht.");
+ useEffect(()=>{document.querySelector(".causal-board")?.scrollIntoView({block:"start",behavior:"auto"})},[s.round]);
  const update=(next:Chapter04Session,valid:boolean,ok="Die Verbindung ist fachlich tragfähig.",wrong="Prüfen Sie Ursache, Handlung und Textbeleg noch einmal.")=>{setS(next);onSave(next);setFeedback(valid?ok:wrong)};
  const apply=(r:{valid:boolean;session:Chapter04Session},ok?:string,wrong?:string)=>update(r.session,r.valid,ok,wrong);
  const next=(patch:Partial<Chapter04Session>={})=>update({...s,...patch,round:s.round+1},true,"Der nächste Untersuchungsschritt ist geöffnet.");

@@ -19,7 +19,7 @@ test("chapter 1 introduces situation terms before the task and persists that int
 test("chapter 1 transfer uses responsive multi-selection and one combined check",async({page})=>{
  await page.setViewportSize({width:390,height:844});await openChapter(page,"chapter_01",{round:7,signalStep:3,signalAnswers:[],certaintyAssignments:{},situationAssignments:{},evidenceLinked:true,transferAssignments:{},transferEvidence:{},transferSelections:{},transferConfirmed:[],seenGlossaryIntroductions:["chapter_01"],completed:false,failedAttempts:0,competencyEvents:[]});
  await expect(page.locator(".transfer-ledger select")).toHaveCount(0);await expect(page.getByRole("button",{name:"Situationsanalyse prüfen"})).toHaveCount(1);await expect(page.getByText(/Wählen Sie \d|Markieren Sie \d/)).toHaveCount(0);
- for(const group of transferSituationGroups)for(const option of group.options.filter(item=>item.correct))await page.getByText(option.text,{exact:true}).click();await page.getByRole("button",{name:"Situationsanalyse prüfen"}).click();await expect(page.getByText("Das Regiebuch ist wieder lesbar.",{exact:true})).toBeVisible();
+ for(const group of transferSituationGroups)for(const option of group.options.filter(item=>item.correct))await page.getByText(option.text,{exact:true}).click();await page.getByRole("button",{name:"Situationsanalyse prüfen"}).click();await expect(page.getByRole("status")).toContainText("Das Regiebuch ist wieder lesbar.");
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1)).toBe(true);
 });
 
@@ -33,18 +33,30 @@ test("chapter 1 explains evidence terms before their first use",async({page})=>{
 });
 
 test("chapter 1 checks the street situation only after the complete draft",async({page})=>{
- await openChapter(page,"chapter_01",{round:5,seenGlossaryIntroductions:["chapter_01"],situationDraft:{}});const original=await page.getByRole("status").textContent();
+ await openChapter(page,"chapter_01",{round:5,seenGlossaryIntroductions:["chapter_01"],situationDraft:{}});await expect(page.getByRole("status")).toHaveCount(0);
  for(const card of streetSituationCards){await page.locator(".loose-pages button").filter({hasText:card.text}).first().click();const target=card.id==="street_place"?"Zeit":card.target==="characters"?"Figuren":card.target==="history"?"Vorgeschichte":card.target==="conditions"?"Bedingungen":card.target==="place"?"Ort":"Nicht feststellbar";await page.locator(".situation-ledger").getByRole("button",{name:new RegExp(`^${target}`)}).click()}
- await expect(page.getByRole("status")).toHaveText(original??"");await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await page.getByRole("button",{name:"Auswahl prüfen"}).click();await expect(page.getByRole("status")).toContainText("Ort");
+ await expect(page.getByRole("status")).toHaveCount(0);await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await page.getByRole("button",{name:"Auswahl prüfen"}).click();await expect(page.getByRole("status")).toContainText("Ort");
  await page.locator(".loose-pages button").filter({hasText:streetSituationCards[0].text}).first().click();await page.locator(".situation-ledger").getByRole("button",{name:/^Ort/}).click();await page.getByRole("button",{name:"Auswahl prüfen"}).click();await expect(page.getByRole("heading",{name:"Figurenrede ergänzt die Situation"})).toBeVisible();
 });
 
 test("chapter 2 shows a protected source for every goal motive and interest task",async({page})=>{
- await openChapter(page,"chapter_02",{round:6,seenGlossaryIntroductions:["chapter_02"]},["chapter_01"]);await expect(page.getByText("Mein Gemahl ist auf Erden",{exact:false})).toBeVisible();for(const task of roleTasks)await expect(page.getByText(task.observation,{exact:true})).toBeVisible();
+ await openChapter(page,"chapter_02",{round:6,seenGlossaryIntroductions:["chapter_02"]},["chapter_01"]);await expect(page.getByText("Mein Gemahl ist auf Erden",{exact:false})).toBeVisible();await expect(page.getByText("Was möchte eine Figur in der konkreten Situation erreichen?",{exact:true})).toBeVisible();await expect(page.getByText("Der Text liefert nicht genug Hinweise, um eine Aussage zuverlässig zu begründen.",{exact:true})).toBeVisible();for(const task of roleTasks.slice(0,4))await expect(page.getByText(task.observation,{exact:true})).toBeVisible();
+});
+
+test("chapter 2 completion is explicit and returns to the unlocked theatre",async({page})=>{
+ await openChapter(page,"chapter_02",{round:11,completed:true,seenGlossaryIntroductions:["chapter_02"]},["chapter_01","chapter_02"]);await page.getByRole("button",{name:/Kapitel 2 öffnen/}).click();await expect(page.getByText("Die Figurenakte ist vollständig.",{exact:true})).toBeVisible();await page.getByRole("button",{name:"Zur großen Bühne"}).click();await expect(page.getByRole("button",{name:/Kapitel 3 öffnen/})).toBeVisible();
+});
+
+test("glossary dialogs reopen at their beginning",async({page})=>{
+ await openChapter(page,"chapter_02",{round:6,seenGlossaryIntroductions:["chapter_02"]},["chapter_01"]);await page.getByRole("button",{name:"Begriff Motiv erklären"}).click();const dialog=page.getByRole("dialog",{name:"Motiv"});await dialog.evaluate(node=>{node.scrollTop=999});await dialog.getByRole("button",{name:"Schließen"}).click();await page.getByRole("button",{name:"Begriff Motiv erklären"}).click();expect(await dialog.evaluate(node=>node.scrollTop)).toBe(0);
 });
 
 test("always choosing the first answer no longer solves chapter 3",async({page})=>{
  await openChapter(page,"chapter_03",{round:2,seenGlossaryIntroductions:["chapter_03"]},["chapter_01","chapter_02"]);const task=practiceActs[0];expect(task.actOptions[0]).not.toBe(task.act);await page.locator(".dialogue-choice").first().getByRole("button").first().click();await expect(page.getByRole("status")).toContainText("Prüfen");await expect(page.getByText("Probe 2 von 12")).toBeVisible();
+});
+
+test("chapter 1 scene 6 cannot be solved by always choosing the first option",async({page})=>{
+ await openChapter(page,"chapter_01",{round:6,evidenceLinked:false,seenGlossaryIntroductions:["chapter_01","chapter_01_evidence"]});for(const field of await page.locator(".evidence-chain fieldset").all())await field.getByRole("button").first().click();await page.getByRole("button",{name:"Verbindung in das Regiebuch eintragen"}).click();await expect(page.getByRole("heading",{name:"Figurenrede ergänzt die Situation"})).toBeVisible();
 });
 
 test("chapter 5 counterchecks use plausible distractors at different positions",async({page})=>{

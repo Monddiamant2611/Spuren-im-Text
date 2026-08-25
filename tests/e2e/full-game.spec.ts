@@ -7,7 +7,7 @@ import { certaintyClaims, situationEvidence, streetSituationCards, transferSitua
 
 test.beforeEach(async ({ page }) => { await page.goto("/dramatik"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
 
-async function leaveChapter(page: Page) { await page.getByRole("button", { name: /Theater/ }).click(); }
+async function leaveChapter(page: Page) { const completion=page.getByRole("button",{name:"Zur großen Bühne"});await expect(completion).toBeVisible();await completion.click(); }
 async function selectAndPlace(page: Page, item: string | RegExp, zone: string | RegExp) { await page.getByRole("button", { name: item }).click(); await page.getByRole("button", { name: zone }).last().evaluate(element=>(element as HTMLButtonElement).click()); }
 async function completeChapter01(page:Page){
   await page.getByRole("button",{name:"Regiebuch untersuchen"}).click();
@@ -72,8 +72,8 @@ test("complete learning path reaches the restored director's book without a dead
   await page.getByRole("button",{name:"Erste Figurenakte öffnen"}).click();
   await page.getByRole("button",{name:"Analyse beginnen"}).click();
   for(const item of practiceClaims)await selectAndPlace(page,item.text,item.target==="explicit"?"Eindeutig belegt":item.target==="inference"?"Plausibel erschließbar":"Nicht belegt");
-  for(const item of characterizationCards)await selectAndPlace(page,item.text,item.target==="direct"?/^Direkt\b/:/^Indirekt\b/);
-  for(const item of shakespeareCharacterizationCards)await selectAndPlace(page,item.text,item.target==="direct"?"Direkt ausgesprochen":item.target==="indirect"?"Aus Verhalten erschlossen":"Nicht ausreichend belegt");
+  for(const item of characterizationCards)await selectAndPlace(page,item.text,item.target==="direct"?/^Direkt\b/:item.target==="indirect"?/^Indirekt\b/:"Nicht ausreichend belegt");
+  for(const item of shakespeareCharacterizationCards)await selectAndPlace(page,item.text,item.target==="direct"?/^Direkt\b/:item.target==="indirect"?/^Indirekt\b/:"Nicht ausreichend belegt");
   for(const task of highlightTasks)await page.getByRole("button",{name:chapter02PrimaryById(task.sourceId).text}).click();
   await page.getByRole("button",{name:"Gesamtauswahl prüfen"}).click();
   await page.getByRole("button",{name:highlightReasoning.find(item=>item.valid)!.text}).click();

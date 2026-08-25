@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { hydrateSession } from "../../../core/state/hydrateSession";
 import type { GameState } from "../../../core/state/types";
 import { PrimarySourceText } from "../../../shared/components/PrimarySourceText";
@@ -13,6 +13,7 @@ import { assignError, assignJulietRelevance, chooseGeneralHypothesis, chooseTran
 type Props={gameState:GameState;onSave:(s:Chapter05Session)=>void;onExit:()=>void;onComplete:(s:Chapter05Session)=>void};
 export function Chapter05({gameState,onSave,onExit,onComplete}:Props){
  const[s,setS]=useState(()=>hydrateSession(gameState.decisions.chapter_05,initialChapter05Session,19));const[feedback,setFeedback]=useState("Analyse beschreibt nicht nur, was im Text steht, sondern erklärt dessen Funktion und Bedeutung.");
+ useEffect(()=>{document.querySelector(".chapter05-desk")?.scrollIntoView({block:"start",behavior:"auto"})},[s.round]);
  const apply=(result:{valid:boolean;session:Chapter05Session},ok="Der Zusammenhang ist textnah begründet.",bad="Prüfen Sie, welche Denkbewegung hier noch fehlt.")=>{setS(result.session);onSave(result.session);setFeedback(result.valid?ok:bad)};
  const finish=()=>{const r=completeChapter05(s);apply(r,"Die Deutung steht. Das Theater ist bereit.","Schließen Sie zuerst Transfer und Synthese ab.");if(r.valid)onComplete(r.session)};
  return <main className="chapter-shell interpretation-chapter chapter05-workshop"><header className="chapter-header"><button onClick={onExit}>← Theater</button><div><p>Kapitel 5 · Interpretationswerkstatt</p><h1>Was bedeutet das?</h1><small>Analyseergebnisse zu einer Interpretation verbinden</small></div><span>Station {Math.min(s.round,18)} von 18</span></header>

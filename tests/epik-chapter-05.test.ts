@@ -1,0 +1,9 @@
+import { describe, expect, it } from "vitest";
+import { chapter05PracticeTexts, chapter05Steps, evaluateTimeStatement, isTimeTransferComplete, selectTimeText, timeComparisons } from "../src/games/epik/data/chapter_05";
+describe("Epik Bereich 5", () => {
+  it("besitzt fünf Schritte und zehn unterschiedliche Texte", () => { expect(chapter05Steps).toHaveLength(5); expect(chapter05PracticeTexts).toHaveLength(10); expect(new Set(chapter05PracticeTexts.map((text) => text.id)).size).toBe(10); });
+  it("deckt Ordnung, Tempo und Frequenz ab", () => { const orders = chapter05PracticeTexts.map((text) => text.order); const tempi = chapter05PracticeTexts.map((text) => text.tempo); const frequencies = chapter05PracticeTexts.map((text) => text.frequency); expect(orders).toEqual(expect.arrayContaining(["Analepse", "Prolepse"])); expect(tempi).toEqual(expect.arrayContaining(["Zeitraffung", "Zeitdeckung", "Zeitdehnung"])); expect(frequencies).toEqual(expect.arrayContaining(["singulativ", "repetitiv", "iterativ"])); });
+  it("enthält drei Vergleiche und rotiert ohne Wiederholung", () => { expect(timeComparisons).toHaveLength(3); const first = selectTimeText(0); expect(selectTimeText(0, [first.id]).id).not.toBe(first.id); });
+  it("bewertet zentrale Fehlvorstellungen", () => { expect(evaluateTimeStatement("preterite", false)).toBe(true); expect(evaluateTimeStatement("stretch", false)).toBe(true); expect(evaluateTimeStatement("repetitive", false)).toBe(true); expect(evaluateTimeStatement("iterative", true)).toBe(true); expect(evaluateTimeStatement("exact", false)).toBe(true); });
+  it("erkennt einen vollständigen Transfer", () => { const complete = { routine: 1, exception: 1, routineEvidence: 1, exceptionEvidence: 1, interplay: 1, analysis: 1 }; expect(isTimeTransferComplete(complete)).toBe(true); expect(isTimeTransferComplete({ routine: 1 })).toBe(false); });
+});

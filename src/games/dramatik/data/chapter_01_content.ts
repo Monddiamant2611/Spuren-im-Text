@@ -29,6 +29,10 @@ export const certaintyClaims = [
   { id: "claim_return", text: "Anna erwägt, umzukehren.", target: "explicit" as const },
   { id: "claim_fear", text: "Anna hat große Angst.", target: "inference" as const },
   { id: "claim_person", text: "Hinter der Tür wartet eine gefährliche Person.", target: "unsupported" as const },
+  { id: "claim_handle", text: "Annas Hand liegt auf der Türklinke.", target: "explicit" as const },
+  { id: "claim_resolve", text: "Annas tiefes Einatmen und ihr „Nein“ können als Versuch verstanden werden, sich zum Öffnen zu entschließen.", target: "inference" as const },
+  { id: "claim_room", text: "Hinter der Tür befindet sich ein dunkler Raum.", target: "unsupported" as const },
+  { id: "claim_hesitation", text: "Anna zögert vor dem Öffnen der Tür.", target: "inference" as const },
 ];
 
 export const streetSituationCards = [
@@ -49,6 +53,11 @@ export const situationEvidence = {
   observation: "Sampson will, dass die andere Seite den Streit offiziell beginnt.",
   situation: "Die Figuren achten darauf, wer den Streit nach außen hin beginnt.",
 };
+export const evidenceRoundOptions={
+ textIds:["c01_street_provocation_2","c01_street_provocation_1","c01_street_provocation_3"],
+ observations:["Sampson versucht, Gregorio zu beruhigen.","Sampson kennt den Ausgang des Streits.","Sampson beschreibt nur einen früheren Streit.",situationEvidence.observation,"Sampson bittet die Gegenseite um Hilfe."],
+ situations:["Romeo lenkt die Begegnung.","Sampson wird den Streit sicher gewinnen.",situationEvidence.situation,"Die Figuren kennen den Ausgang bereits.","Die Begegnung ist von Anfang an friedlich geregelt."],
+} as const;
 
 export const transferFields = [
   { id: "transfer_place", field: "place" as const, answer: "Nicht eindeutig angegeben", evidenceId: null },
@@ -90,14 +99,14 @@ export const transferSituationGroups:readonly SituationGroup[]=[
  ]},
  {field:"history",options:[
   {id:"history_previous_request",text:"Paris hat bereits zuvor um Julietta geworben.",correct:true,evidenceId:"c01_transfer_capulet_age",evidenceKind:"primary"},
-  {id:"history_feud",text:"Capulet und Montague leben seit längerer Zeit in Mißhelligkeit.",correct:true,evidenceId:"c01_transfer_capulet_peace",evidenceKind:"primary"},
+  {id:"history_feud",text:"Capulet und Montague leben seit längerer Zeit in Mißhelligkeit.",correct:false,evidenceId:"c01_transfer_capulet_peace",evidenceKind:"primary"},
   {id:"history_secret_listener",text:"Romeo hat das Gespräch heimlich belauscht.",correct:false,evidenceId:null,evidenceKind:"none"},
   {id:"history_married",text:"Julietta ist bereits verheiratet.",correct:false,evidenceId:null,evidenceKind:"none"},
  ]},
  {field:"conditions",options:[
   {id:"condition_age",text:"Julietta hat noch nicht vierzehn Jahre gesehen.",correct:true,evidenceId:"c01_transfer_capulet_age",evidenceKind:"primary"},
   {id:"condition_delay",text:"Capulet hält eine Heirat zu diesem Zeitpunkt für verfrüht.",correct:true,evidenceId:"c01_transfer_capulet_age",evidenceKind:"primary"},
-  {id:"condition_sanction",text:"Capulet und Montague müssen wegen ihres Streits dieselbe Strafe befürchten.",correct:true,evidenceId:"c01_transfer_capulet_peace",evidenceKind:"primary"},
+  {id:"condition_sanction",text:"Capulet und Montague müssen wegen ihres Streits dieselbe Strafe befürchten.",correct:false,evidenceId:"c01_transfer_capulet_peace",evidenceKind:"primary"},
   {id:"condition_juliette_choice",text:"Julietta entscheidet in diesem Ausschnitt selbst über die Heirat.",correct:false,evidenceId:null,evidenceKind:"none"},
  ]},
 ] as const;

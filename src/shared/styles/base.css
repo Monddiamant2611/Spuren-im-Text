@@ -190,3 +190,14 @@ h1,h2,h3 { font-family:var(--font-display); font-weight:400; }
 .chapter-three .dialogue-workbench>.lorenzo-guide .character-image,
 .chapter-three .dialogue-workbench>.lorenzo-guide>strong{display:none}
 .chapter-three .dialogue-workbench>.lorenzo-guide::before{content:"Regiehinweis";display:block;margin-block-end:.5rem;font-family:var(--font-display);font-weight:700}
+/* Targeted visual-didactic corrections */
+.dramatik-typography .start-frame h1{max-width:11ch;font-size:clamp(1.95rem,3.8vw,3.8rem);line-height:1;overflow-wrap:normal}
+.didactic-note{max-width:58rem;margin:.55rem auto .85rem;text-align:center;font-size:clamp(.9rem,.86rem + .15vw,1rem);font-style:italic;line-height:1.5;color:#e5d8bd}.task-slip .didactic-note,.context-leaf .didactic-note{color:inherit}.assignment-progress{margin:.1rem 0;text-align:center;font-size:.85rem;color:#d8c8aa}
+.chapter-opening-note{width:100%;margin:0;padding:.75rem 1rem;border:1px solid #b99555;background:#102c36;color:#f2e4c6;text-align:center;font-weight:700}
+.chapter-one-scene .lorenzo-guide{width:clamp(17rem,25vw,26rem);height:min(78vh,50rem)}
+.chapter-one-scene .regiebuch-workspace{width:min(74rem,calc(100% - clamp(19rem,28vw,29rem)))}
+.task-slip{text-align:center}.task-slip>p,.task-slip>strong{display:block;max-width:54rem;margin:.5rem auto}
+.loose-pages button{position:relative}.loose-pages button.is-assigned{border:2px solid #c29c52;background:#e8d5a5;box-shadow:inset 0 0 0 2px #7a354144,0 .35rem .7rem #0006}.assignment-mark{position:absolute;right:.45rem;top:.35rem;width:1.45rem;height:1.45rem;display:grid;place-items:center;border:1px solid #765523;border-radius:50%;background:#153641;color:#f2d88f;font-weight:800}
+.chapter-completion{position:fixed;z-index:1900;left:50%;bottom:1rem;transform:translateX(-50%);width:min(42rem,calc(100% - 2rem));padding:1rem 1.25rem;border:2px solid #c3a15b;background:#102b35f2;color:#f4e8cf;text-align:center;box-shadow:0 1rem 3rem #000b}.chapter-completion p{margin:.35rem 0 .8rem}.chapter-completion .chapter-primary-action{display:inline-block}
+.theatre-access-desk{z-index:8}.theatre-access-ensemble{z-index:7}.theatre-access-archive{z-index:5;bottom:8%;width:21%}.theatre-access-stage{z-index:4;bottom:11%;width:18%}.theatre-access-book{z-index:3;bottom:8%;width:23%}
+@media(max-width:48rem){.chapter-one-scene .lorenzo-guide{width:11rem;height:16rem}.chapter-one-scene .regiebuch-workspace{width:calc(100% - 1rem)}.chapter-completion{bottom:.5rem}.dramatik-typography .start-frame h1{font-size:clamp(1.8rem,8.5vw,2.8rem);line-height:1}.theatre-access-archive,.theatre-access-stage,.theatre-access-book{bottom:initial;width:initial}}

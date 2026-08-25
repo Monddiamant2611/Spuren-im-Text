@@ -1,5 +1,5 @@
 "use client";
-import {useState,type ReactNode} from "react";
+import {useEffect,useState,type ReactNode} from "react";
 import {hydrateSession} from "../../../core/state/hydrateSession";
 import type {GameState} from "../../../core/state/types";
 import {AssetImage} from "../../../shared/components/AssetImage";
@@ -14,6 +14,7 @@ type Props={gameState:GameState;onSave:(s:Chapter03Session)=>void;onExit:()=>voi
 export function Chapter03({gameState,onSave,onExit,onComplete}:Props){
  const[session,setSession]=useState<Chapter03Session>(()=>hydrateSession(gameState.decisions.chapter_03,initialChapter03Session,12));
  const[feedback,setFeedback]=useState("Die Bühne ist bereit, doch die Gesprächslinien fehlen noch.");
+ useEffect(()=>{document.querySelector(".dialogue-task")?.scrollIntoView({block:"start",behavior:"auto"})},[session.round]);
  const update=(n:Chapter03Session,ok:boolean)=>{setSession(n);onSave(n);setFeedback(ok?"Der Zusammenhang ist textnah rekonstruiert.":"Prüfen Sie Textstelle, Handlung und Gesprächsziel noch einmal. Sie können die Auswahl korrigieren.")};
  const act=(id:string,v:string)=>{const r=assignPracticeAct(session,id,v);update(r.session,r.valid)};
  const goal=(id:string,v:string)=>{const r=assignPracticeGoal(session,id,v);update(r.session,r.valid)};

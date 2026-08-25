@@ -22,6 +22,7 @@ import type { Chapter05Session } from "../../games/dramatik/mechanics/chapter_05
 import { Finale } from "../../games/dramatik/scenes/Finale";
 import { createFinaleSnapshot, isFinaleAvailable } from "../../games/dramatik/mechanics/finale_state";
 import { AssetImage } from "./AssetImage";
+import { ChapterCompletion } from "./ChapterCompletion";
 
 type Overlay = "options" | "sources" | "regiebuch" | "chapter" | null;
 
@@ -41,6 +42,7 @@ export function GameShell() {
     return () => window.clearTimeout(timer);
   }, []);
   useEffect(() => { const warn = () => setStorageWarning(true); window.addEventListener("lernwerkstatt:storage-error", warn); return () => window.removeEventListener("lernwerkstatt:storage-error", warn); }, []);
+  useEffect(() => { window.scrollTo({ top: 0, behavior: "auto" }); }, [screen]);
 
   const persist = (next: GameState) => {
     const performanceState = next.performanceState === "PERFORMANCE_RUNNING" || next.performanceState === "PERFORMANCE_COMPLETE" ? next.performanceState : undefined;
@@ -110,7 +112,7 @@ export function GameShell() {
     const completed = patch.finaleCompleted === true;
     persist({ ...state, ...snapshot, ...patch, currentChapter: "finale", progress: { ...state.progress, finale_ready: true, ...(completed ? { finale_completed: true, game_completed: true } : {}) } });
   };
-  const renderWithStatus = (content: ReactNode) => <>{storageWarning && <div className="storage-warning" role="status">Der Spielstand kann momentan nicht dauerhaft gespeichert werden. Sie können in dieser Sitzung weiterarbeiten.</div>}{content}</>;
+  const renderWithStatus = (content: ReactNode) => <>{storageWarning && <div className="storage-warning" role="status">Der Spielstand kann momentan nicht dauerhaft gespeichert werden. Sie können in dieser Sitzung weiterarbeiten.</div>}{content}{screen.startsWith("chapter_")&&state.completedChapters.includes(screen)&&<ChapterCompletion chapterId={screen} onExit={()=>setScreen("theatre")}/>}</>;
 
   if (!hydrated) return renderWithStatus(<main className="loading-screen" aria-label="Spiel wird geladen"><span>Das Theater öffnet …</span></main>);
   if (screen === "chapter_01") return renderWithStatus(<Chapter01 gameState={state} onSave={saveChapter01} onExit={() => setScreen("theatre")} onComplete={completeChapter01} />);
@@ -174,6 +176,7 @@ function OverlayPanel({ type, chapter, state, onClose, onSettings, onReset }: { 
   const returnFocusRef = useRef<HTMLElement | null>(typeof document === "undefined" ? null : document.activeElement instanceof HTMLElement ? document.activeElement : null);
   useEffect(() => {
     const returnTarget = returnFocusRef.current;
+    panelRef.current?.scrollTo({ top: 0, behavior: "auto" });
     closeRef.current?.focus();
     return () => returnTarget?.focus();
   }, []);
