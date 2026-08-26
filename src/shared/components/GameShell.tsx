@@ -23,6 +23,8 @@ import { Finale } from "../../games/dramatik/scenes/Finale";
 import { createFinaleSnapshot, isFinaleAvailable } from "../../games/dramatik/mechanics/finale_state";
 import { AssetImage } from "./AssetImage";
 import { ChapterCompletion } from "./ChapterCompletion";
+import { ReviewWorkspace } from "../../games/dramatik/review/ReviewWorkspace";
+import { reviewTargetById } from "../../games/dramatik/review/reviewRegistry";
 
 type Overlay = "options" | "sources" | "regiebuch" | "chapter" | null;
 
@@ -34,11 +36,12 @@ export function GameShell() {
   const [focusArea, setFocusArea] = useState("desk");
   const [hydrated, setHydrated] = useState(false);
   const [storageWarning, setStorageWarning] = useState(false);
+  const [reviewTargetId,setReviewTargetId]=useState<string|null>(null);
   const audio = useRef<AudioManager | null>(null);
 
   useEffect(() => {
     audio.current = new AudioManager();
-    const timer = window.setTimeout(() => { setState(loadGameState()); setHydrated(true); }, 0);
+    const timer = window.setTimeout(() => { const params=new URLSearchParams(window.location.search);if(params.get("review")==="1"){const direct=params.get("step");const chapter=params.get("chapter");const round=params.get("round");const legacy=chapter&&round?`chapter_0${Number(chapter)}-round-${Number(round)}`:null;setReviewTargetId(reviewTargetById(direct??legacy??"theatre-initial").id)}setState(loadGameState()); setHydrated(true); }, 0);
     return () => window.clearTimeout(timer);
   }, []);
   useEffect(() => { const warn = () => setStorageWarning(true); window.addEventListener("lernwerkstatt:storage-error", warn); return () => window.removeEventListener("lernwerkstatt:storage-error", warn); }, []);
@@ -115,6 +118,7 @@ export function GameShell() {
   const renderWithStatus = (content: ReactNode) => <>{storageWarning && <div className="storage-warning" role="status">Der Spielstand kann momentan nicht dauerhaft gespeichert werden. Sie können in dieser Sitzung weiterarbeiten.</div>}{content}{screen.startsWith("chapter_")&&state.completedChapters.includes(screen)&&<ChapterCompletion chapterId={screen} onExit={()=>setScreen("theatre")}/>}</>;
 
   if (!hydrated) return renderWithStatus(<main className="loading-screen" aria-label="Spiel wird geladen"><span>Das Theater öffnet …</span></main>);
+  if(reviewTargetId)return <ReviewWorkspace initialTargetId={reviewTargetId} onDisable={()=>{const url=new URL(window.location.href);url.search="";window.history.replaceState({},"",url);setReviewTargetId(null);setScreen("theatre")}}/>;
   if (screen === "chapter_01") return renderWithStatus(<Chapter01 gameState={state} onSave={saveChapter01} onExit={() => setScreen("theatre")} onComplete={completeChapter01} />);
   if (screen === "chapter_02") return renderWithStatus(<Chapter02 gameState={state} onSave={saveChapter02} onExit={() => setScreen("theatre")} onComplete={completeChapter02} />);
   if (screen === "chapter_03") return renderWithStatus(<Chapter03 gameState={state} onSave={saveChapter03} onExit={() => setScreen("theatre")} onComplete={completeChapter03} />);

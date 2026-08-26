@@ -11,12 +11,12 @@ import { chapterReview } from "../data/finale/regiebuch";
 import { analysisMethodGroups, examCheck, synthesisAreas, synthesisConnections, synthesisFindings, synthesisSourceReferences, type SynthesisAreaId } from "../data/finale/synthesis";
 import { aggregateVisibleCompetencies, findDevelopmentArea, findDistinctStrength, visibleCompetencies } from "../mechanics/competency_aggregation";
 
-type Mode = "welcome" | "review" | "synthesis" | "book" | "closing" | "complete";
+export type FinaleMode = "welcome" | "review" | "synthesis" | "book" | "closing" | "complete";
 type FinalePatch = Partial<Pick<GameState, "finaleStarted" | "finaleCompleted" | "gameCompleted" | "performanceState" | "finaleVisitedAreas" | "finaleSynthesisCompleted" | "finaleBookOpened" | "finaleClosingSeen">>;
 
-export function Finale({ state, onUpdate, onExit }: { state: GameState; onUpdate: (patch: FinalePatch) => void; onExit: () => void }) {
-  const initialMode: Mode = state.finaleClosingSeen || state.finaleCompleted ? "complete" : state.finaleBookOpened ? "book" : state.finaleSynthesisCompleted ? "synthesis" : state.finaleStarted ? "review" : "welcome";
-  const [mode, setMode] = useState<Mode>(initialMode);
+export function Finale({ state, onUpdate, onExit, previewMode }: { state: GameState; onUpdate: (patch: FinalePatch) => void; onExit: () => void; previewMode?:FinaleMode }) {
+  const initialMode: FinaleMode = previewMode??(state.finaleClosingSeen || state.finaleCompleted ? "complete" : state.finaleBookOpened ? "book" : state.finaleSynthesisCompleted ? "synthesis" : state.finaleStarted ? "review" : "welcome");
+  const [mode, setMode] = useState<FinaleMode>(initialMode);
   const [visited, setVisited] = useState<SynthesisAreaId[]>(state.finaleVisitedAreas.filter((id): id is SynthesisAreaId => synthesisAreas.some((area) => area.id === id)));
   const [activeArea, setActiveArea] = useState<SynthesisAreaId | null>(null);
   const [practice, setPractice] = useState(false);
