@@ -10,14 +10,14 @@ async function openChapter(page:Page,chapter:string,session:Record<string,unknow
 }
 
 test("chapter 1 introduces situation terms before the task and persists that introduction",async({page})=>{
- await openChapter(page,"chapter_01",{round:5,signalStep:3,signalAnswers:[],certaintyAssignments:{},situationAssignments:{},evidenceLinked:false,transferAssignments:{},transferEvidence:{},transferSelections:{},transferConfirmed:[],seenGlossaryIntroductions:[],completed:false,failedAttempts:0,competencyEvents:[]});
- const dialog=page.getByRole("dialog",{name:"Was gehört zu einer Situationsanalyse?"});await expect(dialog).toBeVisible();await expect(dialog).toContainText("Ort");await expect(dialog).not.toContainText(/Capulet|Paris|Romeo|Verona/);await dialog.getByRole("button",{name:"Analyse beginnen"}).click();
+ await openChapter(page,"chapter_01",{round:4,signalStep:3,signalAnswers:[],certaintyAssignments:{},situationAssignments:{},evidenceLinked:false,transferAssignments:{},transferEvidence:{},transferSelections:{},transferConfirmed:[],seenGlossaryIntroductions:[],completed:false,failedAttempts:0,competencyEvents:[]});
+ const dialog=page.getByRole("dialog",{name:"Was gehört zu einer Situationsanalyse?"});await expect(dialog).toBeVisible();await expect(dialog).toContainText("Die Situationsanalyse klärt die Ausgangslage einer Szene.");await expect(dialog).toContainText("Textbefund – plausible Erschließung – nicht feststellbar");await expect(dialog).not.toContainText("Eine Information, die sich unmittelbar am vorliegenden Text nachweisen lässt.");await expect(dialog).toContainText("Ort");await expect(dialog).not.toContainText(/Capulet|Paris|Romeo|Verona/);await dialog.getByRole("button",{name:"Analyse beginnen"}).click();
  await expect(page.getByRole("button",{name:"Begriff Ort erklären"})).toBeVisible();await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await expect(dialog).toBeHidden();
  const saved=await page.evaluate(key=>JSON.parse(localStorage.getItem(key)!),storageKey);expect(saved.decisions.chapter_01.failedAttempts).toBe(0);expect(saved.decisions.chapter_01.competencyEvents).toHaveLength(0);
 });
 
 test("chapter 1 transfer uses responsive multi-selection and one combined check",async({page})=>{
- await page.setViewportSize({width:390,height:844});await openChapter(page,"chapter_01",{round:7,signalStep:3,signalAnswers:[],certaintyAssignments:{},situationAssignments:{},evidenceLinked:true,transferAssignments:{},transferEvidence:{},transferSelections:{},transferConfirmed:[],seenGlossaryIntroductions:["chapter_01"],completed:false,failedAttempts:0,competencyEvents:[]});
+ await page.setViewportSize({width:390,height:844});await openChapter(page,"chapter_01",{round:13,signalStep:3,signalAnswers:[],certaintyAssignments:{},situationAssignments:{},evidenceLinked:true,transferAssignments:{},transferEvidence:{},transferSelections:{},transferConfirmed:[],seenGlossaryIntroductions:["chapter_01"],completed:false,failedAttempts:0,competencyEvents:[]});
  await expect(page.locator(".transfer-ledger select")).toHaveCount(0);await expect(page.getByRole("button",{name:"Situationsanalyse prüfen"})).toHaveCount(1);await expect(page.getByText(/Wählen Sie \d|Markieren Sie \d/)).toHaveCount(0);
  for(const group of transferSituationGroups)for(const option of group.options.filter(item=>item.correct))await page.getByText(option.text,{exact:true}).click();await page.getByRole("button",{name:"Situationsanalyse prüfen"}).click();await expect(page.getByRole("status")).toContainText("Das Regiebuch ist wieder lesbar.");
  expect(await page.evaluate(()=>document.documentElement.scrollWidth<=window.innerWidth+1)).toBe(true);
@@ -33,7 +33,7 @@ test("chapter 1 explains evidence terms before their first use",async({page})=>{
 });
 
 test("chapter 1 checks the street situation only after the complete draft",async({page})=>{
- await openChapter(page,"chapter_01",{round:5,seenGlossaryIntroductions:["chapter_01"],situationDraft:{}});await expect(page.getByRole("status")).toHaveCount(0);
+ await openChapter(page,"chapter_01",{round:11,seenGlossaryIntroductions:["chapter_01"],situationDraft:{}});await expect(page.getByRole("status")).toHaveCount(0);
  for(const card of streetSituationCards){await page.locator(".loose-pages button").filter({hasText:card.text}).first().click();const target=card.id==="street_place"?"Zeit":card.target==="characters"?"Figuren":card.target==="history"?"Vorgeschichte":card.target==="conditions"?"Bedingungen":card.target==="place"?"Ort":"Nicht feststellbar";await page.locator(".situation-ledger").getByRole("button",{name:new RegExp(`^${target}`)}).click()}
  await expect(page.getByRole("status")).toHaveCount(0);await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await page.getByRole("button",{name:"Auswahl prüfen"}).click();await expect(page.getByRole("status")).toContainText("Ort");
  await page.locator(".loose-pages button").filter({hasText:streetSituationCards[0].text}).first().click();await page.locator(".situation-ledger").getByRole("button",{name:/^Ort/}).click();await page.getByRole("button",{name:"Auswahl prüfen"}).click();await expect(page.getByRole("heading",{name:"Figurenrede ergänzt die Situation"})).toBeVisible();
@@ -56,7 +56,7 @@ test("always choosing the first answer no longer solves chapter 3",async({page})
 });
 
 test("chapter 1 scene 6 cannot be solved by always choosing the first option",async({page})=>{
- await openChapter(page,"chapter_01",{round:6,evidenceLinked:false,seenGlossaryIntroductions:["chapter_01","chapter_01_evidence"]});for(const field of await page.locator(".evidence-chain fieldset").all())await field.getByRole("button").first().click();await page.getByRole("button",{name:"Verbindung in das Regiebuch eintragen"}).click();await expect(page.getByRole("heading",{name:"Figurenrede ergänzt die Situation"})).toBeVisible();
+ await openChapter(page,"chapter_01",{round:12,evidenceLinked:false,seenGlossaryIntroductions:["chapter_01","chapter_01_evidence"]});for(const field of await page.locator(".evidence-chain fieldset").all())await field.getByRole("button").first().click();await page.getByRole("button",{name:"Verbindung in das Regiebuch eintragen"}).click();await expect(page.getByRole("heading",{name:"Figurenrede ergänzt die Situation"})).toBeVisible();
 });
 
 test("chapter 5 counterchecks use plausible distractors at different positions",async({page})=>{

@@ -3,7 +3,7 @@ import { characterizationCards, chapter02PrimaryById, comparisonCards, ensembleL
 import { chapter03Source, comparisonTasks as chapter03Comparisons, goalChange, goalTasks as chapter03Goals, languageTasks as chapter03Language, mainSections, practiceActs as chapter03Practice, speechTasks as chapter03Speech, transferTasks as chapter03Transfer } from "../../src/games/dramatik/data/chapter_03_content";
 import { causalIntro, chain, chainLinks, conflictTypes, escalationCards, finalConnections, introFacts, julietCards, knowledgeCards, situationCards } from "../../src/games/dramatik/data/chapter_04_content";
 import { argumentBlocks, classificationCards, commonErrors, generalChain, hypothesisOptions, interpretationStructure, julietCountercheckOptions, julietFindings, julietHypothesis, julietReverseChain, transferArgument, transferChain, transferCountercheckOptions, transferEvidence, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
-import { certaintyClaims, situationEvidence, streetSituationCards, transferSituationGroups } from "../../src/games/dramatik/data/chapter_01_content";
+import { analysisErrorPractice, categoryPractice, certaintyClaims, certaintyPractice, consolidationGroups, historyConditionPractice, signalChainPractice, situationEvidence, streetSituationCards, transferSituationGroups } from "../../src/games/dramatik/data/chapter_01_content";
 
 test.beforeEach(async ({ page }) => { await page.goto("/dramatik"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
 
@@ -16,8 +16,20 @@ async function completeChapter01(page:Page){
   await page.getByRole("button",{name:"Noch könnte ich umkehren."}).click();
   await page.getByRole("button",{name:"Analyse beginnen"}).click();
   for(const claim of certaintyClaims)await selectAndPlace(page,claim.text,claim.target==="explicit"?"Eindeutig belegt":claim.target==="inference"?"Plausibel erschließbar":"Nicht belegt");
-  await page.getByRole("button",{name:"Shakespeare-Regiebuch öffnen"}).click();
   await page.getByRole("button",{name:"Analyse beginnen"}).click();
+  const situationLabel=(target:string)=>target==="place"?"Ort":target==="time"?"Zeit":target==="characters"?"Figuren":target==="history"?"Vorgeschichte":target==="conditions"?"Bedingungen":target==="current_condition"?"Gegenwärtige Bedingung":target==="other"?"Andere Situationsinformation":"Nicht feststellbar";
+  for(const item of categoryPractice)await selectAndPlace(page,item.text,situationLabel(item.target));
+  await page.getByRole("button",{name:"Gesamtanalyse prüfen"}).click();
+  for(const item of certaintyPractice)await selectAndPlace(page,item.text,item.target==="explicit"?"Eindeutig belegt":item.target==="inference"?"Plausibel erschließbar":"Nicht belegt");
+  await page.getByRole("button",{name:"Gesamtanalyse prüfen"}).click();
+  for(const item of historyConditionPractice)await selectAndPlace(page,item.text,situationLabel(item.target));
+  await page.getByRole("button",{name:"Gesamtanalyse prüfen"}).click();
+  for(const link of signalChainPractice.links){await page.getByRole("button",{name:signalChainPractice.signals[link.signal],exact:true}).click();await page.getByRole("button",{name:signalChainPractice.findings[link.finding],exact:true}).click();await page.getByRole("button",{name:signalChainPractice.inferences[link.inference],exact:true}).click();await page.getByRole("button",{name:"Verbindung prüfen"}).click()}
+  for(const item of analysisErrorPractice)await selectAndPlace(page,item.text,item.target==="explicit"?"Ausreichend belegt":item.target==="inference"?"Plausibel erschließbar":"Methodisch problematisch");
+  await page.getByRole("button",{name:"Gesamtanalyse prüfen"}).click();
+  for(const group of consolidationGroups)for(const option of group.options.filter(item=>item.correct))await page.getByText(option.text,{exact:true}).click();
+  await page.getByRole("button",{name:"Analyse prüfen"}).click();
+  await page.getByRole("button",{name:"Shakespeare-Regiebuch öffnen"}).click();
   for(const card of streetSituationCards){
     await page.locator(".loose-pages button").filter({hasText:card.text}).first().click();
     await page.locator(".situation-ledger").getByRole("button",{name:card.target==="place"?"Ort":card.target==="characters"?"Figuren":card.target==="history"?"Vorgeschichte":card.target==="conditions"?"Bedingungen":"Nicht feststellbar"}).click();
@@ -143,5 +155,5 @@ test("recovers from malformed compatible save and continues from a normalized ch
   await page.evaluate(() => localStorage.setItem("lernwerkstatt-games:state:v1", JSON.stringify({ version:1,currentGame:"dramatik",currentChapter:"chapter_01",completedChapters:"broken",decisions:{chapter_01:{round:99,restoredIds:"broken"}},settings:{music:"broken"},theatreState:"BROKEN" })));
   await page.reload(); await page.getByRole("button", { name: "Fortsetzen" }).click();
   await expect(page.getByRole("heading", { name: "Das zerrissene Regiebuch" })).toBeVisible();
-  await expect(page.getByText("Szene 1 von 7")).toBeVisible();
+  await expect(page.getByText("Szene 1 von 13")).toBeVisible();
 });

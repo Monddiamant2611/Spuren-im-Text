@@ -10,7 +10,7 @@ test("review deep-link opens locked chapter 5 without touching the student save"
 });
 
 test("previous and next navigation update a stable deep-link and survive reload",async({page})=>{
- await page.goto("/dramatik?review=1&chapter=1&round=1");await page.getByRole("button",{name:"PRÜFMODUS"}).click();await page.getByRole("button",{name:"Nächster Schritt →"}).click();await expect(page).toHaveURL(/step=chapter_01-round-2/);await expect(page.getByText("Szene 2 von 7")).toBeVisible();await page.reload();await expect(page.getByText("Szene 2 von 7")).toBeVisible();
+ await page.goto("/dramatik?review=1&chapter=1&round=1");await page.getByRole("button",{name:"PRÜFMODUS"}).click();await page.getByRole("button",{name:"Nächster Schritt →"}).click();await expect(page).toHaveURL(/step=chapter_01-round-2/);await expect(page.getByText("Szene 2 von 13")).toBeVisible();await page.reload();await expect(page.getByText("Szene 2 von 13")).toBeVisible();
 });
 
 test("chapter completion and theatre progression previews remain transient",async({page})=>{

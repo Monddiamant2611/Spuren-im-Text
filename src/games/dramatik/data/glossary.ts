@@ -3,7 +3,7 @@ export type GlossaryChapter = "chapter_01" | "chapter_02" | "chapter_03" | "chap
 export interface GlossaryEntry { id:string; term:string; definition:string; chapter:GlossaryChapter }
 
 export const dramaGlossary:readonly GlossaryEntry[]=[
- {id:"situation_analysis",term:"Situationsanalyse",definition:"Eine Situationsanalyse klärt, unter welchen räumlichen, zeitlichen und sozialen Voraussetzungen eine Szene beginnt.",chapter:"chapter_01"},
+ {id:"situation_analysis",term:"Situationsanalyse",definition:"Die Situationsanalyse klärt die Ausgangslage einer Szene.",chapter:"chapter_01"},
  {id:"location",term:"Ort",definition:"Wo findet die Szene statt? Dabei können ein größerer Handlungsraum und ein konkreter Schauplatz zugleich wichtig sein.",chapter:"chapter_01"},
  {id:"time",term:"Zeit",definition:"Wann findet die Szene statt? Hinweise können die Tageszeit oder die Einordnung im Verhältnis zu anderen Ereignissen betreffen.",chapter:"chapter_01"},
  {id:"characters",term:"Figuren",definition:"Welche Personen treten im untersuchten Ausschnitt tatsächlich auf? Entscheidend ist die konkrete Szene, nicht die gesamte Figurenliste des Dramas.",chapter:"chapter_01"},

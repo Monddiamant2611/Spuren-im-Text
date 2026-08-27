@@ -49,7 +49,7 @@ function stateForTarget(target:ReviewTarget):GameState{
 }
 
 function sessionFor(chapterId:ReviewChapterId,round:number,completed:boolean):ReviewSession{
- if(chapterId==="chapter_01")return{...structuredClone(initialChapter01Session),round:Math.min(7,round) as Chapter01Session["round"],completed};
+ if(chapterId==="chapter_01")return{...structuredClone(initialChapter01Session),round:Math.min(13,round) as Chapter01Session["round"],completed};
  if(chapterId==="chapter_02")return{...createChapter02Session(),round:Math.min(11,round) as Chapter02Session["round"],completed};
  if(chapterId==="chapter_03")return{...structuredClone(initialChapter03Session),round:Math.min(12,round) as Chapter03Session["round"],completed};
  if(chapterId==="chapter_04")return{...structuredClone(initialChapter04Session),round:Math.min(15,round),completed};
