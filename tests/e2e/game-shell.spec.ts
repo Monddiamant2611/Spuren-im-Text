@@ -1,5 +1,5 @@
 import { expect, test } from "@playwright/test";
-import { practiceClaims, transferTasks } from "../../src/games/dramatik/data/chapter_02_content";
+import { chapter02PrimaryById, practiceClaims, transferTasks } from "../../src/games/dramatik/data/chapter_02_content";
 import { transferChain, transferCountercheckOptions, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
 
 test.beforeEach(async ({ page }) => { await page.goto("/dramatik"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
@@ -49,17 +49,18 @@ test("chapter 2 evidence classification is keyboard operable, responsive and per
 test("chapter 2 transfer rejects a wrong evidence link and chapter 5 countercheck survives reload", async ({ page }) => {
   const save = async (currentChapter:string,completedChapters:string[],decisions:Record<string,unknown>,theatreState:string) => page.evaluate(({currentChapter,completedChapters,decisions,theatreState}) => localStorage.setItem("lernwerkstatt-games:state:v1",JSON.stringify({version:1,currentGame:"dramatik",currentChapter,completedChapters,decisions,competencies:{},failedAttempts:{},stagingDecisions:{chapter_04:{}},selectedEvidence:[],progress:{},theatreState,settings:{music:true,soundEffects:true,reducedMotion:false},lastSavedAt:new Date().toISOString()})),{currentChapter,completedChapters,decisions,theatreState});
 
-  const chapter02={round:9,practiceAssignments:{},characterizationAssignments:{},highlights:[],momentAssignments:{},roleAssignments:{},relationshipSteps:[],selfOtherAssignments:{},transferSteps:[],comparisonAssignments:{},ensembleConnections:[],completed:false,failedAttempts:0,competencyEvents:[]};
+  const chapter02={round:15,practiceAssignments:{},characterizationAssignments:{},highlights:[],momentAssignments:{},roleAssignments:{},relationshipSteps:[],selfOtherAssignments:{},transferSteps:[],transferAnalyses:{},comparisonAssignments:{},ensembleConnections:[],completed:false,failedAttempts:0,competencyEvents:[]};
   await save("chapter_02",["chapter_01"],{chapter_02:chapter02},"AFTER_CHAPTER_1");
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
   const first=page.locator(".evidence-entry").first();
-  await first.locator("select").selectOption(transferTasks[1].sourceId);
-  await first.getByRole("button",{name:"Beleg prüfen"}).click();
-  await expect(page.getByRole("status")).toContainText("anderen Beleg");
-  await first.locator("select").selectOption(transferTasks[0].sourceId);
-  await first.getByRole("button",{name:"Beleg prüfen"}).click();
+  await first.getByText(transferTasks[0].options[transferTasks[0].answer],{exact:true}).click();
+  await first.getByText(chapter02PrimaryById(transferTasks[1].sourceId).text,{exact:true}).click();
+  await first.getByRole("button",{name:"Analyse und Beleg prüfen"}).click();
+  await expect(page.getByRole("status")).toContainText("Wählen Sie zuerst");
+  await first.getByText(chapter02PrimaryById(transferTasks[0].sourceId).text,{exact:true}).click();
+  await first.getByRole("button",{name:"Analyse und Beleg prüfen"}).click();
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await expect(page.locator(".evidence-entry.done")).toHaveCount(1);
+  await expect(page.getByText("Analyse 2 von 4")).toBeVisible();
 
   const chapter05={round:15,transferHypothesis:transferHypotheses.find(item=>item.quality==="supported")!.text,failedAttempts:0,competencyEvents:[]};
   await save("chapter_05",["chapter_01","chapter_02","chapter_03","chapter_04"],{chapter_05:chapter05},"AFTER_CHAPTER_4");

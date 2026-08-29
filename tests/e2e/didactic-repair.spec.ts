@@ -40,11 +40,11 @@ test("chapter 1 checks the street situation only after the complete draft",async
 });
 
 test("chapter 2 shows a protected source for every goal motive and interest task",async({page})=>{
- await openChapter(page,"chapter_02",{round:6,seenGlossaryIntroductions:["chapter_02"]},["chapter_01"]);await expect(page.getByText("Mein Gemahl ist auf Erden",{exact:false})).toBeVisible();await expect(page.getByText("Was möchte eine Figur in der konkreten Situation erreichen?",{exact:true})).toBeVisible();await expect(page.getByText("Der Text liefert nicht genug Hinweise, um eine Aussage zuverlässig zu begründen.",{exact:true})).toBeVisible();for(const task of roleTasks.slice(0,4))await expect(page.getByText(task.observation,{exact:true})).toBeVisible();
+ await openChapter(page,"chapter_02",{round:12,seenGlossaryIntroductions:["chapter_02"]},["chapter_01"]);await expect(page.getByText("Mein Gemahl ist auf Erden",{exact:false})).toBeVisible();await expect(page.getByText("Was möchte eine Figur in der konkreten Situation erreichen?",{exact:true})).toBeVisible();await expect(page.getByText("Der Text liefert nicht genug Hinweise, um eine Aussage zuverlässig zu begründen.",{exact:true})).toBeVisible();for(const task of roleTasks.slice(0,4))await expect(page.getByText(task.observation,{exact:true})).toBeVisible();
 });
 
 test("chapter 2 completion is explicit and returns to the unlocked theatre",async({page})=>{
- await openChapter(page,"chapter_02",{round:11,completed:true,seenGlossaryIntroductions:["chapter_02"]},["chapter_01","chapter_02"]);await page.getByRole("button",{name:/Kapitel 2 öffnen/}).click();await expect(page.getByText("Die Figurenakte ist vollständig.",{exact:true})).toBeVisible();await page.getByRole("button",{name:"Zur großen Bühne"}).click();await expect(page.getByRole("button",{name:/Kapitel 3 öffnen/})).toBeVisible();
+ await openChapter(page,"chapter_02",{round:17,completed:true,seenGlossaryIntroductions:["chapter_02"]},["chapter_01","chapter_02"]);await page.getByRole("button",{name:/Kapitel 2 öffnen/}).click();await expect(page.getByText("Die Figurenakte ist vollständig.",{exact:true})).toBeVisible();await page.getByRole("button",{name:"Zur großen Bühne"}).click();await expect(page.getByRole("button",{name:/Kapitel 3 öffnen/})).toBeVisible();
 });
 
 test("glossary dialogs reopen at their beginning",async({page})=>{

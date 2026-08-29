@@ -66,7 +66,7 @@ describe("verdeckte Antwortpositionen",()=>{
 
 describe("Ziel, Motiv und Interesse",()=>{
  it("enthält einen textgestützten Motivfall und einen nicht feststellbaren Fall",()=>{
-  expect(roleTasks.find(task=>task.target==="motive")?.sourceId).toBe("c02_transfer_juliette_nurse_plea");
+  expect(roleTasks.some(task=>task.target==="motive"&&task.sourceId==="c02_transfer_juliette_nurse_plea")).toBe(true);
   expect(roleTasks.some(task=>task.target==="unknown")).toBe(true);
  });
  it("kann für jede Rollenaufgabe den geschützten Primärtext unmittelbar laden",()=>{
