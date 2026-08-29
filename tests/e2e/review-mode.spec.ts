@@ -18,7 +18,7 @@ test("chapter completion and theatre progression previews remain transient",asyn
 });
 
 test("review interaction creates neither durable failures nor competency events",async({page})=>{
- await page.goto("/dramatik");await page.evaluate(({key,sentinel})=>localStorage.setItem(key,JSON.stringify(sentinel)),{key,sentinel});await page.goto("/dramatik?review=1&step=chapter_03-round-2");await page.getByRole("button",{name:"Analyse beginnen"}).click();await page.getByRole("button",{name:"feststellen"}).first().click();expect(await page.evaluate(key=>localStorage.getItem(key),key)).toBe(JSON.stringify(sentinel));
+ await page.goto("/dramatik");await page.evaluate(({key,sentinel})=>localStorage.setItem(key,JSON.stringify(sentinel)),{key,sentinel});await page.goto("/dramatik?review=1&step=chapter_03-round-3");await page.getByRole("button",{name:"Analyse beginnen"}).click();await page.getByRole("button",{name:"feststellen"}).first().click();expect(await page.evaluate(key=>localStorage.getItem(key),key)).toBe(JSON.stringify(sentinel));
 });
 
 test("mobile review navigation is operable and closes with Escape",async({page})=>{

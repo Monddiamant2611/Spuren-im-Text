@@ -24,7 +24,7 @@ test("chapter 1 transfer uses responsive multi-selection and one combined check"
 });
 
 test("scene cast changes with the actual Shakespeare scene",async({page})=>{
- await openChapter(page,"chapter_03",{round:11,seenGlossaryIntroductions:["chapter_03"]},["chapter_01","chapter_02"]);let cast=page.getByRole("region",{name:"Szenenfiguren"});await expect(cast.getByText("Romeo",{exact:true})).toBeVisible();await expect(cast.getByText("Juliette",{exact:true})).toBeVisible();await expect(cast.getByText("Tybalt",{exact:true})).toHaveCount(0);
+ await openChapter(page,"chapter_03",{round:1,seenGlossaryIntroductions:["chapter_03"]},["chapter_01","chapter_02"]);let cast=page.getByRole("region",{name:"Szenenfiguren"});await expect(cast.getByText("Romeo",{exact:true})).toBeVisible();await expect(cast.getByText("Tybalt",{exact:true})).toBeVisible();await expect(cast.getByText("Juliette",{exact:true})).toHaveCount(0);
  await openChapter(page,"chapter_04",{round:10,seenGlossaryIntroductions:["chapter_04"]},["chapter_01","chapter_02","chapter_03"]);cast=page.getByRole("region",{name:"Szenenfiguren"});await expect(cast.locator("figure")).toHaveCount(1);await expect(cast.getByText("Juliette",{exact:true})).toBeVisible();
 });
 
@@ -52,7 +52,7 @@ test("glossary dialogs reopen at their beginning",async({page})=>{
 });
 
 test("always choosing the first answer no longer solves chapter 3",async({page})=>{
- await openChapter(page,"chapter_03",{round:2,seenGlossaryIntroductions:["chapter_03"]},["chapter_01","chapter_02"]);const task=practiceActs[0];expect(task.actOptions[0]).not.toBe(task.act);await page.locator(".dialogue-choice").first().getByRole("button").first().click();await expect(page.getByRole("status")).toContainText("Prüfen");await expect(page.getByText("Probe 2 von 12")).toBeVisible();
+ await openChapter(page,"chapter_03",{round:3,seenGlossaryIntroductions:["chapter_03"]},["chapter_01","chapter_02"]);const task=practiceActs[0];expect(task.actOptions[0]).not.toBe(task.act);await page.locator(".dialogue-choice").first().getByRole("button").first().click();await expect(page.getByRole("status")).toContainText("Benennen");await expect(page.getByText("Probe 3 von 16")).toBeVisible();
 });
 
 test("chapter 1 scene 6 cannot be solved by always choosing the first option",async({page})=>{

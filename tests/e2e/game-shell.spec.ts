@@ -75,7 +75,7 @@ test("chapter 2 transfer rejects a wrong evidence link and chapter 5 counterchec
 });
 
 test("chapter 3 dialogue analysis is keyboard operable, responsive and persistent", async ({ page }) => {
-  const chapter03 = { round:4,practiceActs:{practice_mara_stop:"auffordern"},practiceGoals:{},goalEvidence:{},goalChange:null,speechChains:[],phaseOrder:[],turningPoint:null,languageChains:[],findingAssignments:{},transferEvidence:{},comparisonAssignments:{},finalSteps:[],completed:false,failedAttempts:0,competencyEvents:[] };
+  const chapter03 = { round:8,practiceActs:{practice_mara_stop:"auffordern"},practiceGoals:{},goalEvidence:{},goalChange:null,speechChains:[],phaseOrder:[],turningPoint:null,languageChains:[],findingAssignments:{},transferEvidence:{},comparisonAssignments:{},finalSteps:[],completed:false,failedAttempts:0,competencyEvents:[] };
   await page.evaluate((session) => localStorage.setItem("lernwerkstatt-games:state:v1", JSON.stringify({
     version:1,currentGame:"dramatik",currentChapter:"chapter_03",completedChapters:["chapter_01","chapter_02"],decisions:{chapter_03:session},competencies:{},failedAttempts:{},stagingDecisions:{},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_2",settings:{music:true,soundEffects:true,reducedMotion:false},lastSavedAt:new Date().toISOString(),
   })), chapter03);
@@ -83,10 +83,10 @@ test("chapter 3 dialogue analysis is keyboard operable, responsive and persisten
   await expect(page.getByRole("heading",{name:"Die Stimmen auf der Bühne"})).toBeVisible();
   await page.locator(".source-button").first().press("Enter");
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  await expect(page.getByText("Wer will in diesem Abschnitt was?")).toBeVisible();
+  await expect(page.getByRole("heading",{name:"Gesprächsziele am Text"})).toBeVisible();
   await page.setViewportSize({width:390,height:844});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
-  await expect(page.locator(".dialogue-stage")).toBeVisible();
+  await expect(page.locator(".dialogue-workbench")).toBeVisible();
 });
 
 test("chapter 4 causal workshop opens and persists keyboard analysis", async ({ page }) => {

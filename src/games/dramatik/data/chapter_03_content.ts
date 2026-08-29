@@ -4,11 +4,33 @@ import type {PrimarySourceRecord} from "../../../core/content/types";
 export const chapter03PrimarySources=records as PrimarySourceRecord[];
 export const chapter03Source=(id:string)=>chapter03PrimarySources.find(item=>item.id===id)!;
 export const practiceDialogue=[{speaker:"MARA",text:"Du gehst jetzt nicht."},{speaker:"LEON",text:"Ich habe dir nichts zu erklären."},{speaker:"MARA",text:"Dann sieh mich wenigstens an."},{speaker:"LEON",text:"Lass mich vorbei."}] as const;
+export const practiceConversationModel=[
+ {id:"model_utterance",label:"Äußerung",value:"Du gehst jetzt nicht."},
+ {id:"model_act",label:"Sprachhandlung",value:"Mara fordert Leon auf, zu bleiben."},
+ {id:"model_reaction",label:"Reaktion",value:"Leon weist die Gesprächseröffnung zurück."},
+ {id:"model_change",label:"Veränderung",value:"Aus dem Versuch, ihn aufzuhalten, entsteht ein offener Widerspruch."},
+] as const;
 export const practiceActs=[
  {id:"practice_mara_stop",line:0,act:"auffordern",goal:"Leon am Gehen hindern",actOptions:["feststellen","auffordern","warnen"],goalOptions:["eine Entscheidung begründen","Informationen über Leons Plan erhalten","Leon am Gehen hindern"]},
  {id:"practice_leon_reject",line:1,act:"zurückweisen",goal:"eine Erklärung vermeiden",actOptions:["zurückweisen","sich rechtfertigen","nachfragen"],goalOptions:["eine Erklärung vermeiden","Mara von seiner Position überzeugen","das Gespräch vertiefen"]},
  {id:"practice_mara_look",line:2,act:"auffordern",goal:"Leons Aufmerksamkeit auf das Gespräch lenken",actOptions:["beschwichtigen","einen Vorwurf äußern","auffordern"],goalOptions:["Leon zum Fortgehen bewegen","Leons Aufmerksamkeit auf das Gespräch lenken","die Verspätung entschuldigen"]},
  {id:"practice_leon_leave",line:3,act:"auffordern",goal:"die Situation verlassen",actOptions:["zurückweisen","auffordern","beschwichtigen"],goalOptions:["Mara zu einer Erklärung bewegen","die Verspätung ausgleichen","die Situation verlassen"]},
+] as const;
+
+export const neutralPhases=[
+ {id:"neutral_start",label:"Ausgangslage",text:"Leon will gehen; Mara spricht ihn an."},
+ {id:"neutral_initiative",label:"Initiative",text:"Mara fordert Leon auf, zu bleiben."},
+ {id:"neutral_reaction",label:"Reaktion",text:"Leon verweigert eine Erklärung."},
+ {id:"neutral_change",label:"Veränderung",text:"Mara fordert nun wenigstens seine Aufmerksamkeit."},
+ {id:"neutral_result",label:"Ergebnis",text:"Leon hält an seinem Ziel fest, die Situation zu verlassen."},
+] as const;
+export const neutralBoundary={
+ after:"neutral_reaction",
+ reason:"Mara verändert nach Leons Zurückweisung ihre Strategie: Sie verlangt nicht mehr das Bleiben, sondern zunächst Aufmerksamkeit.",
+ distractors:["Jede neue Äußerung bildet automatisch eine neue Phase.","Die Sprecherin wechselt nicht; deshalb gibt es keine Veränderung."]
+} as const;
+export const neutralLanguage=[
+ {id:"neutral_language",finding:"Die Formulierung ‚Dann sieh mich wenigstens an.‘ enthält eine direkte Aufforderung und die Einschränkung ‚wenigstens‘.",effect:"Mara senkt ihr unmittelbares Ziel und erhöht zugleich den Druck, ihr Aufmerksamkeit zu geben.",function:"Die Äußerung markiert eine veränderte Strategie nach Leons Zurückweisung."}
 ] as const;
 
 export const mainSections=[
@@ -56,7 +78,12 @@ export const speechTasks=[
  ]},
 ] as const;
 export const phaseOrder=["main_a","main_b","main_c","main_d"] as const;
-export const turningPoints=[{id:"turn_draw",sourceId:"c03_main_tybalt_draws",change:"Die zuvor sprachliche Herausforderung erhält ein körperliches Handlungssignal."},{id:"turn_fight",sourceId:"c03_main_fight",change:"Der Konflikt wechselt ausdrücklich zur körperlichen Auseinandersetzung."}] as const;
+export const phaseBoundary={after:"main_c",reason:"Mercutio übernimmt nach Romeos Beschwichtigungsversuch die Initiative und fordert Tybalt zum Kampf heraus."} as const;
+export const turningPoints=[
+ {id:"turn_romeo",sourceId:"c03_main_romeo_reassure",before:"Tybalt fordert Romeo heraus.",after:"Mercutio übernimmt die Konfrontation.",change:"Romeos Beschwichtigungsversuch verändert Tybalts Ziel nicht; die Initiative wechselt jedoch anschließend zu Mercutio.",strength:"plausible"},
+ {id:"turn_draw",sourceId:"c03_main_tybalt_draws",before:"Mercutio fordert Tybalt sprachlich heraus.",after:"Tybalt zieht den Degen.",change:"Die sprachliche Herausforderung erhält ein ausdrücklich vorgegebenes körperliches Handlungssignal.",strength:"strong"},
+ {id:"turn_fight",sourceId:"c03_main_fight",before:"Romeo fordert Mercutio auf, den Degen einzustecken.",after:"Mercutio und Tybalt fechten.",change:"Der Konflikt wechselt ausdrücklich zur körperlichen Auseinandersetzung.",strength:"strong"}
+] as const;
 export const languageTasks=[
  {id:"language_imperative",sourceId:"c03_main_tybalt_challenge",feature:"Aufforderung und imperativische Zuspitzung",effect:"Die Wortwahl drängt Romeo zu einer unmittelbaren Reaktion.",function:"Tybalt verschärft seine Herausforderung."},
  {id:"language_appeal",sourceId:"c03_main_romeo_intervenes",feature:"wiederholte Anreden und Aufforderungen",effect:"Romeos Eingreifen wirkt dringlich.",function:"Er versucht, die körperliche Auseinandersetzung zu unterbrechen."},
@@ -65,6 +92,13 @@ export const findingTasks=[
  {id:"finding_draw",text:"Tybalt zieht seinen Degen.",target:"text",sourceId:"c03_main_tybalt_draws"},
  {id:"finding_look",text:"Romeo und Tybalt halten durchgehend Blickkontakt.",target:"staging",sourceId:"c03_main_romeo_answer"},
  {id:"finding_smile",text:"Mercutio lächelt während seiner Herausforderung freundlich.",target:"unsupported",sourceId:"c03_main_mercutio_challenge"},
+] as const;
+export const stageEffectTask={sourceId:"c03_main_fight",effect:"Die ausdrücklich vorgegebene Bühnenhandlung zeigt, dass sprachliche Beschwichtigung den Umschlag in körperliche Gewalt nicht verhindert.",wrong:"Die Angabe legt fest, dass beide Figuren dabei wütend blicken."} as const;
+export const miniAnalysis=[
+ {id:"mini_claim",kind:"claim",text:"Mercutios Eingreifen verschärft die Konfrontation."},
+ {id:"mini_evidence",kind:"evidence",sourceId:"c03_main_mercutio_challenge",text:"Mercutio fordert Tybalt auf, den Degen zu ziehen."},
+ {id:"mini_analysis",kind:"analysis",text:"Die Herausforderung übernimmt die Gesprächsinitiative und beantwortet Romeos Beschwichtigung mit neuer Konfrontation."},
+ {id:"mini_function",kind:"function",text:"Dadurch bewegt sich der Dialog vom Deeskalationsversuch zum Umschlag in körperliche Handlung."},
 ] as const;
 export const transferSections=[
  {id:"transfer_a",sourceIds:["c03_transfer_juliette_name","c03_transfer_romeo_listens"],summary:"Juliette spricht zunächst, ohne zu wissen, dass Romeo zuhört."},
