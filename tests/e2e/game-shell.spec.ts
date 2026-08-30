@@ -81,7 +81,9 @@ test("chapter 3 dialogue analysis is keyboard operable, responsive and persisten
   })), chapter03);
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
   await expect(page.getByRole("heading",{name:"Die Stimmen auf der Bühne"})).toBeVisible();
-  await page.locator(".source-button").first().press("Enter");
+  await page.getByRole("button",{name:"die öffentliche Auseinandersetzung beenden oder verlagern",exact:true}).press("Enter");
+  await page.getByRole("button",{name:/beschwichtigen und eine Verlagerung/}).press("Enter");
+  await page.locator(".evidence-marker").first().press("Enter");
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
   await expect(page.getByRole("heading",{name:"Gesprächsziele am Text"})).toBeVisible();
   await page.setViewportSize({width:390,height:844});

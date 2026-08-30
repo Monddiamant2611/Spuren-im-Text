@@ -1,6 +1,6 @@
 import { expect, test, type Page } from "@playwright/test";
 import { characterizationCards, chapter02PrimaryById, comparisonCards, ensembleLinks, highlightReasoning, highlightTasks, momentClaims, momentPractice, practiceClaims, relationshipPractice, relevancePractice, rolePractice, relationshipTasks, roleTasks, selfOtherPractice, selfOtherTasks, shakespeareCharacterizationCards, transferTasks } from "../../src/games/dramatik/data/chapter_02_content";
-import { chapter03Source, comparisonTasks as chapter03Comparisons, goalTasks as chapter03Goals, languageTasks as chapter03Language, mainSections, miniAnalysis, neutralBoundary, neutralLanguage, neutralPhases, practiceActs as chapter03Practice, practiceConversationModel, speechTasks as chapter03Speech, stageEffectTask, transferTasks as chapter03Transfer, turningPoints } from "../../src/games/dramatik/data/chapter_03_content";
+import { chapter03Source, comparisonTasks as chapter03Comparisons, goalTasks as chapter03Goals, initiativeTasks as chapter03Initiative, initiativeTurning, languageTasks as chapter03Language, mainEvidenceLabels, mainSections, miniAnalysis, neutralBoundary, neutralLanguage, neutralPhases, practiceActs as chapter03Practice, speechTasks as chapter03Speech, stageEffectTask, transferSections, transferTasks as chapter03Transfer, turningPoints } from "../../src/games/dramatik/data/chapter_03_content";
 import { causalIntro, chain, chainLinks, conflictTypes, escalationCards, finalConnections, introFacts, julietCards, knowledgeCards, situationCards } from "../../src/games/dramatik/data/chapter_04_content";
 import { argumentBlocks, classificationCards, commonErrors, generalChain, hypothesisOptions, interpretationStructure, julietCountercheckOptions, julietFindings, julietHypothesis, julietReverseChain, transferArgument, transferChain, transferCountercheckOptions, transferEvidence, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
 import { analysisErrorPractice, categoryPractice, certaintyClaims, certaintyPractice, consolidationGroups, historyConditionPractice, signalChainPractice, situationEvidence, streetSituationCards, transferSituationGroups } from "../../src/games/dramatik/data/chapter_01_content";
@@ -105,35 +105,37 @@ test("complete learning path reaches the restored director's book without a dead
   await page.getByRole("button", { name: /Probenbühne: verfügbar/ }).click();
   await page.getByRole("button",{name:"Allgemeine Dialogprobe beginnen"}).click();
   await page.getByRole("button",{name:"Analyse beginnen"}).click();
-  for(const item of practiceConversationModel)await page.locator(".dialogue-options").getByRole("button",{name:new RegExp(item.label)}).click();
-  await page.getByRole("button",{name:"Gesprächsmodell prüfen"}).click();
+  await page.getByRole("button",{name:"Reihenfolge prüfen"}).click();
   for(const item of chapter03Practice)await page.locator(".dialogue-choice").first().getByRole("button",{name:item.act,exact:true}).click();
   for(const item of chapter03Practice)await page.locator(".dialogue-choice").first().getByRole("button",{name:item.goal,exact:true}).click();
-  for(const item of neutralPhases)await page.locator(".dialogue-options").getByRole("button",{name:new RegExp(item.label)}).click();
-  await page.getByRole("button",{name:"Gesprächsmodell prüfen"}).click();
-  await page.getByRole("button",{name:/nach: Reaktion/}).click();
+  for(const item of chapter03Initiative)await page.getByRole("button",{name:item.label,exact:true}).click();
+  await page.getByRole("button",{name:chapter03Initiative.find(item=>item.id===initiativeTurning)!.text,exact:true}).click();
+  for(const [targetIndex,item] of neutralPhases.entries()){const row=page.locator(".sortable-dialogue li").filter({hasText:item.text});while(await row.evaluate((element,index)=>[...element.parentElement!.children].indexOf(element)>index,targetIndex))await row.getByRole("button",{name:/nach oben/}).click()}
+  await page.getByRole("button",{name:"Reihenfolge prüfen"}).click();
+  await page.getByRole("button",{name:"nach Reaktion",exact:true}).click();
   await page.getByRole("button",{name:neutralBoundary.reason,exact:true}).click();
   await page.getByRole("button",{name:neutralLanguage[0].finding,exact:true}).click();
   await page.getByRole("button",{name:neutralLanguage[0].effect,exact:true}).click();
   await page.getByRole("button",{name:neutralLanguage[0].function,exact:true}).click();
-  for(const task of chapter03Goals)await page.locator(".source-button").filter({hasText:chapter03Source(task.sourceId).text}).click();
+  for(const task of chapter03Goals){await page.getByRole("button",{name:task.goal,exact:true}).click();await page.getByRole("button",{name:task.id==="goal_benvolio"?/beschwichtigen und eine Verlagerung/:task.id==="goal_tybalt"?"herausfordern":"beschwichtigen",exact:task.id!=="goal_benvolio"}).click();await page.getByRole("button",{name:new RegExp(mainEvidenceLabels[task.sourceId])}).click()}
   await page.getByRole("button",{name:"Tybalt beruhigen und den Konflikt vermeiden",exact:true}).click();
   await page.getByRole("button",{name:"in den Kampf eingreifen und die Degen trennen",exact:true}).click();
-  await page.getByRole("button",{name:"verändert sich",exact:true}).click();
-  for(const task of chapter03Speech){const correct=task.options.find(option=>option.act===task.act&&option.reactionId===task.reactionId)!;await page.getByRole("button",{name:correct.label,exact:true}).click()}
-  for(const section of mainSections)await page.getByRole("button",{name:new RegExp(section.label)}).click();
-  await page.getByRole("button",{name:"Chronologie prüfen"}).click();
+  await page.getByRole("button",{name:/von sprachlicher Beschwichtigung/}).click();
+  for(const task of chapter03Speech){await page.getByRole("button",{name:task.act,exact:true}).click();const correct=task.options.find(option=>option.act===task.act&&option.reactionId===task.reactionId)!;await page.getByRole("button",{name:correct.label.split("→")[1].trim(),exact:true}).click();await page.getByRole("button",{name:task.effect,exact:true}).click()}
+  for(const [targetIndex,section] of mainSections.entries()){const row=page.locator(".sortable-dialogue li").filter({hasText:section.label});while(await row.evaluate((element,index)=>[...element.parentElement!.children].indexOf(element)>index,targetIndex))await row.getByRole("button",{name:/nach oben/}).click()}
+  await page.getByRole("button",{name:"Reihenfolge prüfen"}).click();
   await page.getByRole("button",{name:"nach Abschnitt C",exact:true}).click();
   await page.getByRole("button",{name:/Mercutio übernimmt nach Romeos Beschwichtigungsversuch/}).click();
-  const turning=turningPoints.find(x=>x.id==="turn_draw")!;await page.getByRole("button",{name:chapter03Source(turning.sourceId).text,exact:true}).click();await page.getByRole("button",{name:turning.change,exact:true}).click();
-  for(const task of chapter03Language){await page.getByRole("button",{name:task.feature,exact:true}).click();await page.getByRole("button",{name:task.effect,exact:true}).click()}
-  for(const name of ["TEXTLICH VORGEGEBEN","MÖGLICHE INSZENIERUNG","NICHT AUSREICHEND BELEGT"])await page.getByRole("button",{name,exact:true}).click();
+  await page.getByRole("button",{name:/Der Deeskalationsversuch endet/}).click();
+  const turning=turningPoints.find(x=>x.id==="turn_draw")!;await page.getByRole("button",{name:chapter03Source(turning.sourceId).text,exact:true}).click();await page.getByRole("button",{name:"zentraler Wendepunkt",exact:true}).click();
+  for(const task of chapter03Language){await page.getByRole("button",{name:task.feature,exact:true}).click();await page.getByRole("button",{name:task.effect,exact:true}).first().click();await page.getByRole("button",{name:task.function,exact:true}).click()}
+  for(const name of ["TEXTLICH VORGEGEBEN","ALS INSZENIERUNG MÖGLICH","TEXTLICH VORGEGEBEN","NICHT AUSREICHEND BELEGT"])await page.getByRole("button",{name,exact:true}).click();
   await page.getByRole("button",{name:stageEffectTask.effect,exact:true}).click();
   for(const item of miniAnalysis)await page.getByRole("button",{name:new RegExp((item.text??"").slice(0,20))}).click();
-  await page.getByRole("button",{name:"Gesprächsmodell prüfen"}).click();
-  for(const task of chapter03Transfer)await page.locator(".dialogue-options button").filter({hasText:chapter03Source(task.sourceId).text}).click();
+  await page.getByRole("button",{name:"Analyseabsatz zusammensetzen"}).click();
+  const transferIds=transferSections.flatMap(section=>section.sourceIds);for(const task of chapter03Transfer)await page.locator(".evidence-list button").nth(transferIds.indexOf(task.sourceId)).click();
   for(const task of chapter03Comparisons)await page.getByRole("button",{name:task.target==="main"?"KONFLIKTDIALOG":task.target==="transfer"?"ANNÄHERUNGSDIALOG":"BEIDE DIALOGE",exact:true}).click();
-  for(const id of ["c03_transfer_juliette_danger","c03_transfer_romeo_love","c03_transfer_juliette_concern"])await page.locator(".source-button").filter({hasText:chapter03Source(id).text}).click();
+  for(const index of [0,1,2])await page.getByRole("button",{name:new RegExp(`Schritt ${index+1}`)}).click();
   await page.getByRole("button",{name:"Dialoganalyse abschließen"}).click();
   await leaveChapter(page);
   await page.getByRole("button", { name: /Bühne: verfügbar/ }).click();

@@ -16,6 +16,12 @@ export const practiceActs=[
  {id:"practice_mara_look",line:2,act:"auffordern",goal:"Leons Aufmerksamkeit auf das Gespräch lenken",actOptions:["beschwichtigen","einen Vorwurf äußern","auffordern"],goalOptions:["Leon zum Fortgehen bewegen","Leons Aufmerksamkeit auf das Gespräch lenken","die Verspätung entschuldigen"]},
  {id:"practice_leon_leave",line:3,act:"auffordern",goal:"die Situation verlassen",actOptions:["zurückweisen","auffordern","beschwichtigen"],goalOptions:["Mara zu einer Erklärung bewegen","die Verspätung ausgleichen","die Situation verlassen"]},
 ] as const;
+export const initiativeTasks=[
+ {id:"initiative_departure",text:"Leon kündigt an, dass er geht.",target:"maintains",label:"hält die bestehende Gesprächsrichtung aufrecht"},
+ {id:"initiative_attention",text:"Mara fordert Leon auf zu warten und verlangt eine Erklärung.",target:"impulse",label:"setzt einen neuen Impuls"},
+ {id:"initiative_refusal",text:"Leon verweigert die Erklärung.",target:"reaction",label:"reagiert auf einen bestehenden Impuls"},
+] as const;
+export const initiativeTurning="initiative_attention";
 
 export const neutralPhases=[
  {id:"neutral_start",label:"Ausgangslage",text:"Leon will gehen; Mara spricht ihn an."},
@@ -44,6 +50,13 @@ export const goalTasks=[
  {id:"goal_tybalt",sectionId:"main_c",sourceId:"c03_main_tybalt_challenge",goal:"Romeo zur bewaffneten Auseinandersetzung herausfordern"},
  {id:"goal_romeo",sectionId:"main_c",sourceId:"c03_main_romeo_reassure",goal:"Tybalt beruhigen und den Konflikt vermeiden"},
 ] as const;
+export const mainEvidenceLabels:Record<string,string>={
+ c03_main_benvolio_public:"Beleg A · Benvolio schlägt eine ruhige Klärung oder Verlagerung vor.",
+ c03_main_mercutio_refuse:"Beleg B · Mercutio weist Benvolios Vorschlag zurück.",
+ c03_main_tybalt_insult:"Beleg C · Tybalt richtet den Konflikt auf Romeo.",
+ c03_main_tybalt_challenge:"Beleg D · Tybalt fordert Romeo zur bewaffneten Auseinandersetzung heraus.",
+ c03_main_romeo_reassure:"Beleg E · Romeo versucht, Tybalt zu beruhigen.",
+};
 export const goalChange={id:"romeo_goal_change",first:"c03_main_romeo_reassure",second:"c03_main_romeo_intervenes",answer:"verändert_sich",explanation:"Romeo versucht zunächst, Tybalt sprachlich zu beruhigen; später greift er in den bereits begonnenen Kampf ein und will die Degen trennen."} as const;
 export const speechTasks=[
  {id:"act_mercutio",sourceId:"c03_main_mercutio_provoke",act:"provozieren",reactionId:"c03_main_benvolio_public",effect:"Benvolio versucht, die Auseinandersetzung aus der Öffentlichkeit zu verlagern.",options:[
@@ -90,8 +103,9 @@ export const languageTasks=[
 ] as const;
 export const findingTasks=[
  {id:"finding_draw",text:"Tybalt zieht seinen Degen.",target:"text",sourceId:"c03_main_tybalt_draws"},
- {id:"finding_look",text:"Romeo und Tybalt halten durchgehend Blickkontakt.",target:"staging",sourceId:"c03_main_romeo_answer"},
- {id:"finding_smile",text:"Mercutio lächelt während seiner Herausforderung freundlich.",target:"unsupported",sourceId:"c03_main_mercutio_challenge"},
+ {id:"finding_slow",text:"Tybalt zieht den Degen langsam und geht bedrohlich vor.",target:"staging",sourceId:"c03_main_tybalt_draws"},
+ {id:"finding_fight",text:"Mercutio und Tybalt beginnen zu fechten.",target:"text",sourceId:"c03_main_fight"},
+ {id:"finding_inner",text:"Tybalt ist innerlich vollkommen außer Kontrolle.",target:"unsupported",sourceId:"c03_main_tybalt_challenge"},
 ] as const;
 export const stageEffectTask={sourceId:"c03_main_fight",effect:"Die ausdrücklich vorgegebene Bühnenhandlung zeigt, dass sprachliche Beschwichtigung den Umschlag in körperliche Gewalt nicht verhindert.",wrong:"Die Angabe legt fest, dass beide Figuren dabei wütend blicken."} as const;
 export const miniAnalysis=[
@@ -99,6 +113,12 @@ export const miniAnalysis=[
  {id:"mini_evidence",kind:"evidence",sourceId:"c03_main_mercutio_challenge",text:"Mercutio fordert Tybalt auf, den Degen zu ziehen."},
  {id:"mini_analysis",kind:"analysis",text:"Die Herausforderung übernimmt die Gesprächsinitiative und beantwortet Romeos Beschwichtigung mit neuer Konfrontation."},
  {id:"mini_function",kind:"function",text:"Dadurch bewegt sich der Dialog vom Deeskalationsversuch zum Umschlag in körperliche Handlung."},
+] as const;
+export const miniAnalysisOptions=[
+ {kind:"claim",options:[miniAnalysis[0],{id:"mini_claim_distractor",kind:"claim",text:"Mercutio ist grundsätzlich für jeden Streit verantwortlich."}]},
+ {kind:"evidence",options:[miniAnalysis[1],{id:"mini_evidence_distractor",kind:"evidence",sourceId:"c03_main_romeo_reassure",text:"Romeo versucht, Tybalt zu beruhigen."}]},
+ {kind:"analysis",options:[miniAnalysis[2],{id:"mini_analysis_distractor",kind:"analysis",text:"Mercutio spricht länger als Romeo und gewinnt deshalb das Gespräch."}]},
+ {kind:"function",options:[miniAnalysis[3],{id:"mini_function_distractor",kind:"function",text:"Die Äußerung beweist eine unveränderliche Eigenschaft Mercutios."}]},
 ] as const;
 export const transferSections=[
  {id:"transfer_a",sourceIds:["c03_transfer_juliette_name","c03_transfer_romeo_listens"],summary:"Juliette spricht zunächst, ohne zu wissen, dass Romeo zuhört."},
