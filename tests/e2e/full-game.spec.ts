@@ -1,7 +1,7 @@
 import { expect, test, type Page } from "@playwright/test";
 import { characterizationCards, chapter02PrimaryById, comparisonCards, ensembleLinks, highlightReasoning, highlightTasks, momentClaims, momentPractice, practiceClaims, relationshipPractice, relevancePractice, rolePractice, relationshipTasks, roleTasks, selfOtherPractice, selfOtherTasks, shakespeareCharacterizationCards, transferTasks } from "../../src/games/dramatik/data/chapter_02_content";
 import { chapter03Source, comparisonTasks as chapter03Comparisons, goalTasks as chapter03Goals, initiativeTasks as chapter03Initiative, initiativeTurning, languageTasks as chapter03Language, mainEvidenceLabels, mainSections, miniAnalysis, neutralBoundary, neutralLanguage, neutralPhases, practiceActs as chapter03Practice, speechTasks as chapter03Speech, stageEffectTask, transferSections, transferTasks as chapter03Transfer, turningPoints } from "../../src/games/dramatik/data/chapter_03_content";
-import { causalIntro, chain, chainLinks, comparisonAspects, conflictTypes, dramaticCurve, escalationCards, finalConnections, finalCurve, goals as chapter04Goals, internalPreparation, introFacts, julietAlternatives, julietCards, knowledgeCards, neutralActionChains, neutralTurningPoints, situationCards, tombActionChains } from "../../src/games/dramatik/data/chapter_04_content";
+import { causalIntro, chain, chainLinks, comparisonAspects, conflictTypes, dramaticCurve, escalationCards, finalConnections, finalCurve, finalEvidence, finalMeaningOptions, finalTransferOptions, generalEpistemicPractice, generalEvidenceTasks, generalGoalTasks, goals as chapter04Goals, historyPractice, internalPreparation, introFacts, julietAlternatives, julietCards, julietSequence, knowledgeCards, neutralActionChains, neutralTurningPoints, situationCards, tombActionChains } from "../../src/games/dramatik/data/chapter_04_content";
 import { argumentBlocks, classificationCards, commonErrors, generalChain, hypothesisOptions, interpretationStructure, julietCountercheckOptions, julietFindings, julietHypothesis, julietReverseChain, transferArgument, transferChain, transferCountercheckOptions, transferEvidence, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
 import { analysisErrorPractice, categoryPractice, certaintyClaims, certaintyPractice, consolidationGroups, historyConditionPractice, signalChainPractice, situationEvidence, streetSituationCards, transferSituationGroups } from "../../src/games/dramatik/data/chapter_01_content";
 
@@ -46,35 +46,45 @@ async function completeChapter04(page:Page){
  const sort=async(items:readonly {label:string}[])=>{for(const [targetIndex,item] of items.entries()){const row=page.locator(".curve-sorter li").filter({hasText:item.label});while(await row.evaluate((element,index)=>[...element.parentElement!.children].indexOf(element)>index,targetIndex))await row.getByRole("button",{name:/nach oben/}).click()}await page.getByRole("button",{name:"Verlauf prüfen"}).click()};
  for(const item of introFacts.filter(x=>x.relevant))await page.getByRole("button",{name:item.label}).click();
  await page.getByRole("button",{name:"Mara: Feier · Vater: Lernen"}).click();
+ for(const item of generalGoalTasks)await page.getByRole("button",{name:item.options[item.answer],exact:true}).click();
  for(const item of conflictTypes)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.answer==="external"?"Äußerer Konflikt":"Innerer Konflikt"}).click();
- for(const item of causalIntro)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.answer==="temporal"?"Nur zeitlich nacheinander":"Kausal verbunden"}).click();
+ for(const item of historyPractice)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.target==="history"?"Vorgeschichte":item.target==="current"?"Gegenwärtige Ausgangslage":item.target==="knowledge"?"Wissensstand":item.target==="future"?"Vermutete Zukunft":"Irrelevante Information",exact:true}).click();
+ for(const item of causalIntro)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.answer==="causes"?"Verursacht":item.answer==="contributes"?"Trägt bei":"Nur später / kein belegter Zusammenhang",exact:true}).click();
+ for(const item of generalEpistemicPractice)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.target==="knowledge"?"Wissensstand":item.target==="intention"?"Absicht":item.target==="interpretation"?"Deutung":"Nicht ausreichend belegt",exact:true}).click();
+ for(const item of generalEvidenceTasks){await page.getByRole("button",{name:item.evidenceOptions[item.evidenceAnswer],exact:true}).click();await page.getByRole("button",{name:item.analysisOptions[item.analysisAnswer],exact:true}).click()}
  await page.getByRole("button",{name:"Verlaufskurve anwenden"}).click();
  await sort(dramaticCurve);
+ await page.getByRole("button",{name:"Analyse sichern"}).click();
  for(const item of neutralActionChains){await page.getByRole("button",{name:item.impulse,exact:true}).click();await page.getByRole("button",{name:item.reaction,exact:true}).click();await page.getByRole("button",{name:item.effect,exact:true}).click()}
  const neutral=neutralTurningPoints.find(x=>x.judgement==="turning")!;await page.getByRole("button",{name:neutral.label,exact:true}).click();await page.getByRole("button",{name:"Zentraler Wendepunkt",exact:true}).click();
  for(const item of situationCards)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.target==="situation"?"Ausgangslage":item.target==="prior"?"Vorgeschichte":"Nicht ausreichend belegt"}).click();
- for(const item of knowledgeCards)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.target==="romeo"?"Romeo weiß / beabsichtigt":item.target==="paris"?"Paris weiß / deutet":"Nicht ausreichend belegt",exact:true}).click();
- for(const task of chapter04Goals){await page.getByRole("button",{name:/B\d · passende Stelle im Manuskript/}).click();await page.getByRole("button",{name:task.analysis,exact:true}).click()}
+ const knowledgeLabel=(target:string)=>target==="romeo_knowledge"?"Romeo: Wissensstand":target==="romeo_intention"?"Romeo: Absicht":target==="paris_knowledge"?"Paris: Wissensstand":target==="paris_interpretation"?"Paris: Deutung":target==="paris_intention"?"Paris: Absicht":"Nicht ausreichend belegt";
+ for(const item of knowledgeCards)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:knowledgeLabel(item.target),exact:true}).click();
+ for(const task of chapter04Goals){await page.getByRole("button",{name:task.goalOptions[task.goalAnswer],exact:true}).click();const source=task.evidenceOptions.indexOf(task.evidence);await page.locator("fieldset").filter({hasText:"Welcher Primärtextbeleg"}).getByRole("button").nth(source).click();await page.getByRole("button",{name:task.analysis,exact:true}).click()}
  await page.getByRole("button",{name:"Beide Ziele können nicht zugleich verwirklicht werden.",exact:true}).click();
  await sort(chain);
- for(const link of chainLinks){const field=page.locator(".relation-checks>fieldset").first();await field.getByRole("button",{name:link.type==="causes"?"Verursacht":"Trägt bei",exact:true}).click()}
+ for(const link of chainLinks){const field=page.locator(".relation-checks>fieldset").first();await field.getByRole("button",{name:link.type==="causes"?"Verursacht die unmittelbare Reaktion":"Trägt zur Entwicklung oder Eskalation bei",exact:true}).click()}
  for(const item of tombActionChains){await page.getByRole("button",{name:item.impulse,exact:true}).click();await page.getByRole("button",{name:item.reaction,exact:true}).click();await page.getByRole("button",{name:item.effect,exact:true}).click()}
  for(const item of escalationCards)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.level==="tension"?"Anspannung":item.level==="escalation"?"Zuspitzung":"Wendepunkt"}).click();
  await page.getByRole("button",{name:"Beginn des Fechtens",exact:true}).click();await page.getByRole("button",{name:"Zentraler Wendepunkt",exact:true}).click();
+ await page.getByRole("button",{name:/Die Konfliktform verändert sich/}).click();
  await page.locator("fieldset").filter({hasText:"Der Konflikt wird körperlich."}).getByRole("button",{name:"Unmittelbare Folge"}).click();
  await page.locator("fieldset").filter({hasText:"Paris fällt im Kampf."}).getByRole("button",{name:"Weitere Folge"}).click();
  await page.locator("fieldset").filter({hasText:"Ohne Kampf wäre sicher Frieden entstanden."}).getByRole("button",{name:"Nicht ausreichend belegt"}).evaluate(element=>(element as HTMLButtonElement).click());
  for(const item of internalPreparation)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.target==="wish"?"Handlungswunsch":item.target==="fear"?"Befürchtung / Gegenkraft":item.target==="weighing"?"Abwägung":item.target==="decision"?"Entscheidung":"Ausführung",exact:true}).click();
  await page.getByRole("button",{name:"Den inneren Konflikt untersuchen"}).click();
  for(const item of julietCards)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.kind==="situation"?"Ausgangslage":item.kind==="supports_action"?"Spricht für das Handeln":item.kind==="feared_possibility"?"Befürchtete Möglichkeit":item.kind==="decision"?"Entscheidung":"Ausführung"}).dispatchEvent("click");
- await sort(julietCards);
- await page.getByRole("button",{name:/Entscheidung:.*Romeo, ich komme/}).click();
- for(const item of julietAlternatives)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.target==="textual"?"Textlich erwogene Alternative":item.target==="plausible"?"Aufgrund der Situation plausible Alternative":"Nicht ausreichend belegte Spekulation",exact:true}).click();
+ await sort(julietSequence);
+ await page.getByRole("button",{name:/Juliettes an Romeo gerichtete Worte/}).click();
+ for(const item of julietAlternatives)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.target==="textual"?"Textlich erwogen":item.target==="plausible"?"Situativ plausibel":"Nicht ausreichend belegt",exact:true}).click();
  for(const item of comparisonAspects)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.target==="external"?"Äußerer Konflikt":"Innerer Konflikt",exact:true}).click();
- await page.getByRole("button",{name:/Während Romeo und Paris unvereinbare Ziele/}).click();
+ await page.getByRole("button",{name:/Im äußeren Verlauf treiben gegenseitige Handlungen/}).click();
  await sort(finalCurve);
- for(const item of finalConnections)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.answer==="causes"?"Verursacht":item.answer==="contributes"?"Trägt bei":"Nur später / kein belegter Kausalzusammenhang"}).click();
- for(const label of ["Ausgangslage","Ziel","Konflikt","Handlung","Reaktion","Wendepunkt","Folge","Textbeleg"])await page.getByRole("button",{name:label,exact:true}).click();
+ for(const item of finalConnections)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.answer==="causes"?"Verursacht":item.answer==="contributes"?"Trägt bei":"Nur später / kein belegter Zusammenhang",exact:true}).click();
+ await page.getByRole("button",{name:finalMeaningOptions.find(x=>x.valid)!.label,exact:true}).click();
+ await page.locator("fieldset").filter({hasText:"Behauptung:"}).getByRole("button").nth(finalEvidence.evidenceOptions.indexOf(finalEvidence.evidence)).click();
+ await page.getByRole("button",{name:finalEvidence.analysisOptions[finalEvidence.analysisAnswer],exact:true}).click();
+ await page.getByRole("button",{name:finalTransferOptions.find(x=>x.valid)!.label,exact:true}).click();
  await page.getByRole("button",{name:"Handlungsbuch restaurieren"}).click();
 }
 

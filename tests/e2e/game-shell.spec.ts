@@ -105,13 +105,13 @@ test("chapter 4 stores a causal classification and keeps it after reload", async
     version:1,currentGame:"dramatik",currentChapter:"chapter_04",completedChapters:["chapter_01","chapter_02","chapter_03"],decisions:{chapter_04:chapter04},competencies:{},failedAttempts:{},stagingDecisions:{},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_3",settings:{music:true,soundEffects:true,reducedMotion:false},lastSavedAt:new Date().toISOString(),
   })), session);
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
-  const rain=page.locator("fieldset").filter({hasText:"Mara verlässt das Haus"});await rain.getByRole("button",{name:"Nur zeitlich nacheinander"}).click();
+  const rain=page.locator("fieldset").filter({hasText:"Mara verlässt das Haus"});await rain.getByRole("button",{name:"Nur später / kein belegter Zusammenhang"}).click();
   await page.reload(); await page.getByRole("button",{name:"Fortsetzen"}).click();
   const stored = await page.evaluate(() => JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!).decisions.chapter_04.causalIntroAssignments.rain);
-  expect(stored).toBe("temporal");
+  expect(stored).toBe("only_later");
   await page.setViewportSize({width:1024,height:768});
   expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);
-  await expect(page.getByRole("heading",{name:"Danach – oder deshalb?"})).toBeVisible();
+  await expect(page.getByRole("heading",{name:"Ursache, beitragende Bedingung oder nur später?"})).toBeVisible();
 });
 
 test("chapter 5 transfer chain is keyboard operable, persistent and responsive",async({page})=>{
