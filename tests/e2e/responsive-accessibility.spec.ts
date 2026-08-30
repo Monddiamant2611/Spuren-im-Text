@@ -67,7 +67,7 @@ test("modal traps focus, closes with Escape and restores its trigger", async ({ 
 });
 
 test("chapter 4 stays operable and its production figures remain contained on mobile", async ({ page }) => {
-  const chapter04 = { round: 5, failedAttempts: 0, competencyEvents: [] };
+  const chapter04 = { round: 8, seenGlossaryIntroductions:["chapter_04"], failedAttempts: 0, competencyEvents: [] };
   await page.setViewportSize({ width: 390, height: 844 });
   await seed(page, { currentChapter: "chapter_04", completedChapters: ["chapter_01", "chapter_02", "chapter_03"], theatreState: "AFTER_CHAPTER_3", decisions: { chapter_04: chapter04 } });
   await page.reload();
@@ -90,7 +90,7 @@ test("chapter 4 stays operable and its production figures remain contained on mo
 });
 
 test("orientation change preserves the active chapter state", async ({ page }) => {
-  const chapter04 = { round: 5, knowledgeAssignments:{}, failedAttempts: 0, competencyEvents: [] };
+  const chapter04 = { round: 8, seenGlossaryIntroductions:["chapter_04"], situationAssignments:{}, failedAttempts: 0, competencyEvents: [] };
   await page.setViewportSize({ width: 390, height: 844 });
   await seed(page, { currentChapter: "chapter_04", completedChapters: ["chapter_01", "chapter_02", "chapter_03"], theatreState: "AFTER_CHAPTER_3", decisions: { chapter_04: chapter04 } });
   await page.reload(); await page.getByRole("button", { name: "Fortsetzen" }).click();
@@ -98,7 +98,7 @@ test("orientation change preserves the active chapter state", async ({ page }) =
   await page.setViewportSize({ width: 844, height: 390 });
   await expect(page.getByRole("heading", { name: "Der Punkt ohne Rückkehr" })).toBeVisible();
   await page.setViewportSize({ width: 390, height: 844 });
-  await expect(page.getByText("Station 5/15")).toBeVisible();
+  await expect(page.getByText("Station 8/22")).toBeVisible();
   expect(await page.evaluate((key) => localStorage.getItem(key), storageKey)).toBe(before);
 });
 

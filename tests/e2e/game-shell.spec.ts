@@ -100,7 +100,7 @@ test("chapter 4 causal workshop opens and persists keyboard analysis", async ({ 
 });
 
 test("chapter 4 stores a causal classification and keeps it after reload", async ({ page }) => {
-  const session = { round:3,causalIntroAssignments:{},failedAttempts:0,competencyEvents:[] };
+  const session = { round:3,causalIntroAssignments:{},seenGlossaryIntroductions:["chapter_04"],failedAttempts:0,competencyEvents:[] };
   await page.evaluate((chapter04) => localStorage.setItem("lernwerkstatt-games:state:v1", JSON.stringify({
     version:1,currentGame:"dramatik",currentChapter:"chapter_04",completedChapters:["chapter_01","chapter_02","chapter_03"],decisions:{chapter_04:chapter04},competencies:{},failedAttempts:{},stagingDecisions:{},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_3",settings:{music:true,soundEffects:true,reducedMotion:false},lastSavedAt:new Date().toISOString(),
   })), session);

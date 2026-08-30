@@ -25,7 +25,7 @@ test("chapter 1 transfer uses responsive multi-selection and one combined check"
 
 test("scene cast changes with the actual Shakespeare scene",async({page})=>{
  await openChapter(page,"chapter_03",{round:1,seenGlossaryIntroductions:["chapter_03"]},["chapter_01","chapter_02"]);let cast=page.getByRole("region",{name:"Szenenfiguren"});await expect(cast.getByText("Romeo",{exact:true})).toBeVisible();await expect(cast.getByText("Tybalt",{exact:true})).toBeVisible();await expect(cast.getByText("Juliette",{exact:true})).toHaveCount(0);
- await openChapter(page,"chapter_04",{round:10,seenGlossaryIntroductions:["chapter_04"]},["chapter_01","chapter_02","chapter_03"]);cast=page.getByRole("region",{name:"Szenenfiguren"});await expect(cast.locator("figure")).toHaveCount(1);await expect(cast.getByText("Juliette",{exact:true})).toBeVisible();
+ await openChapter(page,"chapter_04",{round:16,seenGlossaryIntroductions:["chapter_04"]},["chapter_01","chapter_02","chapter_03"]);cast=page.getByRole("region",{name:"Szenenfiguren"});await expect(cast.locator("figure")).toHaveCount(1);await expect(cast.getByText("Juliette",{exact:true})).toBeVisible();
 });
 
 test("chapter 1 explains evidence terms before their first use",async({page})=>{
