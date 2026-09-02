@@ -2,8 +2,8 @@
 import {useEffect,useRef,useState} from "react";
 import {reviewGroups,reviewTargets,type ReviewTarget} from "./reviewRegistry";
 
-export function ReviewPanel({current,onSelect,onDisable}:{current:ReviewTarget;onSelect:(target:ReviewTarget)=>void;onDisable:()=>void}){
- const[open,setOpen]=useState(false);const panelRef=useRef<HTMLElement>(null);const triggerRef=useRef<HTMLButtonElement>(null);
+export function ReviewPanel({current,initialOpen=false,onSelect,onDisable}:{current:ReviewTarget;initialOpen?:boolean;onSelect:(target:ReviewTarget)=>void;onDisable:()=>void}){
+ const[open,setOpen]=useState(initialOpen);const panelRef=useRef<HTMLElement>(null);const triggerRef=useRef<HTMLButtonElement>(null);
  useEffect(()=>{if(!open)return;panelRef.current?.querySelector<HTMLElement>("button,[href],select")?.focus();const key=(event:KeyboardEvent)=>{if(event.key==="Escape"){setOpen(false);queueMicrotask(()=>triggerRef.current?.focus())}};document.addEventListener("keydown",key);return()=>document.removeEventListener("keydown",key)},[open]);
  const index=reviewTargets.findIndex(target=>target.id===current.id);const move=(offset:number)=>onSelect(reviewTargets[Math.min(reviewTargets.length-1,Math.max(0,index+offset))]);
  return <div className={`review-navigation ${open?"is-open":""}`}>

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { chapter02PrimaryById, practiceClaims, transferTasks } from "../../src/games/dramatik/data/chapter_02_content";
-import { transferChain, transferCountercheckOptions, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
+import { transferChain, transferCountercheckOptions, transferHypotheses, transferRefined, transferRefinementParts } from "../../src/games/dramatik/data/chapter_05_content";
 
 test.beforeEach(async ({ page }) => { await page.goto("/dramatik"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
 
@@ -120,12 +120,13 @@ test("chapter 5 transfer chain is keyboard operable, persistent and responsive",
  await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await page.getByRole("button",{name:new RegExp(transferChain[0].text.slice(0,18))}).press("Enter");await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();await expect(page.getByRole("listitem").filter({hasText:"Meine Dürftigkeit"})).toBeVisible();await page.setViewportSize({width:1024,height:768});expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth)).toBe(true);await expect(page.getByRole("heading",{name:"Was bedeutet das?"})).toBeVisible();
 });
 
-test("chapter 5 requires a real hypothesis revision and does not write staging",async({page})=>{
+test("chapter 5 persists its real hypothesis refinement and does not write staging",async({page})=>{
  const chapter05={round:16,transferHypothesis:transferHypotheses.find(item=>item.quality==="supported")!.text,transferCountercheck:"apothecary_resists",failedAttempts:0,competencyEvents:[]};
  const state={version:1,currentGame:"dramatik",currentChapter:"chapter_05",completedChapters:["chapter_01","chapter_02","chapter_03","chapter_04"],decisions:{chapter_05:chapter05},competencies:{},failedAttempts:{},stagingDecisions:{chapter_04:{}},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_4",settings:{music:false,soundEffects:false,reducedMotion:true},lastSavedAt:new Date().toISOString()};
  await page.evaluate(saved=>localStorage.setItem("lernwerkstatt-games:state:v1",JSON.stringify(saved)),state);await page.reload();await page.getByRole("button",{name:"Fortsetzen"}).click();
- await page.getByRole("button",{name:chapter05.transferHypothesis}).click();await expect(page.getByRole("status")).toContainText("tatsächliche");expect((await page.evaluate(()=>JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!).decisions.chapter_05.transferRevision))).toBeUndefined();
- await page.getByRole("button",{name:transferRefined}).click();const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!));expect(saved.decisions.chapter_05.transferRevision).toBe(transferRefined);expect(saved.stagingDecisions.chapter_05_revision).toBeUndefined();
+ expect((await page.evaluate(()=>JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!).decisions.chapter_05.transferRevision))).toBeUndefined();
+ for(const part of transferRefinementParts)await page.getByRole("button",{name:part.text,exact:true}).click();
+ const saved=await page.evaluate(()=>JSON.parse(localStorage.getItem("lernwerkstatt-games:state:v1")!));expect(saved.decisions.chapter_05.transferRevision).toBe(transferRefined);expect(saved.stagingDecisions.chapter_05_revision).toBeUndefined();
 });
 
 test("finale synthesizes the learning path, restores the book, replays and survives reload", async ({ page }) => {

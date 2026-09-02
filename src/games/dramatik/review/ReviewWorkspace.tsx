@@ -21,7 +21,7 @@ import {reviewTargetById,type ReviewChapterId,type ReviewTarget} from "./reviewR
 
 type ReviewSession=Chapter01Session|Chapter02Session|Chapter03Session|Chapter04Session|Chapter05Session;
 
-export function ReviewWorkspace({initialTargetId,onDisable}:{initialTargetId:string;onDisable:()=>void}){
+export function ReviewWorkspace({initialTargetId,initialNavigationOpen=false,onDisable}:{initialTargetId:string;initialNavigationOpen?:boolean;onDisable:()=>void}){
  const[target,setTarget]=useState<ReviewTarget>(()=>reviewTargetById(initialTargetId));
  const[state,setState]=useState<GameState>(()=>stateForTarget(reviewTargetById(initialTargetId)));
  const select=(next:ReviewTarget)=>{setTarget(next);setState(stateForTarget(next));const url=new URL(window.location.href);url.searchParams.set("review","1");url.searchParams.set("step",next.id);url.searchParams.delete("chapter");url.searchParams.delete("round");window.history.replaceState({},"",url)};
@@ -37,7 +37,8 @@ export function ReviewWorkspace({initialTargetId,onDisable}:{initialTargetId:str
   if(target.chapterId==="chapter_04")return <Chapter04 {...props} onSave={session=>save("chapter_04",session)} onComplete={session=>save("chapter_04",session)}/>;
   return <Chapter05 {...props} onSave={session=>save("chapter_05",session)} onComplete={session=>save("chapter_05",session)}/>;
  },[state,target]);
- return <div className="review-workspace"><div className="review-banner" role="status">PRÜFMODUS · Änderungen werden nicht gespeichert und nicht bewertet.</div><div key={target.id}>{content}</div>{target.kind==="chapter"&&target.completion&&<ChapterCompletion chapterId={target.chapterId} onExit={()=>select(reviewTargetById("theatre-initial"))}/>}<ReviewPanel current={target} onSelect={select} onDisable={onDisable}/></div>;
+ const isolatedChapter05Completion=target.kind==="chapter"&&target.chapterId==="chapter_05"&&target.completion;
+ return <div className="review-workspace"><div className="review-banner" role="status">PRÜFMODUS · Änderungen werden nicht gespeichert und nicht bewertet.</div><div key={target.id} className={isolatedChapter05Completion?"review-chapter05-completion":undefined}>{isolatedChapter05Completion?<ChapterCompletion chapterId="chapter_05" onExit={()=>select(reviewTargetById("theatre-initial"))}/>:content}</div>{target.kind==="chapter"&&target.completion&&!isolatedChapter05Completion&&<ChapterCompletion chapterId={target.chapterId} onExit={()=>select(reviewTargetById("theatre-initial"))}/>}<ReviewPanel current={target} initialOpen={initialNavigationOpen} onSelect={select} onDisable={onDisable}/></div>;
 }
 
 function stateForTarget(target:ReviewTarget):GameState{

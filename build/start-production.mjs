@@ -18,7 +18,7 @@ const port = Number.parseInt(process.env.PORT ?? "3000", 10);
 const host = process.env.HOSTNAME ?? "0.0.0.0";
 const internal = await startProdServer({ port: 0, host: "127.0.0.1", outDir: runtime, purpose: "internal" });
 const clientRoot = resolve(runtime, "client");
-const contentTypes = { ".js": "application/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".woff2": "font/woff2" };
+const contentTypes = { ".js": "application/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml", ".png": "image/png", ".jpg": "image/jpeg", ".webp": "image/webp", ".woff2": "font/woff2", ".mp3": "audio/mpeg" };
 
 // Vinext 0.0.50 stores Windows cache keys with backslashes and consequently
 // returns 404 for its own /assets URLs. Serve immutable client assets here and

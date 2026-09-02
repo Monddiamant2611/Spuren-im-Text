@@ -37,11 +37,12 @@ export function GameShell() {
   const [hydrated, setHydrated] = useState(false);
   const [storageWarning, setStorageWarning] = useState(false);
   const [reviewTargetId,setReviewTargetId]=useState<string|null>(null);
+  const [reviewNavigationOpen,setReviewNavigationOpen]=useState(false);
   const audio = useRef<AudioManager | null>(null);
 
   useEffect(() => {
     audio.current = new AudioManager();
-    const timer = window.setTimeout(() => { const params=new URLSearchParams(window.location.search);if(params.get("review")==="1"){const direct=params.get("step");const chapter=params.get("chapter");const round=params.get("round");const legacy=chapter&&round?`chapter_0${Number(chapter)}-round-${Number(round)}`:null;setReviewTargetId(reviewTargetById(direct??legacy??"theatre-initial").id)}setState(loadGameState()); setHydrated(true); }, 0);
+    const timer = window.setTimeout(() => { const params=new URLSearchParams(window.location.search);if(params.get("review")==="1"){const direct=params.get("step");const chapter=params.get("chapter");const round=params.get("round");const legacy=chapter&&round?`chapter_0${Number(chapter)}-round-${Number(round)}`:null;setReviewTargetId(reviewTargetById(direct??legacy??"theatre-initial").id);setReviewNavigationOpen(params.get("panel")==="1")}const loaded=loadGameState();audio.current?.setMusicEnabled(loaded.settings.music);audio.current?.setEffectsEnabled(loaded.settings.soundEffects);setState(loaded);setHydrated(true); }, 0);
     return () => window.clearTimeout(timer);
   }, []);
   useEffect(() => { const warn = () => setStorageWarning(true); window.addEventListener("lernwerkstatt:storage-error", warn); return () => window.removeEventListener("lernwerkstatt:storage-error", warn); }, []);
@@ -53,9 +54,9 @@ export function GameShell() {
     const stored = saveGameState(withTheatre); setState(stored);
   };
 
-  const begin = () => { if (state.currentGame && !window.confirm("Soll ein neues Spiel begonnen und der vorhandene Spielstand ersetzt werden?")) return; persist(createNewGameState()); setScreen("theatre"); };
+  const begin = () => { if (state.currentGame && !window.confirm("Soll ein neues Spiel begonnen und der vorhandene Spielstand ersetzt werden?")) return; const next=createNewGameState();persist(next);audio.current?.setMusicEnabled(next.settings.music);audio.current?.startMusic();setScreen("theatre"); };
   const resume = () => {
-    const loaded = loadGameState(); setState(loaded);
+    const loaded = loadGameState(); setState(loaded);audio.current?.setMusicEnabled(loaded.settings.music);audio.current?.startMusic();
     if (loaded.currentChapter === "chapter_01" && !loaded.completedChapters.includes("chapter_01")) setScreen("chapter_01");
     else if (loaded.currentChapter === "chapter_02" && !loaded.completedChapters.includes("chapter_02")) setScreen("chapter_02");
     else if (loaded.currentChapter === "chapter_03" && !loaded.completedChapters.includes("chapter_03")) setScreen("chapter_03");
@@ -76,7 +77,7 @@ export function GameShell() {
   };
   const updateSettings = (patch: Partial<GameSettings>) => {
     const settings = { ...state.settings, ...patch };
-    audio.current?.setMusicEnabled(settings.music); audio.current?.setEffectsEnabled(settings.soundEffects);
+    audio.current?.setMusicEnabled(settings.music); audio.current?.setEffectsEnabled(settings.soundEffects);if(settings.music)audio.current?.startMusic();
     persist({ ...state, settings });
   };
   const reset = () => {
@@ -115,17 +116,20 @@ export function GameShell() {
     const completed = patch.finaleCompleted === true;
     persist({ ...state, ...snapshot, ...patch, currentChapter: "finale", progress: { ...state.progress, finale_ready: true, ...(completed ? { finale_completed: true, game_completed: true } : {}) } });
   };
+  const enableReviewMode = () => {
+    const target=reviewTargetById("theatre-initial");const url=new URL(window.location.href);url.searchParams.set("review","1");url.searchParams.set("step",target.id);url.searchParams.set("panel","1");window.history.replaceState({},"",url);setOverlay(null);setReviewNavigationOpen(true);setReviewTargetId(target.id);
+  };
   const renderWithStatus = (content: ReactNode) => <>{storageWarning && <div className="storage-warning" role="status">Der Spielstand kann momentan nicht dauerhaft gespeichert werden. Sie können in dieser Sitzung weiterarbeiten.</div>}{content}{screen.startsWith("chapter_")&&state.completedChapters.includes(screen)&&<ChapterCompletion chapterId={screen} onExit={()=>setScreen("theatre")}/>}</>;
 
   if (!hydrated) return renderWithStatus(<main className="loading-screen" aria-label="Spiel wird geladen"><span>Das Theater öffnet …</span></main>);
-  if(reviewTargetId)return <ReviewWorkspace initialTargetId={reviewTargetId} onDisable={()=>{const url=new URL(window.location.href);url.search="";window.history.replaceState({},"",url);setReviewTargetId(null);setScreen("theatre")}}/>;
+  if(reviewTargetId)return <ReviewWorkspace key={reviewNavigationOpen?"review-panel-open":"review-panel-closed"} initialTargetId={reviewTargetId} initialNavigationOpen={reviewNavigationOpen} onDisable={()=>{const url=new URL(window.location.href);url.search="";window.history.replaceState({},"",url);setReviewNavigationOpen(false);setReviewTargetId(null);setScreen("theatre")}}/>;
   if (screen === "chapter_01") return renderWithStatus(<Chapter01 gameState={state} onSave={saveChapter01} onExit={() => setScreen("theatre")} onComplete={completeChapter01} />);
   if (screen === "chapter_02") return renderWithStatus(<Chapter02 gameState={state} onSave={saveChapter02} onExit={() => setScreen("theatre")} onComplete={completeChapter02} />);
   if (screen === "chapter_03") return renderWithStatus(<Chapter03 gameState={state} onSave={saveChapter03} onExit={() => setScreen("theatre")} onComplete={completeChapter03} />);
   if (screen === "chapter_04") return renderWithStatus(<Chapter04 gameState={state} onSave={saveChapter04} onExit={() => setScreen("theatre")} onComplete={completeChapter04} />);
   if (screen === "chapter_05") return renderWithStatus(<Chapter05 gameState={state} onSave={saveChapter05} onExit={() => setScreen("theatre")} onComplete={completeChapter05} />);
   if (screen === "finale") return renderWithStatus(<Finale state={state} onUpdate={updateFinale} onExit={() => setScreen("theatre")} />);
-  if (screen === "start") return renderWithStatus(<StartScreen saved={state.currentGame !== null} onBegin={begin} onResume={resume} onBook={() => setScreen("finale")} onOverlay={setOverlay} overlay={overlay} state={state} onSettings={updateSettings} onReset={reset} />);
+  if (screen === "start") return renderWithStatus(<StartScreen saved={state.currentGame !== null} onBegin={begin} onResume={resume} onBook={() => setScreen("finale")} onOverlay={setOverlay} overlay={overlay} state={state} onSettings={updateSettings} onReset={reset} onReview={enableReviewMode} />);
 
   return (
     <main className={`game-shell theatre-${state.theatreState.toLowerCase()} ${state.settings.reducedMotion ? "reduce-motion" : ""}`}>
@@ -161,20 +165,20 @@ export function GameShell() {
       </section>
       <div className="feedback-bar" role="status"><span aria-hidden="true">◆</span> Das Theater befindet sich im Zustand <strong>{state.theatreState.replaceAll("_", " ")}</strong>.</div>
       {storageWarning && <div className="storage-warning" role="status">Der Spielstand kann momentan nicht dauerhaft gespeichert werden. Sie können in dieser Sitzung weiterarbeiten.</div>}
-      {overlay && <OverlayPanel type={overlay} chapter={chapter} state={state} onClose={() => setOverlay(null)} onSettings={updateSettings} onReset={reset} />}
+      {overlay && <OverlayPanel type={overlay} chapter={chapter} state={state} onClose={() => setOverlay(null)} onSettings={updateSettings} onReset={reset} onReview={enableReviewMode} />}
     </main>
   );
 }
 
-function StartScreen({ saved, onBegin, onResume, onBook, onOverlay, overlay, state, onSettings, onReset }: { saved: boolean; onBegin: () => void; onResume: () => void; onBook: () => void; onOverlay: (value: Overlay) => void; overlay: Overlay; state: GameState; onSettings: (value: Partial<GameSettings>) => void; onReset: () => void }) {
-  return <main className={`start-screen ${state.settings.reducedMotion ? "reduce-motion" : ""}`}><AssetImage id="bg_theatre_main" className="start-background" loading="eager" decorative/><div className="start-shade" aria-hidden="true"/><div className="start-frame"><div className="start-ornament" aria-hidden="true">◆</div><p className="eyebrow">Lernwerkstatt · Dramatik</p><h1>DIE LETZTE<br/>AUFFÜHRUNG</h1><p className="subtitle">Das verlorene Regiebuch</p><p className="intro">Die Vorstellung steht kurz bevor.<br/>Doch das Regiebuch ist beschädigt, das Ensemble ungeordnet und die Bühne noch nicht bereit.<br/>Bringen Sie das Theater wieder zum Leben.</p><div className="start-actions"><button className="primary-action" onClick={onBegin}>Spiel beginnen</button>{saved && <button onClick={onResume}>Fortsetzen</button>}{state.gameCompleted && <button onClick={onBook}>Regiebuch ansehen</button>}<button onClick={() => onOverlay("options")}>Optionen</button><button onClick={() => onOverlay("sources")}>Textgrundlage &amp; Quellen</button></div></div>{overlay && <OverlayPanel type={overlay} state={state} onClose={() => onOverlay(null)} onSettings={onSettings} onReset={onReset} />}</main>;
+function StartScreen({ saved, onBegin, onResume, onBook, onOverlay, overlay, state, onSettings, onReset, onReview }: { saved: boolean; onBegin: () => void; onResume: () => void; onBook: () => void; onOverlay: (value: Overlay) => void; overlay: Overlay; state: GameState; onSettings: (value: Partial<GameSettings>) => void; onReset: () => void; onReview: () => void }) {
+  return <main className={`start-screen ${state.settings.reducedMotion ? "reduce-motion" : ""}`}><AssetImage id="bg_theatre_main" className="start-background" loading="eager" decorative/><div className="start-shade" aria-hidden="true"/><div className="start-frame"><div className="start-ornament" aria-hidden="true">◆</div><p className="eyebrow">Lernwerkstatt · Dramatik</p><h1>DIE LETZTE<br/>AUFFÜHRUNG</h1><p className="subtitle">Das verlorene Regiebuch</p><p className="intro">Die Vorstellung steht kurz bevor.<br/>Doch das Regiebuch ist beschädigt, das Ensemble ungeordnet und die Bühne noch nicht bereit.<br/>Bringen Sie das Theater wieder zum Leben.</p><div className="start-actions"><button className="primary-action" onClick={onBegin}>Spiel beginnen</button>{saved && <button onClick={onResume}>Fortsetzen</button>}{state.gameCompleted && <button onClick={onBook}>Regiebuch ansehen</button>}<button onClick={() => onOverlay("options")}>Optionen</button><button onClick={() => onOverlay("sources")}>Textgrundlage &amp; Quellen</button></div></div>{overlay && <OverlayPanel type={overlay} state={state} onClose={() => onOverlay(null)} onSettings={onSettings} onReset={onReset} onReview={onReview} />}</main>;
 }
 
 function ProgressIndicator({ completed }: { completed: string[] }) {
   return <ol className="progress-indicator" aria-label="Spielfortschritt">{progressMarks.map((label, index) => { const id = `chapter_0${index + 1}`; const status = completed.includes(id) ? "completed" : isChapterUnlocked(id, completed) ? "available" : "locked"; return <li key={label} className={status} aria-label={`${label}: ${status === "completed" ? "abgeschlossen" : status === "available" ? "verfügbar" : "gesperrt"}`}><span aria-hidden="true">{status === "completed" ? "◆" : status === "available" ? "◇" : "·"}</span><small>{label}</small></li>; })}</ol>;
 }
 
-function OverlayPanel({ type, chapter, state, onClose, onSettings, onReset }: { type: Exclude<Overlay, null>; chapter?: { id: string; title: string }; state: GameState; onClose: () => void; onSettings: (value: Partial<GameSettings>) => void; onReset: () => void }) {
+function OverlayPanel({ type, chapter, state, onClose, onSettings, onReset, onReview }: { type: Exclude<Overlay, null>; chapter?: { id: string; title: string }; state: GameState; onClose: () => void; onSettings: (value: Partial<GameSettings>) => void; onReset: () => void; onReview: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
   const panelRef = useRef<HTMLElement>(null);
   const returnFocusRef = useRef<HTMLElement | null>(typeof document === "undefined" ? null : document.activeElement instanceof HTMLElement ? document.activeElement : null);
@@ -193,7 +197,7 @@ function OverlayPanel({ type, chapter, state, onClose, onSettings, onReset }: { 
     if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   };
-  return <div className="overlay-backdrop" role="presentation" onKeyDown={handleKeyDown} onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section ref={panelRef} className="overlay-panel" role="dialog" aria-modal="true" aria-labelledby="overlay-title"><button ref={closeRef} className="close-button" onClick={onClose} aria-label="Fenster schließen">×</button>{type === "chapter" && <><p className="overlay-kicker">Kapitel</p><h2 id="overlay-title">{chapter?.id === "finale" ? "Finale" : `Kapitel ${Number(chapter?.id.slice(-2))}`} – {chapter?.title}</h2></>}{type === "sources" && <><p className="overlay-kicker">Textgrundlage &amp; Quellen</p><h2 id="overlay-title">{dramatikSource.author}<br/><cite>„{dramatikSource.work}“</cite></h2><dl><dt>Deutsche Textgrundlage</dt><dd>Übersetzung von {dramatikSource.translation}</dd><dt>Primärtextgrundlage</dt><dd>{dramatikSource.primaryTextBasis}</dd></dl><p>Literarische Primärtexte werden in diesem Spiel wortgetreu aus der im Projekt hinterlegten Wieland-Ausgabe übernommen. Didaktische Erläuterungen und Interpretationen werden davon deutlich getrennt.</p></>}{type === "options" && <><p className="overlay-kicker">Einstellungen</p><h2 id="overlay-title">Optionen</h2><div className="settings"><Toggle label="Musik" checked={state.settings.music} onChange={(music) => onSettings({ music })}/><Toggle label="Soundeffekte" checked={state.settings.soundEffects} onChange={(soundEffects) => onSettings({ soundEffects })}/><Toggle label="Bewegungen reduzieren" checked={state.settings.reducedMotion} onChange={(reducedMotion) => onSettings({ reducedMotion })}/></div><button className="danger-button" onClick={onReset}>Spielstand zurücksetzen</button></>}{type === "regiebuch" && <><p className="overlay-kicker">Zentrales Regiebuch</p><h2 id="overlay-title">Das verlorene Regiebuch</h2><div className="book-grid"><section><h3>Kapitelübersicht</h3><ol>{dramatikGame.chapters.slice(0,5).map((item) => <li key={item.id}>{item.title}<span>{state.completedChapters.includes(item.id) ? "Abgeschlossen" : "Noch ohne Eintrag"}</span></li>)}</ol></section><section><h3>Lernweg</h3><p className="placeholder-note">Das vollständige Regiebuch mit Kompetenzübersicht und Deutung öffnet sich nach der letzten Probe.</p></section></div></>}</section></div>;
+  return <div className="overlay-backdrop" role="presentation" onKeyDown={handleKeyDown} onMouseDown={(event) => event.target === event.currentTarget && onClose()}><section ref={panelRef} className="overlay-panel" role="dialog" aria-modal="true" aria-labelledby="overlay-title"><button ref={closeRef} className="close-button" onClick={onClose} aria-label="Fenster schließen">×</button>{type === "chapter" && <><p className="overlay-kicker">Kapitel</p><h2 id="overlay-title">{chapter?.id === "finale" ? "Finale" : `Kapitel ${Number(chapter?.id.slice(-2))}`} – {chapter?.title}</h2></>}{type === "sources" && <><p className="overlay-kicker">Textgrundlage &amp; Quellen</p><h2 id="overlay-title">{dramatikSource.author}<br/><cite>„{dramatikSource.work}“</cite></h2><dl><dt>Deutsche Textgrundlage</dt><dd>Übersetzung von {dramatikSource.translation}</dd><dt>Primärtextgrundlage</dt><dd>{dramatikSource.primaryTextBasis}</dd></dl><p>Literarische Primärtexte werden in diesem Spiel wortgetreu aus der im Projekt hinterlegten Wieland-Ausgabe übernommen. Didaktische Erläuterungen und Interpretationen werden davon deutlich getrennt.</p></>}{type === "options" && <><p className="overlay-kicker">Einstellungen</p><h2 id="overlay-title">Optionen</h2><div className="settings"><Toggle label="Hintergrundmusik" checked={state.settings.music} onChange={(music) => onSettings({ music })}/><Toggle label="Soundeffekte" checked={state.settings.soundEffects} onChange={(soundEffects) => onSettings({ soundEffects })}/><Toggle label="Bewegungen reduzieren" checked={state.settings.reducedMotion} onChange={(reducedMotion) => onSettings({ reducedMotion })}/></div>{process.env.NODE_ENV!=="production"&&<div className="review-dev-entry"><p>Lokale Entwicklungsprüfung ohne Speicherung und Bewertung.</p><button type="button" onClick={onReview}>Prüfmodus</button></div>}<button className="danger-button" onClick={onReset}>Spielstand zurücksetzen</button></>}{type === "regiebuch" && <><p className="overlay-kicker">Zentrales Regiebuch</p><h2 id="overlay-title">Das verlorene Regiebuch</h2><div className="book-grid"><section><h3>Kapitelübersicht</h3><ol>{dramatikGame.chapters.slice(0,5).map((item) => <li key={item.id}>{item.title}<span>{state.completedChapters.includes(item.id) ? "Abgeschlossen" : "Noch ohne Eintrag"}</span></li>)}</ol></section><section><h3>Lernweg</h3><p className="placeholder-note">Das vollständige Regiebuch mit Kompetenzübersicht und Deutung öffnet sich nach der letzten Probe.</p></section></div></>}</section></div>;
 }
 
 function Toggle({ label, checked, onChange }: { label: string; checked: boolean; onChange: (value: boolean) => void }) { return <label className="toggle"><span>{label}</span><input type="checkbox" checked={checked} onChange={(event) => onChange(event.target.checked)}/><span className="switch" aria-hidden="true"/></label>; }

@@ -2,7 +2,7 @@ import { expect, test, type Page } from "@playwright/test";
 import { characterizationCards, chapter02PrimaryById, comparisonCards, ensembleLinks, highlightReasoning, highlightTasks, momentClaims, momentPractice, practiceClaims, relationshipPractice, relevancePractice, rolePractice, relationshipTasks, roleTasks, selfOtherPractice, selfOtherTasks, shakespeareCharacterizationCards, transferTasks } from "../../src/games/dramatik/data/chapter_02_content";
 import { chapter03Source, comparisonTasks as chapter03Comparisons, goalTasks as chapter03Goals, initiativeTasks as chapter03Initiative, initiativeTurning, languageTasks as chapter03Language, mainEvidenceLabels, mainSections, miniAnalysis, neutralBoundary, neutralLanguage, neutralPhases, practiceActs as chapter03Practice, speechTasks as chapter03Speech, stageEffectTask, transferSections, transferTasks as chapter03Transfer, turningPoints } from "../../src/games/dramatik/data/chapter_03_content";
 import { causalIntro, chain, chainLinks, comparisonAspects, conflictTypes, dramaticCurve, escalationCards, finalConnections, finalCurve, finalEvidence, finalMeaningOptions, finalTransferOptions, generalEpistemicPractice, generalEvidenceTasks, generalGoalTasks, goals as chapter04Goals, historyPractice, internalPreparation, introFacts, julietAlternatives, julietCards, julietSequence, knowledgeCards, neutralActionChains, neutralTurningPoints, situationCards, tombActionChains } from "../../src/games/dramatik/data/chapter_04_content";
-import { argumentBlocks, classificationCards, commonErrors, generalChain, hypothesisOptions, interpretationStructure, julietCountercheckOptions, julietFindings, julietHypothesis, julietReverseChain, transferArgument, transferChain, transferCountercheckOptions, transferEvidence, transferHypotheses, transferRefined } from "../../src/games/dramatik/data/chapter_05_content";
+import { argumentBlocks, classificationCards, commonErrors, errorRepairs, generalChain, generalCountercheckOptions, hypothesisOptions, interpretationStructure, julietCountercheckOptions, julietFindings, julietRefinementParts, julietReverseChain, synthesisSteps, transferArgument, transferChain, transferCountercheckOptions, transferEvidence, transferHypotheses, transferRefinementParts } from "../../src/games/dramatik/data/chapter_05_content";
 import { analysisErrorPractice, categoryPractice, certaintyClaims, certaintyPractice, consolidationGroups, historyConditionPractice, signalChainPractice, situationEvidence, streetSituationCards, transferSituationGroups } from "../../src/games/dramatik/data/chapter_01_content";
 
 test.beforeEach(async ({ page }) => { await page.goto("/dramatik"); await page.evaluate(() => localStorage.clear()); await page.reload(); });
@@ -161,22 +161,20 @@ test("complete learning path reaches the restored director's book without a dead
   await completeChapter04(page);
   await leaveChapter(page);
   await page.getByRole("button", { name: /Regiebuch: verfügbar/ }).click();
-  await page.getByRole("button",{name:"Analyse beginnen"}).click();
-
-  for(const item of classificationCards)await selectAndPlace(page,item.text,({observation:"Textbeobachtung",analysis:"Analyse",interpretation:"Interpretation",unsupported:"nicht ausreichend belegt"} as Record<string,string>)[item.target]);
+  for(const item of classificationCards)await selectAndPlace(page,item.text,item.target==="observation"?"Textbefund":"geht über die Beobachtung hinaus");
   for(const item of generalChain)await page.getByRole("button",{name:new RegExp(item.text.slice(0,18))}).click();
-  await page.getByRole("button",{name:hypothesisOptions.find(x=>x.quality==="supported")!.text}).click();await page.getByRole("button",{name:/durch den widersprüchlichen zweiten Satz präzisieren/}).click();
+  await page.getByRole("button",{name:hypothesisOptions.find(x=>x.quality==="supported")!.text}).click();await page.getByRole("button",{name:generalCountercheckOptions.find(item=>item.action==="refine")!.text}).click();
   for(const item of julietFindings)await selectAndPlace(page,item.text,item.accepted[0]==="direct"?"stützt unmittelbar":item.accepted[0]==="supplement"?"ergänzt":"kaum relevant");
   for(const item of [...julietReverseChain].reverse())await page.getByRole("button",{name:new RegExp(item.text.slice(0,16))}).click();
-  await page.getByRole("button",{name:julietCountercheckOptions.find(item=>item.id==="juliet_has_agency")!.text,exact:true}).click();await page.getByRole("button",{name:julietHypothesis}).click();
+  await page.getByRole("button",{name:julietCountercheckOptions.find(item=>item.id==="juliet_has_agency")!.text,exact:true}).click();for(const part of julietRefinementParts)await page.getByRole("button",{name:part.text,exact:true}).click();
   for(const item of argumentBlocks)await page.getByRole("button",{name:new RegExp(item.text.slice(0,16))}).click();
-  for(const item of commonErrors)await selectAndPlace(page,item.text,({evidence_without_analysis:"Beleg ohne Analyse",unsupported_claim:"unbelegte Behauptung",summary_only:"bloße Inhaltsangabe"} as Record<string,string>)[item.target]);
+  for(const item of commonErrors){await selectAndPlace(page,item.text,({evidence_without_analysis:"Beleg ohne Analyse",unsupported_claim:"unbelegte Behauptung",summary_only:"bloße Inhaltsangabe",overinterpretation:"Überinterpretation",missing_link:"fehlende Rückbindung"} as Record<string,string>)[item.target]);await page.getByRole("button",{name:errorRepairs.find(entry=>entry.id===item.id)!.text}).click()}
   for(const text of interpretationStructure)await page.getByRole("button",{name:text}).click();
   for(const item of transferEvidence.filter(x=>x.relevance!=="little").slice(0,4))await page.getByRole("button",{name:item.text}).click();
   for(const item of transferChain)await page.getByRole("button",{name:new RegExp(item.text.slice(0,18))}).click();
-  await page.getByRole("button",{name:transferHypotheses.find(x=>x.quality==="supported")!.text}).click();await page.getByRole("button",{name:transferCountercheckOptions.find(item=>item.id==="apothecary_resists")!.text,exact:true}).click();await page.getByRole("button",{name:transferRefined}).click();
+  await page.getByRole("button",{name:transferHypotheses.find(x=>x.quality==="supported")!.text}).click();await page.getByRole("button",{name:transferCountercheckOptions.find(item=>item.id==="apothecary_resists")!.text,exact:true}).click();for(const part of transferRefinementParts)await page.getByRole("button",{name:part.text,exact:true}).click();
   for(const item of transferArgument)await page.getByRole("button",{name:new RegExp(item.text.slice(0,18))}).click();
-  await page.getByRole("button",{name:/Gegenbelege bestimmen ihre Reichweite/}).click();await page.getByRole("button",{name:"Kapitel abschließen"}).click();
+  for(const item of synthesisSteps)await page.getByRole("button",{name:item.text,exact:true}).click();await page.getByRole("button",{name:"Zur großen Bühne"}).click();
   await leaveChapter(page);
 
   await page.getByRole("button", { name: /Finale: Die letzte Probe/ }).click();

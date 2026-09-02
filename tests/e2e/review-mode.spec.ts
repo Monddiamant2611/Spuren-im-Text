@@ -5,6 +5,18 @@ const sentinel={version:1,currentGame:"dramatik",currentChapter:"chapter_01",com
 
 test("normal mode contains no review interface",async({page})=>{await page.goto("/dramatik");await expect(page.getByRole("button",{name:"PRÜFMODUS"})).toHaveCount(0);await expect(page.getByText(/Keine Speicherung/)).toHaveCount(0)});
 
+test("development options open the visible review navigation without changing the student save",async({page})=>{
+ await page.goto("/dramatik");await page.evaluate(({key,sentinel})=>localStorage.setItem(key,JSON.stringify(sentinel)),{key,sentinel});await page.reload();
+ await page.getByRole("button",{name:"Optionen"}).click();await page.getByRole("button",{name:"Prüfmodus",exact:true}).click();
+ await expect(page).toHaveURL(/review=1/);await expect(page).toHaveURL(/panel=1/);await expect(page.getByText("PRÜFMODUS · Änderungen werden nicht gespeichert und nicht bewertet.",{exact:true})).toBeVisible();
+ let panel=page.getByRole("complementary",{name:"Interne Entwicklungsnavigation"});await expect(panel).toBeVisible();
+ await page.reload();panel=page.getByRole("complementary",{name:"Interne Entwicklungsnavigation"});await expect(panel).toBeVisible();
+ for(const chapter of ["Kapitel 1","Kapitel 2","Kapitel 3","Kapitel 4","Kapitel 5"])await expect(panel.getByText(chapter,{exact:true})).toBeVisible();
+ await panel.getByText("Kapitel 5",{exact:true}).click();await panel.getByRole("button",{name:"Juliette: Belege rückwärts prüfen",exact:true}).click();await expect(page.getByText("Station 6 von 18")).toBeVisible();
+ await page.getByRole("button",{name:"PRÜFMODUS"}).click();panel=page.getByRole("complementary",{name:"Interne Entwicklungsnavigation"});await panel.getByRole("button",{name:"Kapitelabschluss",exact:true}).click();await expect(page.getByText("DIE DEUTUNG IST BEGRÜNDET.",{exact:true})).toBeVisible();await expect(page.locator(".chapter05-desk")).toHaveCount(0);
+ await page.getByRole("button",{name:"PRÜFMODUS"}).click();await page.getByRole("button",{name:"Prüfmodus ausschalten"}).click();await expect(page).toHaveURL(/\/dramatik$/);expect(await page.evaluate(key=>localStorage.getItem(key),key)).toBe(JSON.stringify(sentinel));
+});
+
 test("review deep-link opens locked chapter 5 without touching the student save",async({page})=>{
  await page.goto("/dramatik");await page.evaluate(({key,sentinel})=>localStorage.setItem(key,JSON.stringify(sentinel)),{key,sentinel});await page.goto("/dramatik?review=1&step=chapter_05-round-12");await expect(page.getByText(/PRÜFMODUS · Änderungen werden nicht gespeichert/)).toBeVisible();await expect(page.getByText("Station 12 von 18")).toBeVisible();expect(await page.evaluate(key=>localStorage.getItem(key),key)).toBe(JSON.stringify(sentinel));
 });
