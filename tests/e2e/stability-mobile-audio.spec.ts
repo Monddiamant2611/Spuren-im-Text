@@ -77,6 +77,24 @@ test("mobile smoke keeps representative game areas reachable without horizontal 
   }
 });
 
+for(const viewport of [{width:360,height:800},{width:390,height:844},{width:430,height:932}]){
+  test(`chapter workspaces use a compact single-column phone composition at ${viewport.width}x${viewport.height}`,async({page})=>{
+    await page.setViewportSize(viewport);
+    for(const step of ["chapter_01-round-13","chapter_02-round-15","chapter_03-round-8","chapter_04-round-8","chapter_04-round-16","chapter_05-round-5","chapter_05-round-12"]){
+      await page.goto(`/dramatik?review=1&step=${step}`);
+      expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1),`${step} document overflow`).toBe(true);
+      const layout=page.locator(".transfer-analysis-layout,.chapter-two-transfer-layout,.text-analysis-layout,.chapter04-text-layout,.chapter05-layout").first();
+      if(await layout.count())expect((await layout.evaluate(element=>getComputedStyle(element).gridTemplateColumns)).split(" ").length,`${step} columns`).toBe(1);
+      const sceneImages=page.locator(".scene-character-image:visible");
+      const heights=await sceneImages.evaluateAll(elements=>elements.map(element=>element.getBoundingClientRect().height));
+      expect(Math.max(0,...heights),`${step} figure height`).toBeLessThanOrEqual(viewport.height*.34);
+      const controls=page.locator("main button:visible,main label:visible");
+      const undersized=await controls.evaluateAll(elements=>elements.filter(element=>element.getBoundingClientRect().height<43).length);
+      expect(undersized,`${step} touch targets`).toBe(0);
+    }
+  });
+}
+
 test("music follows the persisted setting and only starts after a user action",async({page})=>{
   await page.addInitScript(()=>{
     const log={plays:0,pauses:0,sources:[] as string[]};

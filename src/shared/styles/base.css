@@ -416,3 +416,67 @@ h1,h2,h3 { font-family:var(--font-display); font-weight:400; }
  .chapter05-source,.chapter05-source p{max-width:100%;overflow-wrap:anywhere}
  .marked-source{scroll-margin-top:7rem}
 }
+
+/* Smartphone-Komposition: Figuren illustrieren, Arbeitsinhalte bestimmen den Fluss. */
+@media(max-width:40rem){
+ .chapter-one-scene,.ensemble-stage,.dialogue-opening,.chapter-04-causality .causal-stage,.chapter05-workshop{min-height:0}
+ .chapter-one-scene{padding:0 .4rem .5rem;overflow:visible}
+ .chapter-one-scene .lorenzo-guide{position:relative;inset:auto;width:min(9rem,34vw);height:min(28dvh,12rem);margin:.25rem auto 0}
+ .chapter-one-scene .regiebuch-workspace{width:100%;margin:0;padding:.65rem;min-height:0}
+ .chapter-one-scene .lorenzo-speech{min-height:0;margin-left:0}
+ .regiebuch-scene,.ensemble-scene{gap:.65rem}
+ .practice-spread,.transfer-ledger,.transfer-analysis-layout,.chapter-two-transfer-layout,.text-analysis-layout,.chapter04-text-layout,.chapter05-layout{grid-template-columns:minmax(0,1fr)}
+ .practice-spread,.transfer-ledger,.transfer-analysis-layout,.chapter-two-transfer-layout,.text-analysis-layout,.chapter04-text-layout{gap:.65rem}
+ .primary-leaf,.practice-manuscript,.ensemble-primary,.chapter04-manuscript,.chapter05-source{width:100%;max-height:none;overflow:visible;font-size:1rem;line-height:1.6}
+ .primary-leaf,.practice-spread article,.chapter04-manuscript article,.chapter05-source{padding:.75rem}
+ .transfer-source-column{position:static}
+ .situation-multiselect,.certainty-racks,.situation-ledger,.relevance-key,.comparison-sources,.connection-role-tabs{grid-template-columns:1fr;gap:.5rem}
+
+ .ensemble-stage{padding:.25rem .4rem .5rem;overflow:visible}
+ .chapter-two .ensemble-lorenzo{position:relative;inset:auto;width:min(8rem,32vw);height:min(27dvh,11rem);margin:.15rem auto 0}
+ .ensemble-dossier{width:100%;min-height:0;margin:0;padding:.65rem}
+ .ensemble-lorenzo-speech,.task-slip,.context-leaf{padding:.7rem .8rem}
+ .dossier-with-portrait{grid-template-columns:1fr}
+ .dossier-portrait{width:min(9rem,42vw);margin-inline:auto}
+ .relationship-portraits,.final-portraits{gap:.4rem}
+ .ensemble-person{width:min(8.5rem,44vw)}
+ .ensemble-person img{height:min(25dvh,9rem)}
+
+ .scene-characters,.chapter05-workshop .scene-characters{position:relative;inset:auto;display:flex;align-items:flex-end;justify-content:center;flex-wrap:nowrap;width:100%;min-height:0;height:auto;margin:.2rem auto .55rem;padding:0 .35rem;gap:.35rem}
+ .scene-character,.scene-character.primary,.chapter05-workshop .scene-character,.chapter05-workshop .scene-character.primary{flex:0 1 min(9rem,44vw);width:min(9rem,44vw);max-width:9rem;margin:0}
+ .scene-character-image,.chapter05-workshop .scene-character-image{width:100%;height:min(29dvh,10rem);max-height:min(29dvh,10rem);object-fit:contain;object-position:center bottom}
+ .scene-character-fallback{height:min(26dvh,8.5rem)}
+ .scene-character figcaption{padding:.2rem .45rem;font-size:.78rem}
+ .scene-characters[data-scene="chapter_01.capulet_paris"] .scene-character.primary{width:min(9rem,44vw)}
+ .scene-characters[data-scene="chapter_01.capulet_paris"] .scene-character-image{height:min(29dvh,10rem)}
+
+ .dialogue-opening{display:grid;width:calc(100% - .75rem);margin:.4rem auto;border-width:.3rem;overflow:visible}
+ .dialogue-opening .scene-characters{min-height:0}
+ .dialogue-opening-card{position:relative;inset:auto;margin:0 .35rem .35rem;padding:.75rem}
+ .chapter-three .dialogue-workbench,.dialogue-tools{width:calc(100% - .75rem);margin-bottom:.75rem}
+ .chapter-three .dialogue-workbench{gap:.6rem}
+ .dialogue-guide,.dialogue-task{padding:.7rem}
+ .dialogue-source-panel{width:100%;padding:.4rem}
+ .source-card{font-size:1rem;line-height:1.6}
+
+ .chapter-04-causality .causal-stage{padding:.25rem 0 .5rem}
+ .chapter-04-causality .causal-board{width:calc(100% - .75rem);margin:.25rem auto;padding:.7rem}
+ .chapter04-manuscript{padding:.35rem}
+ .chapter04-manuscript>div{padding:.25rem}
+ .causal-board,.assignment-board,.chapter04-analysis{min-width:0}
+
+ .chapter05-workshop{background-attachment:scroll}
+ .chapter05-workshop .scene-characters,.chapter05-scene-apothecary .scene-characters{justify-content:center;width:100%;margin:.2rem auto .55rem;padding:0 .35rem}
+ .chapter05-layout{width:calc(100% - .75rem);gap:.55rem;margin-bottom:.75rem}
+ .chapter05-brief,.chapter05-desk{padding:.7rem}
+ .chapter05-brief>p,.chapter05-brief blockquote{margin:.45rem 0;line-height:1.55}
+ .chapter05-source p{font-size:1rem;line-height:1.6}
+ .chapter05-workshop .choice-grid,.assign-board,.ordered-board ol,.interpretation-intro,.structure-contrast,.process-branch{gap:.5rem}
+ .chapter05-workshop .chapter-header{padding:.55rem .65rem}
+ .chapter05-workshop .interpretation-trace{width:calc(100% - .75rem);margin:.3rem auto .55rem}
+ .chapter05-final-state,.chapter05-final-state .chapter05-completion{min-height:0}
+
+ .chapter-one button,.chapter-two button,.chapter-three button,.chapter-04-causality button,.chapter05-workshop button,
+ .chapter-one label,.chapter-two label,.chapter-three label,.chapter-04-causality label,.chapter05-workshop label{min-height:2.75rem}
+ .chapter-header h1,.chapter-top h1,.chapter05-brief h2,.chapter05-desk h2{overflow-wrap:anywhere}
+}
