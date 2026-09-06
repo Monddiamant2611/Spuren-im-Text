@@ -40,7 +40,7 @@ test("chapter 4 avoids an inner analysis scroll container",async({page})=>{
 
 test("incorrect choices explain the missing reasoning and remain correctable",async({page})=>{
  await openRound(page,2);
- const task=page.locator("fieldset").first();await task.getByRole("button",{name:/Konflikt/}).last().click();
+  const task=page.locator("fieldset").filter({hasText:"Mara will zur Feier; ihr Vater verlangt Lernen."});await task.getByRole("button",{name:"Innerer Konflikt",exact:true}).click();
  await expect(page.getByRole("status")).toContainText("Liegt der Gegensatz");
  await expect(task.getByRole("button").first()).toBeEnabled();
 });

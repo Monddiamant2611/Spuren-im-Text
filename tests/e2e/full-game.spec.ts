@@ -60,7 +60,7 @@ async function completeChapter04(page:Page){
  for(const item of situationCards)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.target==="situation"?"Ausgangslage":item.target==="prior"?"Vorgeschichte":"Nicht ausreichend belegt"}).click();
  const knowledgeLabel=(target:string)=>target==="romeo_knowledge"?"Romeo: Wissensstand":target==="romeo_intention"?"Romeo: Absicht":target==="paris_knowledge"?"Paris: Wissensstand":target==="paris_interpretation"?"Paris: Deutung":target==="paris_intention"?"Paris: Absicht":"Nicht ausreichend belegt";
  for(const item of knowledgeCards)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:knowledgeLabel(item.target),exact:true}).click();
- for(const task of chapter04Goals){await page.getByRole("button",{name:task.goalOptions[task.goalAnswer],exact:true}).click();const source=task.evidenceOptions.indexOf(task.evidence);await page.locator("fieldset").filter({hasText:"Welcher Primärtextbeleg"}).getByRole("button").nth(source).click();await page.getByRole("button",{name:task.analysis,exact:true}).click()}
+ for(const task of chapter04Goals){await page.getByRole("button",{name:task.goalOptions[task.goalAnswer],exact:true}).click();await page.locator(`[data-evidence-id="${task.evidence}"]`).click();await page.getByRole("button",{name:task.analysis,exact:true}).click()}
  await page.getByRole("button",{name:"Beide Ziele können nicht zugleich verwirklicht werden.",exact:true}).click();
  await sort(chain);
  for(const link of chainLinks){const field=page.locator(".relation-checks>fieldset").first();await field.getByRole("button",{name:link.type==="causes"?"Verursacht die unmittelbare Reaktion":"Trägt zur Entwicklung oder Eskalation bei",exact:true}).click()}
@@ -82,7 +82,7 @@ async function completeChapter04(page:Page){
  await sort(finalCurve);
  for(const item of finalConnections)await page.locator("fieldset").filter({hasText:item.label}).getByRole("button",{name:item.answer==="causes"?"Verursacht":item.answer==="contributes"?"Trägt bei":"Nur später / kein belegter Zusammenhang",exact:true}).click();
  await page.getByRole("button",{name:finalMeaningOptions.find(x=>x.valid)!.label,exact:true}).click();
- await page.locator("fieldset").filter({hasText:"Behauptung:"}).getByRole("button").nth(finalEvidence.evidenceOptions.indexOf(finalEvidence.evidence)).click();
+ await page.locator(`[data-evidence-id="${finalEvidence.evidence}"]`).click();
  await page.getByRole("button",{name:finalEvidence.analysisOptions[finalEvidence.analysisAnswer],exact:true}).click();
  await page.getByRole("button",{name:finalTransferOptions.find(x=>x.valid)!.label,exact:true}).click();
  await page.getByRole("button",{name:"Handlungsbuch restaurieren"}).click();
@@ -152,7 +152,7 @@ test("complete learning path reaches the restored director's book without a dead
   await page.getByRole("button",{name:"Analyseabsatz zusammensetzen"}).click();
   const transferIds=transferSections.flatMap(section=>section.sourceIds);for(const task of chapter03Transfer)await page.locator(".evidence-list button").nth(transferIds.indexOf(task.sourceId)).click();
   for(const task of chapter03Comparisons)await page.getByRole("button",{name:task.target==="main"?"KONFLIKTDIALOG":task.target==="transfer"?"ANNÄHERUNGSDIALOG":"BEIDE DIALOGE",exact:true}).click();
-  for(const index of [0,1,2])await page.getByRole("button",{name:new RegExp(`Schritt ${index+1}`)}).click();
+  for(const id of ["c03_transfer_juliette_danger","c03_transfer_romeo_love","c03_transfer_juliette_concern"])await page.locator(`[data-card-id="${id}"]`).click();
   await page.getByRole("button",{name:"Dialoganalyse abschließen"}).click();
   await leaveChapter(page);
   await page.getByRole("button", { name: /Bühne: verfügbar/ }).click();
