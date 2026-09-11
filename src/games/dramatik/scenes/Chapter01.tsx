@@ -10,11 +10,33 @@ import { analysisErrorPractice, categoryPractice, certaintyClaims, certaintyPrac
 import { PrimarySourceText } from "../../../shared/components/PrimarySourceText";
 import { GlossaryHelp } from "../../../shared/components/GlossaryHelp";
 import { SceneCharacters } from "../../../shared/components/SceneCharacters";
+import { advanceWithSupport, LearningSupport, useLearningSupport } from "../components/LearningSupport";
 import { glossaryFor } from "../data/glossary";
 import { advanceChapter01, assignTraining, checkAnalysisErrors, checkCategoryPractice, checkCertaintyPractice, checkChain, checkConsolidation, checkHistoryConditionPractice, checkStreetSituation, checkTransferAnalysis, classifyClaim, draftSituation, identifySignal, initialChapter01Session, linkSituationEvidence, selectChainPart, toggleTrainingSelection, toggleTransferStatement, type Chapter01Session } from "../mechanics/chapter_01_engine";
 
 const certaintyLabels:Record<Certainty,string>={explicit:"Eindeutig belegt",inference:"Plausibel erschließbar",unsupported:"Nicht belegt"};
 const analysisLabels:Record<Certainty,string>={explicit:"Ausreichend belegt",inference:"Plausibel erschließbar",unsupported:"Methodisch problematisch"};
+const chapter01Hints:Record<number,[string,string]>={
+  2:["Achten Sie darauf, ob die Stelle eine Sprecherangabe, gesprochene Rede oder Bühnengeschehen bezeichnet.","Ordnen Sie nach der sichtbaren Textfunktion: Sprechername, Figurenrede oder Regieanweisung."],
+  3:["Fragen Sie, ob der Wortlaut die Aussage nennt, nur nahelegt oder gar nicht trägt.","Eine plausible Ergänzung ist kein Textbefund; nicht belegte Angaben gehören zu ‚Nicht belegt‘."],
+  4:["Prüfen Sie bei jeder Karte, welche konkrete Situationsfrage sie beantwortet.","Ordnen Sie Ort, Zeit, Figuren, Vorgeschichte und Bedingungen nach der jeweils tatsächlich genannten Information."],
+  5:["Eine momentane Beobachtung trägt nicht automatisch eine Aussage über Dauer oder Gewohnheit.","Trennen Sie ausdrücklich Genanntes, vorsichtige Erschließung und fehlende Information."],
+  6:["Vorgeschichte ist bereits geschehen; Bedingungen gelten in der gegenwärtigen Situation.","Vergangenes Ereignis, aktuelle Rahmenbedingung und bloße Ergänzung gehören in verschiedene Kategorien."],
+  7:["Die Schlussfolgerung muss genau aus dem gewählten Textsignal und Befund folgen.","Verbinden Sie nur die drei Bausteine, die denselben beobachtbaren Zusammenhang beschreiben."],
+  8:["Suchen Sie zuerst die Stelle, an der mehr behauptet wird, als der Text trägt.","Eine Ergänzung, Verallgemeinerung oder sichere Zukunftsbehauptung ist methodisch problematisch."],
+  9:["Prüfen Sie jede Kategorie vollständig und entfernen Sie plausible, aber nicht belegte Ergänzungen.","Die Lösung verlangt pro Bereich nur die Aussagen, die der Übungstext wirklich trägt."],
+  11:["Mindestens eine Karte steht in einer Kategorie, die ihr Textsignal nicht beantwortet.","Vergleichen Sie jede Zuordnung erneut mit Ort, Figuren, Vorgeschichte und gegenwärtigen Bedingungen."],
+  12:["Der Beleg muss zunächst eine beobachtbare Gesprächshandlung tragen.","Wählen Sie die Textstelle, in der Sampson eine Reaktion provozieren will, und leiten Sie erst daraus die Situation ab."],
+  13:["Eine zutreffende Information ist nicht automatisch zentral für diese Gesprächssituation.","Entfernen Sie Kontextdetails ohne unmittelbaren Situationsbezug und behalten Sie die belegten Kernaussagen."],
+};
+function chapter01FailureDetails(session:Chapter01Session){
+ const sets:Record<number,readonly {id:string;text:string;target:string}[]>={4:categoryPractice,5:certaintyPractice,6:historyConditionPractice,8:analysisErrorPractice};
+ const items=sets[session.round];
+ if(items){const roundLabels:Record<string,string>=session.round===4?situationLabels:session.round===5?certaintyLabels:session.round===6?historyConditionLabels:analysisLabels;const wrong=items.filter(item=>session.trainingAssignments[item.id]!==item.target);return{incorrectItems:wrong.map(item=>item.text),resolution:wrong.map(item=>`„${item.text}“ gehört zu „${roundLabels[item.target]}“, weil diese Kategorie die Reichweite der Aussage fachlich beschreibt.`)}}
+ if(session.round===11){const wrong=streetSituationCards.filter(item=>session.situationDraft[item.id]!==item.target);return{incorrectItems:wrong.map(item=>item.text),resolution:wrong.map(item=>`„${item.text}“ gehört zu „${situationLabels[item.target]}“; der eingeblendete Text trägt genau diese Situationsinformation.`)}}
+ if(session.round===13){const wrong=transferSituationGroups.flatMap(group=>group.options.filter(option=>(session.transferSelections[group.field]??[]).includes(option.id)!==option.correct).map(option=>({text:option.text,target:situationLabels[group.field],correct:option.correct})));return{incorrectItems:wrong.map(item=>item.text),resolution:wrong.map(item=>item.correct?`„${item.text}“ ist für „${item.target}“ auszuwählen, weil sie zur konkreten Gesprächssituation gehört.`:`„${item.text}“ ist hier nicht auszuwählen, weil sie die Kategorie „${item.target}“ für diese Situation nicht trägt.`)}}
+ return{incorrectItems:[],resolution:[chapter01Hints[session.round]?.[1]??"Vergleichen Sie die gewählte Antwort mit dem sichtbaren Textsignal."]};
+}
 
 function analysisErrorFeedback(problemIds:string[]){
  const reasons=new Set(analysisErrorPractice.filter(item=>problemIds.includes(item.id)).map(item=>item.reason));
@@ -28,8 +50,10 @@ function analysisErrorFeedback(problemIds:string[]){
 export function Chapter01({gameState,onSave,onExit,onComplete}:{gameState:GameState;onSave:(session:Chapter01Session)=>void;onExit:()=>void;onComplete:(session:Chapter01Session)=>void}) {
   const [session,setSession]=useState(()=>hydrateSession(gameState.decisions.chapter_01,initialChapter01Session,13));
   const [feedback,setFeedback]=useState("");
+  const support=useLearningSupport(`chapter01-${session.round}`);
   useEffect(()=>{const workspace=document.querySelector<HTMLElement>(".regiebuch-workspace");workspace?.scrollIntoView({block:"start",behavior:"auto"});const heading=workspace?.querySelector<HTMLElement>("h2");if(heading){heading.tabIndex=-1;heading.focus({preventScroll:true})}},[session.round]);
-  const update=(next:Chapter01Session)=>{if(next.round!==session.round)setFeedback("");setSession(next);onSave(next)};
+  const update=(next:Chapter01Session)=>{if(next.failedAttempts>session.failedAttempts){const hints=chapter01Hints[session.round]??["Prüfen Sie die ausgewählte Information direkt am Text und an der verlangten Kategorie.","Vergleichen Sie Wortlaut, Textbefund und Zielkategorie noch einmal getrennt."];support.registerFailure(hints[0],hints[1],chapter01FailureDetails(next))}else if(next.round!==session.round)support.reset();if(next.round!==session.round)setFeedback("");setSession(next);onSave(next)};
+  const assist=()=>{const next=advanceWithSupport(session,13);setSession(next);onSave(next);support.reset();setFeedback("Mit Unterstützung abgeschlossen. Nutzen Sie den geklärten Unterschied in der nächsten Aufgabe.");if(next.completed)onComplete(next)};
   const finish=(next:Chapter01Session)=>{update(next);if(next.completed)onComplete(next)};
   return <main className={`chapter-shell chapter-one round-${session.round}`}>
     <header className="chapter-header"><button onClick={onExit}>← Theater</button><div><p>Kapitel 1 · Regiepult</p><h1>Das zerrissene Regiebuch</h1></div><span>Szene {session.round} von 13</span></header>
@@ -50,6 +74,7 @@ export function Chapter01({gameState,onSave,onExit,onComplete}:{gameState:GameSt
         {session.round===11&&<><SceneCharacters sceneId="chapter_01.street"/><SituationRound session={session} onPlace={(id,target)=>update(draftSituation(session,id,target))} onCheck={()=>{const result=checkStreetSituation(session);update(result.session);setFeedback(result.valid?"Die Situationsangaben sind als Gesamtbild tragfähig.":`Prüfen Sie die Zuordnung in diesen Bereichen erneut: ${result.problemFields.map(field=>situationLabels[field]).join(", ")}.`)}}/></>}
         {session.round===12&&<EvidenceRound onCheck={(textId,observation,situation)=>{const result=linkSituationEvidence(session,textId,observation,situation);update(result.session);setFeedback(result.valid?"Textstelle, Beobachtung und Situationsinformation sind schlüssig verbunden.":"Die Verbindung springt zu weit. Bleiben Sie zunächst bei der beobachtbaren Gesprächshandlung.")}}/>}
         {session.round===13&&<><SceneCharacters sceneId="chapter_01.capulet_paris"/><TransferRound session={session} onToggle={(field,id)=>update(toggleTransferStatement(session,field,id))} onCheck={()=>{const result=checkTransferAnalysis(session,transferSituationGroups);finish(result.session);const fields=Object.entries(result.fieldResults).filter(([,status])=>status!=="complete").map(([field])=>situationLabels[field as SituationField]);setFeedback(result.valid?"Das Regiebuch ist wieder lesbar.":`Ein Teil ist bereits tragfähig. Prüfen Sie noch: ${fields.join(", ")}.`)}}/></>}
+        <LearningSupport state={support} onAssist={assist}/>
         {feedback&&<p className={`chapter-feedback ${feedback==="Eine mögliche Vorstellung darf nicht als Textaussage ausgegeben werden."?"didactic-note":""}`} role="status" aria-live="polite">{feedback}</p>}
       </section>
     </section>

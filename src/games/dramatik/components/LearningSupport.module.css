@@ -1,0 +1,33 @@
+.panel {
+  margin-block: 0.75rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid color-mix(in srgb, #7f3445 52%, transparent);
+  border-inline-start: 0.35rem solid #7f3445;
+  border-radius: 0.65rem;
+  background: color-mix(in srgb, #fff8ed 94%, #7f3445);
+  color: #321f25;
+  scroll-margin-block: 20vh;
+}
+
+.panel strong,
+.panel span {
+  display: block;
+}
+
+.panel span {
+  margin-top: 0.3rem;
+  line-height: 1.5;
+}
+
+.panel button {
+  min-height: 44px;
+  margin-top: 0.65rem;
+  padding: 0.55rem 0.85rem;
+}
+
+@media (max-width: 640px) {
+  .panel {
+    margin-block: 0.5rem;
+    padding: 0.75rem;
+  }
+}
