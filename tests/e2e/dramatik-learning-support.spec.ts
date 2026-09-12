@@ -32,7 +32,6 @@ test("feedback escalates and supported progression prevents a dead end", async (
 
 test("chapter 2 names the wrong figure card and reveals its exact category before progression", async ({ page }) => {
   await page.goto("/dramatik?review=1&step=chapter_02-round-2");
-  await page.getByRole("button", { name: "Analyse beginnen" }).click();
   const item = practiceClaims.find(entry => entry.target === "explicit")!;
   for (let attempt = 0; attempt < 2; attempt += 1) {
     await page.getByRole("button", { name: item.text }).click();
