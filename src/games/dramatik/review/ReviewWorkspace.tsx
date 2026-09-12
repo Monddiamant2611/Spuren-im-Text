@@ -50,11 +50,11 @@ function stateForTarget(target:ReviewTarget):GameState{
 }
 
 function sessionFor(chapterId:ReviewChapterId,round:number,completed:boolean):ReviewSession{
- if(chapterId==="chapter_01")return{...structuredClone(initialChapter01Session),round:Math.min(13,round) as Chapter01Session["round"],completed};
- if(chapterId==="chapter_02")return{...createChapter02Session(),round:Math.min(17,round) as Chapter02Session["round"],completed};
- if(chapterId==="chapter_03")return{...structuredClone(initialChapter03Session),round:Math.min(16,round) as Chapter03Session["round"],completed,seenGlossaryIntroductions:round>2||completed?["chapter_03"]:[]};
- if(chapterId==="chapter_04")return{...structuredClone(initialChapter04Session),round:Math.min(22,round),completed,seenGlossaryIntroductions:round>1||completed?["chapter_04"]:[]};
- return{...structuredClone(initialChapter05Session),round:Math.min(19,round),completed};
+ if(chapterId==="chapter_01")return{...structuredClone(initialChapter01Session),round:Math.min(13,round) as Chapter01Session["round"],completed,seenGlossaryIntroductions:["chapter_01","chapter_01_evidence"]};
+ if(chapterId==="chapter_02")return{...createChapter02Session(),round:Math.min(17,round) as Chapter02Session["round"],completed,seenGlossaryIntroductions:["chapter_02"]};
+ if(chapterId==="chapter_03")return{...structuredClone(initialChapter03Session),round:Math.min(16,round) as Chapter03Session["round"],completed,seenGlossaryIntroductions:["chapter_03"]};
+ if(chapterId==="chapter_04")return{...structuredClone(initialChapter04Session),round:Math.min(22,round),completed,seenGlossaryIntroductions:["chapter_04"]};
+ return{...structuredClone(initialChapter05Session),round:Math.min(19,round),completed,seenGlossaryIntroductions:["chapter_05"]};
 }
 
 function finaleState(base:GameState,mode:"welcome"|"review"|"synthesis"|"book"|"closing"|"complete"):GameState{

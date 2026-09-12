@@ -35,17 +35,42 @@ test("phone transfer uses a vertical, collapsible source view",async({page})=>{
 
 test("conversation line offers pointer-independent move controls",async({page})=>{
  await page.goto("/dramatik?review=1&step=chapter_03-round-11");
- await expect(page.locator(".sortable-dialogue li")).toHaveCount(4);
- await expect(page.getByRole("button",{name:/Abschnitt D nach oben/})).toBeVisible();
- await expect(page.getByRole("button",{name:/Abschnitt D nach unten/})).toBeVisible();
+ const rows=page.locator(".sortable-dialogue li");
+ await expect(rows).toHaveCount(4);
+ const firstLabel=await rows.first().locator("strong").first().innerText();
+ await page.getByRole("button",{name:`${firstLabel} nach unten`}).click();
+ await expect(rows.nth(1).locator("strong").first()).toHaveText(firstLabel);
 });
 
 test("conversation line can be reordered with a pointer drag",async({page})=>{
  await page.goto("/dramatik?review=1&step=chapter_03-round-11");
  const rows=page.locator(".sortable-dialogue li");
  const moved=rows.first();
+ const movedLabel=await moved.locator("strong").first().innerText();
  await moved.dragTo(rows.last());
- await expect(rows.last()).toContainText("Abschnitt D");
+ await expect(rows.last().locator("strong").first()).toHaveText(movedLabel);
+});
+
+test("conversation line can be reordered with a pointer drag in the student path",async({page})=>{
+ await page.goto("/dramatik");
+ await page.evaluate(()=>localStorage.setItem("lernwerkstatt-games:state:v1",JSON.stringify({version:1,currentGame:"dramatik",currentChapter:"chapter_03",completedChapters:["chapter_01","chapter_02"],decisions:{chapter_03:{round:11,seenGlossaryIntroductions:["chapter_03"],failedAttempts:0,competencyEvents:[]}},competencies:{},failedAttempts:{},stagingDecisions:{},selectedEvidence:[],progress:{},theatreState:"AFTER_CHAPTER_2",settings:{music:false,soundEffects:false,reducedMotion:true},lastSavedAt:new Date().toISOString()})));
+ await page.reload();
+ await page.getByRole("button",{name:"Fortsetzen"}).click();
+ const rows=page.locator(".sortable-dialogue li");
+ const moved=rows.first();
+ const movedLabel=await moved.locator("strong").first().innerText();
+ await moved.dragTo(rows.last());
+ await expect(rows.last().locator("strong").first()).toHaveText(movedLabel);
+});
+
+test("conversation line remains operable with move controls on mobile",async({page})=>{
+ await page.setViewportSize({width:390,height:844});
+ await page.goto("/dramatik?review=1&step=chapter_03-round-11");
+ const rows=page.locator(".sortable-dialogue li");
+ const firstLabel=await rows.first().locator("strong").first().innerText();
+ await page.getByRole("button",{name:`${firstLabel} nach unten`}).click();
+ await expect(rows.nth(1).locator("strong").first()).toHaveText(firstLabel);
+ expect(await page.evaluate(()=>document.documentElement.scrollWidth<=document.documentElement.clientWidth+1)).toBe(true);
 });
 
 test("glossary reopens deliberately at the top",async({page})=>{
@@ -58,10 +83,13 @@ test("glossary reopens deliberately at the top",async({page})=>{
  expect(await dialog.evaluate(element=>element.scrollTop)).toBe(0);
 });
 
-test("glossary auto-opens only at the first relevant chapter step",async({page})=>{
+test("glossary does not auto-open at a review deep link",async({page})=>{
  await page.goto("/dramatik?review=1&step=chapter_03-round-2");
+ await expect(page.locator(".glossary-dialog")).toHaveCount(0);
+ await page.getByRole("button",{name:"Begriff Sprachhandlung erklären"}).click();
  await expect(page.locator(".glossary-dialog")).toBeVisible();
- await page.getByRole("button",{name:"Analyse beginnen"}).click();
+ await page.keyboard.press("Escape");
+ await expect(page.locator(".glossary-dialog")).toHaveCount(0);
  await page.getByRole("button",{name:"PRÜFMODUS"}).click();
  await page.getByRole("button",{name:"Nächster Schritt"}).click();
  await expect(page.getByRole("heading",{name:"Was tut die Figur mit den Worten?"})).toBeVisible();

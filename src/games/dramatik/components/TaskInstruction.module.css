@@ -1,0 +1,17 @@
+.instruction {
+  margin: .45rem 0 .8rem;
+  padding: .72rem .9rem;
+  border: 1px solid rgba(208, 171, 91, .72);
+  border-left-width: 4px;
+  border-radius: .45rem;
+  background: rgba(255, 246, 220, .96);
+  color: #30251f;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: clamp(.94rem, 1.2vw, 1.02rem);
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .instruction { margin: .35rem 0 .65rem; padding: .65rem .75rem; font-size: .96rem; }
+}
