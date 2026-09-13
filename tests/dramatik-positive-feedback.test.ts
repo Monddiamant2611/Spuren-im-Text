@@ -23,6 +23,15 @@ describe("Dramatik positive Teilrückmeldungen", () => {
     const chapter = source("Chapter03");
     expect(chapter).toContain('aria-label="Bereits richtige Teilantworten"');
     expect(chapter).toContain('confirmed-answer-list');
+    expect(chapter).toContain('✗ Noch zu prüfen ·');
+    expect(chapter).toContain('setLastAttempt({id:x.id,value:v})');
+  });
+
+  it("verwendet in Kapitel 5 verständliche Sprache statt unnötiger Metasprache", () => {
+    const chapter = source("Chapter05");
+    expect(chapter).not.toMatch(/ökonomischer Druck|Willensdimension|rekursiv|Psychologisierung/);
+    expect(chapter).toContain("finanzielle Not des Apothekers");
+    expect(chapter).toContain("seine eigene Entscheidung");
   });
 
   it("beschriftet richtige und falsche Einzelzuordnungen in Kapitel 4 nicht nur farblich", () => {

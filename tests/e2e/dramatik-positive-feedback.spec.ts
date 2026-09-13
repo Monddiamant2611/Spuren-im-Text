@@ -37,7 +37,26 @@ test("chapter 3 keeps a secured speech act visible when the next answer is wrong
   await page.getByRole("group", { name: "Du gehst jetzt nicht." }).getByRole("button", { name: first.act, exact: true }).click();
   await page.getByRole("group", { name: "Ich habe dir nichts zu erklären." }).getByRole("button").first().click();
   await expect(page.getByText(/✓ Richtig ·/).first()).toBeVisible();
+  await expect(page.getByText(/✗ Noch zu prüfen ·/)).toBeVisible();
 });
+
+test("chapter 3 conversation goals show a correct and a wrong partial result together", async ({ page }) => {
+  await page.goto("/dramatik?review=1&step=chapter_03-round-3");
+  for (const item of practiceActs) {
+    await page.getByRole("group", { name: practiceDialogueText(item.line), exact: true }).getByRole("button", { name: item.act, exact: true }).click();
+  }
+  const first = practiceActs[0];
+  await page.getByRole("group", { name: new RegExp(first.act) }).getByRole("button", { name: first.goal, exact: true }).click();
+  const next = practiceActs[1];
+  const wrongGoal = next.goalOptions.find(option => option !== next.goal)!;
+  await page.getByRole("group", { name: new RegExp(next.act) }).getByRole("button", { name: wrongGoal, exact: true }).click();
+  await expect(page.getByRole("list", { name: "Bereits richtige Teilantworten" }).getByText(/✓ Richtig ·/)).toBeVisible();
+  await expect(page.getByText(`✗ Noch zu prüfen · ${wrongGoal}`, { exact: true })).toBeVisible();
+  await page.getByRole("group", { name: new RegExp(next.act) }).getByRole("button", { name: wrongGoal, exact: true }).click();
+  await expect(page.getByRole("button", { name: "Lösungshilfe anzeigen" })).toBeVisible();
+});
+
+const practiceDialogueText = (line: number) => ["Du gehst jetzt nicht.", "Ich habe dir nichts zu erklären.", "Dann sieh mich wenigstens an.", "Lass mich vorbei."][line];
 
 test("chapter 4 labels correct and wrong assignment controls textually", async ({ page }) => {
   await page.goto("/dramatik?review=1&step=chapter_04-round-2");
