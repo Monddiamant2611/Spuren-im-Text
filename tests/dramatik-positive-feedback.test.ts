@@ -52,5 +52,12 @@ describe("Dramatik positive Teilrückmeldungen", () => {
     expect(css).toContain(".answer-status");
     expect(css).toContain(".confirmed-answer-list");
     expect(css).toContain(".inline-answer-status");
+    expect(css).toContain(".answer-correct :is(span,small,strong,b,em){color:inherit!important}");
+  });
+
+  it("wiederholt die generische Einzelwahl-Anweisung in Kapitel 3 nicht pro Teilitem", () => {
+    const chapter = source("Chapter03");
+    expect(chapter).not.toContain("Wählen Sie genau eine Antwort. Entscheiden Sie anhand der genannten Gesprächsfunktion");
+    expect(chapter).toContain("<TaskInstruction>{chapter03Tasks[session.round]}</TaskInstruction>");
   });
 });

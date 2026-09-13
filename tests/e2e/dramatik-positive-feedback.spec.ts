@@ -3,7 +3,7 @@ import { categoryPractice } from "../../src/games/dramatik/data/chapter_01_conte
 import { practiceClaims } from "../../src/games/dramatik/data/chapter_02_content";
 import { practiceActs } from "../../src/games/dramatik/data/chapter_03_content";
 import { conflictTypes } from "../../src/games/dramatik/data/chapter_04_content";
-import { classificationCards } from "../../src/games/dramatik/data/chapter_05_content";
+import { classificationCards, transferChain } from "../../src/games/dramatik/data/chapter_05_content";
 
 const situationLabel = (target: string) => target === "place" ? "Ort" : target === "time" ? "Zeit" : target === "characters" ? "Figuren" : target === "history" ? "Vorgeschichte" : target === "conditions" ? "Bedingungen" : target === "current_condition" ? "Gegenwärtige Bedingung" : target === "other" ? "Andere Situationsinformation" : "Nicht feststellbar";
 const certaintyLabel = (target: string) => target === "explicit" ? "Eindeutig belegt" : target === "inference" ? "Plausibel erschließbar" : "Nicht belegt";
@@ -54,6 +54,26 @@ test("chapter 3 conversation goals show a correct and a wrong partial result tog
   await expect(page.getByText(`✗ Noch zu prüfen · ${wrongGoal}`, { exact: true })).toBeVisible();
   await page.getByRole("group", { name: new RegExp(next.act) }).getByRole("button", { name: wrongGoal, exact: true }).click();
   await expect(page.getByRole("button", { name: "Lösungshilfe anzeigen" })).toBeVisible();
+});
+
+test("chapter 3 conversation goals show their shared instruction only once", async ({ page }) => {
+  await page.goto("/dramatik?review=1&step=chapter_03-round-4");
+  await expect(page.locator("[data-task-instruction]")).toHaveCount(1);
+  await expect(page.locator("[data-task-instruction]")).toContainText("Ordnen Sie jeder Äußerung das übergeordnete Gesprächsziel zu");
+  await expect(page.getByRole("group")).toHaveCount(4);
+});
+
+test("chapter 5 positive argument labels inherit a readable light color", async ({ page }) => {
+  await page.goto("/dramatik?review=1&step=chapter_05-round-13");
+  await page.getByRole("button", { name: new RegExp(transferChain[0].text) }).click();
+  const confirmed = page.locator(".ordered-board .answer-correct").first();
+  await expect(confirmed).toBeVisible();
+  const colors = await confirmed.evaluate(element => {
+    const label = element.querySelector("small");
+    return { card: getComputedStyle(element).color, label: label ? getComputedStyle(label).color : "" };
+  });
+  expect(colors.label).toBe(colors.card);
+  await expect(confirmed.getByText("✓ Richtig", { exact: true })).toBeVisible();
 });
 
 const practiceDialogueText = (line: number) => ["Du gehst jetzt nicht.", "Ich habe dir nichts zu erklären.", "Dann sieh mich wenigstens an.", "Lass mich vorbei."][line];
