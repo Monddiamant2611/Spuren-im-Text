@@ -52,7 +52,10 @@ describe("Dramatik positive Teilrückmeldungen", () => {
     expect(css).toContain(".answer-status");
     expect(css).toContain(".confirmed-answer-list");
     expect(css).toContain(".inline-answer-status");
-    expect(css).toContain(".answer-correct :is(span,small,strong,b,em){color:inherit!important}");
+    expect(css).toContain("--feedback-success-text:#f6fff8");
+    expect(css).toContain(".answer-correct :is(span,small,strong,b,em,p,label,legend,div){color:inherit!important}");
+    expect(css).toContain(".confirmed-answer-list li :is(span,small,strong,b,em,p,label,legend,div){color:inherit!important}");
+    expect(css).toContain(".answer-correct::before,.answer-correct::after");
   });
 
   it("wiederholt die generische Einzelwahl-Anweisung in Kapitel 3 nicht pro Teilitem", () => {
