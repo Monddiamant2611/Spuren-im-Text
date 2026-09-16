@@ -1,0 +1,1186 @@
+{
+  "taskCount": 100,
+  "unsafeCount": 0,
+  "rows": [
+    {
+      "taskId": "style-recognize-1",
+      "text": "Stein, Moos, Farn und Wurzel füllen den Wald.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass mehrere gleichrangige Einzelbegriffe einen gemeinsamen Bedeutungsbereich entfalten?",
+      "correctFigures": [
+        "Akkumulation"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-2",
+      "text": "Die blinde Justitia hält Waage und Schwert.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass ein abstrakter Begriff über mehrere Merkmale hinweg als Figur oder Bild erscheint?",
+      "correctFigures": [
+        "Allegorie"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-3",
+      "text": "Wind weckt weite Wiesen.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass mehrere nahe Wörter mit demselben hörbaren Anlaut beginnen?",
+      "correctFigures": [
+        "Alliteration"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-4",
+      "text": "Auch dieser Apfel versprach Erkenntnis.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass eine Formulierung ohne ausdrückliche Erklärung auf einen kulturellen Zusammenhang verweist?",
+      "correctFigures": [
+        "Allusion"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-5",
+      "text": "Es blieb ein Wort. / Ein Wort, das niemand sprach.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Anadiplose",
+        "Repetitio"
+      ],
+      "possibleOverlaps": [
+        "Repetitio"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-6",
+      "text": "Wer heute zu spät kommt, den kann ich nur sagen: Wir warten nicht.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass ein Satz anders weitergeführt wird, als sein Anfang grammatisch erwarten lässt?",
+      "correctFigures": [
+        "Anakoluth"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-7",
+      "text": "Noch wartet das Haus. / Noch schweigt die Uhr.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Anapher",
+        "Parallelismus"
+      ],
+      "possibleOverlaps": [
+        "Parallelismus"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-8",
+      "text": "Er verlor die Heimat, das Haus, den Schlüssel.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass eine Reihung vom Bedeutenden zum Geringeren führt?",
+      "correctFigures": [
+        "Antiklimax"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-9",
+      "text": "Du gehst ins Licht, ich bleibe in der Nacht.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Antithese",
+        "Parallelismus"
+      ],
+      "possibleOverlaps": [
+        "Parallelismus"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-10",
+      "text": "O Zeit, bleib einen Atemzug!",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Rede sich ausdrücklich an eine nicht gewöhnlich ansprechbare Größe richtet?",
+      "correctFigures": [
+        "Apostrophe"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-11",
+      "text": "Wenn du noch einmal –!",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Gedankenstrich oder Auslassungspunkte einen bedeutungsvollen Abbruch markieren?",
+      "correctFigures": [
+        "Aposiopese"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-12",
+      "text": "Ich kam, sah, schwieg.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Aufzählungsglieder unverbunden nebeneinanderstehen?",
+      "correctFigures": [
+        "Asyndeton"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-13",
+      "text": "Die müden Züge glühen über kühlen Hügeln.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass der Vokalklang übereinstimmt, ohne dass ein voller Reim vorliegt?",
+      "correctFigures": [
+        "Assonanz"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-14",
+      "text": "Die Wege sind kurz, lang sind die Nächte.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Reihenfolge zweier Elemente im zweiten Teil umgekehrt erscheint?",
+      "correctFigures": [
+        "Chiasmus"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-15",
+      "text": "Ich wartete Stunden – nein, Jahre.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass eine Formulierung zurückgenommen und genauer neu gefasst wird?",
+      "correctFigures": [
+        "Correctio"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-16",
+      "text": "Ein Häuschen duckt sich hinterm Deich.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass ein Wort grammatisch verkleinert oder emotional nuanciert wird?",
+      "correctFigures": [
+        "Diminutiv"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-17",
+      "text": "Kein Laut. Nirgends ein Licht.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass erwartbare Satzteile fehlen und sinnvoll ergänzt werden können?",
+      "correctFigures": [
+        "Ellipse"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-18",
+      "text": "Fenster, Türen, Treppen, Flure: alles war leer.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass mehrere Aspekte nacheinander genannt und entfaltet werden?",
+      "correctFigures": [
+        "Enumeratio"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-19",
+      "text": "Ich suche dich im Regen, / ich verliere dich im Regen.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass mehrere Verse oder Sätze mit denselben Worten schließen?",
+      "correctFigures": [
+        "Epipher"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-20",
+      "text": "Fort, fort aus diesem Haus!",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Epizeuxis",
+        "Geminatio",
+        "Repetitio"
+      ],
+      "possibleOverlaps": [
+        "Geminatio",
+        "Repetitio"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-21",
+      "text": "Er ist von uns gegangen.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass eine belastende Realität sprachlich abgeschwächt wird?",
+      "correctFigures": [
+        "Euphemismus"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-22",
+      "text": "Wie hell dieser Morgen ist!",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Ausrufeform, Interjektion oder Ausrufezeichen starke Beteiligung signalisiert?",
+      "correctFigures": [
+        "Exclamatio"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-23",
+      "text": "Niemals, niemals kehre ich zurück.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Geminatio",
+        "Epizeuxis",
+        "Repetitio"
+      ],
+      "possibleOverlaps": [
+        "Epizeuxis",
+        "Repetitio"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-24",
+      "text": "Ich wartete eine Ewigkeit.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass ein Sachverhalt über ein realistisches Maß hinaus gesteigert wird?",
+      "correctFigures": [
+        "Hyperbel"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-25",
+      "text": "Was bleibt? Nur dieser Name.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass auf eine gestellte Frage direkt eine eigene Antwort folgt?",
+      "correctFigures": [
+        "Hypophora"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-26",
+      "text": "Ach, wäre der Abend noch fern!",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Wörter wie ach, oh, weh oder pfui unmittelbar eine Reaktion ausdrücken?",
+      "correctFigures": [
+        "Interjektion"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-27",
+      "text": "Dunkel ist der Weg.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Satzglieder zur Hervorhebung ungewohnt angeordnet werden?",
+      "correctFigures": [
+        "Inversion"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-28",
+      "text": "Ein prächtiger Tag – der Keller steht unter Wasser.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Kontextsignale zeigen, dass das Gesagte nicht wörtlich gelten kann?",
+      "correctFigures": [
+        "Ironie"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-29",
+      "text": "Er flüsterte, rief, schrie.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass aufeinanderfolgende Glieder an Intensität oder Bedeutung zunehmen?",
+      "correctFigures": [
+        "Klimax"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-30",
+      "text": "Fern ist der Weg, unendlich fern.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Kyklos",
+        "Repetitio"
+      ],
+      "possibleOverlaps": [
+        "Repetitio"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-31",
+      "text": "Das war nicht unklug.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass eine positive oder negative Wertung indirekt als Nicht-Gegenteil erscheint?",
+      "correctFigures": [
+        "Litotes"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-32",
+      "text": "Ein Faden der Hoffnung hält mich.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass ein Ausdruck aus einem Bedeutungsbereich auf einen anderen übertragen wird?",
+      "correctFigures": [
+        "Metapher"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-33",
+      "text": "Ich lese heute Kafka.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass etwa Urheber für Werk, Ort für Institution oder Gefäß für Inhalt steht?",
+      "correctFigures": [
+        "Metonymie"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-34",
+      "text": "Die Stadt trägt ein Morgenflimmern.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass eine verständliche, aber nicht etablierte Wortbildung auffällt?",
+      "correctFigures": [
+        "Neologismus"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-35",
+      "text": "Der Regen tickt und platscht.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass der Wortklang ein hörbares Ereignis imitiert?",
+      "correctFigures": [
+        "Onomatopoesie"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-36",
+      "text": "beredtes Schweigen",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Gegensätze innerhalb einer engen Wortgruppe gekoppelt sind?",
+      "correctFigures": [
+        "Oxymoron"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-37",
+      "text": "Im Verlieren fand ich mich.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass ein ganzer Gedanke der Alltagserwartung widerspricht und zum Nachdenken zwingt?",
+      "correctFigures": [
+        "Paradoxon"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-38",
+      "text": "Du suchst den Tag, ich suche die Nacht.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass mehrere Einheiten grammatisch gleich gebaut sind?",
+      "correctFigures": [
+        "Parallelismus"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-39",
+      "text": "Der Zug – längst erwartet – kam nicht.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Gedankenstriche, Klammern oder Kommata einen selbstständigen Einschub markieren?",
+      "correctFigures": [
+        "Parenthese"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-40",
+      "text": "Der rote Planet war heute deutlich zu sehen.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass der gemeinte Gegenstand nicht genannt, sondern beschreibend ersetzt wird?",
+      "correctFigures": [
+        "Periphrase"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-41",
+      "text": "Der Wind flüstert durch die Zweige.",
+      "questionFocus": "Welche genauere Bezeichnung passt hier am besten?",
+      "correctFigures": [
+        "Personifikation"
+      ],
+      "possibleOverlaps": [
+        "Metapher"
+      ],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-42",
+      "text": "der weiße Schimmel",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass eine Eigenschaft bereits im Bezugswort enthalten ist?",
+      "correctFigures": [
+        "Pleonasmus"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-43",
+      "text": "Und Wind und Regen und Nacht kamen.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass jedes oder fast jedes Glied durch dasselbe Bindewort angeschlossen wird?",
+      "correctFigures": [
+        "Polysyndeton"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-44",
+      "text": "Warte auf mich, warte.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Wörter oder Strukturen erkennbar erneut verwendet werden?",
+      "correctFigures": [
+        "Repetitio"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-45",
+      "text": "Wer könnte diesen Morgen vergessen?",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Antwort als selbstverständlich gilt oder die Frage eine Aussage verstärkt?",
+      "correctFigures": [
+        "Rhetorische Frage"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-46",
+      "text": "Jeder Abschied trägt einen Anfang.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Sentenz",
+        "Metapher"
+      ],
+      "possibleOverlaps": [
+        "Metapher"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-47",
+      "text": "Jeden Morgen blickte Mara auf das verschlossene Tor. Als sie endlich ging, stand es offen.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass ein wiederkehrender Gegenstand mehrere kontextgestützte Bedeutungsebenen bündelt?",
+      "correctFigures": [
+        "Symbol"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-48",
+      "text": "ein warmer Klang",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Synästhesie",
+        "Metapher"
+      ],
+      "possibleOverlaps": [
+        "Metapher"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-49",
+      "text": "Alle Hände arbeiteten am Boot.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass ein Teil für das Ganze oder das Ganze für einen Teil steht?",
+      "correctFigures": [
+        "Synekdoche"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-50",
+      "text": "immer und ewig",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass nahe Synonyme denselben Gedanken doppelt ausdrücken?",
+      "correctFigures": [
+        "Tautologie"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-51",
+      "text": "Still wie Schnee liegt der Hof.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Wörter wie wie, als oder als ob zwei Vorstellungen verbinden?",
+      "correctFigures": [
+        "Vergleich"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-52",
+      "text": "Der Strom fiel aus, die Gedanken strömten weiter.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass eine Formulierung zwei Bedeutungen zugleich aktiviert oder klanglich verschiebt?",
+      "correctFigures": [
+        "Wortspiel"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-53",
+      "text": "Klare Köpfe klären komplexe Fragen.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die betonten Wörter mit demselben k-Anlaut beginnen?",
+      "correctFigures": [
+        "Alliteration"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-54",
+      "text": "Frische Fakten für faire Debatten.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass mehrere tragende Wörter denselben f-Anlaut wiederholen?",
+      "correctFigures": [
+        "Alliteration"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-55",
+      "text": "Heute planen wir. Heute bauen wir. Heute beginnen wir.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Anapher",
+        "Parallelismus"
+      ],
+      "possibleOverlaps": [
+        "Parallelismus"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-56",
+      "text": "Kein Blick zurück, kein Schritt zur Seite, kein Wort des Zweifels.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass „kein“ drei gleichrangige Einheiten eröffnet?",
+      "correctFigures": [
+        "Anapher"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-57",
+      "text": "Die Firma verlor den Auftrag, den Kunden, den Kugelschreiber.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Reihung vom wirtschaftlich Bedeutenden zum belanglosen Gegenstand absinkt?",
+      "correctFigures": [
+        "Antiklimax"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-58",
+      "text": "Er versprach Frieden, Wohlstand und pünktliche Busse.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Versprechen vom gesellschaftlich Großen zum Alltäglichen absinken?",
+      "correctFigures": [
+        "Antiklimax"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-59",
+      "text": "Die Daten wachsen, das Vertrauen schrumpft.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Antithese",
+        "Parallelismus"
+      ],
+      "possibleOverlaps": [
+        "Parallelismus"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-60",
+      "text": "Sie redete von Nähe und hielt doch Abstand.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Nähe und Abstand als gegensätzliche Haltungen kontrastieren?",
+      "correctFigures": [
+        "Antithese"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-61",
+      "text": "Du verlorene Zeit, gib mir einen Nachmittag zurück!",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Apostrophe",
+        "Exclamatio",
+        "Personifikation"
+      ],
+      "possibleOverlaps": [
+        "Exclamatio",
+        "Personifikation"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-62",
+      "text": "O Vernunft, melde dich in dieser Debatte!",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Apostrophe",
+        "Exclamatio",
+        "Personifikation"
+      ],
+      "possibleOverlaps": [
+        "Exclamatio",
+        "Personifikation"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-63",
+      "text": "Schwere Wege dehnen jede Rede.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass der lange e-Klang in mehreren betonten Silben wiederkehrt?",
+      "correctFigures": [
+        "Assonanz"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-64",
+      "text": "Kühle Züge führen müde Schüler.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass der ü-Klang mehrere betonte Wörter klanglich verbindet?",
+      "correctFigures": [
+        "Assonanz"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-65",
+      "text": "Schon Feierabend? Noch lange nicht.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass in beiden Äußerungen Prädikate ausgelassen, aber ergänzbar sind?",
+      "correctFigures": [
+        "Ellipse"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-66",
+      "text": "Drei Tickets, bitte.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass das finite Verb fehlt und aus der Kaufsituation ergänzt wird?",
+      "correctFigures": [
+        "Ellipse"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-67",
+      "text": "Wir lernen für morgen, wir streiten für morgen, wir wählen für morgen.",
+      "questionFocus": "Welche Stilmittel erkennst du in diesen drei Sätzen? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Epipher",
+        "Anapher",
+        "Parallelismus"
+      ],
+      "possibleOverlaps": [
+        "Anapher",
+        "Parallelismus"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-68",
+      "text": "Du fehlst im Zimmer, im Gespräch fehlst du, selbst im Traum fehlst du.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass „fehlst du“ wiederholt an den Enden steht?",
+      "correctFigures": [
+        "Epipher"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-69",
+      "text": "Das Unternehmen passt seine Personalstruktur an.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass der Abbau von Arbeitsplätzen in einer neutral klingenden Umschreibung verborgen wird?",
+      "correctFigures": [
+        "Euphemismus"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-70",
+      "text": "Der Patient ist friedlich eingeschlafen.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass der Tod durch eine mildere Wendung bezeichnet wird?",
+      "correctFigures": [
+        "Euphemismus"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-71",
+      "text": "Mein Postfach explodiert vor Nachrichten.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Hyperbel",
+        "Metapher"
+      ],
+      "possibleOverlaps": [
+        "Metapher"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-72",
+      "text": "Ich habe dir das schon tausendmal erklärt.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Häufigkeit weit über das realistische Maß gesteigert wird?",
+      "correctFigures": [
+        "Hyperbel"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-73",
+      "text": "Durch die leeren Straßen fährt der letzte Bus.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Ortsangabe vor dem sonst üblichen Subjekt steht?",
+      "correctFigures": [
+        "Inversion"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-74",
+      "text": "Besonders wichtig ist heute die Datensicherung.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass das Prädikativ vor Subjekt und Verb hervorgehoben wird?",
+      "correctFigures": [
+        "Inversion"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-75",
+      "text": "Sie prüfte, zweifelte, widersprach.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Handlungen von Kontrolle über Unsicherheit zu offenem Widerspruch an Intensität zunehmen?",
+      "correctFigures": [
+        "Klimax"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-76",
+      "text": "Ein Flüstern wurde zum Ruf, der Ruf zum Protest.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Klimax",
+        "Anadiplose"
+      ],
+      "possibleOverlaps": [
+        "Anadiplose"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-77",
+      "text": "Die Präsentation war nicht ohne Fehler.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass eine negative Bewertung durch Verneinung des Gegenteils zurückhaltend formuliert wird?",
+      "correctFigures": [
+        "Litotes"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-78",
+      "text": "Sein Beitrag war nicht unbedeutend.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Bedeutsamkeit als Verneinung ihres Gegenteils erscheint?",
+      "correctFigures": [
+        "Litotes"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-79",
+      "text": "Ein Teppich aus Lichtern lag über der Stadt.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die ausgedehnte Lichtfläche als Teppich bezeichnet wird?",
+      "correctFigures": [
+        "Metapher"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-80",
+      "text": "Die Diskussion steckte in einer Sackgasse.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass ein festgefahrener Gedankengang als räumliche Sackgasse gefasst wird?",
+      "correctFigures": [
+        "Metapher"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-81",
+      "text": "Nach dem Videotag blieb nur Bildschirmmüdigkeit.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass ein neuer zusammengesetzter Ausdruck für digitale Erschöpfung gebildet wird?",
+      "correctFigures": [
+        "Neologismus"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-82",
+      "text": "Im Pausenhof begann das Gerüchtegewitter.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Neologismus",
+        "Metapher"
+      ],
+      "possibleOverlaps": [
+        "Metapher"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-83",
+      "text": "Die Tastatur klackert, der Drucker rattert.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Verben zwei technische Geräusche nachahmen?",
+      "correctFigures": [
+        "Onomatopoesie"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-84",
+      "text": "Platsch – der Ball landete in der Pfütze.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass „Platsch“ den Aufprall im Wasser klanglich imitiert?",
+      "correctFigures": [
+        "Onomatopoesie"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-85",
+      "text": "kontrolliertes Chaos",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass zwei widersprüchliche Begriffe in einer engen Wortgruppe verbunden sind?",
+      "correctFigures": [
+        "Oxymoron"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-86",
+      "text": "anwesende Abwesenheit",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Anwesenheit und Abwesenheit innerhalb einer Wortgruppe unmittelbar verbunden sind?",
+      "correctFigures": [
+        "Oxymoron"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-87",
+      "text": "Erst als das Netz ausfiel, waren alle verbunden.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Paradoxon",
+        "Antithese"
+      ],
+      "possibleOverlaps": [
+        "Antithese"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-88",
+      "text": "Je mehr Informationen vorlagen, desto weniger wussten wir.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Paradoxon",
+        "Antithese",
+        "Parallelismus"
+      ],
+      "possibleOverlaps": [
+        "Antithese",
+        "Parallelismus"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-89",
+      "text": "Wir prüfen die Zahlen, wir prüfen die Quellen.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Parallelismus",
+        "Anapher"
+      ],
+      "possibleOverlaps": [
+        "Anapher"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-90",
+      "text": "Die Stadt wird lauter, der Himmel wird dunkler.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass zwei Aussagen gleich gebaut und dadurch vergleichbar sind?",
+      "correctFigures": [
+        "Parallelismus"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-91",
+      "text": "Der Kalender mahnt mich an die Frist.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Personifikation",
+        "Metapher"
+      ],
+      "possibleOverlaps": [
+        "Metapher"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-92",
+      "text": "Die Stadt schläft noch, aber ihre Ampeln blinzeln.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Personifikation",
+        "Metapher"
+      ],
+      "possibleOverlaps": [
+        "Metapher"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-93",
+      "text": "Wir brauchen Zeit – Zeit zum Prüfen, Zeit zum Entscheiden.",
+      "questionFocus": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "correctFigures": [
+        "Repetitio",
+        "Anapher"
+      ],
+      "possibleOverlaps": [
+        "Anapher"
+      ],
+      "singleOrMultipleChoice": "multi",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-94",
+      "text": "Der Fehler blieb im System. Ein kleiner Fehler, doch dieser Fehler stoppte alles.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass „Fehler“ über mehrere Sätze hinweg wiederkehrt?",
+      "correctFigures": [
+        "Repetitio"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-95",
+      "text": "Wollen wir wirklich warten, bis die Brücke gesperrt werden muss?",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Frage als dringender Handlungsappell statt als Informationsbitte fungiert?",
+      "correctFigures": [
+        "Rhetorische Frage"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-96",
+      "text": "Wer liest schon freiwillig vierzig Seiten Kleingedrucktes?",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die Frage eine skeptische Behauptung über Nutzerverhalten ausdrückt?",
+      "correctFigures": [
+        "Rhetorische Frage"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-97",
+      "text": "Seit dem Streit blieb die Küchentür zwischen ihnen geschlossen. Am Abend öffnete sie beide Flügel.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die wiederholt geschlossene und schließlich geöffnete Tür den Beziehungszustand mitträgt?",
+      "correctFigures": [
+        "Symbol"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-98",
+      "text": "Auf jedem Demonstrationsplakat stand dieselbe zerbrochene Waage; sie verwies auf die als ungerecht empfundene Verteilung.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass die wiederkehrende Waage über den Gegenstand hinaus für Gerechtigkeit steht?",
+      "correctFigures": [
+        "Symbol"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-99",
+      "text": "Die neue Software reagiert so träge wie ein überfüllter Bus.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass Software und Bus durch „wie“ hinsichtlich ihrer Trägheit verglichen werden?",
+      "correctFigures": [
+        "Vergleich"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    },
+    {
+      "taskId": "style-recognize-100",
+      "text": "Er tat, als ob die Entschuldigung ein Formular wäre.",
+      "questionFocus": "Welche Figur liegt hier gezielt darin, dass der Umgang mit einer Entschuldigung durch „als ob“ mit Bürokratie verglichen wird?",
+      "correctFigures": [
+        "Vergleich"
+      ],
+      "possibleOverlaps": [],
+      "singleOrMultipleChoice": "choice",
+      "overlapHandledSafely": true
+    }
+  ]
+}

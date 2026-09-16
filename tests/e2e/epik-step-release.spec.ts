@@ -25,7 +25,7 @@ test("Bereich 3 schaltet Wahrnehmung prüfen nach allen sichtbaren Teilaufgaben 
   await page.getByLabel("Lernschritte Bereich 3").getByRole("button", { name: "Schritt 4" }).click();
   await page.getByRole("button", { name: /Seine Beobachtung ist|Die Beschreibung bleibt|Die zugespitzte Bewertung|Die Details sind|Jules Wahrnehmung|Aussage und Verhalten|Die äußeren Eindrücke|Seine Deutung kann|Eine Enttäuschung|Seine Befürchtung/ }).click();
   await page.getByRole("button", { name: "Er bewertet die Handlung und lenkt die Leserwahrnehmung." }).click();
-  const statements = page.locator(".epik-task > div");
+  const statements = page.locator(".epik-task > div:has(> button[aria-pressed])");
   for (let index = 0; index < await statements.count(); index += 1) {
     const row = statements.nth(index);
     if (!(await row.getByRole("button").count())) continue;

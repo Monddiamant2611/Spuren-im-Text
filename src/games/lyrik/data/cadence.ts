@@ -1,0 +1,18 @@
+import type { CadenceExample } from "./content-model";
+
+export const cadenceExamples:readonly CadenceExample[]=[
+ {id:"cadence-male-1",text:"Sonne leuchtet überm stillen Land.",finalSyllables:["len","Land"],finalStresses:[0,1],cadence:"male",explanation:"Die letzte betonte Silbe „Land“ beendet den katalektischen Vers; danach folgt keine unbetonte Silbe.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-male-2",text:"Im Hof erlischt das letzte Licht.",finalSyllables:["te","Licht"],finalStresses:[0,1],cadence:"male",explanation:"Die letzte betonte Silbe „Licht“ steht am Versende; der Schluss ist männlich beziehungsweise stumpf.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-male-3",text:"Am See beginnt der junge Tag.",finalSyllables:["ge","Tag"],finalStresses:[0,1],cadence:"male",explanation:"Auf die letzte Hebung „Tag“ folgt keine Senkung; deshalb liegt eine männliche Kadenz vor.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-male-4",text:"Ein leiser Ruf durchdringt die Nacht.",finalSyllables:["die","Nacht"],finalStresses:[0,1],cadence:"male",explanation:"„Nacht“ trägt die letzte Betonung und schließt den Vers unmittelbar ab.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-female-1",text:"Sonne leuchtet über Dächern.",finalSyllables:["Dä","chern"],finalStresses:[1,0],cadence:"female",explanation:"Nach der letzten betonten Silbe „Dä-“ folgt mit „-chern“ genau eine unbetonte Silbe.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-female-2",text:"Winde tragen dunkle Wolken.",finalSyllables:["Wol","ken"],finalStresses:[1,0],cadence:"female",explanation:"Der Vers endet nach der letzten Hebung „Wol-“ mit einer unbetonten Silbe.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-female-3",text:"Vögel suchen ferne Inseln.",finalSyllables:["In","seln"],finalStresses:[1,0],cadence:"female",explanation:"Auf die letzte betonte Silbe „In-“ folgt die unbetonte Endsilbe „-seln“.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-female-4",text:"Regen löscht die hellen Spuren.",finalSyllables:["Spu","ren"],finalStresses:[1,0],cadence:"female",explanation:"Eine unbetonte Silbe folgt auf die letzte Hebung „Spu-“; der Versschluss ist weiblich.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-rich-1",text:"Am Horizont erscheint die Königin.",finalSyllables:["Kö","ni","gin"],finalStresses:[1,0,0],cadence:"rich",explanation:"Nach der letzten betonten Silbe „Kö-“ folgen zwei unbetonte Silben; das ergibt eine reiche Kadenz.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-rich-2",text:"Auf den Dächern liegt etwas Goldenes.",finalSyllables:["Gol","de","nes"],finalStresses:[1,0,0],cadence:"rich",explanation:"Der substantivierte Versschluss „Goldenes“ besitzt eine betonte und zwei nachfolgende unbetonte Silben.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-rich-3",text:"Durch das Fenster fällt etwas Leuchtendes.",finalSyllables:["Leuch","ten","des"],finalStresses:[1,0,0],cadence:"rich",explanation:"Auf die letzte Hebung „Leuch-“ folgen die zwei unbetonten Silben „-ten-des“.",sourceType:"exerciseText",verificationStatus:"accepted"},
+ {id:"cadence-rich-4",text:"Über dem Wasser zieht etwas Schimmerndes.",finalSyllables:["Schim","mern","des"],finalStresses:[1,0,0],cadence:"rich",explanation:"Der Vers hat nach der letzten betonten Silbe zwei unbetonte Schlusssilben und damit eine reiche Kadenz.",sourceType:"exerciseText",verificationStatus:"accepted"}
+];
+
+export const rejectedCadenceIds=Array.from({length:68},(_,index)=>`legacy-cadence-rejected-${index+1}`);

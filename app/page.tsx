@@ -1,7 +1,7 @@
-import { LiteratureArchive } from "@/src/features/literature-archive/LiteratureArchive";
+import { LyrikWorkshop } from "@/src/games/lyrik/LyrikWorkshop";
 
 export const dynamic = "force-static";
 
 export default function Home() {
-  return <LiteratureArchive />;
+  return <LyrikWorkshop />;
 }

@@ -1,0 +1,34 @@
+import type {AnalysisAreaId,LyrikTask} from "./game";
+import {classifyTask,isEligibleForTraining} from "./training";
+
+const hash=(value:string)=>[...value].reduce((result,char)=>Math.imul(result^char.charCodeAt(0),16777619)>>>0,2166136261);
+
+export function shuffledOptions(task:LyrikTask,sessionSeed="audit-session",sequenceIndex?:number){
+ const entries=(task.options??[]).map((label,index)=>({id:`${task.id}:option:${index}`,label,correct:task.correct?.includes(label)??false}));
+ if(["sorting","matching"].includes(task.mechanic??""))return entries;
+ let seed=hash(`${sessionSeed}:${task.id}`);
+ for(let index=entries.length-1;index>0;index--){seed=(Math.imul(seed,1664525)+1013904223)>>>0;const swap=seed%(index+1);[entries[index],entries[swap]]=[entries[swap],entries[index]];}
+ if(task.correct?.length===1&&entries.length){const correct=entries.findIndex(option=>option.correct),serial=Number(task.id.match(/(\d+)(?!.*\d)/)?.[1]??hash(task.id));let target=(serial+hash(sessionSeed))%entries.length;if(sequenceIndex!==undefined){const block=Math.floor(sequenceIndex/entries.length),slot=sequenceIndex%entries.length,positions=Array.from({length:entries.length},(_,index)=>index);let positionSeed=hash(`${sessionSeed}:block:${block}`);for(let index=positions.length-1;index>0;index--){positionSeed=(Math.imul(positionSeed,1664525)+1013904223)>>>0;const swap=positionSeed%(index+1);[positions[index],positions[swap]]=[positions[swap],positions[index]];}target=positions[slot];}if(correct>=0)[entries[correct],entries[target]]=[entries[target],entries[correct]];}
+ return entries;
+}
+
+const practiceSkills:Record<AnalysisAreaId,readonly string[]>={lyric:["lyricFeatures","lyricVsProse","condensation","firstImpression","nonMandatoryRhyme","nonMandatoryMeter"],interpretation:["observation","finding","evidence","evidenceQuality","observationVsInterpretation","securePlausibleUnsupported"],form:["verse","stanza","rhyme","rhymeScheme","enjambment","formalPattern"],speaker:["lyricalI","speaker","addressee","speechSituation","speakerPerspective","speakerRelation"],movement:["theme","senseSection","turn","stasis","beginningEnding","movement"],metre:["wordStress","foot","hebigkeit","meter","cadence","metricalDeviation"],language:["wordChoice","wordField","connotation","styleDeviceRecognition","styleDeviceFunction","syntax"],mood:["mood","attitude","perspective","moodEvidence","perspectiveShift","perspective"],integration:["connectFindings","formContent","speakerLanguage","moodPerspective","rhythmSyntax","beginningEnding"]};
+const progressionPracticeIds:Partial<Record<AnalysisAreaId,readonly string[]>>={form:["progression-form-1","progression-form-2","progression-form-3","progression-form-4","progression-form-5","progression-form-6"],movement:["progression-movement-1","progression-movement-2","progression-movement-3","progression-movement-4","progression-movement-5","progression-movement-6"],language:["progression-language-1","progression-language-2","progression-language-3","style-recognize-32","style-recognize-41","style-analyze-32"]};
+const progressionChallengeIds:Partial<Record<AnalysisAreaId,readonly string[]>>={form:["progression-form-c1","progression-form-c2","progression-form-c3"],movement:["progression-movement-c1","progression-movement-c2","progression-movement-c3"],metre:["exercise-meter-jambus-verse-d","exercise-cadence-female-4","exercise-meter-progression-c3"],language:["style-recognize-7","style-recognize-67","style-analyze-67"]};
+const metricWordIds=["exercise-meter-jambus-word-1","exercise-meter-trochaeus-word-1","exercise-meter-dactyl-word-1","exercise-meter-anapaest-word-1"];
+const selectionHash=(value:string)=>[...value].reduce((result,char)=>Math.imul(result^char.charCodeAt(0),16777619)>>>0,2166136261);
+const metricPracticeIds=(sessionSeed:string)=>{const start=selectionHash(sessionSeed)%metricWordIds.length;return[metricWordIds[start],metricWordIds[(start+1)%metricWordIds.length],"exercise-meter-jambus-verse-b","exercise-meter-trochaeus-verse-a","exercise-cadence-male-1","exercise-meter-trochaeus-verse-e"]};
+const metricPracticeSkills=["wordStress","foot","hebigkeit","meter","cadence","metricalDeviation"] as const;
+
+export function pickChapterTasks(all:readonly LyrikTask[],area:AnalysisAreaId,step:number,sessionSeed="audit-session"){const approved=all.filter(task=>isEligibleForTraining(task,area)),byId=(ids:readonly string[])=>ids.map(id=>approved.find(task=>task.id===id)).filter((task):task is LyrikTask=>!!task);if(step===3&&area==="metre")return byId(metricPracticeIds(sessionSeed)).map((task,index)=>({...task,skill:metricPracticeSkills[index]}));if(step===3&&progressionPracticeIds[area])return byId(progressionPracticeIds[area]!);if(step===4&&progressionChallengeIds[area])return byId(progressionChallengeIds[area]!);const picked:LyrikTask[]=[],used=new Set<string>();const add=(task:LyrikTask|undefined)=>{if(task&&!used.has(task.id)){picked.push(task);used.add(task.id);}};if(step===3)for(const skill of practiceSkills[area])add(approved.find(task=>classifyTask(task).skill===skill&&task.level<=2&&!used.has(task.id)));const practiceIds=new Set((step===3?(area==="metre"?byId(metricPracticeIds(sessionSeed)):picked):pickChapterTasks(all,area,3,sessionSeed)).map(task=>task.id));if(step===4)for(const task of approved.filter(task=>task.level>=2&&!practiceIds.has(task.id)&&(task.cognitiveOperation==="analyze"||task.cognitiveOperation==="connect"||task.cognitiveOperation==="evaluate"||task.cognitiveOperation==="explainFunction")))add(task);if(step===5)for(const task of approved.filter(task=>task.level===3&&task.kind==="free"&&!practiceIds.has(task.id)))add(task);for(const task of approved)if(picked.length<(step===3?6:step===4?3:2)&&!practiceIds.has(task.id))add(task);return picked.slice(0,step===3?6:step===4?3:2);}
+
+export function pickUnseenTransferTasks(all:readonly LyrikTask[],area:AnalysisAreaId,guidedSourceWorkIds:readonly string[],sessionSeed="audit-session"){
+ const previous=[...pickChapterTasks(all,area,3,sessionSeed),...pickChapterTasks(all,area,4,sessionSeed)];
+ const seenWorks=new Set([...guidedSourceWorkIds,...previous.flatMap(task=>task.sourceWorkIds??(task.source?.workId?[task.source.workId]:[]))]);
+ const seenTexts=new Set(previous.map(task=>task.text?.trim()).filter(Boolean));
+ const eligible=all.filter(task=>isEligibleForTraining(task,area)&&task.level>=2&&!previous.some(prior=>prior.id===task.id)&&!(task.sourceWorkIds??(task.source?.workId?[task.source.workId]:[])).some(id=>seenWorks.has(id))&&!seenTexts.has(task.text?.trim())).sort((a,b)=>Number(b.phase==="transfer")-Number(a.phase==="transfer"));
+ const exercise=eligible.filter(task=>task.sourceType==="exerciseText");
+ const authentic=eligible.filter(task=>task.sourceType==="authentic");
+ const chosen=authentic.length>=2?authentic:exercise.length>=2?exercise:eligible;
+ return chosen.slice(0,2);
+}

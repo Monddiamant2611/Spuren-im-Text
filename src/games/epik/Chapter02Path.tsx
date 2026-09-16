@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Button } from "@/src/features/literature-archive/components/Button";
+import { ProgressionButton as Button, isContinuingDespiteErrors } from "./ProgressionButton";
 import { Card } from "@/src/features/literature-archive/components/Card";
 import { PracticeText } from "./PracticeText";
 import { useShuffledOptions, useRunSeed } from "./choice-options";
@@ -10,7 +10,7 @@ import { chapter02Glossary, chapter02PracticeTexts, chapter02Steps, comparisonCa
 import { ChapterCompletionActions } from "./ChapterCompletionActions";
 
 function TextCard({ text }: { text: PerspectiveText }) { return <PracticeText title={text.title} text={text.text}/>; }
-function Choice({ label, options, answer, selected, onSelect }: { label: string; options: readonly string[]; answer: string; selected?: string; onSelect: (value: string) => void }) { const orderedOptions = useShuffledOptions(options, label); return <fieldset className="epik-choice"><legend>{label}</legend>{orderedOptions.map((option) => <button type="button" key={option} className={selected === option ? "is-selected" : ""} onClick={() => onSelect(option)}>{option}</button>)}{selected && <small role="status">{chapterChoiceFeedback(label, selected, answer)}</small>}</fieldset>; }
+function Choice({ label, options, answer, selected, onSelect }: { label: string; options: readonly string[]; answer: string; selected?: string; onSelect: (value: string) => void }) { const orderedOptions = useShuffledOptions(options, label); return <fieldset className="epik-choice"><legend>{label}</legend>{orderedOptions.map((option) => <button type="button" key={option} aria-pressed={selected === option} className={selected === option ? "is-selected" : ""} onClick={() => onSelect(option)}>{option}</button>)}{selected && <small role="status">{chapterChoiceFeedback(label, selected, answer)}</small>}</fieldset>; }
 
 const informationPassages = [
   { id: "a", text: "Mika drückte die Türklinke herunter. Niemand antwortete. Ob Rena überhaupt im Gebäude war, wusste er nicht." },
@@ -27,7 +27,7 @@ export function Chapter02Path({ initialStep = 0 }: { initialStep?: number }) {
   const texts = useMemo(() => { const picked: PerspectiveText[] = []; for (let index = 0; index < 5; index += 1) picked.push(selectPerspectiveText(offset + index, picked.map((item) => item.id))); return picked; }, [offset]);
   const comparison = comparisonCases[offset % comparisonCases.length]; const text = step === 4 ? chapter02PracticeTexts.find((item) => item.id === "kajak")! : texts[step];
   const perspectiveSamples = (["auktorial", "personal", "ich"] as const).map((perspective) => { const pool = chapter02PracticeTexts.filter((item) => item.perspective === perspective); return pool[offset % pool.length]; });
-  function next(message: string) { setFeedback(message); setAnswers({}); if (step === 4) setCompleted(true); else setStep((value) => value + 1); }
+  function next(message: string) { setFeedback(isContinuingDespiteErrors() ? undefined : message); setAnswers({}); if (step === 4) setCompleted(true); else setStep((value) => value + 1); }
   function repeat() { setOffset((value) => value + 3); setStep(0); setAnswers({}); setFeedback(undefined); setCompleted(false); }
   const set = (id: string, value: string | boolean) => setAnswers((old) => ({ ...old, [id]: value }));
 
