@@ -1,0 +1,70 @@
+{
+  "chapters": [
+    {
+      "chapter": 1,
+      "introduction": "Wie sagt ein Gedicht mit wenigen Worten besonders viel?Die schlesischen Weber — Heinrich Heine\n\nIm düstern Auge keine Thräne,\nSie sitzen am Webstuhl und fletschen die Zähne:\nDeutschland, wir weben Dein Leichentuch,\nWir weben hinein den dreifachen Fluch –\nWir weben, wir weben!\nEin Fluch dem Gotte, zu dem wir gebeten\nIn Winterskälte und Hungersnöthen;\nWir haben vergebens gehofft und geharrt,\nEr hat uns geäfft und gefoppt und genarrt –\nWir weben, wir weben!\nEin Fluch dem König, dem König der Reichen,\nDen unser Elend nicht konnte erweichen,Schau zunächst genau hin. Was fällt dir auf, ohne schon eine fertige Interpretation zu behaupten?",
+      "knowledgeCards": 4,
+      "knowledgeExample": "LyrikLiterarische Texte, die Sprache, Klang, Bilder und Form besonders verdichten.Merke: Reim und festes Metrum sind möglich, aber keine Pflicht.GedichtEin einzelner lyrischer Text mit einer bewusst gestalteten sprachlichen Form.Merke: Nicht jeder Zeilenumbruch trägt automatisch eine besondere Wirkung.Sprachliche VerdichtungEin Gedicht sagt oft mit wenigen Worten sehr viel. Ein Bild oder Wort kann mehrere Gedanken und Gefühle auslösen.Merke: Ein schwieriger Satz ist nicht automatisch sprachlich verdichtet.Erster EindruckDas ist das, was dir beim ersten Lesen auffällt. Danach prüfst du am Text, ob dein Eindruck wirklich passt.Merke: Ein erster Eindruck ist noch keine fertige Analyse.",
+      "guidedPrompt": "Arbeitsauftrag: Vergleiche das Gedicht mit der Prosafassung. Was ist im Gedicht anders? Wähle drei passende Beobachtungen.",
+      "practicePrompt": "Untersuche im Gedicht „Mondnacht“: Klang, Bildlichkeit und Kreuzreim. Nenne eine Beobachtung. Belege sie am Ausschnitt. Erkläre dann, was die Stelle zeigt.",
+      "challengePrompt": "Was zeigt „und beantwortet keine Frage.“ im Verlauf des Textes?",
+      "transferPrompt": "Welche Analyse passt zum Text? Warum ist die andere Erklärung schwächer?"
+    },
+    {
+      "chapter": 3,
+      "introduction": "Wie gestalten Verse, Strophen und Reime den Text?Der Panther — Rainer Maria Rilke\n\n(Im Jardin des Plantes, Paris)\nSein Blick ist vom Vorübergehn der Stäbe\nso müd geworden, daß er nichts mehr hält.\nIhm ist, als ob es tausend Stäbe gäbe\nund hinter tausend Stäben keine Welt.\nDer weiche Gang geschmeidig starker Schritte,\nder sich im allerkleinsten Kreise dreht,\nist wie ein Tanz von Kraft um eine Mitte,\nin der betäubt ein großer Wille steht.\nNur manchmal schiebt der Vorhang der Pupille\nsich lautlos auf –. Dann geht ein Bild hinein,\ngeht durch der Glieder angespannte Stille –Schau zunächst genau hin. Was fällt dir auf, ohne schon eine fertige Interpretation zu behaupten?",
+      "knowledgeCards": 6,
+      "knowledgeExample": "SonettEin Sonett hat vierzehn Verse. Häufig besteht es aus zwei Vierzeilern und zwei Dreizeilern. Es gibt aber auch andere Formen, etwa das Shakespeare-Sonett.Merke: These–Antithese–Synthese ist eine mögliche Lesart, aber kein festes Merkmal jedes Sonetts.VersEine einzelne Gedichtzeile.Merke: Vers und Satz nicht gleichsetzen.StropheEine Gruppe von Versen, die im Gedicht als Abschnitt zusammensteht.Merke: Eine Strophe ist nicht automatisch ein vollständiger Satz.ReimWörter klingen vom letzten betonten Vokal an gleich oder ähnlich.Merke: Ähnliche Buchstaben ergeben nicht immer einen Reim; nicht jedes Gedicht reimt sich.PaarreimJe zwei aufeinanderfolgende Verse reimen sich: aabb.Merke: Das Schema beschreibt zunächst nur die Anordnung, nicht automatisch die Wirkung.KreuzreimDie Reime wechseln einander ab: abab.Merke: Die Buchstaben richten sich nach dem Klang, nicht nach dem Inhalt.",
+      "guidedPrompt": "Arbeitsauftrag: Lies den Ausschnitt. Wie viele Verse siehst du?",
+      "practicePrompt": "Wie ist der Text gegliedert?",
+      "challengePrompt": "Welche zwei Formbefunde sind richtig?",
+      "transferPrompt": "Welche Textstellen belegen die Deutung „Vereinzelung in einer geteilten Alltagssituation“ am besten?"
+    },
+    {
+      "chapter": 5,
+      "introduction": "Was verändert sich im Gedicht, was bleibt gleich?Der Gott der Stadt — Georg Heym\n\nAuf einem Häuserblocke sitzt er breit.\nDie Winde lagern schwarz um seine Stirn.\nEr schaut voll Wut, wo fern in Einsamkeit\nDie letzten Häuser in das Land verirrn.\nVom Abend glänzt der rote Bauch dem Baal,\nDie großen Städte knieen um ihn her.\nDer Kirchenglocken ungeheure Zahl\nWogt auf zu ihm aus schwarzer Türme Meer.\nWie Korybanten-Tanz dröhnt die Musik\nDer Millionen durch die Straßen laut.\nDer Schlote Rauch, die Wolken der Fabrik\nZiehn auf zu ihm, wie Duft von Weihrauch blaut.Schau zunächst genau hin. Was fällt dir auf, ohne schon eine fertige Interpretation zu behaupten?",
+      "knowledgeCards": 5,
+      "knowledgeExample": "ThemaDer allgemeine Gegenstands- oder Erfahrungsbereich eines Gedichts.Merke: Thema und Deutungshypothese sind nicht dasselbe.SinnabschnittInhaltlich zusammengehöriger Teil eines Gedichts.Merke: Strophengrenze und Sinnabschnitt müssen nicht zusammenfallen.Innere BewegungVeränderung von Wahrnehmung, Haltung, Gedanken oder Gefühlen im Textverlauf.Merke: Nicht jedes Gedicht entwickelt sich; Stillstand kann zentral sein.WendungMarkanter Wechsel im Verlauf eines Gedichts.Merke: Nicht jeder neue Vers ist eine Wendung.StillstandBewusst ausbleibende Entwicklung oder Bewegung.Merke: Stillstand ist nicht automatisch ein Mangel des Textes.",
+      "guidedPrompt": "Arbeitsauftrag: Wie beginnt das Gedicht in den ersten vier Versen?",
+      "practicePrompt": "Wie ist die Situation am Anfang?",
+      "challengePrompt": "Welche Verlaufsbeschreibung passt besser?",
+      "transferPrompt": "Welche Textstellen belegen die Deutung „Vereinzelung in einer geteilten Alltagssituation“ am besten?"
+    },
+    {
+      "chapter": 6,
+      "introduction": "Wie unterscheiden sich Metrum, Rhythmus und Kadenz?Der Panther — Rainer Maria Rilke\n\n(Im Jardin des Plantes, Paris)\nSein Blick ist vom Vorübergehn der Stäbe\nso müd geworden, daß er nichts mehr hält.\nIhm ist, als ob es tausend Stäbe gäbe\nund hinter tausend Stäben keine Welt.\nDer weiche Gang geschmeidig starker Schritte,\nder sich im allerkleinsten Kreise dreht,\nist wie ein Tanz von Kraft um eine Mitte,\nin der betäubt ein großer Wille steht.\nNur manchmal schiebt der Vorhang der Pupille\nsich lautlos auf –. Dann geht ein Bild hinein,\ngeht durch der Glieder angespannte Stille –Schau zunächst genau hin. Was fällt dir auf, ohne schon eine fertige Interpretation zu behaupten?",
+      "knowledgeCards": 6,
+      "knowledgeExample": "MetrumDas Metrum ist das Grundmuster der Betonungen in einem Vers. Betonte und unbetonte Silben wechseln nach einem Muster.Merke: Metrum und Rhythmus sind nicht dasselbe.RhythmusRhythmus hörst du beim Lesen. Er entsteht durch Betonungen, Pausen und den Satzbau.Merke: Ein Versfuß hat nicht immer dieselbe Wirkung.VersfußEin Versfuß ist ein kleines Betonungsmuster. Mehrere Versfüße können zusammen das Metrum eines Verses bilden.Merke: Die natürliche Betonung entscheidet, nicht die Schreibweise.HebigkeitDie Hebigkeit sagt, wie viele Hebungen ein Vers hat.Merke: Silbenzahl und Hebungszahl sind nicht dasselbe.JambusVersfuß aus unbetonter und betonter Silbe: xX.Merke: Jambus bedeutet nicht automatisch Harmonie oder Vorwärtsdrang.TrochäusVersfuß aus betonter und unbetonter Silbe: Xx.Merke: Trochäus besitzt keine feste, kontextfreie Wirkung.",
+      "guidedPrompt": "Arbeitsauftrag: Lies den Vers laut. Welche zwei Wörter betonst du beim Sprechen besonders stark?",
+      "practicePrompt": "Lies das Wort laut. Zu welchem Versfuß passt seine Betonung?",
+      "challengePrompt": "Bestimme den Versfuß. Zähle danach die Hebungen im ganzen Vers.",
+      "transferPrompt": "Bestimme den Versfuß. Zähle danach die Hebungen im ganzen Vers."
+    },
+    {
+      "chapter": 7,
+      "introduction": "Wie erzeugen Wörter und Stilmittel Bedeutung?Die schlesischen Weber — Heinrich Heine\n\nIm düstern Auge keine Thräne,\nSie sitzen am Webstuhl und fletschen die Zähne:\nDeutschland, wir weben Dein Leichentuch,\nWir weben hinein den dreifachen Fluch –\nWir weben, wir weben!\nEin Fluch dem Gotte, zu dem wir gebeten\nIn Winterskälte und Hungersnöthen;\nWir haben vergebens gehofft und geharrt,\nEr hat uns geäfft und gefoppt und genarrt –\nWir weben, wir weben!\nEin Fluch dem König, dem König der Reichen,\nDen unser Elend nicht konnte erweichen,Schau zunächst genau hin. Was fällt dir auf, ohne schon eine fertige Interpretation zu behaupten?",
+      "knowledgeCards": 8,
+      "knowledgeExample": "WortwahlAuswahl konkreter Wörter und ihrer Bedeutungsnuancen.Merke: Ein einzelnes Wort nie aus dem Zusammenhang lösen.WortfeldGruppe von Wörtern aus einem gemeinsamen Bedeutungsbereich.Merke: Ein einzelnes Wort bildet noch kein Wortfeld.KonnotationMitbedeutung oder Wertung, die ein Wort zusätzlich zur Grundbedeutung trägt.Merke: Konnotationen sind kontext- und kulturabhängig.BildspracheSprachliche Gestaltung, die Vorstellungen über Bilder und Übertragungen erzeugt.Merke: Nicht jedes anschauliche Wort ist ein Stilmittel.AkkumulationReihung mehrerer Unterbegriffe zu einem nicht genannten oder nachgestellten Oberbegriff.Merke: Enumeratio nennt oft nur eine Aufzählung; die Akkumulation bündelt einen Oberbegriff.AllegorieFortgeführte bildliche Darstellung eines abstrakten Gedankens durch eine anschauliche Gestalt.Merke: Ein Symbol kann punktuell bleiben; eine Allegorie ist systematisch ausdeutbar.AlliterationWiederholung desselben Anfangslauts in benachbarten betonten Wörtern.Merke: Gleiche Anfangsbuchstaben genügen nicht, wenn die Laute verschieden sind.AllusionIndirekte Anspielung auf bekanntes Wissen, einen Text, Mythos oder ein Ereignis.Merke: Ein direkt genanntes Zitat ist keine bloße Anspielung.",
+      "guidedPrompt": "Arbeitsauftrag: Wähle zwei sprachliche Signale, die die Stadt groß oder mächtig erscheinen lassen.",
+      "practicePrompt": "Welches Verb fällt auf, weil es die Häuser wie Lebewesen erscheinen lässt?",
+      "challengePrompt": "Welche Stilmittel erkennst du? Wähle alle passenden Antworten.",
+      "transferPrompt": "Welche Textstellen belegen die Deutung „Vereinzelung in einer geteilten Alltagssituation“ am besten?"
+    },
+    {
+      "chapter": 9,
+      "introduction": "Wie verbindest du Beobachtungen zu einer begründeten Deutung?Der Panther — Rainer Maria Rilke\n\n(Im Jardin des Plantes, Paris)\nSein Blick ist vom Vorübergehn der Stäbe\nso müd geworden, daß er nichts mehr hält.\nIhm ist, als ob es tausend Stäbe gäbe\nund hinter tausend Stäben keine Welt.\nDer weiche Gang geschmeidig starker Schritte,\nder sich im allerkleinsten Kreise dreht,\nist wie ein Tanz von Kraft um eine Mitte,\nin der betäubt ein großer Wille steht.\nNur manchmal schiebt der Vorhang der Pupille\nsich lautlos auf –. Dann geht ein Bild hinein,\ngeht durch der Glieder angespannte Stille –Schau zunächst genau hin. Was fällt dir auf, ohne schon eine fertige Interpretation zu behaupten?",
+      "knowledgeCards": 2,
+      "knowledgeExample": "AnalyseketteGeordnete Verbindung von Beobachtung, Beleg, Analyse, Funktion, Bedeutung und Deutung.Merke: Keine Wirkung zwischen Fachbegriff und Beleg einschieben, die der Text nicht trägt.Befunde verknüpfenDu verbindest mindestens zwei Beobachtungen. Dann erklärst du, was sie zusammen über das Gedicht zeigen.Merke: Zwei Beobachtungen nur aufzuzählen reicht nicht.",
+      "guidedPrompt": "Arbeitsauftrag: Welche Beobachtung stützt die Deutung, dass Verfall einsetzt?",
+      "practicePrompt": "Untersuche im Gedicht „Verfall“: Sonett, Verfall und Gegenlesart. Nenne eine Beobachtung. Belege sie am Ausschnitt. Erkläre dann, was die Stelle zeigt.",
+      "challengePrompt": "Was zeigt „und übe meinen neuen Namen.“ im Verlauf des Textes?",
+      "transferPrompt": "Vergleiche „und fällt in den Sand.“ und „und baut die Rampe höher.“. Welche Deutung stützen beide Stellen?"
+    }
+  ],
+  "kartei": "BegriffTextbelegKurz erklärtEin Textbeleg ist eine genaue Stelle, die deine Aussage stützt.So erkennst du esPrüfe, ob die Stelle wirklich zu deiner Aussage passt.Mini-Beispieldas Fragezeichen in ‚Ein Zeichen?‘MerksatzEin Zitat allein erklärt noch nichts.Mehr wissen",
+  "archive": "← Zur InhaltsübersichtWissensartikelLyrikWas bedeutet das?Literarische Texte, die Sprache, Klang, Bilder und Form besonders verdichten.BeispielDer Regen schreibt ans Fenster.So erkennst du esAchte auf bewusst gesetzte Zeilen, Klang, Bildlichkeit und eine konzentrierte Wahrnehmung.So verwendest du es in einer AnalyseNenne mehrere Textsignale, statt Lyrik an nur einem Merkmal festzumachen.Typischer FehlerReim und festes Metrum sind möglich, aber keine Pflicht.Verwandte BegriffeGedicht · Sprachliche Verdichtung · Erster EindruckAls Karte lernenIm Training üben",
+  "training": "Untersuche im Gedicht „Mondnacht“: Klang, Bildlichkeit und Kreuzreim. Nenne eine Beobachtung. Belege sie am Ausschnitt. Erkläre dann, was die Stelle zeigt.",
+  "consoleErrors": [],
+  "requestErrors": [],
+  "success": true
+}

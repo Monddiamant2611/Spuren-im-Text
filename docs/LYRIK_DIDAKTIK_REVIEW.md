@@ -154,13 +154,13 @@ entfällt
 ### L1-2 · Produkt-ID `lyric-004`
 
 - **Vollständiger Text:** Im Schrank hängen Sonntage<br>mit ausgeblichenen Schultern.<br>Großvater prüft die leeren Bügel<br>und kennt noch jeden Namen.
-- **Aufgabenstellung:** Welche Aussage beschreibt „und kennt noch jeden Namen.“ zunächst als Befund?
+- **Aufgabenstellung:** Was kannst du an „und kennt noch jeden Namen.“ sicher beobachten?
 - **Antworttyp:** matching
-- **Alle Antwortoptionen:** 1. Sicherer Befund: Im Text steht „und kennt noch jeden Namen.“; seine Gesamtbedeutung ist damit noch nicht festgelegt. **[richtig]**<br>2. Die Stelle „Im Schrank hängen Sonntage“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig.<br>3. „und kennt noch jeden Namen.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „mit ausgeblichenen Schultern.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.
-- **Richtige Lösung:** Sicherer Befund: Im Text steht „und kennt noch jeden Namen.“; seine Gesamtbedeutung ist damit noch nicht festgelegt.
+- **Alle Antwortoptionen:** 1. Im Text steht „und kennt noch jeden Namen.“. Das ist ein sicherer Befund, aber noch keine Deutung des ganzen Textes. **[richtig]**<br>2. Die Stelle „Im Schrank hängen Sonntage“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig.<br>3. „und kennt noch jeden Namen.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „mit ausgeblichenen Schultern.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.
+- **Richtige Lösung:** Im Text steht „und kennt noch jeden Namen.“. Das ist ein sicherer Befund, aber noch keine Deutung des ganzen Textes.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Im Schrank hängen Sonntage“ und „und kennt noch jeden Namen.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Im Schrank hängen Sonntage“ und „und kennt noch jeden Namen.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „und kennt noch jeden Namen.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „und kennt noch jeden Namen.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `describe`
 - **Domain:** `lyric`
 - **Level:** 1
@@ -173,13 +173,13 @@ entfällt
 ### L1-3 · Produkt-ID `lyric-007`
 
 - **Vollständiger Text:** Kinder fahren Kreise<br>um das rostige Geschütz.<br>Eine Taube sucht im Lauf<br>nach Krümeln, nicht nach Zeichen.
-- **Aufgabenstellung:** Welcher Beleg stützt die Deutungsrichtung „alltäglicher Frieden jenseits großer Symbole“ am stärksten?
+- **Aufgabenstellung:** Welche Textstellen belegen die Deutung „alltäglicher Frieden jenseits großer Symbole“ am besten?
 - **Antworttyp:** evidence
-- **Alle Antwortoptionen:** 1. Das Belegpaar „um das rostige Geschütz.“ und „nach Krümeln, nicht nach Zeichen.“ trägt die Deutungsrichtung, weil die beiden Stellen die Deutungsrichtung aus unterschiedlichen Blickwinkeln konkret belegen. **[richtig]**<br>2. Die Stelle „Kinder fahren Kreise“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Die zusätzliche Beobachtung zu „um das rostige Geschütz.“ bleibt für diese Antwort folgenlos und kann die fehlende Begründung deshalb nicht ersetzen.<br>3. „nach Krümeln, nicht nach Zeichen.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „um das rostige Geschütz.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.
-- **Richtige Lösung:** Das Belegpaar „um das rostige Geschütz.“ und „nach Krümeln, nicht nach Zeichen.“ trägt die Deutungsrichtung, weil die beiden Stellen die Deutungsrichtung aus unterschiedlichen Blickwinkeln konkret belegen.
+- **Alle Antwortoptionen:** 1. „um das rostige Geschütz.“ und „nach Krümeln, nicht nach Zeichen.“ stützen die Deutung. Die Stellen zeigen den Ausgangspunkt und ergänzen oder widersprechen einander. **[richtig]**<br>2. Die Stelle „Kinder fahren Kreise“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Die zusätzliche Beobachtung zu „um das rostige Geschütz.“ bleibt für diese Antwort folgenlos und kann die fehlende Begründung deshalb nicht ersetzen.<br>3. „nach Krümeln, nicht nach Zeichen.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „um das rostige Geschütz.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.
+- **Richtige Lösung:** „um das rostige Geschütz.“ und „nach Krümeln, nicht nach Zeichen.“ stützen die Deutung. Die Stellen zeigen den Ausgangspunkt und ergänzen oder widersprechen einander.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Kinder fahren Kreise“ und „nach Krümeln, nicht nach Zeichen.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Kinder fahren Kreise“ und „nach Krümeln, nicht nach Zeichen.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „um das rostige Geschütz.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „um das rostige Geschütz.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `evidence`
 - **Domain:** `lyric`
 - **Level:** 1
@@ -232,13 +232,13 @@ entfällt
 ### L2-1 · Produkt-ID `lyric-002`
 
 - **Vollständiger Text:** Über Nacht bekam mein Telefon<br>ein freundlicheres Gesicht.<br>Nur meine alten Nachrichten<br>findet es seitdem nicht mehr.
-- **Aufgabenstellung:** Welche Formulierung unterscheidet bei „findet es seitdem nicht mehr.“ Befund und Analyse am präzisesten?
+- **Aufgabenstellung:** Welche Antwort nennt zu „findet es seitdem nicht mehr.“ erst einen Befund und erklärt ihn dann?
 - **Antworttyp:** comparison
 - **Alle Antwortoptionen:** 1. Der Befund nennt den Verlust der alten Nachrichten; die Analyse stellt ihn dem zuvor beschriebenen freundlicheren Aussehen als konkrete negative Folge gegenüber. **[richtig]**<br>2. Die Stelle „Über Nacht bekam mein Telefon“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Auch der Schluss „findet es seitdem nicht mehr.“ stützt diese Zuordnung nicht: Er müsste mit der ersten Beobachtung verknüpft statt als eindeutiger Beweis behandelt werden.<br>3. „findet es seitdem nicht mehr.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „ein freundlicheres Gesicht.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Über Nacht bekam mein Telefon“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „findet es seitdem nicht mehr.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.
 - **Richtige Lösung:** Der Befund nennt den Verlust der alten Nachrichten; die Analyse stellt ihn dem zuvor beschriebenen freundlicheren Aussehen als konkrete negative Folge gegenüber.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Über Nacht bekam mein Telefon“ und „findet es seitdem nicht mehr.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Über Nacht bekam mein Telefon“ und „findet es seitdem nicht mehr.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „findet es seitdem nicht mehr.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „findet es seitdem nicht mehr.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `compare`
 - **Domain:** `lyric`
 - **Level:** 2
@@ -251,13 +251,13 @@ entfällt
 ### L2-2 · Produkt-ID `lyric-005`
 
 - **Vollständiger Text:** Unter der Bank schläft noch der Ball.<br>Kreide verblasst im Regen.<br>Ich lese unsere Namen rückwärts<br>bis die Klingel von damals schweigt.
-- **Aufgabenstellung:** Welcher Beleg stützt die Deutungsrichtung „Vergänglichkeit gemeinsamer Kindheit“ am stärksten?
+- **Aufgabenstellung:** Welche Textstellen belegen die Deutung „Vergänglichkeit gemeinsamer Kindheit“ am besten?
 - **Antworttyp:** evidence
-- **Alle Antwortoptionen:** 1. Das Belegpaar „Kreide verblasst im Regen.“ und „bis die Klingel von damals schweigt.“ trägt die Deutungsrichtung, weil die beiden Stellen die Deutungsrichtung aus unterschiedlichen Blickwinkeln konkret belegen. **[richtig]**<br>2. Die Stelle „Unter der Bank schläft noch der Ball.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Auch der Schluss „bis die Klingel von damals schweigt.“ stützt diese Zuordnung nicht: Er müsste mit der ersten Beobachtung verknüpft statt als eindeutiger Beweis behandelt werden.<br>3. „bis die Klingel von damals schweigt.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Kreide verblasst im Regen.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Unter der Bank schläft noch der Ball.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „bis die Klingel von damals schweigt.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.
-- **Richtige Lösung:** Das Belegpaar „Kreide verblasst im Regen.“ und „bis die Klingel von damals schweigt.“ trägt die Deutungsrichtung, weil die beiden Stellen die Deutungsrichtung aus unterschiedlichen Blickwinkeln konkret belegen.
+- **Alle Antwortoptionen:** 1. „Kreide verblasst im Regen.“ und „bis die Klingel von damals schweigt.“ stützen die Deutung. Die Stellen zeigen den Ausgangspunkt und ergänzen oder widersprechen einander. **[richtig]**<br>2. Die Stelle „Unter der Bank schläft noch der Ball.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Auch der Schluss „bis die Klingel von damals schweigt.“ stützt diese Zuordnung nicht: Er müsste mit der ersten Beobachtung verknüpft statt als eindeutiger Beweis behandelt werden.<br>3. „bis die Klingel von damals schweigt.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Kreide verblasst im Regen.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Unter der Bank schläft noch der Ball.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „bis die Klingel von damals schweigt.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.
+- **Richtige Lösung:** „Kreide verblasst im Regen.“ und „bis die Klingel von damals schweigt.“ stützen die Deutung. Die Stellen zeigen den Ausgangspunkt und ergänzen oder widersprechen einander.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Unter der Bank schläft noch der Ball.“ und „bis die Klingel von damals schweigt.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Unter der Bank schläft noch der Ball.“ und „bis die Klingel von damals schweigt.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „Kreide verblasst im Regen.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „Kreide verblasst im Regen.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `evidence`
 - **Domain:** `lyric`
 - **Level:** 2
@@ -270,13 +270,13 @@ entfällt
 ### L2-3 · Produkt-ID `movement-008`
 
 - **Vollständiger Text:** Du gabst mir ein Buch<br>mit Eselsohren an den mutigen Stellen.<br>Heute gebe ich es zurück.<br>Die mutigen Stellen behalte ich.
-- **Aufgabenstellung:** Welche Analyse erklärt die Funktion von „Die mutigen Stellen behalte ich.“ innerhalb der Textbewegung?
+- **Aufgabenstellung:** Was zeigt „Die mutigen Stellen behalte ich.“ im Verlauf des Textes?
 - **Antworttyp:** errorDetective
 - **Alle Antwortoptionen:** 1. „Die mutigen Stellen behalte ich“ führt die Gabe des Buches als innere Aneignung weiter: Das Buch wird zurückgegeben, sein ermutigender Gehalt bleibt beim Ich. **[richtig]**<br>2. Die Stelle „Du gabst mir ein Buch“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Auch der Schluss „Die mutigen Stellen behalte ich.“ stützt diese Zuordnung nicht: Er müsste mit der ersten Beobachtung verknüpft statt als eindeutiger Beweis behandelt werden.<br>3. „Die mutigen Stellen behalte ich.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „mit Eselsohren an den mutigen Stellen.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Du gabst mir ein Buch“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „Die mutigen Stellen behalte ich.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.
 - **Richtige Lösung:** „Die mutigen Stellen behalte ich“ führt die Gabe des Buches als innere Aneignung weiter: Das Buch wird zurückgegeben, sein ermutigender Gehalt bleibt beim Ich.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Du gabst mir ein Buch“ und „Die mutigen Stellen behalte ich.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Du gabst mir ein Buch“ und „Die mutigen Stellen behalte ich.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „Die mutigen Stellen behalte ich.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „Die mutigen Stellen behalte ich.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `analyze`
 - **Domain:** `movement`
 - **Level:** 2
@@ -403,13 +403,13 @@ entfällt
 ### L2-10 · Produkt-ID `movement-038`
 
 - **Vollständiger Text:** Herr Sommer deckt für zwei.<br>Das zweite Glas bleibt sauber.<br>Beim Abräumen sagt er Danke<br>in die Richtung des Fensters.
-- **Aufgabenstellung:** Welche Formulierung unterscheidet bei „in die Richtung des Fensters.“ Befund und Analyse am präzisesten?
+- **Aufgabenstellung:** Welche Antwort nennt zu „in die Richtung des Fensters.“ erst einen Befund und erklärt ihn dann?
 - **Antworttyp:** comparison
 - **Alle Antwortoptionen:** 1. Der Befund nennt die Richtung des Dankes zum Fenster; die Analyse konkretisiert damit, dass Herr Sommers Geste keinen anwesenden zweiten Tischgast erreicht. **[richtig]**<br>2. Die Stelle „Herr Sommer deckt für zwei.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Auch der Schluss „in die Richtung des Fensters.“ stützt diese Zuordnung nicht: Er müsste mit der ersten Beobachtung verknüpft statt als eindeutiger Beweis behandelt werden.<br>3. „in die Richtung des Fensters.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Das zweite Glas bleibt sauber.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Herr Sommer deckt für zwei.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „in die Richtung des Fensters.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.
 - **Richtige Lösung:** Der Befund nennt die Richtung des Dankes zum Fenster; die Analyse konkretisiert damit, dass Herr Sommers Geste keinen anwesenden zweiten Tischgast erreicht.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Herr Sommer deckt für zwei.“ und „in die Richtung des Fensters.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Herr Sommer deckt für zwei.“ und „in die Richtung des Fensters.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „in die Richtung des Fensters.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „in die Richtung des Fensters.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `compare`
 - **Domain:** `movement`
 - **Level:** 2
@@ -424,13 +424,13 @@ entfällt
 ### L3-1 · Produkt-ID `lyric-003`
 
 - **Vollständiger Text:** Sieben Menschen unter Glas.<br>Jeder trägt ein anderes Wetter.<br>Der Bus verspätet sich.<br>Niemand leiht dem anderen Zeit.
-- **Aufgabenstellung:** Welcher Beleg stützt die Deutungsrichtung „Vereinzelung in einer geteilten Alltagssituation“ am stärksten?
+- **Aufgabenstellung:** Welche Textstellen belegen die Deutung „Vereinzelung in einer geteilten Alltagssituation“ am besten?
 - **Antworttyp:** evidence
-- **Alle Antwortoptionen:** 1. Das Belegpaar „Jeder trägt ein anderes Wetter.“ und „Niemand leiht dem anderen Zeit.“ trägt die Deutungsrichtung, weil die beiden Stellen die Deutungsrichtung aus unterschiedlichen Blickwinkeln konkret belegen. **[richtig]**<br>2. Die Stelle „Sieben Menschen unter Glas.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Sieben Menschen unter Glas.“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „Niemand leiht dem anderen Zeit.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Jeder trägt ein anderes Wetter.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Sieben Menschen unter Glas.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „Niemand leiht dem anderen Zeit.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Jeder trägt ein anderes Wetter.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Sieben Menschen unter Glas.“ und „Niemand leiht dem anderen Zeit.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
-- **Richtige Lösung:** Das Belegpaar „Jeder trägt ein anderes Wetter.“ und „Niemand leiht dem anderen Zeit.“ trägt die Deutungsrichtung, weil die beiden Stellen die Deutungsrichtung aus unterschiedlichen Blickwinkeln konkret belegen.
+- **Alle Antwortoptionen:** 1. „Jeder trägt ein anderes Wetter.“ und „Niemand leiht dem anderen Zeit.“ stützen die Deutung. Die Stellen zeigen den Ausgangspunkt und ergänzen oder widersprechen einander. **[richtig]**<br>2. Die Stelle „Sieben Menschen unter Glas.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Sieben Menschen unter Glas.“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „Niemand leiht dem anderen Zeit.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Jeder trägt ein anderes Wetter.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Sieben Menschen unter Glas.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „Niemand leiht dem anderen Zeit.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Jeder trägt ein anderes Wetter.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Sieben Menschen unter Glas.“ und „Niemand leiht dem anderen Zeit.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
+- **Richtige Lösung:** „Jeder trägt ein anderes Wetter.“ und „Niemand leiht dem anderen Zeit.“ stützen die Deutung. Die Stellen zeigen den Ausgangspunkt und ergänzen oder widersprechen einander.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Sieben Menschen unter Glas.“ und „Niemand leiht dem anderen Zeit.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Sieben Menschen unter Glas.“ und „Niemand leiht dem anderen Zeit.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „Jeder trägt ein anderes Wetter.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „Jeder trägt ein anderes Wetter.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `evidence`
 - **Domain:** `lyric`
 - **Level:** 3
@@ -443,13 +443,13 @@ entfällt
 ### L3-2 · Produkt-ID `lyric-006`
 
 - **Vollständiger Text:** Am anderen Ufer brennt kein Licht.<br>Ein Rucksack treibt im Schilf.<br>Der Fluss kennt beide Sprachen<br>und beantwortet keine Frage.
-- **Aufgabenstellung:** Welche Analyse erklärt die Funktion von „und beantwortet keine Frage.“ innerhalb der Textbewegung?
+- **Aufgabenstellung:** Was zeigt „und beantwortet keine Frage.“ im Verlauf des Textes?
 - **Antworttyp:** marking
 - **Alle Antwortoptionen:** 1. „und beantwortet keine Frage“ führt die beobachtete Szene in eine ausdrücklich offene, nicht aufgelöste Schlussbewegung. **[richtig]**<br>2. Die Stelle „Am anderen Ufer brennt kein Licht.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig.<br>3. „und beantwortet keine Frage.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Ein Rucksack treibt im Schilf.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Am anderen Ufer brennt kein Licht.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „und beantwortet keine Frage.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Ein Rucksack treibt im Schilf.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Am anderen Ufer brennt kein Licht.“ und „und beantwortet keine Frage.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
 - **Richtige Lösung:** „und beantwortet keine Frage“ führt die beobachtete Szene in eine ausdrücklich offene, nicht aufgelöste Schlussbewegung.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Am anderen Ufer brennt kein Licht.“ und „und beantwortet keine Frage.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Am anderen Ufer brennt kein Licht.“ und „und beantwortet keine Frage.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „und beantwortet keine Frage.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „und beantwortet keine Frage.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `analyze`
 - **Domain:** `lyric`
 - **Level:** 3
@@ -462,13 +462,13 @@ entfällt
 ### L3-3 · Produkt-ID `lyric-009`
 
 - **Vollständiger Text:** Mein Name passt in das Kästchen.<br>Meine Herkunft nicht.<br>Unter der Unterschrift<br>beginnt ein Zimmer, noch kein Zuhause.
-- **Aufgabenstellung:** Welche Formulierung verbindet „Meine Herkunft nicht.“ mit einer konkreten Funktion?
+- **Aufgabenstellung:** Welche Antwort erklärt, was „Meine Herkunft nicht.“ an dieser Stelle bewirkt?
 - **Antworttyp:** evidence
-- **Alle Antwortoptionen:** 1. „Meine Herkunft nicht.“ zeigt, wie sich die Wahrnehmung oder Bedeutung verändert und trägt damit kontextbezogen zu „Differenz von Wohnort und Heimat“ bei. **[richtig]**<br>2. Die Stelle „Mein Name passt in das Kästchen.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Mein Name passt in das Kästchen.“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „beginnt ein Zimmer, noch kein Zuhause.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Meine Herkunft nicht.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Mein Name passt in das Kästchen.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „beginnt ein Zimmer, noch kein Zuhause.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Meine Herkunft nicht.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Mein Name passt in das Kästchen.“ und „beginnt ein Zimmer, noch kein Zuhause.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
-- **Richtige Lösung:** „Meine Herkunft nicht.“ zeigt, wie sich die Wahrnehmung oder Bedeutung verändert und trägt damit kontextbezogen zu „Differenz von Wohnort und Heimat“ bei.
+- **Alle Antwortoptionen:** 1. „Meine Herkunft nicht.“ zeigt, wie sich die Wahrnehmung oder Bedeutung verändert. So trägt die Stelle zur Deutung „Differenz von Wohnort und Heimat“ bei. **[richtig]**<br>2. Die Stelle „Mein Name passt in das Kästchen.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Mein Name passt in das Kästchen.“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „beginnt ein Zimmer, noch kein Zuhause.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Meine Herkunft nicht.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Mein Name passt in das Kästchen.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „beginnt ein Zimmer, noch kein Zuhause.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Meine Herkunft nicht.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Mein Name passt in das Kästchen.“ und „beginnt ein Zimmer, noch kein Zuhause.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
+- **Richtige Lösung:** „Meine Herkunft nicht.“ zeigt, wie sich die Wahrnehmung oder Bedeutung verändert. So trägt die Stelle zur Deutung „Differenz von Wohnort und Heimat“ bei.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Mein Name passt in das Kästchen.“ und „beginnt ein Zimmer, noch kein Zuhause.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Mein Name passt in das Kästchen.“ und „beginnt ein Zimmer, noch kein Zuhause.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „Meine Herkunft nicht.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „Meine Herkunft nicht.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `explainFunction`
 - **Domain:** `lyric`
 - **Level:** 3
@@ -500,13 +500,13 @@ entfällt
 ### L3-5 · Produkt-ID `lyric-015`
 
 - **Vollständiger Text:** Der Umschlag war dünn.<br>Sein Nein wog bis zum Abend.<br>Dann faltete ich daraus<br>ein kleines, störrisches Boot.
-- **Aufgabenstellung:** Welche Analyse ist textnah, und warum wäre eine naheliegende Alternative schwächer?
+- **Aufgabenstellung:** Welche Analyse passt zum Text? Warum ist die andere Erklärung schwächer?
 - **Antworttyp:** errorDetective
-- **Alle Antwortoptionen:** 1. Tragfähig ist die Analyse von „Sein Nein wog bis zum Abend.“ im Zusammenhang mit „ein kleines, störrisches Boot.“; eine automatische Wirkung oder biografische Zuschreibung wäre nicht belegt. **[richtig]**<br>2. Die Stelle „Der Umschlag war dünn.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Der Umschlag war dünn.“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „ein kleines, störrisches Boot.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Sein Nein wog bis zum Abend.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Der Umschlag war dünn.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „ein kleines, störrisches Boot.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Sein Nein wog bis zum Abend.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Der Umschlag war dünn.“ und „ein kleines, störrisches Boot.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
-- **Richtige Lösung:** Tragfähig ist die Analyse von „Sein Nein wog bis zum Abend.“ im Zusammenhang mit „ein kleines, störrisches Boot.“; eine automatische Wirkung oder biografische Zuschreibung wäre nicht belegt.
+- **Alle Antwortoptionen:** 1. Die Erklärung verbindet „Sein Nein wog bis zum Abend.“ und „ein kleines, störrisches Boot.“. Sie behauptet weder eine feste Wirkung noch etwas über die Autorperson. **[richtig]**<br>2. Die Stelle „Der Umschlag war dünn.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Der Umschlag war dünn.“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „ein kleines, störrisches Boot.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Sein Nein wog bis zum Abend.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Der Umschlag war dünn.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „ein kleines, störrisches Boot.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Sein Nein wog bis zum Abend.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Der Umschlag war dünn.“ und „ein kleines, störrisches Boot.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
+- **Richtige Lösung:** Die Erklärung verbindet „Sein Nein wog bis zum Abend.“ und „ein kleines, störrisches Boot.“. Sie behauptet weder eine feste Wirkung noch etwas über die Autorperson.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Der Umschlag war dünn.“ und „ein kleines, störrisches Boot.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Der Umschlag war dünn.“ und „ein kleines, störrisches Boot.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „Sein Nein wog bis zum Abend.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „Sein Nein wog bis zum Abend.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `evaluate`
 - **Domain:** `lyric`
 - **Level:** 3
@@ -519,13 +519,13 @@ entfällt
 ### L3-6 · Produkt-ID `lyric-018`
 
 - **Vollständiger Text:** Die Bahn fährt im Kreis.<br>Gesichter steigen aus, Gesichter ein.<br>Nur die Frau mit den roten Schuhen<br>bleibt drei Runden lang.
-- **Aufgabenstellung:** Entwickle eine überprüfbare Deutungshypothese zu „Anonymität und verborgene Geschichten“.
+- **Aufgabenstellung:** Formuliere eine Deutungshypothese zu „Anonymität und verborgene Geschichten“. Prüfe sie am Text.
 - **Antworttyp:** offene Analyse mit Selbstkontrolle
 - **Alle Antwortoptionen:** entfällt – offene Analyse
 - **Richtige Lösung:** keine automatisch einzig richtige Lösung
 - **Mögliche Alternativlösungen:** Weitere textnahe Lösungen sind möglich, wenn alle Kriterien erfüllt und Abweichungen begründet werden.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Die Bahn fährt im Kreis.“ und „bleibt drei Runden lang.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Die Bahn fährt im Kreis.“ und „bleibt drei Runden lang.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „bleibt drei Runden lang.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „bleibt drei Runden lang.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `hypothesize`
 - **Domain:** `lyric`
 - **Level:** 3
@@ -533,22 +533,22 @@ entfällt
 - **Kriteriencheck:**
 - [ ] konkreter Befund
 - [ ] genauer Textbeleg
-- [ ] kontextbezogene Funktion
-- [ ] Bezug zur Bedeutung
-- [ ] Reichweite oder alternative Lesart reflektiert
-- **Musteranalyse:** Der Text gestaltet Anonymität und verborgene Geschichten. „bleibt drei Runden lang.“ und „Gesichter steigen aus, Gesichter ein.“ stützen diese Lesart gemeinsam; ihre Funktion ist zu erklären und eine alternative Lesart bleibt anhand der Kriterien prüfbar.
+- [ ] Funktion an der Stelle erklärt
+- [ ] Bezug zur Deutung
+- [ ] Grenzen oder andere Lesart geprüft
+- **Musteranalyse:** Der Text gestaltet Anonymität und verborgene Geschichten. „bleibt drei Runden lang.“ und „Gesichter steigen aus, Gesichter ein.“ stützen diese Deutung. Prüfe auch, ob eine andere Lesart zum Text passt.
 - **Hinweis:** Die Musteranalyse ist ein Modell, keine Auswendiglösung.
 
 ### L3-7 · Produkt-ID `lyric-021`
 
 - **Vollständiger Text:** Die Boote stehen im Schlick<br>auf ihren eigenen Schatten.<br>Ein Kind sammelt Muscheln<br>wo gestern noch Tiefe war.
-- **Aufgabenstellung:** Erschließe aus „auf ihren eigenen Schatten.“ und „wo gestern noch Tiefe war.“ eine Bedeutung und begrenze ihre Reichweite.
+- **Aufgabenstellung:** Vergleiche „auf ihren eigenen Schatten.“ und „wo gestern noch Tiefe war.“. Welche Deutung stützen beide Stellen?
 - **Antworttyp:** offene Analyse mit Selbstkontrolle
 - **Alle Antwortoptionen:** entfällt – offene Analyse
 - **Richtige Lösung:** keine automatisch einzig richtige Lösung
 - **Mögliche Alternativlösungen:** Weitere textnahe Lösungen sind möglich, wenn alle Kriterien erfüllt und Abweichungen begründet werden.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Die Boote stehen im Schlick“ und „wo gestern noch Tiefe war.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Die Boote stehen im Schlick“ und „wo gestern noch Tiefe war.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „auf ihren eigenen Schatten.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „auf ihren eigenen Schatten.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `interpret`
 - **Domain:** `lyric`
 - **Level:** 3
@@ -556,22 +556,22 @@ entfällt
 - **Kriteriencheck:**
 - [ ] konkreter Befund
 - [ ] genauer Textbeleg
-- [ ] kontextbezogene Funktion
-- [ ] Bezug zur Bedeutung
-- [ ] Reichweite oder alternative Lesart reflektiert
-- **Musteranalyse:** Der Text gestaltet Veränderlichkeit von Natur und Maßstäben. „auf ihren eigenen Schatten.“ und „wo gestern noch Tiefe war.“ stützen diese Lesart gemeinsam; ihre Funktion ist zu erklären und eine alternative Lesart bleibt anhand der Kriterien prüfbar.
+- [ ] Funktion an der Stelle erklärt
+- [ ] Bezug zur Deutung
+- [ ] Grenzen oder andere Lesart geprüft
+- **Musteranalyse:** Der Text gestaltet Veränderlichkeit von Natur und Maßstäben. „auf ihren eigenen Schatten.“ und „wo gestern noch Tiefe war.“ stützen diese Deutung. Prüfe auch, ob eine andere Lesart zum Text passt.
 - **Hinweis:** Die Musteranalyse ist ein Modell, keine Auswendiglösung.
 
 ### L3-8 · Produkt-ID `lyric-024`
 
 - **Vollständiger Text:** Die Mikrowelle zählt rückwärts.<br>Ich zähle nicht mit.<br>Als sie klingelt, ist der Streit<br>noch immer nicht vorbei.
-- **Aufgabenstellung:** Übertrage die Kette Beobachtung → Beleg → Funktion → Bedeutung auf diesen unbekannten Text.
+- **Aufgabenstellung:** Untersuche den neuen Text. Nenne einen Befund. Belege ihn. Erkläre, was er für deine Deutung bedeutet.
 - **Antworttyp:** offene Analyse mit Selbstkontrolle
 - **Alle Antwortoptionen:** entfällt – offene Analyse
 - **Richtige Lösung:** keine automatisch einzig richtige Lösung
 - **Mögliche Alternativlösungen:** Weitere textnahe Lösungen sind möglich, wenn alle Kriterien erfüllt und Abweichungen begründet werden.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Die Mikrowelle zählt rückwärts.“ und „noch immer nicht vorbei.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Die Mikrowelle zählt rückwärts.“ und „noch immer nicht vorbei.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „noch immer nicht vorbei.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „noch immer nicht vorbei.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `transfer`
 - **Domain:** `lyric`
 - **Level:** 3
@@ -579,22 +579,22 @@ entfällt
 - **Kriteriencheck:**
 - [ ] konkreter Befund
 - [ ] genauer Textbeleg
-- [ ] kontextbezogene Funktion
-- [ ] Bezug zur Bedeutung
-- [ ] Reichweite oder alternative Lesart reflektiert
-- **Musteranalyse:** Der Text gestaltet Differenz von Uhrzeit und Konfliktdauer. „noch immer nicht vorbei.“ und „Ich zähle nicht mit.“ stützen diese Lesart gemeinsam; ihre Funktion ist zu erklären und eine alternative Lesart bleibt anhand der Kriterien prüfbar.
+- [ ] Funktion an der Stelle erklärt
+- [ ] Bezug zur Deutung
+- [ ] Grenzen oder andere Lesart geprüft
+- **Musteranalyse:** Der Text gestaltet Differenz von Uhrzeit und Konfliktdauer. „noch immer nicht vorbei.“ und „Ich zähle nicht mit.“ stützen diese Deutung. Prüfe auch, ob eine andere Lesart zum Text passt.
 - **Hinweis:** Die Musteranalyse ist ein Modell, keine Auswendiglösung.
 
 ### L3-9 · Produkt-ID `interpretation-030`
 
 - **Vollständiger Text:** Das Zimmer ist längst gestrichen.<br>Nur am Nordfenster<br>findet der Nachmittag noch<br>die Farbe deiner Jacke.
-- **Aufgabenstellung:** Welche Analyse erklärt die Funktion von „die Farbe deiner Jacke.“ innerhalb der Textbewegung?
+- **Aufgabenstellung:** Was zeigt „die Farbe deiner Jacke.“ im Verlauf des Textes?
 - **Antworttyp:** errorDetective
 - **Alle Antwortoptionen:** 1. „die Farbe deiner Jacke“ wendet die Wahrnehmung vom längst veränderten Zimmer zu einer konkreten Erinnerungsspur am Nordfenster. **[richtig]**<br>2. Die Stelle „Das Zimmer ist längst gestrichen.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig.<br>3. „die Farbe deiner Jacke.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Nur am Nordfenster“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Das Zimmer ist längst gestrichen.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „die Farbe deiner Jacke.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Nur am Nordfenster“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Das Zimmer ist längst gestrichen.“ und „die Farbe deiner Jacke.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
 - **Richtige Lösung:** „die Farbe deiner Jacke“ wendet die Wahrnehmung vom längst veränderten Zimmer zu einer konkreten Erinnerungsspur am Nordfenster.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Das Zimmer ist längst gestrichen.“ und „die Farbe deiner Jacke.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Das Zimmer ist längst gestrichen.“ und „die Farbe deiner Jacke.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „die Farbe deiner Jacke.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „die Farbe deiner Jacke.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `analyze`
 - **Domain:** `interpretation`
 - **Level:** 3
@@ -607,13 +607,13 @@ entfällt
 ### L3-10 · Produkt-ID `language-033`
 
 - **Vollständiger Text:** Frau Aydin reicht Tomaten<br>über die frisch gestrichene Grenze.<br>Herr Kern nimmt drei<br>und vergisst für einen Satz den Streit.
-- **Aufgabenstellung:** Welche Formulierung verbindet „über die frisch gestrichene Grenze.“ mit einer konkreten Funktion?
+- **Aufgabenstellung:** Welche Antwort erklärt, was „über die frisch gestrichene Grenze.“ an dieser Stelle bewirkt?
 - **Antworttyp:** connection
-- **Alle Antwortoptionen:** 1. „über die frisch gestrichene Grenze.“ zeigt, wie sich die Wahrnehmung oder Bedeutung verändert und trägt damit kontextbezogen zu „alltägliche Geste überwindet vorläufig eine Grenze“ bei. **[richtig]**<br>2. Die Stelle „Frau Aydin reicht Tomaten“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Frau Aydin reicht Tomaten“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „und vergisst für einen Satz den Streit.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „über die frisch gestrichene Grenze.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Frau Aydin reicht Tomaten“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „und vergisst für einen Satz den Streit.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „über die frisch gestrichene Grenze.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Frau Aydin reicht Tomaten“ und „und vergisst für einen Satz den Streit.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
-- **Richtige Lösung:** „über die frisch gestrichene Grenze.“ zeigt, wie sich die Wahrnehmung oder Bedeutung verändert und trägt damit kontextbezogen zu „alltägliche Geste überwindet vorläufig eine Grenze“ bei.
+- **Alle Antwortoptionen:** 1. „über die frisch gestrichene Grenze.“ zeigt, wie sich die Wahrnehmung oder Bedeutung verändert. So trägt die Stelle zur Deutung „alltägliche Geste überwindet vorläufig eine Grenze“ bei. **[richtig]**<br>2. Die Stelle „Frau Aydin reicht Tomaten“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Frau Aydin reicht Tomaten“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „und vergisst für einen Satz den Streit.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „über die frisch gestrichene Grenze.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Frau Aydin reicht Tomaten“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „und vergisst für einen Satz den Streit.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „über die frisch gestrichene Grenze.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Frau Aydin reicht Tomaten“ und „und vergisst für einen Satz den Streit.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
+- **Richtige Lösung:** „über die frisch gestrichene Grenze.“ zeigt, wie sich die Wahrnehmung oder Bedeutung verändert. So trägt die Stelle zur Deutung „alltägliche Geste überwindet vorläufig eine Grenze“ bei.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Frau Aydin reicht Tomaten“ und „und vergisst für einen Satz den Streit.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Frau Aydin reicht Tomaten“ und „und vergisst für einen Satz den Streit.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „über die frisch gestrichene Grenze.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „über die frisch gestrichene Grenze.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `explainFunction`
 - **Domain:** `language`
 - **Level:** 3
@@ -626,13 +626,13 @@ entfällt
 ### L3-11 · Produkt-ID `integration-036`
 
 - **Vollständiger Text:** Die Straße trägt tausend Stimmen.<br>Am Rand zählt jemand Fenster.<br>Als der Platz sich leert, bleibt<br>ein Satz aus Kreide.
-- **Aufgabenstellung:** Welche Analyse verknüpft „ein Satz aus Kreide.“ und „Am Rand zählt jemand Fenster.“, statt beide nur aufzuzählen?
+- **Aufgabenstellung:** Welche Antwort verbindet „ein Satz aus Kreide.“ und „Am Rand zählt jemand Fenster.“?
 - **Antworttyp:** connection
 - **Alle Antwortoptionen:** 1. Das Zählen der Fenster vereinzelt den Blick am Rand der vielstimmigen Straße; der zurückbleibende Kreidesatz konkretisiert anschließend eine einzelne, vergängliche Spur im geleerten Raum. **[richtig]**<br>2. Die Stelle „Die Straße trägt tausend Stimmen.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Die Straße trägt tausend Stimmen.“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „ein Satz aus Kreide.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Am Rand zählt jemand Fenster.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Die Straße trägt tausend Stimmen.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „ein Satz aus Kreide.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Am Rand zählt jemand Fenster.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Die Straße trägt tausend Stimmen.“ und „ein Satz aus Kreide.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
 - **Richtige Lösung:** Das Zählen der Fenster vereinzelt den Blick am Rand der vielstimmigen Straße; der zurückbleibende Kreidesatz konkretisiert anschließend eine einzelne, vergängliche Spur im geleerten Raum.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Die Straße trägt tausend Stimmen.“ und „ein Satz aus Kreide.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Die Straße trägt tausend Stimmen.“ und „ein Satz aus Kreide.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „ein Satz aus Kreide.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „ein Satz aus Kreide.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `connect`
 - **Domain:** `integration`
 - **Level:** 3
@@ -645,13 +645,13 @@ entfällt
 ### L3-12 · Produkt-ID `interpretation-043`
 
 - **Vollständiger Text:** Auf Seite sieben fehlt ein Bild.<br>Die Ecken halten seinen Platz.<br>Meine Schwester erzählt<br>eine andere Version des Sommers.
-- **Aufgabenstellung:** Welcher Beleg stützt die Deutungsrichtung „Familiengeschichte als mehrdeutige Rekonstruktion“ am stärksten?
+- **Aufgabenstellung:** Welche Textstellen belegen die Deutung „Familiengeschichte als mehrdeutige Rekonstruktion“ am besten?
 - **Antworttyp:** evidence
-- **Alle Antwortoptionen:** 1. Das Belegpaar „Die Ecken halten seinen Platz.“ und „eine andere Version des Sommers.“ trägt die Deutungsrichtung, weil die beiden Stellen die Deutungsrichtung aus unterschiedlichen Blickwinkeln konkret belegen. **[richtig]**<br>2. Die Stelle „Auf Seite sieben fehlt ein Bild.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Auf Seite sieben fehlt ein Bild.“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „eine andere Version des Sommers.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Die Ecken halten seinen Platz.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Auf Seite sieben fehlt ein Bild.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „eine andere Version des Sommers.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Die Ecken halten seinen Platz.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Auf Seite sieben fehlt ein Bild.“ und „eine andere Version des Sommers.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
-- **Richtige Lösung:** Das Belegpaar „Die Ecken halten seinen Platz.“ und „eine andere Version des Sommers.“ trägt die Deutungsrichtung, weil die beiden Stellen die Deutungsrichtung aus unterschiedlichen Blickwinkeln konkret belegen.
+- **Alle Antwortoptionen:** 1. „Die Ecken halten seinen Platz.“ und „eine andere Version des Sommers.“ stützen die Deutung. Die Stellen zeigen den Ausgangspunkt und ergänzen oder widersprechen einander. **[richtig]**<br>2. Die Stelle „Auf Seite sieben fehlt ein Bild.“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Auf Seite sieben fehlt ein Bild.“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „eine andere Version des Sommers.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „Die Ecken halten seinen Platz.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Auf Seite sieben fehlt ein Bild.“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „eine andere Version des Sommers.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „Die Ecken halten seinen Platz.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Auf Seite sieben fehlt ein Bild.“ und „eine andere Version des Sommers.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
+- **Richtige Lösung:** „Die Ecken halten seinen Platz.“ und „eine andere Version des Sommers.“ stützen die Deutung. Die Stellen zeigen den Ausgangspunkt und ergänzen oder widersprechen einander.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
-- **Feedback bei richtiger Antwort:** Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Auf Seite sieben fehlt ein Bild.“ und „eine andere Version des Sommers.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
-- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Die Aufgabe verlangt eine Prüfung am konkreten Wortlaut. „Auf Seite sieben fehlt ein Bild.“ und „eine andere Version des Sommers.“ dürfen weder isoliert noch mit einer im Text nicht markierten Haltung oder Funktion verbunden werden.
+- **Feedback bei richtiger Antwort:** Das Zitat „Die Ecken halten seinen Platz.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
+- **Feedback bei typischer Falschantwort:** Die gewählte Aussage trägt die Behauptung nicht vollständig. Das Zitat „Die Ecken halten seinen Platz.“ allein erklärt die Aussage noch nicht. Zeige, was die Stelle hier belegt. Eine feste Wirkung oder die Biografie der Autorperson folgt daraus nicht.
 - **Cognitive Operation:** `evidence`
 - **Domain:** `interpretation`
 - **Level:** 3
@@ -687,7 +687,7 @@ entfällt
 ### L3-14 · Produkt-ID `style-analyze-89`
 
 - **Vollständiger Text:** Wir prüfen die Zahlen, wir prüfen die Quellen.
-- **Aufgabenstellung:** Analysiere, wie das konkrete Signal von Parallelismus zu „ordnet zwei gleichrangige Prüfschritte“ beiträgt. Prüfe eine naheliegende Verwechslung.
+- **Aufgabenstellung:** Untersuche Parallelismus an dieser Stelle. Nenne das sprachliche Signal. Erkläre, was es hier zeigt. Prüfe eine mögliche Verwechslung.
 - **Antworttyp:** offene Analyse mit Selbstkontrolle
 - **Alle Antwortoptionen:** entfällt – offene Analyse
 - **Richtige Lösung:** keine automatisch einzig richtige Lösung
@@ -752,7 +752,7 @@ entfällt
 ### L3-17 · Produkt-ID `form-018`
 
 - **Vollständiger Text:** Die Bahn fährt im Kreis.<br>Gesichter steigen aus, Gesichter ein.<br>Nur die Frau mit den roten Schuhen<br>bleibt drei Runden lang.
-- **Aufgabenstellung:** Welche strukturelle Beobachtung trägt besonders zur Darstellung des Kreisens bei, und wie lässt sie sich funktional deuten?
+- **Aufgabenstellung:** Was fällt am Aufbau auf? Erkläre, wie dadurch das Kreisen sichtbar wird.
 - **Antworttyp:** offene Analyse mit Selbstkontrolle
 - **Alle Antwortoptionen:** entfällt – offene Analyse
 - **Richtige Lösung:** keine automatisch einzig richtige Lösung
@@ -768,7 +768,7 @@ entfällt
 - [ ] Gegenbewegung aus/ein erklärt
 - [ ] Runden oder Wiederkehr einbezogen
 - [ ] Funktion für das Kreisen gedeutet
-- **Musteranalyse:** Die Wiederholung „Gesichter … Gesichter“, die Gegenbewegung „steigen aus … ein“ und die Angabe „drei Runden lang“ lassen Wechsel und Wiederkehr zugleich hervortreten; so wird das Kreisen strukturell erfahrbar.
+- **Musteranalyse:** „Gesichter“ wird wiederholt. „Steigen aus … ein“ zeigt eine Gegenbewegung. Zusammen mit „drei Runden lang“ lässt das die Fahrt wie ein Kreisen erscheinen.
 - **Hinweis:** Die Musteranalyse ist ein Modell, keine Auswendiglösung.
 
 ### L3-18 · Produkt-ID `speaker-021`
@@ -818,7 +818,7 @@ entfällt
 ### L3-20 · Produkt-ID `interpretation-027`
 
 - **Vollständiger Text:** Im Schaufenster stehen noch Puppen<br>in der Mode vom letzten Jahr.<br>Jeden Morgen grüßt der Bäcker<br>diejenige mit dem gelben Kleid.
-- **Aufgabenstellung:** Welches Belegpaar trägt die Deutungsrichtung „Einsamkeit und imaginative Nähe“ am stärksten?
+- **Aufgabenstellung:** Welche zwei Textstellen belegen die Deutung „Einsamkeit und vorgestellte Nähe“ am besten?
 - **Antworttyp:** evidence
 - **Alle Antwortoptionen:** 1. „Jeden Morgen grüßt der Bäcker“ und „diejenige mit dem gelben Kleid“ zeigen, dass er die zuvor als Puppe erkennbare Figur wiederholt wie eine vertraute Person anspricht. **[richtig]**<br>2. Die Stelle „Im Schaufenster stehen noch Puppen“ wird zwar richtig wiedergegeben, beantwortet aber die konkrete Fragestellung nicht vollständig. Der Bezug auf „Im Schaufenster stehen noch Puppen“ klingt zunächst plausibel, legt Bedeutung und Funktion im Zusammenhang aber genauer fest, als der Text es erlaubt.<br>3. „diejenige mit dem gelben Kleid.“ ist textnah, wird hier jedoch einer Funktion zugeordnet, die der Zusammenhang nicht stützt.<br>4. Die Beobachtung zu „in der Mode vom letzten Jahr.“ ist möglich, ersetzt aber nicht den verlangten Analyseschritt.<br>5. Aus „Im Schaufenster stehen noch Puppen“ wird eine eindeutige Haltung abgeleitet, obwohl der Text diese Festlegung nicht markiert.<br>6. „diejenige mit dem gelben Kleid.“ wird isoliert; der für die Aufgabe entscheidende Zusammenhang mit dem übrigen Text fehlt.<br>7. Die zeitliche oder räumliche Angabe in „in der Mode vom letzten Jahr.“ wird genannt, ihre konkrete Funktion jedoch vertauscht.<br>8. Die Antwort verbindet „Im Schaufenster stehen noch Puppen“ und „diejenige mit dem gelben Kleid.“, erklärt ihr Verhältnis aber in die entgegengesetzte Richtung.
 - **Richtige Lösung:** „Jeden Morgen grüßt der Bäcker“ und „diejenige mit dem gelben Kleid“ zeigen, dass er die zuvor als Puppe erkennbare Figur wiederholt wie eine vertraute Person anspricht.
@@ -943,11 +943,11 @@ entfällt
 - **Level:** 3
 - **Didaktische Begründung:** Die Aufgabe verlangt transfer am konkreten Text und begrenzt unbelegte Schlussfolgerungen.
 - **Kriteriencheck:**
-- [ ] zentraler interpretierbarer Zusammenhang
+- [ ] Deutung klar genannt
 - [ ] zwei genaue Textbelege
-- [ ] Befund und Funktion verbunden
-- [ ] alternative Lesart oder Gegenbefund geprüft
-- [ ] keine behauptete Autorenabsicht
+- [ ] Zusammenhang der Befunde erklärt
+- [ ] andere Lesart oder Gegenbeleg geprüft
+- [ ] keine unbelegte Autorenabsicht
 - **Musteranalyse:** Der Text verbindet körperlich konkrete Arbeitserfahrung mit der Vorstellung eines von der Arbeitssirene befreiten Morgens und gestaltet dadurch Belastung sowie die Hoffnung auf Entlastung.
 - **Hinweis:** Die Musteranalyse ist ein Modell, keine Auswendiglösung.
 
@@ -1046,11 +1046,11 @@ entfällt
 - **Level:** 3
 - **Didaktische Begründung:** Die Aufgabe verlangt transfer am konkreten Text und begrenzt unbelegte Schlussfolgerungen.
 - **Kriteriencheck:**
-- [ ] zentraler interpretierbarer Zusammenhang
+- [ ] Deutung klar genannt
 - [ ] zwei genaue Textbelege
-- [ ] Befund und Funktion verbunden
-- [ ] alternative Lesart oder Gegenbefund geprüft
-- [ ] keine behauptete Autorenabsicht
+- [ ] Zusammenhang der Befunde erklärt
+- [ ] andere Lesart oder Gegenbeleg geprüft
+- [ ] keine unbelegte Autorenabsicht
 - **Musteranalyse:** Der Text gestaltet technischen Fortschritt als ambivalent: Die freundlichere Oberfläche steht einem Verlust persönlicher Erinnerungszugänge gegenüber. Eine Lesart als bloßer Bedienfehler ist möglich, erklärt den inszenierten Gegensatz jedoch schwächer.
 - **Hinweis:** Die Musteranalyse ist ein Modell, keine Auswendiglösung.
 
@@ -1120,7 +1120,7 @@ entfällt
 - **Vollständiger Text:** Sieben Menschen unter Glas.<br>Jeder trägt ein anderes Wetter.<br>Der Bus verspätet sich.<br>Niemand leiht dem anderen Zeit.
 - **Aufgabenstellung:** Wie verbinden sich sprachliche Gestaltung und Stimmung in der Warteszene?
 - **Antworttyp:** connection
-- **Alle Antwortoptionen:** 1. Die Menschen teilen denselben engen Raum, doch die individualisierten „Wetter“ und das abschließende „Niemand“ markieren Distanz. Aus der räumlichen Nähe entsteht keine Gemeinschaft, sondern eine zurückhaltend-distanzierte Atmosphäre. **[richtig]**<br>2. Die gemeinsame Verspätung und das Glas schaffen eine solidarische Atmosphäre, in der die verschiedenen Wetter bedeutungslos werden.<br>3. Das Wort „Niemand“ beweist eine umfassende Gesellschaftskritik, unabhängig von den übrigen Beobachtungen der Szene.<br>4. Die unterschiedlichen Wetter erzeugen eine lebhafte, gemeinschaftliche Stimmung, weil jede Person ihre Gefühle offen mit den anderen teilt. „Sieben Menschen unter Glas.“ und „Niemand leiht dem anderen Zeit.“ werden dabei als gleichgerichtete Befunde verbunden, die gemeinsam nur eine einzige Deutungsrichtung stützen.
+- **Alle Antwortoptionen:** 1. Die Menschen teilen denselben engen Raum, doch die individualisierten „Wetter“ und das abschließende „Niemand“ markieren Distanz. Aus der räumlichen Nähe entsteht keine Gemeinschaft, sondern eine zurückhaltend-distanzierte Atmosphäre. **[richtig]**<br>2. Die gemeinsame Verspätung und das Glas schaffen eine solidarische Atmosphäre, in der die verschiedenen Wetter bedeutungslos werden.<br>3. Das Wort „Niemand“ beweist eine umfassende Gesellschaftskritik, unabhängig von den übrigen Beobachtungen der Szene.<br>4. Die unterschiedlichen Wetter erzeugen eine lebhafte, gemeinschaftliche Stimmung, weil jede Person ihre Gefühle offen mit den anderen teilt. „Sieben Menschen unter Glas.“ und „Niemand leiht dem anderen Zeit.“ gelten in dieser Antwort als Belege für dieselbe Deutung. Sie prüft nicht, ob der Schluss die erste Beobachtung verändert oder ihr widerspricht.
 - **Richtige Lösung:** Die Menschen teilen denselben engen Raum, doch die individualisierten „Wetter“ und das abschließende „Niemand“ markieren Distanz. Aus der räumlichen Nähe entsteht keine Gemeinschaft, sondern eine zurückhaltend-distanzierte Atmosphäre.
 - **Mögliche Alternativlösungen:** Keine weitere Option ist nach der präzisierten Aufgabenstellung gleichwertig richtig.
 - **Feedback bei richtiger Antwort:** Die räumliche Nähe steht den getrennten inneren Bildern und dem ausbleibenden Teilen von Zeit gegenüber. Das trägt eine distanzierte Atmosphäre; eine umfassende Gesellschaftskritik bleibt nur eine mögliche weitergehende Lesart.

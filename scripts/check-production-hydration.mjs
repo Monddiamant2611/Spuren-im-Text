@@ -2,6 +2,7 @@ import {chromium} from "@playwright/test";
 import {mkdir,readFile,writeFile} from "node:fs/promises";
 
 const url=process.argv[2]??"http://127.0.0.1:3000/";
+const trainingRounds=Number(process.argv[3]??20);
 const output=new URL("../artifacts/lyrik-student-browser-audit.json",import.meta.url);
 const answerManifest=JSON.parse(await readFile(new URL("../artifacts/lyrik-answer-bias-audit.json",import.meta.url),"utf8"));
 const answerRows=new Map(answerManifest.rows.map(row=>[row.taskId,row]));
@@ -115,7 +116,12 @@ try{
   const introHeader=normalize(introText.split(/\r?\n/)[0]??"");
   const introPoem=released.find(poem=>introHeader.includes(poem.title)&&introHeader.includes(poem.author));
   verifyPoem(introPoem,introText,item);if(introPoem)item.sourceWorkIds.push(introPoem.id);
-  await page.getByRole("button",{name:/Gemeinsam/}).click();await completeGuided(item);
+  await page.locator(".lyrik-lesson-steps button").nth(1).click();
+  item.introTabCompleted=/✓\s*Einführung/.test((await page.locator(".lyrik-lesson-steps button").nth(0).textContent())??"");
+  item.knowledgeVisible=await page.locator(".lyrik-knowledge-grid h3").count()>0;
+  await page.getByRole("button",{name:/Gemeinsam/}).click();
+  item.knowledgeTabCompleted=/✓\s*Wissen/.test((await page.locator(".lyrik-lesson-steps button").nth(1).textContent())??"");
+  await completeGuided(item);
   if(chapter===6){await page.reload({waitUntil:"networkidle"});await page.getByRole("button",{name:/Kapitel 6/}).click();item.togetherPersisted=/✓\s*Gemeinsam/.test((await page.locator(".lyrik-lesson-steps button").nth(2).textContent())??"");}
   await completePhase("Üben",6,item,"practiceTasksCompleted");
   await completePhase("Challenge",3,item,"challengeCompleted");
@@ -130,6 +136,8 @@ try{
   report.transferSourceAudit.push(...report.taskSourceAudit.filter(row=>row.chapter===chapter&&row.phase==="Transfer").map(row=>({chapter,transferTaskId:row.taskId,transferSourceWorkId:row.sourceWorkId,sourcesUsedBeforeTransfer:[...worksBeforeTransfer],isPreviouslySeen:row.sourceWorkId?worksBeforeTransfer.has(row.sourceWorkId):false,isAuthentic:row.status==="valid",isExerciseText:row.status==="validExerciseText"})));
   if(await page.locator('.lyrik-task').count())report.transferWraparoundCount++;
   await page.reload({waitUntil:"networkidle"});await page.getByRole("button",{name:new RegExp(`Kapitel ${chapter}`)}).click();
+  item.introductionPersisted=/✓\s*Einführung/.test((await page.locator(".lyrik-lesson-steps button").nth(0).textContent())??"");
+  item.knowledgePersisted=/✓\s*Wissen/.test((await page.locator(".lyrik-lesson-steps button").nth(1).textContent())??"");
   item.transferPersisted=/✓\s*Transfer/.test((await page.locator(".lyrik-lesson-steps button").nth(5).textContent())??"");
   item.sourceWorkIds=[...new Set([...item.sourceWorkIds,...item.workIds])];delete item.taskIds;delete item.workIds;
   report.chapters.push(item);
@@ -141,9 +149,9 @@ try{
   const name=normalize((await buttons.nth(trainingIndex).textContent())??`Training ${trainingIndex+1}`);
   await buttons.nth(trainingIndex).click();
   const item={training:name,tasksCompleted:0,uniqueTaskIds:[],uniqueWorkIds:[],immediateTaskRepeats:0,immediateWorkRepeats:0,repeatedTaskWithin5:0,repeatedWorkWithin5:0,unresolvedLeaks:0,blockedLeaks:0,rightsBlockedLeaks:0,userTextLeaks:0,interactionFailures:0,emptyTasks:0,consoleErrors:[],taskIds:[],workIds:[]};
-  for(let round=0;round<20;round++){
+  for(let round=0;round<trainingRounds;round++){
    if(await answerCurrent(item))item.tasksCompleted++;
-   if(round<19)await page.getByRole("button",{name:"Nächste Aufgabe"}).click({force:true});
+   if(round<trainingRounds-1)await page.getByRole("button",{name:"Nächste Aufgabe"}).click({force:true});
   }
   item.uniqueTaskIds=[...new Set(item.taskIds)];item.uniqueWorkIds=[...new Set(item.workIds)];
   item.immediateTaskRepeats=countRepeats(item.taskIds,1);item.immediateWorkRepeats=countRepeats(item.workIds,1);
@@ -151,8 +159,8 @@ try{
   delete item.taskIds;delete item.workIds;report.trainings.push(item);
   await page.getByRole("button",{name:"Training beenden"}).click();
  }
- report.success=report.chapters.length===9&&report.chapters.every(item=>item.introductionVisible&&item.togetherStepsCompleted>0&&item.togetherCompletionClicked&&item.togetherTabCompleted&&item.practiceActivated&&(item.chapter!==6||item.togetherPersisted)&&item.practiceTasksCompleted===6&&item.challengeCompleted&&item.practicePersisted&&item.challengePersisted&&item.transferCompleted&&item.transferTabCompleted&&item.chapterCompleted&&item.transferPersisted&&item.transferSourcesUnseen&&!item.errors.length)&&report.trainings.length===10&&report.trainings.every(item=>item.tasksCompleted===20&&!item.immediateTaskRepeats&&!item.interactionFailures&&!item.emptyTasks)&&!report.transferWraparoundCount&&report.multiSelectChecks>0&&!report.multiSelectFailures&&!report.unresolvedLeaks&&!report.rightsBlockedLeaks&&!report.blockedTaskLeaks&&!report.userTextLeaks&&!report.sourceMismatchCount&&!report.evidenceMismatchCount&&!report.solutionMismatchCount&&!report.feedbackMismatchCount&&!report.interactionFailures&&!report.consoleErrors.length&&!report.requestErrors.length;
+ report.success=report.chapters.length===9&&report.chapters.every(item=>item.introductionVisible&&item.introTabCompleted&&item.knowledgeVisible&&item.knowledgeTabCompleted&&item.togetherStepsCompleted>0&&item.togetherCompletionClicked&&item.togetherTabCompleted&&item.practiceActivated&&(item.chapter!==6||item.togetherPersisted)&&item.practiceTasksCompleted===6&&item.challengeCompleted&&item.practicePersisted&&item.challengePersisted&&item.transferCompleted&&item.transferTabCompleted&&item.chapterCompleted&&item.introductionPersisted&&item.knowledgePersisted&&item.transferPersisted&&item.transferSourcesUnseen&&!item.errors.length)&&report.trainings.length===10&&report.trainings.every(item=>item.tasksCompleted===trainingRounds&&!item.immediateTaskRepeats&&!item.interactionFailures&&!item.emptyTasks)&&!report.transferWraparoundCount&&report.multiSelectChecks>0&&!report.multiSelectFailures&&!report.unresolvedLeaks&&!report.rightsBlockedLeaks&&!report.blockedTaskLeaks&&!report.userTextLeaks&&!report.sourceMismatchCount&&!report.evidenceMismatchCount&&!report.solutionMismatchCount&&!report.feedbackMismatchCount&&!report.interactionFailures&&!report.consoleErrors.length&&!report.requestErrors.length;
 }catch(error){report.consoleErrors.push(`Audit abgebrochen: ${error}`);}
 finally{await mkdir(new URL("../artifacts/",import.meta.url),{recursive:true});await writeFile(output,JSON.stringify(report,null,2));await browser.close();}
-console.log(JSON.stringify({success:report.success,chapters:`${report.chapters.filter(item=>item.introductionVisible&&item.togetherStepsCompleted&&item.practiceTasksCompleted===6&&item.challengeCompleted&&item.practicePersisted&&item.challengePersisted&&item.transferCompleted).length}/9`,trainingTasks:`${report.trainings.reduce((sum,item)=>sum+item.tasksCompleted,0)}/200`,leaks:{unresolved:report.unresolvedLeaks,rightsBlocked:report.rightsBlockedLeaks,blockedTask:report.blockedTaskLeaks,userText:report.userTextLeaks},sourceMismatchCount:report.sourceMismatchCount,evidenceMismatchCount:report.evidenceMismatchCount,solutionMismatchCount:report.solutionMismatchCount,feedbackMismatchCount:report.feedbackMismatchCount,interactionFailures:report.interactionFailures,consoleErrors:report.consoleErrors.length,requestErrors:report.requestErrors.length},null,2));
+console.log(JSON.stringify({success:report.success,chapters:`${report.chapters.filter(item=>item.introductionVisible&&item.togetherStepsCompleted&&item.practiceTasksCompleted===6&&item.challengeCompleted&&item.practicePersisted&&item.challengePersisted&&item.transferCompleted).length}/9`,trainingTasks:`${report.trainings.reduce((sum,item)=>sum+item.tasksCompleted,0)}/${trainingRounds*10}`,leaks:{unresolved:report.unresolvedLeaks,rightsBlocked:report.rightsBlockedLeaks,blockedTask:report.blockedTaskLeaks,userText:report.userTextLeaks},sourceMismatchCount:report.sourceMismatchCount,evidenceMismatchCount:report.evidenceMismatchCount,solutionMismatchCount:report.solutionMismatchCount,feedbackMismatchCount:report.feedbackMismatchCount,interactionFailures:report.interactionFailures,consoleErrors:report.consoleErrors.length,requestErrors:report.requestErrors.length},null,2));
 if(!report.success)process.exitCode=1;

@@ -1,0 +1,254 @@
+{
+  "root": true,
+  "introStanzaBoundary": true,
+  "categories": [
+    {
+      "name": "Grundlagen & Belegen",
+      "visibleCards": 7,
+      "flipped": true
+    },
+    {
+      "name": "Form & Aufbau",
+      "visibleCards": 12,
+      "flipped": true
+    },
+    {
+      "name": "Sprecher & Sprechsituation",
+      "visibleCards": 5,
+      "flipped": true
+    },
+    {
+      "name": "Inhalt & innere Bewegung",
+      "visibleCards": 5,
+      "flipped": true
+    },
+    {
+      "name": "Metrum, Rhythmus & Kadenz",
+      "visibleCards": 12,
+      "flipped": true
+    },
+    {
+      "name": "Sprache & Wortwahl",
+      "visibleCards": 4,
+      "flipped": true
+    },
+    {
+      "name": "Stilmittel",
+      "visibleCards": 52,
+      "flipped": false
+    },
+    {
+      "name": "Stimmung, Haltung & Perspektive",
+      "visibleCards": 4,
+      "flipped": true
+    },
+    {
+      "name": "Analyse verknüpfen",
+      "visibleCards": 2,
+      "flipped": true
+    },
+    {
+      "name": "Deuten & Schreiben",
+      "visibleCards": 13,
+      "flipped": true
+    }
+  ],
+  "styleGroups": [
+    {
+      "name": "Bildlichkeit & Bedeutungsübertragung",
+      "cards": 9
+    },
+    {
+      "name": "Wiederholung & Klang",
+      "cards": 10
+    },
+    {
+      "name": "Satzbau & Stellung",
+      "cards": 9
+    },
+    {
+      "name": "Gegensatz & Steigerung",
+      "cards": 8
+    },
+    {
+      "name": "Rede- & Gedankenfiguren",
+      "cards": 8
+    },
+    {
+      "name": "Weitere sprachliche Figuren",
+      "cards": 8
+    }
+  ],
+  "styleCardCount": 52,
+  "archiveGroups": [
+    {
+      "name": "Grundlagen der Lyrik",
+      "articles": 4
+    },
+    {
+      "name": "Form & Aufbau",
+      "articles": 12
+    },
+    {
+      "name": "Beobachten & Belegen",
+      "articles": 3
+    },
+    {
+      "name": "Sprechsituation",
+      "articles": 5
+    },
+    {
+      "name": "Inhalt & innere Bewegung",
+      "articles": 5
+    },
+    {
+      "name": "Metrum, Rhythmus & Kadenz",
+      "articles": 12
+    },
+    {
+      "name": "Sprache & Wortwahl",
+      "articles": 4
+    },
+    {
+      "name": "Stilmittel",
+      "articles": 52
+    },
+    {
+      "name": "Stimmung, Haltung & Perspektive",
+      "articles": 4
+    },
+    {
+      "name": "Analyse verknüpfen",
+      "articles": 2
+    },
+    {
+      "name": "Deutung & Interpretation",
+      "articles": 7
+    },
+    {
+      "name": "Schreiben einer Gedichtanalyse",
+      "articles": 3
+    }
+  ],
+  "archiveArticles": 113,
+  "emptyCardBacks": [],
+  "emptyArticles": [],
+  "responsive": [
+    {
+      "width": 1440,
+      "scrollWidth": 1440,
+      "clientWidth": 1440,
+      "clippedButtons": 0
+    },
+    {
+      "width": 900,
+      "scrollWidth": 900,
+      "clientWidth": 900,
+      "clippedButtons": 0
+    },
+    {
+      "width": 390,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "clippedButtons": 0
+    }
+  ],
+  "responsiveSurfaces": [
+    {
+      "surface": "Lernpfad",
+      "width": 390,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "clippedButtons": 0
+    },
+    {
+      "surface": "Kartei",
+      "width": 390,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "clippedButtons": 0
+    },
+    {
+      "surface": "Wissensarchiv",
+      "width": 390,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "clippedButtons": 0
+    },
+    {
+      "surface": "Training",
+      "width": 390,
+      "scrollWidth": 390,
+      "clientWidth": 390,
+      "clippedButtons": 0
+    }
+  ],
+  "keyboard": {
+    "searchLabeled": true,
+    "archiveSearchLabeled": true,
+    "buttonFocusable": true,
+    "formLabel": true,
+    "optionFocusable": true
+  },
+  "sessions": [
+    {
+      "session": 1,
+      "taskId": "progression-language-1",
+      "optionIds": [
+        "progression-language-1:option:0",
+        "progression-language-1:option:1",
+        "progression-language-1:option:3",
+        "progression-language-1:option:2"
+      ],
+      "stable": true
+    },
+    {
+      "session": 2,
+      "taskId": "progression-language-1",
+      "optionIds": [
+        "progression-language-1:option:0",
+        "progression-language-1:option:3",
+        "progression-language-1:option:2",
+        "progression-language-1:option:1"
+      ],
+      "stable": true
+    },
+    {
+      "session": 3,
+      "taskId": "progression-language-1",
+      "optionIds": [
+        "progression-language-1:option:0",
+        "progression-language-1:option:3",
+        "progression-language-1:option:1",
+        "progression-language-1:option:2"
+      ],
+      "stable": true
+    }
+  ],
+  "storage": {
+    "invalid": true,
+    "partial": true,
+    "noSkipping": true,
+    "noFalseKnowledgeCheck": true,
+    "introductionPersisted": true,
+    "knowledgePersisted": true
+  },
+  "consoleErrors": [],
+  "consoleWarnings": [],
+  "requestErrors": [],
+  "httpErrors": [],
+  "screenshots": [
+    "chapter-1.png",
+    "chapter-3.png",
+    "chapter-5.png",
+    "chapter-6.png",
+    "chapter-7.png",
+    "chapter-9.png",
+    "kartei-stilmittel.png",
+    "wissensarchiv.png",
+    "training.png",
+    "training-mobile.png",
+    "chapter-6-mobile.png"
+  ],
+  "success": true
+}

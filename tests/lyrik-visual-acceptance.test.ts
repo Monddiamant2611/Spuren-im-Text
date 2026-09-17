@@ -11,6 +11,7 @@ const released=tasksForRelease(allTasks,"student");
 const guided=guidedForRelease("student");
 
 describe("visuelle Abnahme 3B",()=>{
+ it("liefert bei einem vollständig gesperrten Pool keinen Phantom-Task",()=>{for(const area of areas){expect(pickChapterTasks([],area,3)).toEqual([]);expect(pickChapterTasks([],area,4)).toEqual([]);expect(pickUnseenTransferTasks([],area,[])).toEqual([]);}});
  it("nutzt in allen neun Kapiteln zwei bisher ungesehene Transfer-Bundles",()=>{
   areas.forEach((area,index)=>{
    const local=released.filter(task=>task.area===area);

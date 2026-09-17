@@ -1,0 +1,127 @@
+{
+  "date": "2026-09-17",
+  "mode": "student",
+  "environment": "production-build",
+  "route": "/lyrik",
+  "rootRouteOpensLyrik": true,
+  "releaseReady": true,
+  "chapters": {
+    "chapterCompletionCount": 9,
+    "chapterCount": 9,
+    "introductionCompleted": 9,
+    "knowledgeCompleted": 9,
+    "togetherCompleted": 9,
+    "practiceCompleted6Of6": 9,
+    "challengeCompleted3Of3": 9,
+    "transferCompleted": 9,
+    "introductionAndKnowledgeReloadPersisted": 9,
+    "practiceReloadPersisted": 9,
+    "challengeReloadPersisted": 9,
+    "transferReloadPersisted": 9,
+    "transferWraparoundCount": 0,
+    "transferPreviouslySeenCount": 0,
+    "directPhaseSkippingBlocked": true,
+    "falseKnowledgeCheckOnBackNavigation": false
+  },
+  "sources": {
+    "releasedCanonicalWorks": 6,
+    "authenticBrowserChecks": 63,
+    "canonicalTextBrowserChecks": 63,
+    "renderedVerseChecks": 574,
+    "sourceMismatchCount": 0,
+    "evidenceMismatchCount": 0,
+    "solutionMismatchCount": 0,
+    "feedbackMismatchCount": 0,
+    "stanzaBoundaryRegressionPassed": true
+  },
+  "releaseGates": {
+    "unresolvedLeaks": 0,
+    "rightsBlockedLeaks": 0,
+    "blockedTaskLeaks": 0,
+    "userTextLeaks": 0,
+    "gibranTranslationsBlocked": true,
+    "emptyCurrentPools": 0,
+    "emptyPoolFallbackPresent": true
+  },
+  "skills": {
+    "skillMismatchCount": 0,
+    "skillPoolTests": "PASS",
+    "progressionTests": "PASS"
+  },
+  "interaction": {
+    "multiSelectChecks": 6,
+    "multiSelectFailures": 0,
+    "interactionFailures": 0,
+    "randomSessions": 3,
+    "stableOptionIdsWithinSession": true,
+    "differentOptionOrdersAcrossSessions": true
+  },
+  "answerBias": {
+    "closedTasks": 819,
+    "fourOptionTasks": 337,
+    "correctPositionDistribution": [85, 84, 84, 84],
+    "correctIsLongestRate": 0.206809583858764,
+    "correctIsShortestRate": 0.0870113493064313,
+    "maxConsecutiveSameCorrectPosition": 2,
+    "genericDistractorCount": 0,
+    "signalWordBiasCount": 0,
+    "lengthBiasWarningTasks": 81,
+    "regressionTest": "PASS"
+  },
+  "training": {
+    "runs": 10,
+    "interactionsPerRun": 50,
+    "completedInteractions": 500,
+    "immediateTaskRepeats": 0,
+    "meterWordTaskCoverage": {"jambus": 11, "trochaeus": 16, "dactyl": 8, "anapaest": 8},
+    "verifiedMeterTests": "PASS",
+    "mixedTraining": "PASS"
+  },
+  "knowledge": {
+    "flashcardCategories": 10,
+    "styleDevicesVisible": 52,
+    "centralStyleDevicesWeight3": 24,
+    "otherStyleDevicesWeight1": 28,
+    "archiveGroups": 12,
+    "archiveArticlesOpened": 113,
+    "emptyCardBacks": 0,
+    "emptyArticles": 0
+  },
+  "browser": {
+    "responsiveWidths": [1440, 900, 390],
+    "mobileSurfacesChecked": ["Lernpfad", "Kartei", "Wissensarchiv", "Training"],
+    "unusableClippedButtons": 0,
+    "keyboardBasicCheck": "PASS",
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "requestErrors": 0,
+    "httpErrors": 0,
+    "hydrationErrors": 0
+  },
+  "checks": {
+    "typecheck": "PASS",
+    "lint": "PASS",
+    "testFiles": 79,
+    "testsPassed": 536,
+    "productionBuild": "PASS",
+    "releaseLeakTest": "PASS",
+    "sourceConsistencyTest": "PASS",
+    "skillPoolTest": "PASS",
+    "answerBiasTest": "PASS",
+    "progressionTest": "PASS",
+    "visualAcceptanceTest": "PASS",
+    "languageAuditRegressionTest": "PASS"
+  },
+  "evidence": [
+    "artifacts/lyrik-student-browser-audit.json",
+    "artifacts/lyrik-release-surfaces.json",
+    "artifacts/lyrik-answer-bias-audit.json",
+    "artifacts/lyrik-language-warnings.json",
+    "artifacts/lyrik-final-screenshots/"
+  ],
+  "limits": [
+    "The synthetic empty-pool state was checked in selection tests and by code-path review, not forced in the production browser.",
+    "Browser source/evidence checks are automated; a literary line-by-line human review of every task was not repeated in this release round.",
+    "Basic keyboard and responsive checks are not a full accessibility audit."
+  ]
+}
